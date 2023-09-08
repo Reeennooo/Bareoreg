@@ -1,0 +1,174 @@
+.input-custom {
+  &__input {
+    width: 100%;
+    position: relative;
+  }
+
+  // &.is-invalid {
+  //   input {
+  //     border-color: $input-error;
+  //     & ~ label {
+  //       color: $input-error;
+  //     }
+  //   }
+
+  //   input:focus {
+  //     box-shadow: 0px 0px 0px 1px $input-error;
+  //   }
+
+  //   &__message {
+  //     display: block;
+  //     color: $input-error;
+  //   }
+  // }
+
+  // стили для input
+  input {
+    display: block;
+    width: 100%;
+    height: 56px;
+    padding: 16px;
+    font-family: $default-font;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $grey;
+    background-color: $white;
+    background-clip: border-box;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    appearance: none;
+    @include transition('border-color, box-shadow');
+  }
+
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  // стили для placeholder. скрываем его
+  input::placeholder {
+    color: transparent;
+    &::-moz-placeholder {
+      color: transparent;
+    }
+  }
+
+  // стили при hover на input
+  input:hover {
+    border-color: $violet;
+  }
+
+  // стили при focuse на input
+  input:focus {
+    border-color: $violet;
+    box-shadow: 0px 0px 0px 1px $violet;
+    & ~ label {
+      color: $violet;
+    }
+  }
+
+  input:not(:placeholder-shown):not(.is-invalid):focus ~ label {
+    color: $violet;
+  }
+
+  // Стили если Input не пустой :not(:placeholder-shown) или focus
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+  }
+
+  input:not(:placeholder-shown) ~ label {
+    color: $grey;
+  }
+
+  // стили при disabled
+  &:has(input:disabled) {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  // не валидные значения
+  input.is-invalid {
+    border-color: $input-error;
+    & ~ label {
+      color: $input-error;
+    }
+  }
+
+  input.is-invalid:focus {
+    box-shadow: 0px 0px 0px 1px $input-error;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px $white inset;
+    -webkit-text-fill-color: $grey;
+  }
+
+  // label
+  label {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    display: flex;
+    pointer-events: none;
+    border: none;
+    background-color: $white;
+    color: $grey;
+    padding: 0 4px;
+    // txt
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    @include transition('top, font-size', 0.2s);
+  }
+
+  // дополнительный текст
+  &__message {
+    display: none;
+    margin-top: 4px;
+    padding-left: 16px;
+    color: $grey;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+
+    &.error-message {
+      display: block;
+      color: $input-error;
+    }
+  }
+
+  &__info {
+    position: absolute;
+    cursor: pointer;
+    top: 16px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: $grey;
+  }
+
+  // Modifications
+  &--support-txt {
+    .input-custom__message {
+      display: block;
+    }
+  }
+
+  &--info {
+    input {
+      padding-right: 40px;
+    }
+  }
+}

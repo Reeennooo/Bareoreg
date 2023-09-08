@@ -1,0 +1,48 @@
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  outline: none;
+  background-color: $violet;
+  border: 1px solid rgba($color: $violet, $alpha: 0.85);
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include transition('opacity');
+
+  svg {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    fill: none;
+    stroke: $white;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  // Нажатие
+  &:active {
+    opacity: 0.75;
+  }
+
+  // Не активна
+  &.disabled,
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
+  &--ghost {
+    background-color: transparent;
+    border: 1px solid $grey-light;
+
+    svg {
+      stroke: $grey-light;
+    }
+  }
+}

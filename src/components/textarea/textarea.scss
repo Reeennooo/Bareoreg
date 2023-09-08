@@ -1,0 +1,93 @@
+.textarea {
+  position: relative;
+
+  textarea {
+    display: block;
+    width: 100%;
+    height: 80px;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    padding: 16px;
+    resize: none;
+    // txt
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: inherit;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12x;
+      // background-color: rgb(3, 66, 95);
+      margin-right: 10px;
+      padding-right: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $white;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 4px solid $white;
+      background-color: $grey-light;
+      border-radius: 10px;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 25px;
+    left: 16px;
+    display: flex;
+    pointer-events: none;
+    border: none;
+    background-color: $white;
+    color: $grey;
+    padding: 0 4px;
+    transform: translateY(-50%);
+    // txt
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    @include transition('top, font-size', 0.2s);
+  }
+
+  textarea:hover {
+    border-color: $violet;
+  }
+
+  textarea:focus {
+    border-color: $violet;
+    box-shadow: 0px 0px 0px 1px $violet;
+    & ~ label {
+      color: $violet;
+    }
+  }
+
+  textarea:focus ~ label,
+  textarea:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+  }
+
+  textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px $white inset;
+    -webkit-text-fill-color: $grey;
+  }
+
+  textarea.is-invalid {
+    border-color: $input-error;
+    & ~ label {
+      color: $input-error;
+    }
+  }
+
+  textarea.is-invalid:focus {
+    box-shadow: 0px 0px 0px 1px $input-error;
+  }
+}

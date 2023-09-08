@@ -1,0 +1,11 @@
+mixin modal-upload()
+  +modal().modal-upload
+    .modal-upload__title.i-modal__title Задайте название прикрепляемому файлу:
+    .modal-upload__files
+      //- +file()
+    +input-custom({type: text, name: 'file-name', placeholder: 'Название файла'})
+    .modal-upload__btns
+      +btn({txt: 'Сохранить'}).modal-upload__save
+      +btn({txt: 'Отменить', mode: 'ghost'}).modal-upload__cancel
+
+  

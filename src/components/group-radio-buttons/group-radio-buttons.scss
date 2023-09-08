@@ -1,0 +1,16 @@
+.group-radio-buttons {
+  &__title {
+    display: block;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    margin-bottom: 8px;
+    color: $grey;
+  }
+  &__options {
+    display: flex;
+    column-gap: 24px;
+  }
+}

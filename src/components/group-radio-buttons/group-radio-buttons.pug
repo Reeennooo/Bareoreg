@@ -1,0 +1,6 @@
+mixin group-radio-buttons(data)
+  .group-radio-buttons&attributes(attributes)
+    span.group-radio-buttons__title=data.title
+    .group-radio-buttons__options
+      if (block)
+        block

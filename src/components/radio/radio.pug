@@ -1,0 +1,6 @@
+mixin radio(data)
+  label.radio
+    input(type="radio" name=data.name value=data.value)
+    span.radio__fake
+    if(data.label)
+      span.radio__label!=data.label

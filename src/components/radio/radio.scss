@@ -1,0 +1,93 @@
+// СТИЛИ КАСТОМНОГО Радио
+.radio {
+  display: flex;
+  column-gap: 8px;
+  align-items: flex-start;
+  // align-items: center;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  .radio__fake {
+    position: relative;
+    padding: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  // Вид Радио
+  .radio__fake::before {
+    @include transition('border-color');
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 2px solid #515151;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 90% 90%;
+  }
+
+  .radio__fake::after {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+  }
+
+  // Вид Радио в состоянии checked
+  input:checked + .radio__fake {
+    &::before {
+      border-color: $violet;
+      // background-color: $white;
+      // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23675dda'/%3e%3c/svg%3e");
+    }
+    &::after {
+      display: block;
+      background-color: $violet;
+    }
+  }
+
+  // hover
+  input:not(:disabled):not(:checked) + .radio__fake:hover {
+    &::before {
+      border-color: $violet;
+    }
+  }
+
+  // hover если радио чекнут
+  // input:not(:disabled):checked + .radio__fake:hover {
+  //   &::before {
+  //     border-color: yellow;
+  //     background-color: yellow;
+  //   }
+  // }
+
+  // Состояние disable
+  input:disabled + .radio__fake::before {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+// Стили для текста label
+.radio__label {
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 16px;
+  color: $grey;
+  cursor: pointer;
+}

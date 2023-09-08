@@ -1,0 +1,26 @@
+mixin btn(data)
+  if(data.href) 
+    a(data.href=data.href class=`
+      btn 
+      ${data.mode ? `btn--${data.mode}` : ''} 
+      ${data.disabled ? 'disabled' : ''}
+    `)&attributes(attributes)
+      if(data.icon)
+        svg
+          use(xlink:href=`img/sprite.svg#${data.icon}`)
+      if(data.txt)
+        span=data.txt
+  else 
+    button(
+      class=`btn ${data.mode ? `btn--${data.mode}` : ''}`
+      modes
+      )&attributes(attributes)
+      if(data.icon)
+        svg
+          use(xlink:href=`img/sprite.svg#${data.icon}`)
+      if(data.txt)
+        span=data.txt
+      //- if(data.payload)
+      //- if block
+      //-   block
+

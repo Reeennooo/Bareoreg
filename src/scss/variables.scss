@@ -1,0 +1,35 @@
+// Widths   420 479 575 640 767 991 1199 1400
+$mobile-sm: 479px;
+$mobile: 575px;
+$mobile-big: 767px;
+$tablet: 991px;
+$desktop: 1199px;
+
+$grid-spacing: 40px;
+$grid-spacing-sm: 20px;
+
+$base-img: '../img/';
+
+$font-size: 16px;
+$line-height: 1.5;
+// Fonts
+$default-font: 'TTNormsPro', sans-serif; //400/700
+$additional-font: 'Montserrat', sans-serif; //400/700/800
+
+// Colors
+$background: #f4f3ff;
+$background-violet: linear-gradient(0deg, rgba(103, 80, 164, 0.08) 0%, rgba(103, 80, 164, 0.08) 100%), #fffbfe;
+
+$black: #000000;
+$white: #ffffff;
+$grey: #1c1b1f;
+$grey: #49454f;
+$grey-light: #79747e;
+$grey-light-100: #7a7289;
+$grey-super-light: #e8eaee;
+$violet-light: #d0bcff;
+$violet: #675dda;
+$violet-deep: #6750a4;
+$green: #52b530;
+$color-error: #e60000;
+$input-error: #b3261e;

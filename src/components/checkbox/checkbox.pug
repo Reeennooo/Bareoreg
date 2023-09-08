@@ -1,0 +1,6 @@
+mixin checkbox(data)
+  label.checkbox
+    input(type="checkbox" name=data.name value=data.value)
+    span.checkbox__fake
+    if(data.label)
+      span.checkbox__label!=data.label

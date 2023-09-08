@@ -1,0 +1,754 @@
++form().form-new-patient
+  +group({title: 'Персональные данные пациента'}).form-new-patient__pesonal-data
+    .group__grid
+      +input-custom({type: 'text', placeholder: 'Фамилия*', name: 'surname',})(class='only-txt' data-required='')
+      +input-custom({type: 'text', placeholder: 'Имя*', name: 'name',})(class='only-txt' data-required='')
+      +input-custom({type: 'text', placeholder: 'Отчество*', name: 'middle-name',})(class='only-txt' data-required='')
+      +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth',})(autocomplete='off' data-required='').only-number#calendar
+      +group-radio-buttons({title: 'Пол*'})(data-required='' data-has-connection="gender")
+        +radio({name: 'gender', value: 'man', label: 'Мужской'})
+        +radio({name: 'gender', value: 'woman', label: 'Женский'})
+      +input-custom({type: 'number', placeholder: 'Вес кг*', name: 'weight'})(data-required='')
+      +input-custom({type: 'number', placeholder: 'Рост (см)*', name: 'height'})(data-required='')
+      +itc-custom-select({
+        id: 'patient-status', 
+        name: 'patient-status',
+        placeholder: 'Статус',
+        selectedIndex: 1,
+        selectedValue: 'new-patient',
+        selectedTxt: 'Новый пациент',
+        options: [
+          {
+            index: 1,
+            value: 'new-patient',
+            txt: 'Новый пациент',
+            selected: true,
+          },
+          {
+            index: 2,
+            value: 'observed',
+            txt: 'Наблюдается'
+          },
+          {
+            index: 3,
+            value: 'no-observed',
+            txt: 'Выбыл из наблюдения'
+          },
+          {
+            index: 4,
+            value: 'fatal-outcome',
+            txt: 'Летальный исход'
+          },
+        ]
+        })( data-required='')
+
+  +group({title: 'Общая информация и контактные данные'}).form-new-patient__main-data
+    .group__grid
+      +itc-custom-select({
+          id: 'who-directed', 
+          name: 'who-directed',
+          selectedIndex: 1,
+          selectedValue: 'by-yourself',
+          selectedTxt: 'Самостоятельно',
+          placeholder: 'Кем направлен',
+          options: [
+            {
+              index: 1,
+              value: 'by-yourself',
+              txt: 'Самостоятельно',
+              selected: true
+            },
+            {
+              index: 2,
+              value: 'recommendation of patients',
+              txt: 'По рекомендации прооперированных пациентов'
+            },
+            {
+              index: 3,
+              value: 'recommendation of specialists',
+              txt: 'По рекомендации смежных специалистов (эндокринолог, терапевт, кардиолог, сомнолог и др)'
+            },
+          ]
+          })
+      +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
+      +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})(data-mask='email')
+      +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'tooltip-city'}, mods: ['info']})(data-required='')
+      +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address'}).long-input
+      +checkbox({name: "permission for videomaterial", value: 'yes', label: 'Получено разрешение на использование <br>фото- и видеоматериалов'})
+      +checkbox({name: "permission for Email mailing", value: 'yes', label: 'Получено разрешение на email-рассылку'})
+      +checkbox({name: "permission for SMS mailing", value: 'yes', label: 'Получено разрешение на sms-рассылку'})
+
+  +group({title: 'Сопутствующие заболевания'}).form-new-patient__concomitant-diseases
+    .group__grid
+      +itc-custom-select({
+          id: 'disease1', 
+          name: 'disease1',
+          placeholder: 'Артериальная гипертензия',
+          options: [
+            {
+              index: 1,
+              value: 'no',
+              txt: 'Нет'
+            },
+            {
+              index: 2,
+              value: 'there-is, therapy does not',
+              txt: 'Есть терапию не получает'
+            },
+            {
+              index: 3,
+              value: 'сompensated by therapy',
+              txt: 'Компенсирована терапией',
+            },
+            {
+              index: 4,
+              value: 'no compensated by therapy',
+              txt: 'Не компенсирована терапией',
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease2', 
+          name: 'disease2',
+          placeholder: 'Сахарный диабет 2-го типа',
+          options: [
+            {
+              index: 1,
+              value: 'no signs',
+              txt: 'Нет признаков'
+            },
+            {
+              index: 2,
+              value: 'insulin resistance',
+              txt: 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе'
+            },
+            {
+              index: 3,
+              value: 'taking oral hypoglycemic drugs',
+              txt: 'Прием пероральных гипогликемических препаратов'
+            },
+            {
+              index: 4,
+              value: 'insulin therapy',
+              txt: 'Инсулинотерапия'
+            },
+          ]
+        })(data-has-connection='diabetes')
+      +itc-custom-select({
+          id: 'disease2-duration', 
+          name: 'disease2-duration',
+          placeholder: 'Длительность течения СД2',
+          options: [
+            {
+              index: 1,
+              value: 'first identified',
+              txt: 'Впервые выявлен'
+            },
+            {
+              index: 2,
+              value: 'less than 1 year',
+              txt: 'Менее 1 года'
+            },
+            {
+              index: 3,
+              value: '1 year',
+              txt: '1 год'
+            },
+            {
+              index: 4,
+              value: '2 year',
+              txt: '2 года'
+            },
+            {
+              index: 5,
+              value: '3 year',
+              txt: '3 года'
+            },
+            {
+              index: 6,
+              value: '4 year',
+              txt: '4 года'
+            },
+            {
+              index: 7,
+              value: '5 year',
+              txt: '5 лет'
+            },
+            {
+              index: 8,
+              value: '6 year',
+              txt: '6 лет'
+            },
+            {
+              index: 9,
+              value: '7 year',
+              txt: '7 лет'
+            },
+            {
+              index: 10,
+              value: '8 year',
+              txt: '8 лет'
+            },
+            {
+              index: 11,
+              value: '9 year',
+              txt: '9 лет'
+            },
+            {
+              index: 12,
+              value: '10 years',
+              txt: '10 лет'
+            },
+            {
+              index: 13,
+              value: 'more than 10 years',
+              txt: 'Более 10 лет'
+            },
+          ]
+        })(data-connected='diabetes')
+      +itc-custom-select({
+          id: 'disease3', 
+          name: 'disease3',
+          placeholder: 'ГЭРБ',
+          options: [
+            {
+              index: 1,
+              value: 'no symptoms',
+              txt: 'Нет симптомов'
+            },
+            {
+              index: 2,
+              value: 'periodic symptoms are stopped on their own',
+              txt: 'Периодические симптомы, купируются самостоятельно'
+            },
+            {
+              index: 3,
+              value: 'periodic symptoms are stopped by drugs',
+              txt: 'Переодические симптомыб купируются препаратами'
+            },
+            {
+              index: 4,
+              value: 'daily intake of medications',
+              txt: 'Ежедневыный приём препаратов'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Дислипидемия'})
+        +radio({name: 'dyslipidemia', value: 'yes', label: 'Да'})
+        +radio({name: 'dyslipidemia', value: 'no', label: 'Нет'})
+      +group-radio-buttons({title: 'Атеросклероз'})
+        +radio({name: 'atherosclerosis', value: 'yes', label: 'Да'})
+        +radio({name: 'atherosclerosis', value: 'no', label: 'Нет'})
+      +group-radio-buttons({title: 'Апноэ'})
+        +radio({name: 'apnea', value: 'yes', label: 'Да'})
+        +radio({name: 'apnea', value: 'no', label: 'Нет'})
+      +itc-custom-select({
+          id: 'disease4', 
+          name: 'disease4',
+          placeholder: 'Бронхиальная астма',
+          options: [
+            {
+              index: 0,
+              value: 'no',
+              txt: 'Нет'
+            },
+            {
+              index: 1,
+              value: 'inhaler',
+              txt: 'Ингалятор'
+            },
+            {
+              index: 2,
+              value: 'nebulizer/oral steroids',
+              txt: 'Небулайзер/пероральные стероиды'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease5', 
+          name: 'disease5',
+          placeholder: 'Функциональный статус',
+          options: [
+            {
+              index: 0,
+              value: '3 floors without rest',
+              txt: '3 этажа без отдыха'
+            },
+            {
+              index: 1,
+              value: '1st floor without rest',
+              txt: '1 этаж без отдыха'
+            },
+            {
+              index: 2,
+              value: 'Half a flight of stairs',
+              txt: 'Половина лестничного пролета'
+            },
+            {
+              index: 3,
+              value: 'Does not move independently / Does not leave the house',
+              txt: 'Не передвигается самостоятельно / Не выходит из дом'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease6', 
+          name: 'disease6',
+          placeholder: 'Боль в спине и конечностях',
+          options: [
+            {
+              index: 1,
+              value: 'No symptoms',
+              txt: 'Нет симптомов'
+            },
+            {
+              index: 2,
+              value: 'Intermittent symptoms',
+              txt: 'Периодически возникающие симптомы'
+            },
+            {
+              index: 3,
+              value: 'Regular medication',
+              txt: 'Регулярный прием препаратов'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease7', 
+          name: 'disease7',
+          placeholder: 'Заболевания печени',
+          options: [
+            {
+              index: 0,
+              value: 'No data available',
+              txt: 'Нет данных'
+            },
+            {
+              index: 1,
+              value: 'Signs of steatohepatosis',
+              txt: 'Признаки стеатогепатоза'
+            },
+            {
+              index: 2,
+              value: 'Non-alcoholic fatty liver disease',
+              txt: 'Неалкогольная жировая болезнь печени'
+            },
+            {
+              index: 3,
+              value: 'Cirrhosis of the liver',
+              txt: 'Неалкогольная жировая болезнь печени'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease8', 
+          name: 'disease8',
+          placeholder: 'Грыжа',
+          options: [
+            {
+              index: 0,
+              value: 'No',
+              txt: 'Нет'
+            },
+            {
+              index: 1,
+              value: 'Umbilical',
+              txt: 'Пупочная'
+            },
+            {
+              index: 2,
+              value: 'Ventral',
+              txt: 'Вентральная'
+            },
+            {
+              index: 3,
+              value: 'Inguinal',
+              txt: 'Паховая'
+            },
+            {
+              index: 4,
+              value: 'Under',
+              txt: 'Под'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'disease9', 
+          name: 'disease9',
+          placeholder: 'Жировой фартук',
+          options: [
+            {
+              index: 0,
+              value: 'No',
+              txt: 'Нет'
+            },
+            {
+              index: 1,
+              value: 'Significant skin-fat fold',
+              txt: 'Значительная кожно-жировая складка '
+            },
+            {
+              index: 2,
+              value: 'Inflammation in the folds',
+              txt: 'Воспаление в складках'
+            },
+            {
+              index: 3,
+              value: 'Makes walking difficult',
+              txt: 'Затрудняет ходьбу'
+            },
+            {
+              index: 4,
+              value: 'Cellulite/ulceration',
+              txt: 'Целлюлит/изъязвление'
+            },
+            {
+              index: 5,
+              value: 'History of dermatolipectomy',
+              txt: 'Дерматолипэктомия в анамнезе'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Недержание мочи'})
+        +radio({name: 'urinary-incontinence', value: 'yes', label: 'Да'})
+        +radio({name: 'urinary-incontinence', value: 'no', label: 'Нет'})
+      +group-radio-buttons({title: 'Депрессия'})
+        +radio({name: 'depression', value: 'yes', label: 'Да'})
+        +radio({name: 'depression', value: 'no', label: 'Нет'})
+      +group-radio-buttons({title: 'Желчнокаменная болезнь'})
+        +radio({name: 'cholelithiasis', value: 'yes', label: 'Да'})
+        +radio({name: 'cholelithiasis', value: 'no', label: 'Нет'})
+    .group__grid.group__hidden(data-connected='gender')
+      +itc-custom-select({
+          id: 'menstrual-function', 
+          name: 'menstrual-function',
+          placeholder: 'Менструальная функция',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'polycystic-ovary', 
+          name: 'polycystic-ovary',
+          placeholder: 'Синдром поликистозных яичников',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Операция с целью фертильности'})(data-required='')
+        +radio({name: 'goal-is-fertility', value: 'yes', label: 'Да'})
+        +radio({name: 'goal-is-fertility', value: 'no', label: 'Нет'})
+
+  +group({title: 'Анамнез'}).form-new-patient__anamnesis
+    .group__grid
+      +itc-custom-select({
+          id: 'anamnesis1', 
+          name: 'anamnesis1',
+          placeholder: 'Шкала ASA',
+          options: [
+            {
+              index: 0,
+              value: 'ASA I',
+              txt: 'ASA I (здоровый пациент) '
+            },
+            {
+              index: 1,
+              value: 'ASA II',
+              txt: 'ASA II (системное заболевание умеренной тяжести)'
+            },
+            {
+              index: 2,
+              value: 'ASA III',
+              txt: 'ASA III (тяжелое, но компенсированное либо субкомпенсированное заболевание)'
+            },
+            {
+              index: 3,
+              value: 'ASA IV',
+              txt: 'ASA IV (тяжелое заболевание, представляющее постоянную угрозу жизни)'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'anamnesis2', 
+          name: 'anamnesis2',
+          placeholder: 'Курение',
+          options: [
+            {
+              index: 0,
+              value: 'Never smoked / quit',
+              txt: 'Никогда не курил / бросил'
+            },
+            {
+              index: 1,
+              value: 'Smokes sometimes / Rarely',
+              txt: 'Курит иногда / Редко'
+            },
+            {
+              index: 2,
+              value: 'Up to 20 cigarettes a day',
+              txt: 'До 20 сигарет в день'
+            },
+            {
+              index: 3,
+              value: 'More than 20 cigarettes a day',
+              txt: 'Более 20 сигарет в день'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'anamnesis3', 
+          name: 'anamnesis3',
+          placeholder: 'Факторы риска ТЭЛА',
+          options: [
+            {
+              index: 0,
+              value: 'No',
+              txt: 'Нет'
+            },
+            {
+              index: 1,
+              value: 'Deep vein thrombosis or PE',
+              txt: 'Тромбоз глубоких вен или ТЭЛА'
+            },
+            {
+              index: 2,
+              value: 'Venous edema with ulceration',
+              txt: 'Венозный отек с изъязвлением'
+            },
+            {
+              index: 3,
+              value: 'Kava filter',
+              txt: 'Кава-фильтр'
+            },
+            {
+              index: 4,
+              value: 'Hypoventilation',
+              txt: 'Гиповентиляция'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'anamnesis4', 
+          name: 'anamnesis4',
+          placeholder: 'Регулярный прием препаратов',
+          options: [
+            {
+              index: 0,
+              value: 'From pressure',
+              txt: 'От давления'
+            },
+            {
+              index: 1,
+              value: 'From type 2 diabetes mellitus',
+              txt: 'От сахараного диабета 2-го типа'
+            },
+            {
+              index: 2,
+              value: 'NSAIDs/Painkillers',
+              txt: 'НПВС/Обезболивающие'
+            },
+            {
+              index: 3,
+              value: 'HIV therapy',
+              txt: 'ВИЧ-терапия'
+            },
+            {
+              index: 4,
+              value: 'From neuropsychiatric diseases',
+              txt: 'От психо-неврологических заболеваний'
+            },
+            {
+              index: 5,
+              value: 'Contraceptives',
+              txt: 'Противозачаточные'
+            },
+            {
+              index: 6,
+              value: 'Other',
+              txt: "Другое(Дополните 'Примечание')"
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'anamnesis5', 
+          name: 'anamnesis5',
+          placeholder: 'Попытки снижения веса',
+          options: [
+            {
+              index: 0,
+              value: 'There was no',
+              txt: 'Не было'
+            },
+            {
+              index: 1,
+              value: 'Diet',
+              txt: 'Диета '
+            },
+            {
+              index: 2,
+              value: 'Psychological methods',
+              txt: 'Психологические методы'
+            },
+            {
+              index: 3,
+              value: 'Treatment in the nutrition clinic',
+              txt: 'Лечение в клинике питания'
+            },
+            {
+              index: 4,
+              value: 'Xenical (Orlistat)',
+              txt: 'Ксеникал (Орлистат)'
+            },
+            {
+              index: 5,
+              value: 'Sibutramine (Meridia)',
+              txt: 'Сибутрамин (Меридиа)'
+            },
+            {
+              index: 6,
+              value: 'Agonists (inhibitors) of GPP-1 and GIP',
+              txt: 'Агонисты (ингибиторы) ГПП-1 и ГИП'
+            },
+            {
+              index: 8,
+              value: 'Other drugs',
+              txt: 'Другие препараты'
+            },
+          ]
+        })(data-multiple=true)
+      +itc-custom-select({
+          id: 'anamnesis6', 
+          name: 'anamnesis6',
+          placeholder: 'Предыдущая бариотрическая операция',
+          options: [
+            {
+              index: 0,
+              value: 'There was no',
+              txt: 'Не было'
+            },
+            {
+              index: 1,
+              value: 'Sleeve (Longitudinal resection)',
+              txt: 'Sleeve (Продольная резекция)'
+            },
+            {
+              index: 2,
+              value: 'MGB-OAGB (Mini-bypass)',
+              txt: 'MGB-OAGB (Минигастрошунтирование)'
+            },
+            {
+              index: 3,
+              value: 'RYGB (Gastric bypass)',
+              txt: 'RYGB (Гастрошунтирование)'
+            },
+            {
+              index: 4,
+              value: 'BPD (Biliopancreatic bypass)',
+              txt: 'BPD (Билиопанкреатическое шунтирование)'
+            },
+            {
+              index: 5,
+              value: 'SADI (Duodenoileshunt)',
+              txt: 'SADI (Дуоденоилешунтирование)'
+            },
+            {
+              index: 6,
+              value: 'SLIM OAGB (Short-loop gastric bypass)',
+              txt: 'SLIM OAGB (Гастрошунтирование на короткой петле)'
+            },
+            {
+              index: 7,
+              value: 'Bandaging',
+              txt: 'Бандажирование'
+            },
+            {
+              index: 8,
+              value: 'Intragastric balloon',
+              txt: 'Внутрижелудочный баллон'
+            },
+            {
+              index: 9,
+              value: 'Gastroplication',
+              txt: 'Гастропликация'
+            },
+            {
+              index: 10,
+              value: 'Other operation',
+              txt: 'Другая операция'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'anamnesis7', 
+          name: 'anamnesis7',
+          placeholder: 'Операции в Анамнезе',
+          options: [
+            {
+              index: 0,
+              value: 'Laparoscopy',
+              txt: 'Лапароскопия'
+            },
+            {
+              index: 1,
+              value: 'Laparotomy on the upper floor of the abdominal cavity',
+              txt: 'Лапаротомия на верхнем этаже брюшной полости'
+            },
+            {
+              index: 2,
+              value: 'Laparotomy on the lower floor of the abdominal cavity',
+              txt: 'Лапаротомия на нижнем этаже брюшной полости'
+            },
+            {
+              index: 3,
+              value: 'Multiple laparotomies',
+              txt: 'Множественные лапаротомии'
+            },
+          ]
+        })
+
+  +group({title: 'Дополнительная информация'}).form-new-patient__additional-info
+    .group__grid
+      +textarea({name: 'new-patient-additional', id: 'new-patient-additional', placeholder: 'Примечания'}).form-new-patient__textarea
+      +file-loader({name: 'new-patient-files', id: 'new-patient-files'})
+
+  .form-new-patient__btn-wp
+    +btn({txt: 'Создать'})(type='submit')(disabled).submit-button.form-new-patient__btn
+    +btn({txt: 'Оценить комплаентность', mode: 'ghost'})(type='button').form-new-patient__btn

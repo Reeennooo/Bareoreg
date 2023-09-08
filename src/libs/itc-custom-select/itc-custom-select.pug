@@ -1,0 +1,46 @@
+//- У кнопки кроме data-select="toggle" имеются атрибуты name и value. 
+//- Они определяют соответственно имя селекта и его значение.
+//- data-select="option" – означает, что это опция;
+//- data-value – значение опции;
+//- data-index – индекс (порядковый номер) опции.
+
+//- Если изначально какая-то опция должна быть активна, 
+//- то к ней необходимо добавить класс itc-select__item_selected. 
+//- Кроме этого для button в атрибут value нужно поместить её значение, 
+//- в data-index – её индекс, а в содержимое – её контент.
+
+//- Атрибут data-index содержит индекс выбранной опции. 
+//- Если по умолчанию не должна быть активна какая-то опция, то value следует задать пустую строку, а data-index – значение -1.
+
+//- format data
+//- {
+  id: 1,
+  name: 'Имя',
+  selectedIndex: 3,
+  selectedValue: 'banana'
+  options: [
+    {
+      value: 'watermelon',
+      index: 1,
+      txt: 'Арбуз'
+    },
+    {
+      value: 'melon',
+      index: 2,
+      txt: 'Дыня'
+    },
+    {
+      value: 'banana',
+      index: 3,
+      txt: 'Банан'
+    },
+  ]
+//- }
+
+mixin select(data)
+  .itc-select(id=data.id)
+    button(type='button' name="car" value="" data-select="toggle" data-index="-1").itc-select__toggle
+    .itc-select__dropdown
+      ul.itc-select__options
+        each option in data.options
+          li(data-select="option" data-value=option.value data-index=option.index).itc-select__option

@@ -1,0 +1,4 @@
+mixin textarea(data)
+  .textarea&attributes(attributes)
+    textarea(name=data.name id=data.id placeholder='')
+    label(for=data.id)=data.placeholder

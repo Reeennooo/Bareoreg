@@ -1,0 +1,88 @@
+.file-loader {
+  &.dragover {
+    label {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='#675dda' stroke-width='3' stroke-dasharray='8%2c 10' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
+
+    .file-loader__title {
+      color: $violet;
+      svg {
+        stroke: $violet;
+      }
+    }
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    width: 1px;
+    height: 1px;
+  }
+
+  input:focus + label {
+    // outline: -webkit-focus-ring-color auto 5px;
+    // background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='#675dda' stroke-width='1' stroke-dasharray='8%2c 10' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 44px;
+    width: 100%;
+    height: 100%;
+    // border: 1px dashed $grey-light;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='black' stroke-width='1' stroke-dasharray='8%2c 10' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 4px;
+    @include transition('background-image');
+  }
+
+  &__title {
+    cursor: pointer;
+    @include transition('color');
+    display: flex;
+    justify-content: center;
+    column-gap: 8px;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+    color: $grey;
+
+    @media (hover: hover) {
+      &:hover {
+        color: $violet;
+
+        svg {
+          stroke: $violet;
+        }
+      }
+    }
+
+    svg {
+      @include transition('stroke');
+      stroke: $grey;
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__subtitle {
+    color: $grey-light-100;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+  }
+
+  &__uploaded-files {
+    margin-top: 16px;
+    display: none;
+    flex-wrap: wrap;
+    column-gap: 8px;
+
+    &:has(.file) {
+      display: flex;
+    }
+  }
+}

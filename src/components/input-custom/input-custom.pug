@@ -1,0 +1,28 @@
+mixin input-custom(data)
+  -
+    const classes = [];
+    let classesString;
+    if(data.mods) {
+      data.mods.map(mod => classes.push(`input-custom--${mod}`))
+    }
+    if(attributes.class) {
+        classes.push(attributes.class)
+    }
+    classesString = classes.join(' ')    
+
+    const dataRequired =  data.required ? 'data-required' : '';
+    
+  .input-custom(class=classes)
+    .input-custom__input
+      input(
+        type=data.type 
+        name=data.name placeholder='' 
+        disabled!=attributes.disabled 
+        id=attributes.id 
+        autocomplete=attributes.autocomplete
+        )&attributes(attributes)
+      label(for=data.name)=data.placeholder
+      if(data.info)
+        svg(id=data.info.id).input-custom__info
+          use(href='img/sprite.svg#info')
+    .input-custom__message=data.message

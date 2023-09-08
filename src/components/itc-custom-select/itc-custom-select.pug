@@ -1,0 +1,68 @@
+//- У кнопки кроме data-select="toggle" имеются атрибуты name и value. 
+//- Они определяют соответственно имя селекта и его значение.
+//- data-select="option" – означает, что это опция;
+//- data-value – значение опции;
+//- data-index – индекс (порядковый номер) опции.
+
+//- Если изначально какая-то опция должна быть активна, 
+//- то к ней необходимо добавить класс itc-select__item_selected. 
+//- Кроме этого для button в атрибут value нужно поместить её значение, 
+//- в data-index – её индекс, а в содержимое – её контент.
+
+//- Атрибут data-index содержит индекс выбранной опции. 
+//- Если по умолчанию не должна быть активна какая-то опция, то value следует задать пустую строку, а data-index – значение -1.
+
+//- format data
+//- {
+  id: select-1,
+  name: 'Имя',
+  selectedIndex: 3,
+  selectedValue: 'banana',
+  selectedTxt: 'Текст выбранной опции'
+  placeholder: 'Выберите фрукт'
+  options: [
+    {
+      index: 1,
+      value: 'watermelon',
+      txt: 'Арбуз'
+      selected: true,
+    },
+    {
+      index: 2,
+      value: 'melon',
+      txt: 'Дыня'
+    },
+    {
+      index: 3,
+      value: 'banana',
+      txt: 'Банан'
+    },
+  ]
+//- }
+
+//- .is-invalid - класс для ошибки
+
+mixin itc-custom-select(data)
+  .itc-select(
+    id=data.id 
+    data-multiple=data.multiple ? data.multiple : false
+    )&attributes(attributes)
+    button(
+      type='button' 
+      name=data.name
+      value=data.selectedValue ? data.selectedValue : ''  
+      data-index=data.selectedIndex ? data.selectedIndex : "-1"
+      data-select="toggle").itc-select__toggle
+      span.itc-select__text-selected=data.selectedTxt
+    .itc-select__placeholder=data.placeholder
+    if(data.options)
+      .itc-select__dropdown
+        ul.itc-select__options
+          each option in data.options
+            li(
+              data-select="option" 
+              data-value=option.value 
+              data-index=option.index
+              class=option.selected ? 'itc-select__option_selected' : ''
+              ).itc-select__option=option.txt
+    .itc-select__message

@@ -1,0 +1,16 @@
+header.header
+    .container
+        .header__inner
+            .header__logo
+                img(src="img/logo.svg", alt="logo")
+            .header__nav
+                a(href="#").header__nav-el Главная
+                a(href="#").header__nav-el Статистика
+                a(href="#").header__nav-el Конструктор
+                a(href="#").header__nav-el Формулы
+                a(href="#").header__nav-el Пользователи
+                a(href="#").header__nav-el Группы
+            .header__buttons
+                +btn-circle({icon: 'search'})
+                +btn-circle({icon: 'bell', mode: 'ghost' })
+                +btn-circle({icon: 'user', href: '#', mode: 'ghost'})

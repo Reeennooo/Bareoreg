@@ -1,0 +1,71 @@
+.form-new-patient {
+  overflow: hidden;
+  padding-bottom: 92px;
+  &__textarea {
+    margin-bottom: 44px;
+  }
+
+  &__btn-wp {
+    display: flex;
+    column-gap: 20px;
+  }
+
+  &__btn {
+    max-width: 325px;
+    width: 100%;
+  }
+}
+
+.form-new-patient__pesonal-data {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-new-patient__main-data {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+
+    .long-input {
+      display: flex;
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+  }
+}
+
+.form-new-patient__concomitant-diseases {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+
+    .long-input {
+      display: flex;
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+  }
+
+  .group__grid.group__hidden {
+    // margin-top: 44px;
+    // padding-top: 44px;
+    display: none;
+  }
+}
+
+.form-new-patient__anamnesis {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}

@@ -1,0 +1,93 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.apple-fix {
+  width: 100%;
+  position: fixed;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.clearfix {
+  &::after {
+    content: '.';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  @include heightVH(100, min); //ios
+  overflow: hidden;
+  width: 100%;
+  // overflow-x: hidden;
+  position: relative;
+
+  &.sticky {
+    overflow: unset;
+  }
+  .header {
+    flex: 0 0 auto;
+  }
+  main {
+    position: relative;
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex: 0 0 auto;
+  }
+}
+.is-default-hidden {
+  display: none !important;
+}
+// @supports (-webkit-line-clamp: 6) {
+// 	.your-class {
+// 			display: -webkit-box;
+// 			white-space: normal;
+// 			text-overflow: ellipsis;
+// 			-webkit-box-orient: vertical;//
+// 			-webkit-line-clamp: 6;
+// 			overflow: hidden;
+// 	}
+// }
+
+.tippy-box[data-theme~='violet'] {
+  background-color: $violet;
+  color: $white;
+}
+
+.tippy-box[data-theme~='violet'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: $violet;
+}
+.tippy-box[data-theme~='violet'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: $violet;
+}
+.tippy-box[data-theme~='violet'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: $violet;
+}
+.tippy-box[data-theme~='violet'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: $violet;
+}
+
+.svg {
+  flex-shrink: 0;
+  fill: none;
+  width: 100%;
+  height: 100%;
+}

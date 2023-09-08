@@ -1,0 +1,19 @@
+mixin file()
+  .file
+    .file__name-wrapper
+      .file__icon
+        svg
+          use(href='img/sprite.svg#file')
+      //- .file__image
+      //-   img(src="", alt="")
+      .file__info
+        .file__name Изначальное название файла
+        .file__type Название формата файла
+    .loader
+    .file__uploaded
+      svg
+        use(href='img/sprite.svg#check-bold')
+    .file__delete
+      svg
+        use(href='img/sprite.svg#close')
+    
