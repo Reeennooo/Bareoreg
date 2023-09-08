@@ -1,17 +1,29 @@
 mixin group(data)
-  .group&attributes(attributes).is-active
-    .group__header
-      .group__title
-        .group__completed
-          svg.svg
-            use(xlink:href="img/sprite.svg#check")
-        span=data.title
-      .group__toggle
-        svg.svg
-          use(xlink:href="img/sprite.svg#caret-up")
-    .group__inner-wrapper
+  if(data.type === 'additional')
+    .group.group--additional&attributes(attributes)
+      .group__header
+        .group__title
+          .group__completed
+            svg.svg
+              use(xlink:href="img/sprite.svg#check")
+          span=data.title
       .group__inner
         if block
             block
+  else
+    .group&attributes(attributes).is-active
+      .group__header
+        .group__title
+          .group__completed
+            svg.svg
+              use(xlink:href="img/sprite.svg#check")
+          span=data.title
+        .group__toggle
+          svg.svg
+            use(xlink:href="img/sprite.svg#caret-up")
+      .group__inner-wrapper
+        .group__inner
+          if block
+              block
 
 //- !!! При добавлении блока оберни его в .group__grid

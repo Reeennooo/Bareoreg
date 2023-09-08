@@ -23,6 +23,10 @@
     align-items: flex-start;
     gap: 44px 24px;
   }
+  .long-input {
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
 }
 
 .form-new-patient__main-data {
@@ -52,12 +56,6 @@
       grid-column-start: 2;
       grid-column-end: 4;
     }
-  }
-
-  .group__grid.group__hidden {
-    // margin-top: 44px;
-    // padding-top: 44px;
-    display: none;
   }
 }
 

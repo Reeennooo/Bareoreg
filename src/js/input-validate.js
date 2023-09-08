@@ -30,6 +30,7 @@ export function inputValidate(input, rules) {
     const inputWrapper = input.closest('.input-custom');
     const inputMessage = inputWrapper.querySelector('.input-custom__message');
     const result = approve.value(input.value, rules);
+    console.log(result)
     if (!result.required.approved) {
         inputMessage.innerText = result.required.errors[0];
         inputMessage.classList.add('error-message');

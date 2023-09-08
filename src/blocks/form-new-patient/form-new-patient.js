@@ -1,7 +1,6 @@
 import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import AirDatepicker from 'air-datepicker';
 import { inputValidate } from '../../js/input-validate';
-import tippy from 'tippy.js';
 import IMask from 'imask/esm/index';
 // Заболевание и его name
 // disease1 - Артериальная гипертензия
@@ -52,12 +51,6 @@ new ItcCustomSelect('#anamnesis7');
 // calendar
 new AirDatepicker('#calendar', {
     // inline: true,
-});
-
-// Тултип
-tippy('#tooltip-city', {
-    content: 'Если игнорировать это поле, пациента не будет на географической карте',
-    theme: 'violet',
 });
 
 const allRules = {
@@ -176,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } 
         else if(hasConnectEl.dataset.hasConnection === 'gender') {
             let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`)
-            console.log(connectedEl)
             let observer = new MutationObserver((mutationRecords) => {
                 for(const mutation of mutationRecords) {
                     // console.log(mutation)
@@ -189,6 +181,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             })
             observer.observe(hasConnectEl, {attributes: true, attributeFilter: ['data-value']})
+        }
+        else if(hasConnectEl.dataset.hasConnection === 'status') {
+            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`)
+            let button = hasConnectEl.querySelector('button');
+            let observer = new MutationObserver((mutationRecords) => {
+                for(const mutation of mutationRecords) {
+                    if(mutation.target.value === 'out-observation') {
+                        connectedEl.style.display = 'block'
+                    } else {
+                        connectedEl.style.display = 'none'
+                    }
+                }
+                
+            })
+            observer.observe(button, {attributes: true, attributeFilter: ['value']})
         }
     })
 });

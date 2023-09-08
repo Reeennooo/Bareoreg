@@ -33,34 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // group field
     const groups = document.querySelectorAll('.group');
-    groups.forEach((group) => {
-        // console.log(group)
-        // Проверяем заполненость group при изменениях дочерних элементов.
-        const groupInner = group.querySelector('.group__inner');
-        const requiredElements = groupInner.querySelectorAll('[data-required]');
-        if(!requiredElements.length) {group.classList.add('required-are-filled')}
-        // console.log(requiredElements)
-        requiredElements.forEach((requiredEl) => {
-            if (requiredEl.classList.contains('itc-select')) {
-                const button = requiredEl.querySelector('button');
-                let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
-                observer.observe(button, { attributes: true, attributeFilter: ['value'] });
-            } else if (requiredEl.classList.contains('group-radio-buttons')) {
-                let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
-                observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
-            } else {
-                requiredEl.addEventListener('change', () => checkFilledInput(group, requiredElements));
-            }
-            // console.log(requiredEl.nodeName);
-        });
+    if(groups) {
+        groups.forEach((group) => {
+            // console.log(group)
+            // Проверяем заполненость group при изменениях дочерних элементов.
+            const groupGrid = group.querySelector('.group__grid');
+            // Находит required и в дргуих группах
+            const requiredElements = groupGrid.querySelectorAll('[data-required]');
+            if(!requiredElements.length) {group.classList.add('is-filled')}
+            // console.log(requiredElements)
+            requiredElements.forEach((requiredEl) => {
+                if (requiredEl.classList.contains('itc-select')) {
+                    const button = requiredEl.querySelector('button');
+                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    observer.observe(button, { attributes: true, attributeFilter: ['value'] });
+                } else if (requiredEl.classList.contains('group-radio-buttons')) {
+                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
+                } else {
+                    requiredEl.addEventListener('change', () => checkFilledInput(group, requiredElements));
+                }
+            });
 
-        // Отслеживаем поялвение класса 'is-filled' у группы.
-        let observer = new MutationObserver((mutationRecords) => {
-            checkFilledForm(mutationRecords[0].target)
-            console.log(mutationRecords)
+            // Отслеживаем поялвение класса 'is-filled' у группы.
+            let observer = new MutationObserver((mutationRecords) => {
+                checkFilledForm(mutationRecords[0].target)
+                // console.log(mutationRecords)
+            });
+            observer.observe(group, {attributeFilter: ['class'], attributeOldValue: true})
         });
-        observer.observe(group, {attributeFilter: ['class'], attributeOldValue: true})
-    });
+    }
 
     function checkFilledForm(mutationElement) {
         const form = mutationElement.closest('form');
@@ -68,7 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnSubmit = form.querySelector('.submit-button');
         const groups = form.querySelectorAll('.group');
         const groupsBoolean = [...groups].map(group => {
-            if(group.classList.contains('required-are-filled')) {
+            // if(group.classList.contains('is-filled')) {
+            //     return true
+            // } else {
+            //     return false
+            // }
+            if(group.classList.contains('group--additional') && !group.classList.contains('is-active')) {
+                return true
+            }
+            else if(group.classList.contains('is-filled')) {
                 return true
             } else {
                 return false
@@ -79,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             btnSubmit.setAttribute('disabled', 'disabled')
         }
-        console.log(groupsBoolean)
     }
-    // const formNewPatient = document.querySelector('.form-new-patient')
-    // checkFilledForm(formNewPatient)
 
     function checkFilledInput(group, requiredElements) {
         let inputsField = false;
@@ -112,13 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if(inputsField) {
             group.classList.add('is-filled')
-            group.classList.add('required-are-filled')
         } 
         else if(group.classList.contains('is-filled')) {
             group.classList.remove('is-filled')
-            group.classList.remove('required-are-filled')
         }
         // inputField = checkResult.indexOf(false)
-        console.log(checkResult);
     }
 });

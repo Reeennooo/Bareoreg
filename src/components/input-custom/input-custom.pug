@@ -9,10 +9,8 @@ mixin input-custom(data)
         classes.push(attributes.class)
     }
     classesString = classes.join(' ')    
-
-    const dataRequired =  data.required ? 'data-required' : '';
     
-  .input-custom(class=classes)
+  .input-custom(class=classes data-connected=data.connected)
     .input-custom__input
       input(
         type=data.type 
@@ -23,6 +21,5 @@ mixin input-custom(data)
         )&attributes(attributes)
       label(for=data.name)=data.placeholder
       if(data.info)
-        svg(id=data.info.id).input-custom__info
-          use(href='img/sprite.svg#info')
+        +info({id: data.info.id}).input-custom__info
     .input-custom__message=data.message

@@ -4,6 +4,10 @@
     position: relative;
   }
 
+  &[data-connected] {
+    display: none;
+  }
+
   // &.is-invalid {
   //   input {
   //     border-color: $input-error;

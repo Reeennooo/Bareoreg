@@ -19,28 +19,29 @@
         selectedTxt: 'Новый пациент',
         options: [
           {
-            index: 1,
+            index: 0,
             value: 'new-patient',
             txt: 'Новый пациент',
             selected: true,
           },
           {
-            index: 2,
+            index: 1,
             value: 'observed',
             txt: 'Наблюдается'
           },
           {
-            index: 3,
-            value: 'no-observed',
+            index: 2,
+            value: 'out-observation',
             txt: 'Выбыл из наблюдения'
           },
           {
-            index: 4,
+            index: 3,
             value: 'fatal-outcome',
             txt: 'Летальный исход'
           },
         ]
-        })( data-required='')
+        })(data-required='')(data-has-connection='status')
+      +input-custom({type: 'text', placeholder: 'Причина выбытия*', name: 'reason-for-disposal', connected: 'status'})(class='long-input')
 
   +group({title: 'Общая информация и контактные данные'}).form-new-patient__main-data
     .group__grid
@@ -72,7 +73,7 @@
           })
       +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
       +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})(data-mask='email')
-      +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'tooltip-city'}, mods: ['info']})(data-required='')
+      +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'city-info'}, mods: ['info']})(data-required='')
       +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address'}).long-input
       +checkbox({name: "permission for videomaterial", value: 'yes', label: 'Получено разрешение на использование <br>фото- и видеоматериалов'})
       +checkbox({name: "permission for Email mailing", value: 'yes', label: 'Получено разрешение на email-рассылку'})
@@ -106,7 +107,7 @@
               txt: 'Не компенсирована терапией',
             },
           ]
-        })
+        })(data-required='')
       +itc-custom-select({
           id: 'disease2', 
           name: 'disease2',
@@ -233,13 +234,13 @@
             },
           ]
         })
-      +group-radio-buttons({title: 'Дислипидемия'})
+      +group-radio-buttons({title: 'Дислипидемия', info: {id: '1'}})(data-required='')
         +radio({name: 'dyslipidemia', value: 'yes', label: 'Да'})
         +radio({name: 'dyslipidemia', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Атеросклероз'})
+      +group-radio-buttons({title: 'Атеросклероз', info: {id: '2'}})
         +radio({name: 'atherosclerosis', value: 'yes', label: 'Да'})
         +radio({name: 'atherosclerosis', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Апноэ'})
+      +group-radio-buttons({title: 'Апноэ', info: {id: '3'}})
         +radio({name: 'apnea', value: 'yes', label: 'Да'})
         +radio({name: 'apnea', value: 'no', label: 'Нет'})
       +itc-custom-select({
@@ -418,64 +419,65 @@
       +group-radio-buttons({title: 'Желчнокаменная болезнь'})
         +radio({name: 'cholelithiasis', value: 'yes', label: 'Да'})
         +radio({name: 'cholelithiasis', value: 'no', label: 'Нет'})
-    .group__grid.group__hidden(data-connected='gender')
-      +itc-custom-select({
-          id: 'menstrual-function', 
-          name: 'menstrual-function',
-          placeholder: 'Менструальная функция',
-          options: [
-            {
-              index: 0,
-              value: 'value1',
-              txt: 'List item 1'
-            },
-            {
-              index: 1,
-              value: 'value2',
-              txt: 'List item 2'
-            },
-            {
-              index: 2,
-              value: 'value3',
-              txt: 'List item 3'
-            },
-            {
-              index: 3,
-              value: 'value4',
-              txt: 'List item 4'
-            },
-          ]
-        })
-      +itc-custom-select({
-          id: 'polycystic-ovary', 
-          name: 'polycystic-ovary',
-          placeholder: 'Синдром поликистозных яичников',
-          options: [
-            {
-              index: 0,
-              value: 'value1',
-              txt: 'List item 1'
-            },
-            {
-              index: 1,
-              value: 'value2',
-              txt: 'List item 2'
-            },
-            {
-              index: 2,
-              value: 'value3',
-              txt: 'List item 3'
-            },
-            {
-              index: 3,
-              value: 'value4',
-              txt: 'List item 4'
-            },
-          ]
-        })
-      +group-radio-buttons({title: 'Операция с целью фертильности'})(data-required='')
-        +radio({name: 'goal-is-fertility', value: 'yes', label: 'Да'})
-        +radio({name: 'goal-is-fertility', value: 'no', label: 'Нет'})
+    +group({title: 'Женское здоровье', type: 'additional'})(data-connected='gender')
+      .group__grid
+        +itc-custom-select({
+            id: 'menstrual-function', 
+            name: 'menstrual-function',
+            placeholder: 'Менструальная функция',
+            options: [
+              {
+                index: 0,
+                value: 'value1',
+                txt: 'List item 1'
+              },
+              {
+                index: 1,
+                value: 'value2',
+                txt: 'List item 2'
+              },
+              {
+                index: 2,
+                value: 'value3',
+                txt: 'List item 3'
+              },
+              {
+                index: 3,
+                value: 'value4',
+                txt: 'List item 4'
+              },
+            ]
+          })
+        +itc-custom-select({
+            id: 'polycystic-ovary', 
+            name: 'polycystic-ovary',
+            placeholder: 'Синдром поликистозных яичников',
+            options: [
+              {
+                index: 0,
+                value: 'value1',
+                txt: 'List item 1'
+              },
+              {
+                index: 1,
+                value: 'value2',
+                txt: 'List item 2'
+              },
+              {
+                index: 2,
+                value: 'value3',
+                txt: 'List item 3'
+              },
+              {
+                index: 3,
+                value: 'value4',
+                txt: 'List item 4'
+              },
+            ]
+          })
+        +group-radio-buttons({title: 'Операция с целью фертильности'})
+          +radio({name: 'goal-is-fertility', value: 'yes', label: 'Да'})
+          +radio({name: 'goal-is-fertility', value: 'no', label: 'Нет'})
 
   +group({title: 'Анамнез'}).form-new-patient__anamnesis
     .group__grid
