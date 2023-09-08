@@ -1,8 +1,9 @@
-import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import AirDatepicker from 'air-datepicker';
 import { inputValidate } from '../../js/input-validate';
 import IMask from 'imask/esm/index';
-// Заболевание и его name
+import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
+
+// заболевания
 // disease1 - Артериальная гипертензия
 // disease2 - Сахарный диабет 2-го типа
 // disease2-duration - Длительность течения СД2
@@ -13,15 +14,6 @@ import IMask from 'imask/esm/index';
 // disease7 - Заболевания печени
 // disease8 - Грыжа
 // disease9 - Жировой фартук
-
-// Группа Анамнез
-// anamnesis1 - Шкала АСА
-// anamnesis2 - Курение
-// anamnesis3 - Факторы риска ТЭЛА
-// anamnesis4 - Регулярный прием препаратов
-// anamnesis5 - Попытки снижения веса
-// anamnesis6 - Предыдущая бариатрическая операция
-// anamnesis7 - Операции в анамнезе
 new ItcCustomSelect('#patient-status');
 new ItcCustomSelect('#who-directed');
 new ItcCustomSelect('#disease1');
@@ -35,11 +27,14 @@ new ItcCustomSelect('#disease7');
 new ItcCustomSelect('#disease8');
 new ItcCustomSelect('#disease9');
 
-// hidden
-new ItcCustomSelect('#menstrual-function');
-new ItcCustomSelect('#polycystic-ovary');
-
-
+// анамнез
+// anamnesis1 - Шкала АСА
+// anamnesis2 - Курение
+// anamnesis3 - Факторы риска ТЭЛА
+// anamnesis4 - Регулярный прием препаратов
+// anamnesis5 - Попытки снижения веса
+// anamnesis6 - Предыдущая бариатрическая операция
+// anamnesis7 - Операции в анамнезе
 new ItcCustomSelect('#anamnesis1');
 new ItcCustomSelect('#anamnesis2');
 new ItcCustomSelect('#anamnesis3');
@@ -47,6 +42,10 @@ new ItcCustomSelect('#anamnesis4');
 new ItcCustomSelect('#anamnesis5');
 new ItcCustomSelect('#anamnesis6');
 new ItcCustomSelect('#anamnesis7');
+
+// hidden
+new ItcCustomSelect('#menstrual-function');
+new ItcCustomSelect('#polycystic-ovary');
 
 // calendar
 new AirDatepicker('#calendar', {

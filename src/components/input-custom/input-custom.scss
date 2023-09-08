@@ -87,8 +87,11 @@
     letter-spacing: 0.4px;
   }
 
-  input:not(:placeholder-shown) ~ label {
-    color: $grey;
+  input:not(:placeholder-shown) {
+    color: $grey-dark;
+    & ~ label {
+      color: $grey;
+    }
   }
 
   // стили при disabled

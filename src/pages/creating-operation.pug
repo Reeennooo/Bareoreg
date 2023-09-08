@@ -1,9 +1,10 @@
 extends ../pug/layout.pug
 
 block meta
-    title Создание карты пациента
+    title Создание операции
     meta(name='description', content='')
-    - const pageName = 'new-patient'
+    - const pageName = 'creating-operation'
+
 //- block append head
 //-    link(rel='stylesheet', href='css/some.css')
 
@@ -12,15 +13,14 @@ block meta
 block content
     include ../blocks/hero/hero
     .container
-        include ../blocks/form-new-patient/form-new-patient
         //- h1 Заголовок контента
         //- svg(width="13" height="10")
         //-     use(xlink:href="img/sprite.svg#check")
-    +modal-upload()
+    //- +modal-upload()
 
 block footer
 
 //-block prepend page-bottom
 //-    include ../blocks/modal-test/modal-test
 //- block append page-bottom
-//-   script(src='js/init-selects.js')
+//-   script(src='js/some.js')

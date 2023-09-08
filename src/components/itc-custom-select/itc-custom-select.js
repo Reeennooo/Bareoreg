@@ -52,6 +52,7 @@ export class ItcCustomSelect {
     }
     constructor(target, params) {
         this._el = typeof target === 'string' ? document.querySelector(target) : target;
+        if(!this._el) return
         this._params = params || {};
         // добавлено мной
         this._multiple = this._el.dataset.multiple || this._params.multiple ? true : false;

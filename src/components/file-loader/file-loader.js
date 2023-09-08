@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentFile = null;
     const dropZones = document.querySelectorAll('.file-loader');
     const modalUpload = document.querySelector('.modal-upload');
-    const filesWrapper = modalUpload.querySelector('.modal-upload__files');
+    const filesWrapper = modalUpload?.querySelector('.modal-upload__files');
     const btnSave = modalUpload?.querySelector('.modal-upload__save');
     const btnCancel = modalUpload?.querySelector('.modal-upload__cancel');
 

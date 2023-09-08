@@ -1,7 +1,20 @@
+-
+  let title;
+  let img;
+
+  if(pageName === 'new-patient') {
+    title='Создание карты <br>пациента';
+    img = 'img/1..png';
+  }
+  else if(pageName === 'creating-operation') {
+    title = 'Создание <br>операции';
+    img = 'img/3..png';
+  }
+
 .hero
   .container
     .hero__inner
       +btn({txt: 'Вернуться назад', icon: 'carret-left', href: '#', mode: 'text'}).hero__back
-      h1.hero__title Создание <br>карты пациента
+      h1.hero__title!=title
       .hero__image
-        img(src="img/1..png", alt="Новый пациент")
+        img(src=img, alt="background-image")
