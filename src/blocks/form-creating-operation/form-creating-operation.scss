@@ -1,0 +1,63 @@
+.form-creating-operation {
+  padding-bottom: 92px;
+}
+
+.patient {
+  &__title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.form-creating-operation__general-information {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-creating-operation__operation {
+}
+
+.form-creating-operation__complications {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+
+  .group--additional:first-child {
+    border-top: 0;
+  }
+}
+
+.form-creating-operation__emergency-situations {
+  .input-custom {
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+  .group__grid {
+    align-items: center;
+  }
+}
+
+.form-creating-operation__hospital {
+  .group__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}

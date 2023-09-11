@@ -2,7 +2,7 @@ import AirDatepicker from 'air-datepicker';
 import { inputValidate } from '../../js/input-validate';
 import IMask from 'imask/esm/index';
 import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
-
+import { assignInputRules } from '../../js/input-validate';
 // заболевания
 // disease1 - Артериальная гипертензия
 // disease2 - Сахарный диабет 2-го типа
@@ -128,7 +128,7 @@ const allRules = {
         required: {
             message: 'Обязательное поле',
         },
-    }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -143,71 +143,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // устанавливаем правила
-    assignInputRules();
+    assignInputRules(allRules);
 
     // СВЯЗИ
     // искать по всему документу или только внутри конкретной группы?
-    const hasConnections = document.querySelectorAll('[data-has-connection]')
-    hasConnections.forEach(hasConnectEl => {
-        if(hasConnectEl.dataset.hasConnection === 'diabetes') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`)
+    const hasConnections = document.querySelectorAll('[data-has-connection]');
+    hasConnections.forEach((hasConnectEl) => {
+        if (hasConnectEl.dataset.hasConnection === 'diabetes') {
+            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             let observer = new MutationObserver((mutationRecords) => {
-                for(const mutation of mutationRecords) {
+                for (const mutation of mutationRecords) {
                     // console.log(mutation.target)
-                    if(mutation.target.dataset.index > 1) {
-                        connectedEl.style.display = 'block'
+                    if (mutation.target.dataset.index > 1) {
+                        connectedEl.style.display = 'block';
                     } else {
-
-                        connectedEl.style.display = 'none'
+                        connectedEl.style.display = 'none';
                     }
                 }
-                
-            })
+            });
             let button = hasConnectEl.querySelector('button');
-            observer.observe(button, {attributes: true, attributeFilter: ['value']})
-        } 
-        else if(hasConnectEl.dataset.hasConnection === 'gender') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`)
+            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
+        } else if (hasConnectEl.dataset.hasConnection === 'gender') {
+            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             let observer = new MutationObserver((mutationRecords) => {
-                for(const mutation of mutationRecords) {
+                for (const mutation of mutationRecords) {
                     // console.log(mutation)
-                    if(mutation.target.dataset.value === 'woman') {
-                        connectedEl.style.display = 'grid'
+                    if (mutation.target.dataset.value === 'woman') {
+                        connectedEl.style.display = 'grid';
                     } else {
-                        connectedEl.style.display = 'none'
+                        connectedEl.style.display = 'none';
                     }
                 }
-                
-            })
-            observer.observe(hasConnectEl, {attributes: true, attributeFilter: ['data-value']})
-        }
-        else if(hasConnectEl.dataset.hasConnection === 'status') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`)
+            });
+            observer.observe(hasConnectEl, { attributes: true, attributeFilter: ['data-value'] });
+        } else if (hasConnectEl.dataset.hasConnection === 'status') {
+            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             let button = hasConnectEl.querySelector('button');
             let observer = new MutationObserver((mutationRecords) => {
-                for(const mutation of mutationRecords) {
-                    if(mutation.target.value === 'out-observation') {
-                        connectedEl.style.display = 'block'
+                for (const mutation of mutationRecords) {
+                    if (mutation.target.value === 'out-observation') {
+                        connectedEl.style.display = 'block';
                     } else {
-                        connectedEl.style.display = 'none'
+                        connectedEl.style.display = 'none';
                     }
                 }
-                
-            })
-            observer.observe(button, {attributes: true, attributeFilter: ['value']})
-        }
-    })
-});
-
-function assignInputRules() {
-    const allInputs = document.querySelectorAll('.input-custom input');
-    const rules = Object.keys(allRules);
-
-    allInputs.forEach((input) => {
-        if (rules.indexOf(input.name) !== -1) {
-            input.addEventListener('input', () => inputValidate(input, allRules[input.name]));
-            // может не стоит blur?
-            input.addEventListener('blur', () => inputValidate(input, allRules[input.name]));
+            });
+            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
         }
     });
-}
+});

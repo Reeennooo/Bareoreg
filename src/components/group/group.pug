@@ -13,11 +13,14 @@ mixin group(data)
   else
     .group&attributes(attributes).is-active
       .group__header
-        .group__title
-          .group__completed
-            svg.svg
-              use(xlink:href="img/sprite.svg#check")
-          span=data.title
+        .group__text
+          .group__title
+            .group__completed
+              svg.svg
+                use(xlink:href="img/sprite.svg#check")
+            span=data.title
+          if(data.subtitle)
+            .group__subtitle=data.subtitle
         .group__toggle
           svg.svg
             use(xlink:href="img/sprite.svg#caret-up")

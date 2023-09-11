@@ -8,10 +8,25 @@
   display: none;
 }
 
+.itc-select__message {
+  position: absolute;
+  display: none;
+  margin-top: 4px;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
 // invalid value
 .itc-select.is-invalid {
   .itc-select__toggle {
     border-color: $input-error;
+  }
+
+  .itc-select__message {
+    display: block;
+    color: $input-error;
   }
 
   .itc-select__placeholder {

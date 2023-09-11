@@ -1,2 +1,392 @@
 +form().form-creating-operation
   +group({title: 'Общие сведения'}).form-creating-operation__general-information
+    .group__grid
+      .patient
+        .patient__title Пациент
+        .patient__name Павленко Павел Павлович
+      +input-custom({type: 'number', placeholder: 'Вес на момент операции*', name: 'weight-operation'})
+      +input-custom({type: 'text', placeholder: 'Дата операции*', name: 'date-operation',})(autocomplete='off' data-required='').only-number#calendar-operation
+      +itc-custom-select({
+        id: 'surgeon', 
+        name: 'surgeon',
+        placeholder: 'Хирург',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })(data-required='')
+      +itc-custom-select({
+        id: 'assistants', 
+        name: 'assistants',
+        placeholder: 'Ассистенты',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+      +itc-custom-select({
+        id: 'type-of-operation', 
+        name: 'type-of-operation',
+        placeholder: 'Тип операции',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'Первичная'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'Ревизионная (по поводу неэффективности или осложнений предыдущей операции)'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'Плановый второй этап'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'Ревизия после бариатрической операции в другой клинике'
+          },
+        ]
+      })
+      +itc-custom-select({
+        id: 'kind-of-operation', 
+        name: 'kind-of-operation',
+        placeholder: 'Вид операции',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+      +itc-custom-select({
+        id: 'access', 
+        name: 'access',
+        placeholder: 'Доступ',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+      +input-custom({type: 'number', placeholder: 'Длительность операции (мин)', name: 'duration-operation'})
+      +itc-custom-select({
+        id: 'pain-relief', 
+        name: 'pain-relief',
+        placeholder: 'Обезболивание',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+      +itc-custom-select({
+        id: 'simultaneous-operation', 
+        name: 'simultaneous-operation',
+        placeholder: 'Симультанная операция',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'List item 1'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+  +group({title: 'Операция'}).form-creating-operation__operation
+    .group__grid
+      .group__info Выберите «Вид операции»
+  +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications
+    +group({title: 'Вид осложнения', type: 'additional'})
+      .group__grid
+        +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
+        +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')
+        +checkbox({name: "No complications", value: 'yes', label: 'Нет осложнений'})(data-has-connection='no-complications')
+    +group({title: 'Интраоперационные осложнения', type: 'additional'})(data-connected='intraoperative-complications')
+      .group__grid
+        +itc-custom-select({
+          id: 'bleeding', 
+          name: 'bleeding',
+          placeholder: 'Кровотечение',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+        +itc-custom-select({
+          id: 'Positive leak test', 
+          name: 'Positive leak test',
+          placeholder: 'Позитивный тест на герметичность',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+        +itc-custom-select({
+          id: 'injury of organs', 
+          name: 'injury of organs',
+          placeholder: 'Перфорация и ранение органов',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+        +itc-custom-select({
+          id: 'Electrotrauma of organs', 
+          name: 'Electrotrauma of organs',
+          placeholder: 'Электротравма органов',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+    +group({title: 'Нештатные ситуации', type: 'additional'})(data-connected='emergency-situations').form-creating-operation__emergency-situations
+      .group__grid
+        +checkbox({name: "emergency-situation1", value: 'yes', label: 'Заклинивание степлера'})
+        +checkbox({name: "emergency-situation2", value: 'yes', label: 'Неправильное срабатывание кассеты'})
+        +checkbox({name: "emergency-situation3", value: 'yes', label: 'Трудности установки зонда'})
+        +checkbox({name: "emergency-situation4", value: 'yes', label: 'Прошивание зонда степлером'})
+        +checkbox({name: "emergency-situation5", value: 'yes', label: 'Невозможность экспозиции печени'})
+        +checkbox({name: "emergency-situation6", value: 'yes', label: 'Выраженный спаечный процесс'})
+        +checkbox({name: "emergency-situation7", value: 'yes', label: 'Анестезиологические осложнения'})
+        +checkbox({name: "emergency-situation8", value: 'yes', label: 'Обнаружено новообразование'})
+        +checkbox({name: "emergency-situation9", value: 'yes', label: 'Поломка элементов оборудования'})
+        +checkbox({name: "emergency-situation10", value: 'yes', label: 'Резкое ухудшение состояния хирурга/ассистента'})
+        +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment'})
+  +group({title: 'Прибывание в стационаре и исход'}).form-creating-operation__hospital
+    .group__grid
+      +itc-custom-select({
+          id: 'vomiting', 
+          name: 'vomiting',
+          placeholder: 'Наличие рвоты после операции',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'text', placeholder: 'Дата выписки', name: 'discharge-from-hospital',})(autocomplete='off' data-required='').only-number#calendar-discharge
+      +itc-custom-select({
+          id: 'discharge', 
+          name: 'discharge',
+          placeholder: 'Выписка',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +checkbox({name: "Electrolyte-disturbances", value: 'yes', label: 'Электролитные нарушения'})
+      +checkbox({name: "Rhabdomyolysis", value: 'yes', label: 'Рабдомиолиз'})
+  .form__wrapper-btns
+    +btn({txt: 'Создать'})(type='submit')(disabled).submit-button
+    +btn({txt: 'Оценить комплаентность', mode: 'ghost'})(type='button')

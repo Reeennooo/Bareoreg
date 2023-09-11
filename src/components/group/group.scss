@@ -4,8 +4,14 @@
   border-radius: 20px;
 
   &.is-filled {
-    & > .group__header .group__completed {
-      display: block;
+    & > .group__header {
+      .group__completed {
+        display: block;
+      }
+
+      .group__subtitle {
+        padding-left: 40px;
+      }
     }
   }
 
@@ -47,6 +53,14 @@
     font-size: 24px;
     font-weight: 500;
     line-height: 32px;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: $grey;
   }
 
   // &__additional-title {
@@ -107,12 +121,9 @@
     display: none;
   }
 
-  // &__additional {
-  //   border-top: 2px solid $grey-super-light;
-  //   padding: 44px 32px;
-  //   // padding-top: ;
-  //   .group__grid {
-  //     padding: 0;
-  //   }
-  // }
+  &__info {
+    color: $violet;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+  }
 }
