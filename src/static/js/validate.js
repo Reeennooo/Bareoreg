@@ -33,14 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // group field
     const groups = document.querySelectorAll('.group');
-    if(groups) {
+    if (groups) {
         groups.forEach((group) => {
             // console.log(group)
             // Проверяем заполненость group при изменениях дочерних элементов.
             const groupGrid = group.querySelector('.group__grid');
             // Находит required и в дргуих группах
             const requiredElements = groupGrid.querySelectorAll('[data-required]');
-            if(!requiredElements.length) {group.classList.add('is-filled')}
+            if (!requiredElements.length) {
+                group.classList.add('is-filled');
+            }
             // console.log(requiredElements)
             requiredElements.forEach((requiredEl) => {
                 if (requiredEl.classList.contains('itc-select')) {
@@ -52,42 +54,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
                 } else {
                     requiredEl.addEventListener('change', () => checkFilledInput(group, requiredElements));
+                    requiredEl.addEventListener('blur', () => checkFilledInput(group, requiredElements));
                 }
             });
 
             // Отслеживаем поялвение класса 'is-filled' у группы.
             let observer = new MutationObserver((mutationRecords) => {
-                checkFilledForm(mutationRecords[0].target)
+                checkFilledForm(mutationRecords[0].target);
                 // console.log(mutationRecords)
             });
-            observer.observe(group, {attributeFilter: ['class'], attributeOldValue: true})
+            observer.observe(group, { attributeFilter: ['class'], attributeOldValue: true });
         });
     }
 
     function checkFilledForm(mutationElement) {
         const form = mutationElement.closest('form');
-        if(!form) return
+        if (!form) return;
         const btnSubmit = form.querySelector('.submit-button');
         const groups = form.querySelectorAll('.group');
-        const groupsBoolean = [...groups].map(group => {
+        const groupsBoolean = [...groups].map((group) => {
             // if(group.classList.contains('is-filled')) {
             //     return true
             // } else {
             //     return false
             // }
-            if(group.classList.contains('group--additional') && !group.classList.contains('is-active')) {
-                return true
-            }
-            else if(group.classList.contains('is-filled')) {
-                return true
+            if (group.classList.contains('group--additional') && !group.classList.contains('is-active')) {
+                return true;
+            } else if (group.classList.contains('is-filled')) {
+                return true;
             } else {
-                return false
+                return false;
             }
-        })
-        if(groupsBoolean.indexOf(false) === -1) {
-            btnSubmit.removeAttribute('disabled')
+        });
+        if (groupsBoolean.indexOf(false) === -1) {
+            btnSubmit.removeAttribute('disabled');
         } else {
-            btnSubmit.setAttribute('disabled', 'disabled')
+            btnSubmit.setAttribute('disabled', 'disabled');
         }
     }
 
@@ -117,11 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkResult.indexOf(false) === -1) {
             inputsField = true;
         }
-        if(inputsField) {
-            group.classList.add('is-filled')
-        } 
-        else if(group.classList.contains('is-filled')) {
-            group.classList.remove('is-filled')
+        if (inputsField) {
+            group.classList.add('is-filled');
+        } else if (group.classList.contains('is-filled')) {
+            group.classList.remove('is-filled');
         }
         // inputField = checkResult.indexOf(false)
     }
