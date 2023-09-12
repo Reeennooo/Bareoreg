@@ -5,6 +5,11 @@ import { assignInputRules } from '../../js/input-validate';
 const allRules = {
     // key - это name инпута
     // value - это правила проверки инпута
+    surgeon: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
     'weight-operation': {
         customRange: {
             min: 60,
@@ -25,7 +30,17 @@ const allRules = {
             message: 'Обязательное поле',
         },
     },
-    surgeon: {
+    'type-of-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'kind-of-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'reason-for-revision': {
         required: {
             message: 'Обязательное поле',
         },
@@ -44,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new ItcCustomSelect('#surgeon');
     new ItcCustomSelect('#assistants');
     new ItcCustomSelect('#type-of-operation');
+    new ItcCustomSelect('#reason-for-revision');
     new ItcCustomSelect('#kind-of-operation');
     new ItcCustomSelect('#access');
     new ItcCustomSelect('#pain-relief');
@@ -56,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             function checkState() {
                 if (hasConnectEl.checked) {
-                    connectedEl.style.display = 'block';
+                    connectedEl.classList.add('is-active');
                 } else {
-                    connectedEl.style.display = 'none';
+                    connectedEl.classList.remove('is-active');
                 }
             }
             hasConnectEl.addEventListener('change', checkState);
@@ -69,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     connectedEls.forEach((element) => {
                         element.checked = false;
                         element.setAttribute('disabled', 'disabled');
-                        document.querySelector(`[data-connected=${element.dataset.hasConnection}]`).style.display = 'none';
+                        document.querySelector(`[data-connected=${element.dataset.hasConnection}]`).classList.remove('is-active');
+                        // document.querySelector(`[data-connected=${element.dataset.hasConnection}]`).style.display = 'none';
                     });
                 } else {
                     connectedEls.forEach((element) => {
@@ -78,6 +95,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             hasConnectEl.addEventListener('change', checkState);
+        } else if (hasConnectEl.dataset.hasConnection === 'revision') {
+            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
+            let button = hasConnectEl.querySelector('button');
+            let observer = new MutationObserver((mutationRecords) => {
+                for (const mutation of mutationRecords) {
+                    const index = mutation.target.dataset.index;
+                    if (index === '1' || index === '3') {
+                        connectedEl.classList.add('is-active');
+                        // connectedEl.style.display = 'block';
+                    } else {
+                        connectedEl.classList.remove('is-active');
+                        // connectedEl.style.display = 'none';
+                    }
+                }
+            });
+            observer.observe(button, { attributes: true, attributeFilter: ['data-index'] });
         }
     });
 });

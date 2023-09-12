@@ -155,9 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const mutation of mutationRecords) {
                     // console.log(mutation.target)
                     if (mutation.target.dataset.index > 1) {
-                        connectedEl.style.display = 'block';
+                        connectedEl.classList.add('is-active');
                     } else {
-                        connectedEl.style.display = 'none';
+                        connectedEl.classList.remove('is-active');
                     }
                 }
             });
@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const mutation of mutationRecords) {
                     // console.log(mutation)
                     if (mutation.target.dataset.value === 'woman') {
-                        connectedEl.style.display = 'grid';
+                        connectedEl.classList.add('is-active');
                     } else {
-                        connectedEl.style.display = 'none';
+                        connectedEl.classList.remove('is-active');
                     }
                 }
             });

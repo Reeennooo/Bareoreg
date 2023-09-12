@@ -5,6 +5,10 @@
   }
 
   &[data-connected] {
+    &.is-active {
+      display: block;
+    }
+
     display: none;
   }
 

@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // console.log(requiredElements)
             requiredElements.forEach((requiredEl) => {
+                // дополнительно наблюдаем за элементами имеющими связь
+                if (requiredEl.hasAttribute('data-connected')) {
+                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
+                }
+
                 if (requiredEl.classList.contains('itc-select')) {
                     const button = requiredEl.querySelector('button');
                     let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
@@ -96,7 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkFilledInput(group, requiredElements) {
         let inputsField = false;
         const checkResult = [...requiredElements].map((element) => {
-            if (element.classList.contains('itc-select')) {
+            if (element.hasAttribute('data-connected') && !element.classList.contains('is-active')) {
+                return true;
+            } else if (element.classList.contains('itc-select')) {
                 if (element.querySelector('button').getAttribute('value')) {
                     return true;
                 } else {
