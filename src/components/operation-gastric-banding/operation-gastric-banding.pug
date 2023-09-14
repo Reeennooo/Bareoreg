@@ -1,0 +1,98 @@
+mixin operation-gastric-banding
+  .group__grid(data-connected='operation' data-number='1' data-name='gastric-banding')
+    +itc-custom-select({
+        id: 'type-of-bandage', 
+        name: 'type-of-bandage',
+        placeholder: 'Тип бандажа',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'BioEnterics LAP-BAND'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })(data-required='')
+    +group-radio-buttons({title: 'Диссекция'})(data-required='')
+      +radio({name: 'dissection', value: 'Pars flaccida', label: 'Pars flaccida'})
+      +radio({name: 'dissection', value: 'Перигастральная', label: 'Перигастральная'})
+    +input-custom({type: 'text', placeholder: 'Планируемая дата регулировки бандажа', name:'date-adjustment-bandage',})(autocomplete='off').only-number#calendar-adjustment-bandage
+    +checkbox({name: "Hemming of the stomach wall", value: 'yes', label: 'Подшивание стенки желудка'})
+  +group({title: 'Завершающий этап', type: 'additional'})(
+    data-connected='operation' 
+    data-number='2'
+    data-name='gastric-banding'
+  )
+    .group__grid
+      +group-radio-buttons({title: 'Дренирование брюшной полости и зоны анастомоза'})(data-required='')
+        +radio({name: 'drainage-zone', value: 'Да', label: 'Да'})
+        +radio({name: 'drainage-zone', value: 'Нет', label: 'Нет'})
+      +itc-custom-select({
+        id: 'drainage-tube-thickness', 
+        name: 'drainage-tube-thickness',
+        placeholder: 'Толщина дренажной трубки',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: '12 Fr'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+      +itc-custom-select({
+        id: 'homeostasis-lines', 
+        name: 'homeostasis-lines',
+        placeholder: 'Гомеостаз из степлерных линий',
+        options: [
+          {
+            index: 0,
+            value: 'value1',
+            txt: 'BioEnterics LAP-BAND'
+          },
+          {
+            index: 1,
+            value: 'value2',
+            txt: 'List item 2'
+          },
+          {
+            index: 2,
+            value: 'value3',
+            txt: 'List item 3'
+          },
+          {
+            index: 3,
+            value: 'value4',
+            txt: 'List item 4'
+          },
+        ]
+      })
+    

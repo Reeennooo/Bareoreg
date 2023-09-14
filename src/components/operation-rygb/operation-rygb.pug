@@ -1,0 +1,136 @@
+//- RYGB (Гастрошунтирование)
+mixin operation-rygb()
+  +group({title: 'Формирование малого желудочка', type: 'additional'})(
+    data-connected='operation' 
+    data-number='1'
+    data-name='RYGB (Gastric Bypass)'
+    ).border-none
+    .group__grid
+      +group-radio-buttons({title: 'Желудочек сформирован по зонду'})(data-required='')
+        +radio({name: 'The ventricle is formed by a probe', value: 'Да', label: 'Да'})
+        +radio({name: 'The ventricle is formed by a probe', value: 'С отступом от зонда', label: 'С отступом от зонда'})
+      +itc-custom-select({
+          id: 'stitching-machine', 
+          name: 'stitching-machine',
+          placeholder: 'Сшивающий аппарат ',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes'})(data-required='')
+      +itc-custom-select({
+          id: 'used-cassettes', 
+          name: 'used-cassettes',
+          placeholder: 'Использованные кассеты',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +itc-custom-select({
+          id: 'diameter-of-the-anastomosis', 
+          name: 'diameter-of-the-anastomosis',
+          placeholder: 'Диаметр анастамоза (см)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +group-radio-buttons({title: 'Закрытие технологического отверстия'})(data-required='')
+        +radio({name: 'manual', value: 'Ручное', label: 'Ручное'})
+        +radio({name: 'hardware', value: 'Аппаратное', label: 'Аппаратное'})
+      +itc-custom-select({
+          id: 'manual-anastomosis', 
+          name: 'manual-anastomosis',
+          placeholder: 'Ручной анастомоз',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +textarea({name: 'commentary-on-manual-anastomosis', id: 'commentary-on-manual-anastomosis', placeholder: 'Комментарий к ручномуанастомозу'})
+  +group({title: 'Формирование анастомозов', type: 'additional'})(
+    data-connected='operation' 
+    data-number='2'
+    data-name='RYGB (Gastric Bypass)'
+    )
+    .group__grid
+  +group({title: 'Завершающий этап', type: 'additional'})(
+    data-connected='operation' 
+    data-number='3'
+    data-name='RYGB (Gastric Bypass)'
+  )
+    .group__grid
