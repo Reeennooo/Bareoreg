@@ -175,6 +175,11 @@
   padding: 12px 24px 12px 16px;
 }
 
+.itc-select__option.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 // selected
 .itc-select__option_selected {
   display: flex;

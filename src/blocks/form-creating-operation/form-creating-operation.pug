@@ -128,25 +128,65 @@
           {
             index: 0,
             value: 'value1',
-            txt: 'List item 1'
+            txt: 'Sleeve (Продольная резекция)'
           },
           {
             index: 1,
             value: 'value2',
-            txt: 'List item 2'
+            txt: 'MGB-OAGB (Минигастрошунтирование)'
           },
           {
             index: 2,
-            value: 'value3',
-            txt: 'List item 3'
+            value: 'RYGB (Gastric Bypass)',
+            txt: 'RYGB (Гастрошунтирование)'
           },
           {
             index: 3,
             value: 'value4',
-            txt: 'List item 4'
+            txt: 'BPD (Билиопанкреатическое шунтирование)'
+          },
+          {
+            index: 4,
+            value: 'value4',
+            txt: 'BPD (Билиопанкреатическое шунтирование)'
+          },
+          {
+            index: 5,
+            value: 'value4',
+            txt: 'SADI (Дуоденоилешунтирование)'
+          },
+          {
+            index: 6,
+            value: 'value4',
+            txt: 'SLIM OAGB (Гастрошунтирование на короткой петле)'
+          },
+          {
+            index: 7,
+            value: 'gastric-banding',
+            txt: 'Бандажирование желудка'
+          },
+          {
+            index: 8,
+            value: 'intragastric-ballon',
+            txt: 'Внутрижелудочный баллон'
+          },
+          {
+            index: 9,
+            value: 'value4',
+            txt: 'Гастропликация'
+          },
+          {
+            index: 10,
+            value: 'value4',
+            txt: 'Удаление ВЖБ'
+          },
+          {
+            index: 11,
+            value: 'value4',
+            txt: 'Другая операция'
           },
         ]
-      })(data-required='')
+      })(data-required='' data-has-connection='operation')
       +itc-custom-select({
         id: 'access', 
         name: 'access',
@@ -155,25 +195,35 @@
           {
             index: 0,
             value: 'value1',
-            txt: 'List item 1'
+            txt: 'Лапароскопия'
           },
           {
             index: 1,
             value: 'value2',
-            txt: 'List item 2'
+            txt: 'Конверсия из лапароскопии в лапаротомию'
           },
           {
             index: 2,
             value: 'value3',
-            txt: 'List item 3'
+            txt: 'Конверсия из лапароскопии в мануально ассистированную'
           },
           {
             index: 3,
             value: 'value4',
-            txt: 'List item 4'
+            txt: 'SEALS'
+          },
+          {
+            index: 4,
+            value: 'value5',
+            txt: 'Конверсия SILS в традиционную лапароскопию'
+          },
+          {
+            index: 5,
+            value: 'value6',
+            txt: 'Эндоскопия'
           },
         ]
-      })
+      })(data-required='')
       +input-custom({type: 'number', placeholder: 'Длительность операции (мин)', name: 'duration-operation'})
       +itc-custom-select({
         id: 'pain-relief', 
@@ -183,22 +233,22 @@
           {
             index: 0,
             value: 'value1',
-            txt: 'List item 1'
+            txt: 'в/в'
           },
           {
             index: 1,
             value: 'value2',
-            txt: 'List item 2'
+            txt: 'ЭТН'
           },
           {
             index: 2,
             value: 'value3',
-            txt: 'List item 3'
+            txt: 'ЭТН + перидуральная анестезия'
           },
           {
             index: 3,
             value: 'value4',
-            txt: 'List item 4'
+            txt: 'ЭТН + пластырь'
           },
         ]
       })
@@ -210,28 +260,40 @@
           {
             index: 0,
             value: 'value1',
-            txt: 'List item 1'
+            txt: 'Холецистэктомия'
           },
           {
             index: 1,
             value: 'value2',
-            txt: 'List item 2'
+            txt: 'Герниопластика'
           },
           {
             index: 2,
             value: 'value3',
-            txt: 'List item 3'
+            txt: 'Аппендэктомия'
           },
           {
             index: 3,
             value: 'value4',
-            txt: 'List item 4'
+            txt: 'Гинекологическая операция'
+          },
+          {
+            index: 4,
+            value: 'value4',
+            txt: 'Круроррафия'
+          },
+          {
+            index: 5,
+            value: 'value4',
+            txt: 'Другое'
           },
         ]
-      })
-  +group({title: 'Операция'}).form-creating-operation__operation
-    .group__grid
-      .group__info Выберите «Вид операции»
+      })(data-multiple=true)
+  +group({title: 'Операция', operation: true})(data-group-name='operation').form-creating-operation__operation
+    .group__info Выберите «Вид операции»
+    //- +operation-rygb
+    +operation-intragastric-ballon
+    +operation-gastric-banding
   +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications
     +group({title: 'Вид осложнения', type: 'additional'})
       .group__grid
