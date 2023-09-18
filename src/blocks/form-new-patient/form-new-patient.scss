@@ -17,7 +17,7 @@
 }
 
 .form-new-patient__pesonal-data {
-  .group__grid {
+  .group__form {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: flex-start;
@@ -30,7 +30,7 @@
 }
 
 .form-new-patient__main-data {
-  .group__grid {
+  .group__form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
@@ -45,7 +45,8 @@
 }
 
 .form-new-patient__concomitant-diseases {
-  .group__grid {
+  .group__form,
+  .group__additional-form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
@@ -60,7 +61,7 @@
 }
 
 .form-new-patient__anamnesis {
-  .group__grid {
+  .group__form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;

@@ -5,7 +5,7 @@ mixin operation-rygb()
     data-number='1'
     data-name='RYGB (Gastric Bypass)'
     ).border-none
-    .group__grid
+    .group__additional-form
       +group-radio-buttons({title: 'Желудочек сформирован по зонду'})(data-required='')
         +radio({name: 'The ventricle is formed by a probe', value: 'Да', label: 'Да'})
         +radio({name: 'The ventricle is formed by a probe', value: 'С отступом от зонда', label: 'С отступом от зонда'})
@@ -38,6 +38,34 @@ mixin operation-rygb()
         })(data-required='')
       +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes'})(data-required='')
       +itc-custom-select({
+          id: 'strengthening-the-seam', 
+          name: 'strengthening-the-seam',
+          placeholder: 'Укрепление линии шва',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +input-custom({type: 'number', placeholder: 'Диаметр зонда (Fr)', name: 'probe-diameter'})
+      +itc-custom-select({
           id: 'used-cassettes', 
           name: 'used-cassettes',
           placeholder: 'Использованные кассеты',
@@ -63,11 +91,74 @@ mixin operation-rygb()
               txt: 'List item 4'
             },
           ]
-        })(data-required='')
+        })
       +itc-custom-select({
-          id: 'diameter-of-the-anastomosis', 
-          name: 'diameter-of-the-anastomosis',
-          placeholder: 'Диаметр анастамоза (см)',
+          id: 'indent-gatekeeper', 
+          name: 'indent-gatekeeper',
+          placeholder: 'Отступ от привратника (см)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'hiatus-treatment', 
+          name: 'hiatus-treatment',
+          placeholder: 'Обработка хиатуса',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+  +group({title: 'Формирование анастомозов', type: 'additional'})(
+    data-connected='operation' 
+    data-number='2'
+    data-name='RYGB (Gastric Bypass)'
+    )
+    .group__additional-form
+      +group-radio-buttons({title: 'Сохранение правой гастродуоденальной артерии'})(data-required='')
+        +radio({name: 'preservation-artery', value: 'Да', label: 'Да'})
+        +radio({name: 'preservation-artery', value: 'Нет', label: 'Нет'})
+      +itc-custom-select({
+          id: 'mobilization-bulb', 
+          name: 'mobilization-bulb',
+          placeholder: 'Уровень мобилизации луковицы (отступ от привратника)',
           options: [
             {
               index: 0,
@@ -91,9 +182,111 @@ mixin operation-rygb()
             },
           ]
         })(data-required='')
-      +group-radio-buttons({title: 'Закрытие технологического отверстия'})(data-required='')
-        +radio({name: 'manual', value: 'Ручное', label: 'Ручное'})
-        +radio({name: 'hardware', value: 'Аппаратное', label: 'Аппаратное'})
+      +itc-custom-select({
+          id: 'gut-place', 
+          name: 'gut-place',
+          placeholder: 'Метод определения места пересечения тонкой кишки',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Длина тонкой кишки (см)', name: 'small-intestine-length'})(data-required='')
+      +input-custom({type: 'number', placeholder: 'Длина общей петли (см)', name: 'number-of-cassettes'})
+      +input-custom({type: 'number', placeholder: 'Отступ от связки Трейтца (см)', name: 'ident-treitz'})
+      +input-custom({type: 'number', placeholder: 'Длина алиментарной петли (см)', name: 'length-alimentary-loop'})
+      +input-custom({type: 'number', placeholder: 'Длина билиопанкреатической петли (см)', name: 'length-biliopancreatic-loop'})
+      .group__title-subgroup
+        span Гастроэнтероанастомоз
+      +group-radio-buttons({title: 'Расположение гастроэнтероанастомоза'})
+        +radio({name: 'location-gastroenteroanastomosis', value: 'Впередиободочное', label: 'Впередиободочное'})
+        +radio({name: 'location-gastroenteroanastomosis', value: 'Позадиободочное', label: 'Позадиободочное'})
+      +group-radio-buttons({title: 'Расположение алиментарной петли'})
+        +radio({name: 'location-alimentary-loop', value: 'Впередиободочное', label: 'Впередиободочное'})
+        +radio({name: 'location-alimentary-loop', value: 'Позадиободочное', label: 'Позадиободочное'})
+      +group-radio-buttons({title: 'Отсечение торцевой степлерной линии'})
+        +radio({name: 'cutting-stapler-line', value: 'Да', label: 'Да'})
+        +radio({name: 'cutting-stapler-line', value: 'Просвет вскрыт другим способом', label: 'Просвет вскрыт другим способом'})
+      +group-radio-buttons({title: 'Формирование ГЭА'})
+        +radio({name: 'formation-GEA', value: 'Аппаратный циркулярный', label: 'Аппаратный циркулярный'})
+        +radio({name: 'formation-GEA', value: 'Аппаратный линейный', label: 'Аппаратный линейный'})
+        +radio({name: 'formation-GEA', value: 'Ручной', label: 'Ручной'})
+      +itc-custom-select({
+          id: 'stitching-machine2', 
+          name: 'stitching-machine2',
+          placeholder: 'Сшивающий аппарат ',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes2'})
+      +itc-custom-select({
+          id: 'used-cassettes2', 
+          name: 'used-cassettes2',
+          placeholder: 'Использованные кассеты',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Закрытие технологического отверстия'})
+        +radio({name: 'сlosing-process-hole', value: 'Ручное', label: 'Ручное'})
+        +radio({name: 'сlosing-process-hole', value: 'Аппаратное', label: 'Аппаратное'})
       +itc-custom-select({
           id: 'manual-anastomosis', 
           name: 'manual-anastomosis',
@@ -120,17 +313,269 @@ mixin operation-rygb()
               txt: 'List item 4'
             },
           ]
+        })
+      +itc-custom-select({
+          id: 'select-diameter-anastomosis', 
+          name: 'select-diameter-anastomosis',
+          placeholder: 'Диаметр анастомоза (см)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: '1,5 - 3 см'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'text', placeholder: 'Комментарий к ручному анастомозу', name: 'сommentary-heandly-anastomosis'}).long
+      +group-radio-buttons({title: 'Была ли сформирована шпора?'})
+        +radio({name: 'spur-been-formed', value: 'Да', label: 'Да'})
+        +radio({name: 'spur-been-formed', value: 'Нет', label: 'Нет'})
+      +input-custom({type: 'text', placeholder: 'Высота шпоры (см)', name: 'spur-height'})
+      .group__title-subgroup
+        span Еюноеюноанастомоз
+      +itc-custom-select({
+          id: 'formation-of-EEA', 
+          name: 'formation-of-EEA',
+          placeholder: 'Аппаратный с ручным закрытием',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: '1,5 - 3 см'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
         })(data-required='')
-      +textarea({name: 'commentary-on-manual-anastomosis', id: 'commentary-on-manual-anastomosis', placeholder: 'Комментарий к ручномуанастомозу'})
-  +group({title: 'Формирование анастомозов', type: 'additional'})(
-    data-connected='operation' 
-    data-number='2'
-    data-name='RYGB (Gastric Bypass)'
-    )
-    .group__grid
+      +itc-custom-select({
+          id: 'stitching-machine3', 
+          name: 'stitching-machine3',
+          placeholder: 'Сшивающий аппарат ',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes3'})
+      +itc-custom-select({
+          id: 'used-cassettes3', 
+          name: 'used-cassettes3',
+          placeholder: 'Использованные кассеты',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'select-diameter-anastomosis2', 
+          name: 'select-diameter-anastomosis2',
+          placeholder: 'Диаметр анастомоза (см)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: '1,5 - 3 см'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Закрытие технологического отверстия'})
+        +radio({name: 'сlosing-process-hole2', value: 'Ручное', label: 'Ручное'})
+        +radio({name: 'сlosing-process-hole2', value: 'Аппаратное', label: 'Аппаратное'})
+      +itc-custom-select({
+          id: 'manual-anastomosis2', 
+          name: 'manual-anastomosis2',
+          placeholder: 'Ручной анастомоз',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'text', placeholder: 'Комментарий к ручному анастомозу', name: 'сommentary-heandly-anastomosis2'}).long
+        
   +group({title: 'Завершающий этап', type: 'additional'})(
-    data-connected='operation' 
+    data-connected='operation'  
     data-number='3'
     data-name='RYGB (Gastric Bypass)'
   )
-    .group__grid
+    .group__additional-form
+      +group-radio-buttons({title: 'Дренирование брюшной полости и зон анастомоза'})(data-required='')
+        +radio({name: 'drainage-of-the-abdominal-cavity', value: 'Да', label: 'Да'})
+        +radio({name: 'drainage-of-the-abdominal-cavity', value: 'Нет', label: 'Нет'})
+      +itc-custom-select({
+          id: 'closure-hernia-defects', 
+          name: 'closure-hernia-defects',
+          placeholder: 'Закрытие внутренних грыжевых дефетков',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'thickness-drainage-tube', 
+          name: 'thickness-drainage-tube',
+          placeholder: 'Толщина дренажной трубки',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: 'hemostasis-from-staplers', 
+          name: 'hemostasis-from-staplers',
+          placeholder: 'Гемостаз от степлернх линий',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')

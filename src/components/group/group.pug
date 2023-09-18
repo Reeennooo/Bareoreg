@@ -19,6 +19,8 @@ mixin group(data)
               svg.svg
                 use(xlink:href="img/sprite.svg#check")
             span=data.title
+            if(data.operation)
+              span.group__add-info Операция
           if(data.subtitle)
             .group__subtitle=data.subtitle
         .group__toggle
@@ -28,5 +30,9 @@ mixin group(data)
         .group__inner
           if block
               block
+
+//- Общие поля формы группы - .group__form
+//- Дополнительные группы .group__additional-form
+
 
 //- !!! При добавлении блока оберни его в .group__grid

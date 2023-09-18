@@ -19,7 +19,7 @@
 }
 
 .form-creating-operation__general-information {
-  .group__grid {
+  .group__form {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: flex-start;
@@ -28,18 +28,29 @@
 }
 
 .form-creating-operation__operation {
-  .group__grid {
+  .long {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .group__form,
+  .group__additional-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
   }
-
-  .group__grid[data-connected] {
+  .group__form[data-connected],
+  .group__additional-form[data-connected] {
     display: none;
     &.is-active {
       display: grid;
     }
+  }
+
+  .group__title-subgroup {
+    grid-column-start: 1;
+    grid-column-end: 3;
   }
 
   .textarea {
@@ -59,7 +70,8 @@
 }
 
 .form-creating-operation__complications {
-  .group__grid {
+  .group__form,
+  .group__additional-form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
@@ -76,13 +88,13 @@
     grid-column-start: 2;
     grid-column-end: 4;
   }
-  .group__grid {
+  .group__form {
     align-items: center;
   }
 }
 
 .form-creating-operation__hospital {
-  .group__grid {
+  .group__form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;

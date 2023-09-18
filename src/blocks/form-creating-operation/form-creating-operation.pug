@@ -1,6 +1,6 @@
 +form().form-creating-operation
   +group({title: 'Общие сведения'}).form-creating-operation__general-information
-    .group__grid
+    .group__form
       .patient
         .patient__title Пациент
         .patient__name Павленко Павел Павлович
@@ -289,19 +289,19 @@
           },
         ]
       })(data-multiple=true)
-  +group({title: 'Операция', operation: true})(data-group-name='operation').form-creating-operation__operation
+  +group({title: 'Операция', operation: true})(data-group-name='operation').group--parent.form-creating-operation__operation
     .group__info Выберите «Вид операции»
-    //- +operation-rygb
+    +operation-rygb
     +operation-intragastric-ballon
     +operation-gastric-banding
   +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications
     +group({title: 'Вид осложнения', type: 'additional'})
-      .group__grid
+      .group__additional-form
         +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
         +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')
         +checkbox({name: "No complications", value: 'yes', label: 'Нет осложнений'})(data-has-connection='no-complications')
     +group({title: 'Интраоперационные осложнения', type: 'additional'})(data-connected='intraoperative-complications')
-      .group__grid
+      .group__additional-form
         +itc-custom-select({
           id: 'bleeding', 
           name: 'bleeding',
@@ -411,7 +411,7 @@
           ]
         })
     +group({title: 'Нештатные ситуации', type: 'additional'})(data-connected='emergency-situations').form-creating-operation__emergency-situations
-      .group__grid
+      .group__additional-form
         +checkbox({name: "emergency-situation1", value: 'yes', label: 'Заклинивание степлера'})
         +checkbox({name: "emergency-situation2", value: 'yes', label: 'Неправильное срабатывание кассеты'})
         +checkbox({name: "emergency-situation3", value: 'yes', label: 'Трудности установки зонда'})
@@ -424,7 +424,7 @@
         +checkbox({name: "emergency-situation10", value: 'yes', label: 'Резкое ухудшение состояния хирурга/ассистента'})
         +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment'})
   +group({title: 'Прибывание в стационаре и исход'}).form-creating-operation__hospital
-    .group__grid
+    .group__form
       +itc-custom-select({
           id: 'vomiting', 
           name: 'vomiting',

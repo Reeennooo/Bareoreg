@@ -82,9 +82,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // RYGB (Гастрошунтирование)
     new ItcCustomSelect('#stitching-machine');
+    new ItcCustomSelect('#strengthening-the-seam');
     new ItcCustomSelect('#used-cassettes');
-    new ItcCustomSelect('#diameter-of-the-anastomosis');
+    new ItcCustomSelect('#indent-gatekeeper');
+    new ItcCustomSelect('#hiatus-treatment');
+    new ItcCustomSelect('#mobilization-bulb');
+    new ItcCustomSelect('#gut-place');
+    new ItcCustomSelect('#stitching-machine2');
+    new ItcCustomSelect('#used-cassettes2');
+    new ItcCustomSelect('#used-cassettes2');
     new ItcCustomSelect('#manual-anastomosis');
+    new ItcCustomSelect('#select-diameter-anastomosis');
+    new ItcCustomSelect('#formation-of-EEA');
+    new ItcCustomSelect('#stitching-machine3');
+    new ItcCustomSelect('#used-cassettes3');
+    new ItcCustomSelect('#select-diameter-anastomosis2');
+    new ItcCustomSelect('#manual-anastomosis2');
+    new ItcCustomSelect('#closure-hernia-defects');
+    new ItcCustomSelect('#thickness-drainage-tube');
+    new ItcCustomSelect('#hemostasis-from-staplers');
+
+    new ItcCustomSelect('#diameter-of-the-anastomosis');
 
     // Внутрижелудочный баллон
     new ItcCustomSelect('#ballon-type');
@@ -145,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let connectedElements = document.querySelectorAll(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             // console.log(connectedElements);
             let button = selectKindOperation._elToggle;
-            console.log(connectedElements);
             let buttonObvserver = new MutationObserver(() => {
                 setOperationBlock(button, connectedElements);
             });
@@ -154,18 +171,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const observers = [];
+    // операции
+    // const operationGroup = document.querySelector(`[data-group-name='operation']`);
+    // const operationSelectedTxt = selectKindOperation._textSelectedEl;
+    // function setOperationBlock(operationValue) {
+    //     let operationName = operationSelectedTxt.innerText;
+
+    //     console.log(operationValue);
+    //     console.log(operationName);
+    //     // operationGroup;
+    // }
+    // УСТАНОВКА ОПЕРАЦИЙ И ОТКРЫТИЕ СЛЕДУЮЩЕГО ЭТАПА
     function setOperationBlock(observationElement, connectedElements) {
         const selectOperationHint = document.querySelector('.form-creating-operation__operation .group__info');
         const selectedOperationName = observationElement.value;
         const connectedGroupArr = [...connectedElements];
         let operationNumber = 1;
 
-        connectedGroupArr.forEach((group) => group.classList.remove('is-active'));
+        connectedGroupArr.forEach((group) => {
+            if (group.classList.contains('is-active')) {
+                group.classList.remove('is-active');
+            }
+        });
         const operationGroup = connectedGroupArr.find((group) => group.dataset.name === selectedOperationName && group.dataset.number === String(operationNumber));
 
         if (!operationGroup) return;
 
-        console.log(operationGroup);
+        // console.log(operationGroup);
         showOperationGroup(operationGroup);
 
         function showOperationGroup(group) {
@@ -203,10 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // связи пунктов в различных select
+    // Операция ВЖБ
     const button = selectTypeOperation._elToggle;
-    // Опция операция ВЖБ
     const connectedOption = selectTypeOperation._el.querySelector(`.itc-select__option[data-index='10']`);
-
     if (button) {
         let observer = new MutationObserver(() => {
             if (selectTypeOperation.selectedIndex !== '0') {
@@ -247,19 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                 });
             }
-            // setOperationBlock(selectKindOperation.value);
         });
         observer.observe(kindOperationBtn, { attributeFilter: ['data-index', 'value'] });
-
-        // операции
-        // const operationGroup = document.querySelector(`[data-group-name='operation']`);
-        // const operationSelectedTxt = selectKindOperation._textSelectedEl;
-        // function setOperationBlock(operationValue) {
-        //     let operationName = operationSelectedTxt.innerText;
-
-        //     console.log(operationValue);
-        //     console.log(operationName);
-        //     // operationGroup;
-        // }
     }
 });

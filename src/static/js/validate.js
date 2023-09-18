@@ -35,55 +35,81 @@ document.addEventListener('DOMContentLoaded', () => {
     const groups = document.querySelectorAll('.group');
     if (groups) {
         groups.forEach((group) => {
-            // console.log(group)
             // Проверяем заполненость group при изменениях дочерних элементов.
-            const groupGrid = group.querySelector('.group__grid');
-            // Находит required и в дргуих группах
-            const requiredElements = groupGrid.querySelectorAll('[data-required]');
-            if (!requiredElements.length) {
-                group.classList.add('is-filled');
+            let requiredElements = [];
+            if (group.classList.contains('group--additional')) {
+                const groupAdditionalForm = group.querySelector('.group__additional-form');
+                if (!groupAdditionalForm) {
+                    console.log(group);
+                }
+                requiredElements = groupAdditionalForm.querySelectorAll('[data-required]');
+            } else {
+                const groupForms = group.querySelectorAll('.group__form');
+                const groupForm = group.querySelector('.group__form');
+                if (groupForms.length > 1) {
+                    groupForms.forEach((form) => {
+                        const required = [...form.querySelectorAll('[data-required]')];
+                        requiredElements = requiredElements.concat(required);
+                    });
+                } else if (groupForm) {
+                    requiredElements = groupForm.querySelectorAll('[data-required]');
+                }
             }
-            // console.log(requiredElements)
+
+            checkFilledInput(group);
+
             requiredElements.forEach((requiredEl) => {
                 // дополнительно наблюдаем за элементами имеющими связь
                 if (requiredEl.hasAttribute('data-connected')) {
-                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
                 }
-
                 if (requiredEl.classList.contains('itc-select')) {
                     const button = requiredEl.querySelector('button');
-                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(button, { attributes: true, attributeFilter: ['value'] });
                 } else if (requiredEl.classList.contains('group-radio-buttons')) {
-                    let observer = new MutationObserver(() => checkFilledInput(group, requiredElements));
+                    let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
                 } else {
-                    requiredEl.addEventListener('change', () => checkFilledInput(group, requiredElements));
-                    requiredEl.addEventListener('blur', () => checkFilledInput(group, requiredElements));
+                    requiredEl.addEventListener('change', () => checkFilledInput(group));
+                    requiredEl.addEventListener('blur', () => checkFilledInput(group));
                 }
             });
 
             // Отслеживаем поялвение класса 'is-filled' у группы.
             let observer = new MutationObserver((mutationRecords) => {
+                // Отслеживаем поялвение дополнительной группы и запускаем проверку
+                if (mutationRecords[0].target.classList.contains('group--additional')) {
+                    const parrentGroup = mutationRecords[0].target.closest('.group--parent');
+                    console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
+                    checkFilledInput(parrentGroup);
+                }
                 checkFilledForm(mutationRecords[0].target);
-                // console.log(mutationRecords)
             });
-            observer.observe(group, { attributeFilter: ['class'], attributeOldValue: true });
+            observer.observe(group, { attributeFilter: ['class'] });
+
+            // несколько group__form
+            const groupForms = group.querySelectorAll('.group__form');
+            if (groupForms.length) {
+                groupForms.forEach((groupForm) => {
+                    let groupFormObserver = new MutationObserver(() => {
+                        console.log('.group__form - CHANGE');
+                        checkFilledInput(group);
+                    });
+                    groupFormObserver.observe(groupForm, { attributeFilter: ['class'] });
+                });
+            }
         });
     }
 
     function checkFilledForm(mutationElement) {
+        // console.log('checkFilledForm');
         const form = mutationElement.closest('form');
         if (!form) return;
         const btnSubmit = form.querySelector('.submit-button');
         const groups = form.querySelectorAll('.group');
         const groupsBoolean = [...groups].map((group) => {
-            // if(group.classList.contains('is-filled')) {
-            //     return true
-            // } else {
-            //     return false
-            // }
             if (group.classList.contains('group--additional') && !group.classList.contains('is-active')) {
                 return true;
             } else if (group.classList.contains('is-filled')) {
@@ -99,7 +125,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkFilledInput(group, requiredElements) {
+    function checkFilledInput(group) {
+        let requiredElements = [];
+        let additionalGroupsFilled = undefined;
+
+        // group
+        if (!group.classList.contains('group--additional')) {
+            // несколько форм внутри
+            const groupForms = [...group.querySelectorAll('.group__form')];
+            const groupForm = group.querySelector('.group__form');
+            const additionalGroups = group.querySelectorAll('.group--additional');
+
+            // if(groupForms.length > 1 && additionalGroups.length) {
+
+            // }
+
+            if (groupForms.length > 1) {
+                // console.log(groupForms);
+                groupForms.map((form) => {
+                    // if(!form.hasAttribute('data-connected')) {
+                    //     return form.querySelectorAll('[data-required]')
+                    // }
+                    if (form.hasAttribute('data-connected') && form.classList.contains('is-active')) {
+                        const requiredArr = [...form.querySelectorAll('[data-required]')];
+                        console.log(requiredArr);
+                        requiredElements = requiredElements.concat(requiredArr);
+                    }
+                });
+            }
+            // есть вложенные группы
+            if (additionalGroups.length) {
+                additionalGroups.forEach((addGroup) => {
+                    if (addGroup.classList.contains('is-active') && !addGroup.classList.contains('is-filled')) {
+                        additionalGroupsFilled = false;
+                    } else if (addGroup.classList.contains('is-active') && addGroup.classList.contains('is-filled')) {
+                        additionalGroupsFilled = true;
+                    }
+                });
+            }
+            // обычная группа с одной формой внутри
+            if (groupForms.length === 1) {
+                requiredElements = groupForm.querySelectorAll('[data-required]');
+            }
+        }
+        // group--additional
+        else {
+            const groupAdditionalForm = group.querySelector('.group__additional-form');
+            requiredElements = groupAdditionalForm.querySelectorAll('[data-required]');
+        }
+
+        // console.log(requiredElements);
+        // console.log(additionalGroupsFilled);
         let inputsField = false;
         const checkResult = [...requiredElements].map((element) => {
             if (element.hasAttribute('data-connected') && !element.classList.contains('is-active')) {
@@ -124,14 +200,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
         if (checkResult.indexOf(false) === -1) {
             inputsField = true;
         }
-        if (inputsField) {
-            group.classList.add('is-filled');
-        } else if (group.classList.contains('is-filled')) {
-            group.classList.remove('is-filled');
+
+        // Отключаем галочку для блока Операция
+        // if (group.dataset.groupName === 'operation') {
+        //     console.log(group);
+        //     inputsField = false;
+        // }
+
+        // Если нет активных обязательных элементов
+        // и поле имеет class required, то не добавляем is-filled. (Например группа операция. data-group-name='operation')
+
+        if (additionalGroupsFilled !== undefined) {
+            // console.log(additionalGroupsFilled);
+            if (inputsField && additionalGroupsFilled) {
+                group.classList.add('is-filled');
+            } else if (group.classList.contains('is-filled')) {
+                group.classList.remove('is-filled');
+            }
+        } else {
+            if (inputsField) {
+                group.classList.add('is-filled');
+            } else if (group.classList.contains('is-filled')) {
+                group.classList.remove('is-filled');
+            }
         }
-        // inputField = checkResult.indexOf(false)
     }
 });

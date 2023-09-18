@@ -1,6 +1,6 @@
 +form().form-new-patient
   +group({title: 'Персональные данные пациента'}).form-new-patient__pesonal-data
-    .group__grid
+    .group__form
       +input-custom({type: 'text', placeholder: 'Фамилия*', name: 'surname',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Имя*', name: 'name',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Отчество*', name: 'middle-name',})(class='only-txt' data-required='')
@@ -44,7 +44,7 @@
       +input-custom({type: 'text', placeholder: 'Причина выбытия*', name: 'reason-for-disposal', connected: 'status'})(class='long-input')
 
   +group({title: 'Общая информация и контактные данные'}).form-new-patient__main-data
-    .group__grid
+    .group__form
       +itc-custom-select({
           id: 'who-directed', 
           name: 'who-directed',
@@ -79,8 +79,8 @@
       +checkbox({name: "permission for Email mailing", value: 'yes', label: 'Получено разрешение на email-рассылку'})
       +checkbox({name: "permission for SMS mailing", value: 'yes', label: 'Получено разрешение на sms-рассылку'})
 
-  +group({title: 'Сопутствующие заболевания'}).form-new-patient__concomitant-diseases
-    .group__grid
+  +group({title: 'Сопутствующие заболевания'}).group--parent.form-new-patient__concomitant-diseases
+    .group__form
       +itc-custom-select({
           id: 'disease1', 
           name: 'disease1',
@@ -206,7 +206,7 @@
               txt: 'Более 10 лет'
             },
           ]
-        })(data-connected='diabetes')
+        })(data-connected='diabetes' data-required='')
       +itc-custom-select({
           id: 'disease3', 
           name: 'disease3',
@@ -420,7 +420,7 @@
         +radio({name: 'cholelithiasis', value: 'yes', label: 'Да'})
         +radio({name: 'cholelithiasis', value: 'no', label: 'Нет'})
     +group({title: 'Женское здоровье', type: 'additional'})(data-connected='gender')
-      .group__grid
+      .group__additional-form
         +itc-custom-select({
             id: 'menstrual-function', 
             name: 'menstrual-function',
@@ -480,7 +480,7 @@
           +radio({name: 'goal-is-fertility', value: 'no', label: 'Нет'})
 
   +group({title: 'Анамнез'}).form-new-patient__anamnesis
-    .group__grid
+    .group__form
       +itc-custom-select({
           id: 'anamnesis1', 
           name: 'anamnesis1',
@@ -747,7 +747,7 @@
         })
 
   +group({title: 'Дополнительная информация'}).form-new-patient__additional-info
-    .group__grid
+    .group__form
       +textarea({name: 'new-patient-additional', id: 'new-patient-additional', placeholder: 'Примечания'}).form-new-patient__textarea
       +file-loader({name: 'new-patient-files', id: 'new-patient-files'})
 

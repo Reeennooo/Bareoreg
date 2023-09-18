@@ -1,5 +1,5 @@
 mixin operation-gastric-banding
-  .group__grid(data-connected='operation' data-number='1' data-name='gastric-banding')
+  .group__form(data-connected='operation' data-number='1' data-name='gastric-banding')
     +itc-custom-select({
         id: 'type-of-bandage', 
         name: 'type-of-bandage',
@@ -37,7 +37,7 @@ mixin operation-gastric-banding
     data-number='2'
     data-name='gastric-banding'
   )
-    .group__grid
+    .group__additional-form
       +group-radio-buttons({title: 'Дренирование брюшной полости и зоны анастомоза'})(data-required='')
         +radio({name: 'drainage-zone', value: 'Да', label: 'Да'})
         +radio({name: 'drainage-zone', value: 'Нет', label: 'Нет'})
