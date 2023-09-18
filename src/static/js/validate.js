@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let requiredElements = [];
             if (group.classList.contains('group--additional')) {
                 const groupAdditionalForm = group.querySelector('.group__additional-form');
-                if (!groupAdditionalForm) {
-                    console.log(group);
-                }
+                // if (!groupAdditionalForm) {
+                //     console.log(group);
+                // }
                 requiredElements = groupAdditionalForm.querySelectorAll('[data-required]');
             } else {
                 const groupForms = group.querySelectorAll('.group__form');
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Отслеживаем поялвение дополнительной группы и запускаем проверку
                 if (mutationRecords[0].target.classList.contains('group--additional')) {
                     const parrentGroup = mutationRecords[0].target.closest('.group--parent');
-                    console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
+                    // console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
                     checkFilledInput(parrentGroup);
                 }
                 checkFilledForm(mutationRecords[0].target);
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (groupForms.length) {
                 groupForms.forEach((groupForm) => {
                     let groupFormObserver = new MutationObserver(() => {
-                        console.log('.group__form - CHANGE');
+                        // console.log('.group__form - CHANGE');
                         checkFilledInput(group);
                     });
                     groupFormObserver.observe(groupForm, { attributeFilter: ['class'] });
@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkFilledInput(group) {
+        // console.log('INPUT CHECKING...');
         let requiredElements = [];
         let additionalGroupsFilled = undefined;
 
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // }
                     if (form.hasAttribute('data-connected') && form.classList.contains('is-active')) {
                         const requiredArr = [...form.querySelectorAll('[data-required]')];
-                        console.log(requiredArr);
+                        // console.log(requiredArr);
                         requiredElements = requiredElements.concat(requiredArr);
                     }
                 });

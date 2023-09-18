@@ -14,12 +14,14 @@ mixin input-custom(data)
     .input-custom__input
       input(
         type=data.type 
-        name=data.name placeholder='' 
+        name=data.name 
+        placeholder='' 
         disabled!=attributes.disabled 
-        id=attributes.id 
+        id=data.name || attributes.id
         autocomplete=attributes.autocomplete
+        value=data.value
         )&attributes(attributes)
-      label(for=data.name)=data.placeholder
+      label(for=attributes.id ? attributes.id : data.name)=data.placeholder
       if(data.info)
         +info({id: data.info.id}).input-custom__info
     .input-custom__message=data.message

@@ -31,5 +31,5 @@ mixin operation-intragastric-ballon()
     +group-radio-buttons({title: 'Чем заполнен балон'})(data-required='')
       +radio({name: 'fullness-of-the-balloon', value: 'Воздух', label: 'Воздух'})
       +radio({name: 'fullness-of-the-balloon', value: 'Физраствор', label: 'Физраствор'})
-    +input-custom({type: 'number', placeholder: 'Объем заполнения', name: 'ballon-filling-volume'})(data-required='')
+    +input-custom({type: 'number', placeholder: 'Объем заполнения', name: 'ballon-filling-volume'})(data-required='' class='only-number')
     +input-custom({type: 'text', placeholder: 'Планируемая дата удаления баллона', name:'date-ballon-delete',})(autocomplete='off' data-required='').only-number#calendar-ballon-delete

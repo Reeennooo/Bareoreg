@@ -1,0 +1,312 @@
+mixin operation-sadi
+  +group({title: 'Формирование желудочной трубки', type: 'additional'})(
+    data-connected='operation' 
+    data-number='1'
+    data-name='sadi'
+  ).border-none
+     .group__additional-form
+      +group-radio-buttons({title: 'Желудочек сформирован по зонду'})
+        +radio({name: '[sadi]The ventricle is formed by a probe', value: 'Да', label: 'Да'})
+        +radio({name: '[sadi]The ventricle is formed by a probe', value: 'С отступом от зонда', label: 'С отступом от зонда'})
+      +itc-custom-select({
+          id: '[sadi]stitching-machine', 
+          name: '[sadi]stitching-machine',
+          placeholder: 'Сшивающий аппарат ',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Количество кассет', name: '[sadi]number-of-cassettes'})
+      +input-custom({type: 'text', placeholder: 'Урепление линии шва', name: '[sadi]strengthening-the-seam'})
+      +input-custom({type: 'number', placeholder: 'Диаметр зонда', name: '[sadi]probe-diameter'})
+      +itc-custom-select({
+          id: '[sadi]used-cassettes', 
+          name: '[sadi]used-cassettes',
+          placeholder: 'Использованные кассеты',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: '[sadi]indent-gatekeeper', 
+          name: '[sadi]indent-gatekeeper',
+          placeholder: 'Отступ от привратника (см)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: '[sadi]hiatus-treatment', 
+          name: '[sadi]hiatus-treatment',
+          placeholder: 'Обработка хиатуса',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+  +group({title: 'Формирование анастомозов', type: 'additional'})(
+      data-connected='operation' 
+      data-number='2'
+      data-name='sadi'
+      )
+    .group__additional-form
+      +group-radio-buttons({title: 'Сохранение правой гастродуоденальной артерии'})(data-required='')
+        +radio({name: 'preservation-artery', value: 'Да', label: 'Да'})
+        +radio({name: 'preservation-artery', value: 'Нет', label: 'Нет'})
+      +itc-custom-select({
+          id: '[sadi]mobilization-bulb', 
+          name: '[sadi]mobilization-bulb',
+          placeholder: 'Уровень мобилизации луковицы (отступ от привратника)',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })(data-required='')
+      +itc-custom-select({
+          id: '[sadi]method-determining-location-duodenoenteroanastomosis', 
+          name: '[sadi]method-determining-location-duodenoenteroanastomosis',
+          placeholder: 'Метод определения места дуоденоэнтероанастомоза',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Длина тонкой кишки (см)', name: '[sadi]small-intestine-length'})(data-required='')
+      +input-custom({type: 'number', placeholder: 'Длина общей петли (см)', name: '[sadi]total-loop-length'})
+      +input-custom({type: 'number', placeholder: 'Длина билиопанкреатической петли (см)', name: '[sadi]biliopancreatic-loop-length'})
+      +group-radio-buttons({title: 'Отсечение торцевой степлерной линии'})
+        +radio({name: '[sadi]cutting-stapler-line', value: 'Да', label: 'Да'})
+        +radio({name: '[sadi]cutting-stapler-line', value: 'Просвет вскрыт другим способом', label: 'Просвет вскрыт другим способом'})
+      +itc-custom-select({
+          id: '[sadi]formation-of-DEA', 
+          name: '[sadi]formation-of-DEA',
+          placeholder: 'Формирвоание ДЭА',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +input-custom({type: 'number', placeholder: 'Диаметр анастомоза (см)', name: '[sadi]diameter-anastomosis'})
+      +input-custom({type: 'text', placeholder: 'Комментарий к анастомозу', name: '[sadi]сommentary-anastomosis'})
+  +group({title: 'Завершающий этап', type: 'additional'})(
+    data-connected='operation'  
+    data-number='3'
+    data-name='sadi'
+  )
+    .group__additional-form
+      +group-radio-buttons({title: 'Дренирование брюшной полости и зон анастомоза'})(data-required='')
+        +radio({name: '[sadi]drainage-of-the-abdominal-cavity', value: 'Да', label: 'Да'})
+        +radio({name: '[sadi]drainage-of-the-abdominal-cavity', value: 'Нет', label: 'Нет'})
+      +itc-custom-select({
+          id: '[sadi]closure-hernia-defects', 
+          name: '[sadi]closure-hernia-defects',
+          placeholder: 'Закрытие внутренних грыжевых дефетков',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: '[sadi]thickness-drainage-tube', 
+          name: '[sadi]thickness-drainage-tube',
+          placeholder: 'Толщина дренажной трубки',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +itc-custom-select({
+          id: '[sadi]hemostasis-from-staplers', 
+          name: '[sadi]hemostasis-from-staplers',
+          placeholder: 'Гемостаз от степлернх линий',
+          options: [
+            {
+              index: 0,
+              value: 'value1',
+              txt: 'List item 1'
+            },
+            {
+              index: 1,
+              value: 'value2',
+              txt: 'List item 2'
+            },
+            {
+              index: 2,
+              value: 'value3',
+              txt: 'List item 3'
+            },
+            {
+              index: 3,
+              value: 'value4',
+              txt: 'List item 4'
+            },
+          ]
+        })
+      +group-radio-buttons({title: 'Ушивание лапаротомной раны'})(data-connected='access')
+        +radio({name: '[sadi]suturing-laparotomy-wound', value: 'Узловым способом', label: 'Узловым способом'})
+        +radio({name: '[sadi]suturing-laparotomy-wound', value: 'Непрерывной нитью', label: 'Непрерывной нитью'})

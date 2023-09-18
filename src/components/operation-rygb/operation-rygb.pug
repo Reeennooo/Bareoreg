@@ -6,7 +6,7 @@ mixin operation-rygb()
     data-name='RYGB (Gastric Bypass)'
     ).border-none
     .group__additional-form
-      +group-radio-buttons({title: 'Желудочек сформирован по зонду'})(data-required='')
+      +group-radio-buttons({title: 'Желудочек сформирован по зонду'})
         +radio({name: 'The ventricle is formed by a probe', value: 'Да', label: 'Да'})
         +radio({name: 'The ventricle is formed by a probe', value: 'С отступом от зонда', label: 'С отступом от зонда'})
       +itc-custom-select({
@@ -35,8 +35,8 @@ mixin operation-rygb()
               txt: 'List item 4'
             },
           ]
-        })(data-required='')
-      +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes'})(data-required='')
+        })
+      +input-custom({type: 'number', placeholder: 'Количество кассет', name: 'number-of-cassettes'})
       +itc-custom-select({
           id: 'strengthening-the-seam', 
           name: 'strengthening-the-seam',
@@ -63,8 +63,8 @@ mixin operation-rygb()
               txt: 'List item 4'
             },
           ]
-        })(data-required='')
-      +input-custom({type: 'number', placeholder: 'Диаметр зонда (Fr)', name: 'probe-diameter'})
+        })
+      +input-custom({type: 'number', placeholder: 'Диаметр зонда (Fr)', name: 'probe-diameter', value: 36,})
       +itc-custom-select({
           id: 'used-cassettes', 
           name: 'used-cassettes',
@@ -579,3 +579,6 @@ mixin operation-rygb()
             },
           ]
         })(data-required='')
+      +group-radio-buttons({title: 'Ушивание лапаротомной раны'})(data-connected='access')
+        +radio({name: '[rygb]suturing-laparotomy-wound', value: 'Узловым способом', label: 'Узловым способом'})
+        +radio({name: '[rygb]suturing-laparotomy-wound', value: 'Непрерывной нитью', label: 'Непрерывной нитью'})

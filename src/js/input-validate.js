@@ -44,7 +44,7 @@ export function checkValidate(element, rules) {
     }
 
     // console.log(result);
-    if (!result.required.approved) {
+    if (result?.required?.approved && !result.required.approved) {
         message.innerText = result.required.errors[0];
         message.classList.add('error-message');
         element.classList.add('is-invalid');

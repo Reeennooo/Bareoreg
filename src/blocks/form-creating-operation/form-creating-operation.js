@@ -20,9 +20,6 @@ const allRules = {
             min: 40,
             max: 120,
         },
-        required: {
-            message: 'Обязательное поле',
-        },
     },
     'weight-operation': {
         customRange: {
@@ -59,6 +56,32 @@ const allRules = {
             message: 'Обязательное поле',
         },
     },
+    // Внутрижелудочный баллон
+    'ballon-type': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'fullness-of-the-balloon': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'ballon-filling-volume': {
+        required: {
+            message: 'Обязательное поле',
+        },
+        range: {
+            min: 200,
+            max: 700,
+            message: 'Минимальное значение: 200, максимальное значение 700',
+        },
+    },
+    'date-ballon-delete': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -69,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     new AirDatepicker('#calendar-discharge', {});
     new AirDatepicker('#calendar-adjustment-bandage', {});
+    new AirDatepicker('#calendar-ballon-delete', {});
 
     // выпадающие списки
     new ItcCustomSelect('#surgeon');
@@ -109,6 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Бандажирование желудка
     new ItcCustomSelect('#type-of-bandage');
+
+    // BPD
+    new ItcCustomSelect('#bpd-mobilization-bulb');
+    new ItcCustomSelect('#bpd-formation-of-EEA');
 
     // связи
     const hasConnections = document.querySelectorAll('[data-has-connection]');
@@ -153,6 +181,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             observer.observe(button, { attributes: true, attributeFilter: ['data-index'] });
+        } else if (hasConnectEl.dataset.hasConnection === 'access') {
+            let connectedEls = document.querySelectorAll(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
+            let button = hasConnectEl.querySelector('button');
+            let observer = new MutationObserver((mutationRecords) => {
+                for (const mutation of mutationRecords) {
+                    const value = mutation.target.value;
+                    console.log(value);
+                    if (value === 'conversion-to-laparotomy' || value === 'laparotomy') {
+                        for (const element of connectedEls) {
+                            element.classList.add('is-active');
+                        }
+                    } else {
+                        for (const element of connectedEls) {
+                            element.classList.remove('is-active');
+                        }
+                    }
+                }
+            });
+            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
         }
 
         // связи операций.
@@ -170,21 +217,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const observers = [];
-    // операции
-    // const operationGroup = document.querySelector(`[data-group-name='operation']`);
-    // const operationSelectedTxt = selectKindOperation._textSelectedEl;
-    // function setOperationBlock(operationValue) {
-    //     let operationName = operationSelectedTxt.innerText;
-
-    //     console.log(operationValue);
-    //     console.log(operationName);
-    //     // operationGroup;
-    // }
     // УСТАНОВКА ОПЕРАЦИЙ И ОТКРЫТИЕ СЛЕДУЮЩЕГО ЭТАПА
+    const observers = [];
+    const operationForm = document.querySelector('.form-creating-operation__operation');
+    const operationNameElement = operationForm.querySelector('.group__add-info');
+    const selectOperationHint = operationForm.querySelector('.group__info');
+
     function setOperationBlock(observationElement, connectedElements) {
-        const selectOperationHint = document.querySelector('.form-creating-operation__operation .group__info');
-        const selectedOperationName = observationElement.value;
+        // убираем предыдущих наблюдателей
+        observers.forEach((observer) => observer.disconnect());
+        observers.length = 0;
+        // устанавливаем название операции в блок
+        let operationName = selectKindOperation._textSelectedEl.innerText;
+        operationNameElement.innerText = operationName;
+        const selectedOperationValue = observationElement.value;
         const connectedGroupArr = [...connectedElements];
         let operationNumber = 1;
 
@@ -193,39 +239,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 group.classList.remove('is-active');
             }
         });
-        const operationGroup = connectedGroupArr.find((group) => group.dataset.name === selectedOperationName && group.dataset.number === String(operationNumber));
 
-        if (!operationGroup) return;
+        const operationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
 
-        // console.log(operationGroup);
-        showOperationGroup(operationGroup);
+        if (!operationGroups.length) return;
 
-        function showOperationGroup(group) {
-            if (!group) return;
+        showOperationGroup(operationGroups);
 
-            group.classList.add('is-active');
-            selectOperationHint.style.display = 'none';
+        function showOperationGroup(groups) {
+            if (!groups.length) return;
 
-            if (group.classList.contains('is-filled')) {
-                operationNumber++;
+            for (const group of groups) {
+                group.classList.add('is-active');
 
-                const nextOperationGroup = connectedGroupArr.find((group) => group.dataset.name === selectedOperationName && group.dataset.number === String(operationNumber));
-                if (nextOperationGroup) {
-                    showOperationGroup(nextOperationGroup);
+                if (group.classList.contains('is-filled')) {
+                    operationNumber++;
+
+                    const nextOperationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
+                    if (nextOperationGroups) {
+                        showOperationGroup(nextOperationGroups);
+                    }
+                    return;
                 }
-                return;
-            }
 
-            createObserver(group);
+                createObserver(group);
+            }
+            selectOperationHint.style.display = 'none';
         }
 
         function createObserver(observeredElement) {
+            // console.log('Создаю наблюдателя за элементном:');
+            // console.log(observeredElement);
+
             const operationGroupObserver = new MutationObserver((mutations) => {
                 for (const mutation of mutations) {
                     if (mutation.target.classList.contains('is-filled')) {
                         operationNumber++;
-                        const nextOperationGroup = connectedGroupArr.find((group) => group.dataset.name === selectedOperationName && group.dataset.number === String(operationNumber));
-                        showOperationGroup(nextOperationGroup);
+                        const nextOperationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
+                        console.log(nextOperationGroups);
+                        showOperationGroup(nextOperationGroups);
                     }
                 }
             });
@@ -237,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // связи пунктов в различных select
     // Операция ВЖБ
     const button = selectTypeOperation._elToggle;
-    const connectedOption = selectTypeOperation._el.querySelector(`.itc-select__option[data-index='10']`);
+    const connectedOption = selectKindOperation._el.querySelector(`.itc-select__option[data-index='9']`);
     if (button) {
         let observer = new MutationObserver(() => {
             if (selectTypeOperation.selectedIndex !== '0') {

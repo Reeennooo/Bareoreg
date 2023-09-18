@@ -53,17 +53,17 @@
     grid-column-end: 3;
   }
 
-  .textarea {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    textarea {
-      height: 56px;
-    }
+  // .textarea {
+  //   grid-column-start: 1;
+  //   grid-column-end: 3;
+  //   textarea {
+  //     height: 56px;
+  //   }
 
-    label {
-      top: 50%;
-    }
-  }
+  //   label {
+  //     top: 50%;
+  //   }
+  // }
   .group--additional.border-none {
     border-top: none;
   }

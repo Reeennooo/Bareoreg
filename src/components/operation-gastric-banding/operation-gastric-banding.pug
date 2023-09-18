@@ -34,7 +34,7 @@ mixin operation-gastric-banding
     +checkbox({name: "Hemming of the stomach wall", value: 'yes', label: 'Подшивание стенки желудка'})
   +group({title: 'Завершающий этап', type: 'additional'})(
     data-connected='operation' 
-    data-number='2'
+    data-number='1'
     data-name='gastric-banding'
   )
     .group__additional-form
@@ -95,4 +95,6 @@ mixin operation-gastric-banding
           },
         ]
       })
-    
+      +group-radio-buttons({title: 'Ушивание лапаротомной раны'})(data-connected='access')
+        +radio({name: '[banding]suturing-laparotomy-wound', value: 'Узловым способом', label: 'Узловым способом'})
+        +radio({name: '[banding]suturing-laparotomy-wound', value: 'Непрерывной нитью', label: 'Непрерывной нитью'})

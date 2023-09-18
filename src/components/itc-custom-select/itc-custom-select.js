@@ -3,7 +3,7 @@ export class ItcCustomSelect {
     static EL_SHOW = 'itc-select_show';
     static EL_OPTION = 'itc-select__option';
     static EL_OPTION_SELECTED = 'itc-select__option_selected';
-    static TEXT_SELECTED_EL = 'itc-select__text-selected'
+    static TEXT_SELECTED_EL = 'itc-select__text-selected';
     static DATA = '[data-select]';
     static DATA_TOGGLE = '[data-select="toggle"]';
 
@@ -52,7 +52,7 @@ export class ItcCustomSelect {
     }
     constructor(target, params) {
         this._el = typeof target === 'string' ? document.querySelector(target) : target;
-        if(!this._el) return
+        if (!this._el) return;
         this._params = params || {};
         // добавлено мной
         this._multiple = this._el.dataset.multiple || this._params.multiple ? true : false;
