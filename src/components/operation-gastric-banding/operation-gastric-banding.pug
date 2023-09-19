@@ -26,8 +26,8 @@ mixin operation-gastric-banding
             txt: 'List item 4'
           },
         ]
-      })(data-required='')
-    +group-radio-buttons({title: 'Диссекция'})(data-required='')
+      })
+    +group-radio-buttons({title: 'Диссекция'})
       +radio({name: 'dissection', value: 'Pars flaccida', label: 'Pars flaccida'})
       +radio({name: 'dissection', value: 'Перигастральная', label: 'Перигастральная'})
     +input-custom({type: 'text', placeholder: 'Планируемая дата регулировки бандажа', name:'date-adjustment-bandage',})(autocomplete='off').only-number#calendar-adjustment-bandage
