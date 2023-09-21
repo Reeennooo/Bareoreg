@@ -82,7 +82,7 @@
           },
           {
             index: 3,
-            value: 'revision after another clinic',
+            value: 'Ревизия после бариатрической операции в другой клинике',
             txt: 'Ревизия после бариатрической операции в другой клинике'
           },
         ]
@@ -137,7 +137,7 @@
           },
           {
             index: 2,
-            value: 'RYGB (Gastric Bypass)',
+            value: 'rygb',
             txt: 'RYGB (Гастрошунтирование)'
           },
           {
@@ -152,7 +152,7 @@
           },
           {
             index: 5,
-            value: 'value4',
+            value: 'slim',
             txt: 'SLIM OAGB (Гастрошунтирование на короткой петле)'
           },
           {
@@ -181,7 +181,8 @@
             txt: 'Другая операция'
           },
         ]
-      })(data-required='' data-has-connection='operation')
+      })(data-required='')
+      //- data-has-connection='operation'
       +itc-custom-select({
         id: 'access', 
         name: 'access',
@@ -291,20 +292,8 @@
       })(data-multiple=true)
   +group({title: 'Операция', operation: true})(data-group-name='operation').group--parent.form-creating-operation__operation
     .group__info Выберите «Вид операции»
-    +operation-sleeve
-    +operation-mgb
-    +operation-rygb
-    +operation-bpd
-    +operation-sadi
-    +operation-gastric-banding
-    +operation-intragastric-ballon
-    +operation-gastroplication
-    +operation-removal-of-vzhb
-    +operation-another-operation
-
-    +operation-another-operation
-  +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications
-    +group({title: 'Вид осложнения', type: 'additional'})
+  +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications.group--parent
+    +group({title: 'Вид осложнения', type: 'additional'}).is-active
       .group__additional-form
         +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
         +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')

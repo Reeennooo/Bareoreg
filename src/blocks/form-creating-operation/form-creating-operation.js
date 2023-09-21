@@ -1,6 +1,11 @@
 import AirDatepicker from 'air-datepicker';
 import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import { assignInputRules } from '../../js/input-validate';
+import { initGroupObserve } from '../../js/validate';
+import { setRadioHandler } from '../../components/group-radio-buttons/group-radio-buttons';
+import { OPERATIONS } from '../../js/operation-data';
+import { OPERATIONS_RULES } from '../../js/operation-data';
+import tippy from 'tippy.js';
 
 const allRules = {
     // key - это name инпута
@@ -67,16 +72,6 @@ const allRules = {
             message: 'Обязательное поле',
         },
     },
-    'ballon-filling-volume': {
-        required: {
-            message: 'Обязательное поле',
-        },
-        range: {
-            min: 200,
-            max: 700,
-            message: 'Минимальное значение: 200, максимальное значение 700',
-        },
-    },
     'date-ballon-delete': {
         required: {
             message: 'Обязательное поле',
@@ -84,8 +79,35 @@ const allRules = {
     },
 };
 
+const selects = {
+    'general-information': ['surgeon', 'assistants', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation'],
+    hospital: ['vomiting'],
+};
+
+function initSelects(selects) {
+    const selectsList = Object.entries(selects);
+    let allSelectsId = [];
+    selectsList.map((item) => {
+        allSelectsId = allSelectsId.concat(item[1]);
+    });
+    allSelectsId.forEach((selectId) => {
+        if (selectId === 'type-of-operation') {
+            selectTypeOperation = new ItcCustomSelect(`#${selectId}`);
+        } else if (selectId === 'kind-of-operation') {
+            selectKindOperation = new ItcCustomSelect(`#${selectId}`);
+        } else {
+            new ItcCustomSelect(`#${selectId}`);
+        }
+    });
+}
+
+let selectTypeOperation;
+let selectKindOperation;
+
 document.addEventListener('DOMContentLoaded', () => {
     assignInputRules(allRules);
+    initSelects(selects);
+
     // calendars
     new AirDatepicker('#calendar-operation', {
         // inline: true,
@@ -94,64 +116,24 @@ document.addEventListener('DOMContentLoaded', () => {
     new AirDatepicker('#calendar-adjustment-bandage', {});
     new AirDatepicker('#calendar-ballon-delete', {});
 
-    // выпадающие списки
-    new ItcCustomSelect('#surgeon');
-    new ItcCustomSelect('#assistants');
-    const selectTypeOperation = new ItcCustomSelect('#type-of-operation');
-    new ItcCustomSelect('#reason-for-revision');
-    const selectKindOperation = new ItcCustomSelect('#kind-of-operation');
-    new ItcCustomSelect('#access');
-    new ItcCustomSelect('#pain-relief');
-    new ItcCustomSelect('#simultaneous-operation');
+    const connectedRules = {
+        // key - имя связи
+        // value - [] подходящих значений(для выпадающих списков можно использовать индексы(формат число)).
+        access: ['laparotomy', 'conversion-to-laparotomy'],
+        revision: [1, 3],
+        'intraoperative-complications': [],
+        'emergency-situations': [],
+        'gut-indent': ['value2', 'value4'],
+        surgeon: ['value2'],
+    };
 
-    // RYGB (Гастрошунтирование)
-    new ItcCustomSelect('#stitching-machine');
-    new ItcCustomSelect('#strengthening-the-seam');
-    new ItcCustomSelect('#used-cassettes');
-    new ItcCustomSelect('#indent-gatekeeper');
-    new ItcCustomSelect('#hiatus-treatment');
-    new ItcCustomSelect('#mobilization-bulb');
-    new ItcCustomSelect('#gut-place');
-    new ItcCustomSelect('#stitching-machine2');
-    new ItcCustomSelect('#used-cassettes2');
-    new ItcCustomSelect('#used-cassettes2');
-    new ItcCustomSelect('#manual-anastomosis');
-    new ItcCustomSelect('#select-diameter-anastomosis');
-    new ItcCustomSelect('#formation-of-EEA');
-    new ItcCustomSelect('#stitching-machine3');
-    new ItcCustomSelect('#used-cassettes3');
-    new ItcCustomSelect('#select-diameter-anastomosis2');
-    new ItcCustomSelect('#manual-anastomosis2');
-    new ItcCustomSelect('#closure-hernia-defects');
-    new ItcCustomSelect('#thickness-drainage-tube');
-    new ItcCustomSelect('#hemostasis-from-staplers');
-
-    new ItcCustomSelect('#diameter-of-the-anastomosis');
-
-    // Внутрижелудочный баллон
-    new ItcCustomSelect('#ballon-type');
-
-    // Бандажирование желудка
-    new ItcCustomSelect('#type-of-bandage');
-
-    // BPD
-    new ItcCustomSelect('#bpd-mobilization-bulb');
-    new ItcCustomSelect('#bpd-formation-of-EEA');
-
-    // связи
+    // СВЯЗИ
     const hasConnections = document.querySelectorAll('[data-has-connection]');
     hasConnections.forEach((hasConnectEl) => {
-        if (hasConnectEl.dataset.hasConnection === 'intraoperative-complications' || hasConnectEl.dataset.hasConnection === 'emergency-situations') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            function checkState() {
-                if (hasConnectEl.checked) {
-                    connectedEl.classList.add('is-active');
-                } else {
-                    connectedEl.classList.remove('is-active');
-                }
-            }
-            hasConnectEl.addEventListener('change', checkState);
-        } else if (hasConnectEl.dataset.hasConnection === 'no-complications') {
+        setConnectionsForElements(hasConnectEl);
+
+        // частный случай с disabled чекбоксов.
+        if (hasConnectEl.dataset.hasConnection === 'no-complications') {
             let connectedEls = document.querySelectorAll(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             function checkState() {
                 if (hasConnectEl.checked) {
@@ -167,126 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             hasConnectEl.addEventListener('change', checkState);
-        } else if (hasConnectEl.dataset.hasConnection === 'revision') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            let button = hasConnectEl.querySelector('button');
-            let observer = new MutationObserver((mutationRecords) => {
-                for (const mutation of mutationRecords) {
-                    const index = mutation.target.dataset.index;
-                    if (index === '1' || index === '3') {
-                        connectedEl.classList.add('is-active');
-                    } else {
-                        connectedEl.classList.remove('is-active');
-                    }
-                }
-            });
-            observer.observe(button, { attributes: true, attributeFilter: ['data-index'] });
-        } else if (hasConnectEl.dataset.hasConnection === 'access') {
-            let connectedEls = document.querySelectorAll(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            let button = hasConnectEl.querySelector('button');
-            let observer = new MutationObserver((mutationRecords) => {
-                for (const mutation of mutationRecords) {
-                    const value = mutation.target.value;
-                    console.log(value);
-                    if (value === 'conversion-to-laparotomy' || value === 'laparotomy') {
-                        for (const element of connectedEls) {
-                            element.classList.add('is-active');
-                        }
-                    } else {
-                        for (const element of connectedEls) {
-                            element.classList.remove('is-active');
-                        }
-                    }
-                }
-            });
-            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
-        }
-
-        // связи операций.
-        // Будем искать элементы которые привязаны к полю операция data-connected='operation'
-        // т.к таких элементов будет несколько, то нам придётся перебрать их
-        // и сделать активным только тот элемент у которого data-name === value активного элемента списка.
-        else if (hasConnectEl.dataset.hasConnection === 'operation') {
-            let connectedElements = document.querySelectorAll(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            // console.log(connectedElements);
-            let button = selectKindOperation._elToggle;
-            let buttonObvserver = new MutationObserver(() => {
-                setOperationBlock(button, connectedElements);
-            });
-            buttonObvserver.observe(button, { attributeFilter: ['value'] });
         }
     });
 
-    // УСТАНОВКА ОПЕРАЦИЙ И ОТКРЫТИЕ СЛЕДУЮЩЕГО ЭТАПА
-    const observers = [];
-    const operationForm = document.querySelector('.form-creating-operation__operation');
-    const operationNameElement = operationForm.querySelector('.group__add-info');
-    const selectOperationHint = operationForm.querySelector('.group__info');
-
-    function setOperationBlock(observationElement, connectedElements) {
-        // убираем предыдущих наблюдателей
-        observers.forEach((observer) => observer.disconnect());
-        observers.length = 0;
-        // устанавливаем название операции в блок
-        let operationName = selectKindOperation._textSelectedEl.innerText;
-        operationNameElement.innerText = operationName;
-        const selectedOperationValue = observationElement.value;
-        const connectedGroupArr = [...connectedElements];
-        let operationNumber = 1;
-
-        connectedGroupArr.forEach((group) => {
-            if (group.classList.contains('is-active')) {
-                group.classList.remove('is-active');
-            }
-        });
-
-        const operationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
-
-        if (!operationGroups.length) return;
-
-        showOperationGroup(operationGroups);
-
-        function showOperationGroup(groups) {
-            if (!groups.length) return;
-
-            for (const group of groups) {
-                group.classList.add('is-active');
-
-                if (group.classList.contains('is-filled')) {
-                    operationNumber++;
-
-                    const nextOperationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
-                    if (nextOperationGroups) {
-                        showOperationGroup(nextOperationGroups);
-                    }
-                    return;
-                }
-
-                createObserver(group);
-            }
-            selectOperationHint.style.display = 'none';
-        }
-
-        function createObserver(observeredElement) {
-            // console.log('Создаю наблюдателя за элементном:');
-            // console.log(observeredElement);
-
-            const operationGroupObserver = new MutationObserver((mutations) => {
-                for (const mutation of mutations) {
-                    if (mutation.target.classList.contains('is-filled')) {
-                        operationNumber++;
-                        const nextOperationGroups = connectedGroupArr.filter((group) => group.dataset.name === selectedOperationValue && group.dataset.number === String(operationNumber));
-                        console.log(nextOperationGroups);
-                        showOperationGroup(nextOperationGroups);
-                    }
-                }
-            });
-            operationGroupObserver.observe(observeredElement, { attributeFilter: ['class'] });
-            observers.push(operationGroupObserver);
-        }
-    }
-
-    // связи пунктов в различных select
+    // связи пунктов выпадающих списков
     // Операция ВЖБ
     const button = selectTypeOperation._elToggle;
     const connectedOption = selectKindOperation._el.querySelector(`.itc-select__option[data-index='9']`);
@@ -332,5 +198,398 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         observer.observe(kindOperationBtn, { attributeFilter: ['data-index', 'value'] });
+    }
+
+    // УСТАНАВЛИВАЕМ НАБЛЮДЕНИЕ ЗА СПИСКОМ ОПЕРАЦИЙ
+    const selectOperationObserver = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            setOperation(mutation.target.value);
+        }
+    });
+    selectOperationObserver.observe(selectKindOperation._elToggle, { attributeFilter: ['value'] });
+
+    function setConnectionsForElements(element, rules) {
+        let connectedKey = '';
+
+        function putObservation(element) {
+            if (element.closest('.group-radio-buttons')) {
+                const monitoringElement = element.closest('.group-radio-buttons');
+                const elementObserver = new MutationObserver((mutations) => {
+                    console.log(connectedKey);
+                    let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                    if (connectedRules[connectedKey].includes(mutations[0].target.dataset.value)) {
+                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    } else {
+                        connectedElements.forEach((connectedEL) => {
+                            if (connectedEL.classList.contains('is-active')) {
+                                connectedEL.classList.remove('is-active');
+                            }
+                        });
+                    }
+                });
+                elementObserver.observe(monitoringElement, { attributeFilter: ['data-value'] });
+                return;
+            }
+            if (element.closest('.itc-select')) {
+                const monitoringElement = element.querySelector('button');
+                const elementObserver = new MutationObserver((mutations) => {
+                    let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                    // console.log(mutations[0].target.dataset.index);
+                    // console.log(mutations[0].target.value);
+                    if (connectedRules[connectedKey].includes(mutations[0].target.value) || connectedRules[connectedKey].includes(Number(mutations[0].target.dataset.index))) {
+                        console.log(connectedElements);
+                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    } else {
+                        connectedElements.forEach((connectedEL) => {
+                            if (connectedEL.classList.contains('is-active')) {
+                                connectedEL.classList.remove('is-active');
+                            }
+                        });
+                    }
+                });
+                elementObserver.observe(monitoringElement, { attributeFilter: ['value'] });
+                return;
+            }
+            if (element.closest('.checkbox')) {
+                const monitoringElement = element;
+                let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                function elementObserver() {
+                    if (monitoringElement.checked) {
+                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    } else {
+                        connectedElements.forEach((connectedEL) => {
+                            if (connectedEL.classList.contains('is-active')) {
+                                connectedEL.classList.remove('is-active');
+                            }
+                        });
+                    }
+                }
+                monitoringElement.addEventListener('change', elementObserver);
+                return;
+            }
+        }
+
+        if (element.dataset.hasConnection) {
+            connectedKey = element.dataset.hasConnection;
+            putObservation(element);
+        } else if (element.dataset.connected) {
+            connectedKey = element.dataset.connected;
+            if (connectedRules[connectedKey]) {
+            }
+        }
+    }
+
+    const operationForm = document.querySelector(`[data-group-name="operation"]`);
+    const optionFormInner = operationForm.querySelector('.group__inner');
+    const operationNameElement = operationForm?.querySelector('.group__add-info');
+    let initObservers = [];
+
+    // МЕТОД ДОБАВЛЕНИЯ ОПЕРАЦИИ
+    function setOperation(value) {
+        if (!OPERATIONS[value]) return;
+
+        // устанавливаем имя в блок.
+        let operationName = selectKindOperation._textSelectedEl.innerText;
+        operationNameElement.innerText = operationName;
+        optionFormInner.innerHTML = '';
+
+        const operation = OPERATIONS[value];
+
+        if (operation) {
+            if (operation.mainFields) {
+                const fieldWrapper = document.createElement('div');
+                fieldWrapper.classList.add('group__form');
+
+                console.log(operation.mainFields);
+                operation.mainFields.forEach((item) => {
+                    const node = createSingleField(item);
+                    fieldWrapper.append(node);
+                });
+                optionFormInner.append(fieldWrapper);
+                // initSelects(operation.mainFields);
+            }
+            if (operation.additionalGroups) {
+                operation.additionalGroups.forEach((item) => {
+                    const group = createAditionalGroup(item);
+                    optionFormInner.append(group);
+                });
+                // const group = createAditionalGroup();
+                // optionFormInner.innerHTML(group);
+            }
+        }
+        initGroupObserve(initObservers);
+        assignInputRules(OPERATIONS_RULES);
+        initObservers = [];
+    }
+
+    function createSingleField(item) {
+        switch (item.type) {
+            case 'RADIO-GROUP':
+                return createRadioGroup(item.data);
+            case 'SELECT':
+                return createSelect(item.data);
+            case 'INPUT':
+                return createInput(item.data);
+            case 'SUBTITLE':
+                return createSubtitle(item.data);
+            case 'CHECKBOX':
+                return createCheckbox(item.data);
+            case 'TEXTAREA':
+                return createTextarea(item.data);
+        }
+    }
+
+    function createAditionalGroup(groupData) {
+        const group = document.createElement('div');
+        // console.log(groupData);
+        const innerElements = groupData.content.map((item) => {
+            switch (item.type) {
+                case 'RADIO-GROUP':
+                    return createRadioGroup(item.data);
+                case 'SELECT':
+                    return createSelect(item.data);
+                case 'INPUT':
+                    return createInput(item.data);
+                case 'SUBTITLE':
+                    return createSubtitle(item.data);
+                case 'CHECKBOX':
+                    return createCheckbox(item.data);
+                case 'TEXTAREA':
+                    return createTextarea(item.data);
+            }
+        });
+        group.classList.add('group', 'group--additional');
+        if (groupData.active) {
+            group.classList.add('is-active');
+        }
+        if (groupData.number) {
+            group.setAttribute('data-number', groupData.number);
+            if (groupData.number === 1) {
+                group.classList.add('border-none');
+            }
+        }
+        group.innerHTML = `
+        <div class='group__header'>
+            <div class='group__title'>
+                <div class='group__completed'>
+                    <svg class='svg'>
+                        <use href='img/sprite.svg#check'></use>
+                    </svg>
+                </div>
+                <span>${groupData.name}</span>
+            </div>
+        </div>
+        <div class='group__inner'>
+            <div class='group__additional-form'>
+                
+            </div>
+        </div>`;
+        // console.log(innerElements);
+        const groupAddForm = group.querySelector('.group__additional-form');
+        innerElements.map((item) => {
+            groupAddForm.append(item);
+        });
+
+        // Появление следующего этапа операции
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (mutation.target.classList.contains('is-filled')) {
+                    // console.log('Терперь группа is-flled:');
+                    // console.log(mutation.target);
+                    const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
+                    nextStep?.classList.add('is-active');
+                }
+            }
+        });
+        observer.observe(group, { attributeFilter: ['class'] });
+
+        return group;
+    }
+
+    function createInput(data) {
+        const input = document.createElement('div');
+        input.classList.add('input-custom');
+        input.innerHTML = `
+        <div class='input-custom__input'>
+            <input type='${data.type}' name='${data.name}' placeholder='' id='${data.name}' value='${data.value ? data.value : ''}'>
+            <label for='${data.name}'>${data.placeholder}</label>
+        </div>
+        <div class='input-custom__message'>${data.message}</div>`;
+
+        if (data.required) {
+            input?.querySelector('input')?.setAttribute('data-required', '');
+        }
+        if (data.mod === 'calendar') {
+            new AirDatepicker(input.querySelector('input'), {});
+        }
+
+        if (data.addClass) {
+            input?.querySelector('input').classList.add(data.addClass);
+        }
+
+        if (data.connected) {
+            input.setAttribute('data-connected', data.connected);
+            checkConnectionValue(input, connectedRules);
+        }
+
+        if (data.info) {
+            input.classList.add('input-custom--info');
+            const info = document.createElement('div');
+            info.classList.add('info', 'input-custom__info');
+            info.setAttribute('id', data.info.id);
+            info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
+            input.querySelector('.input-custom__input').append(info);
+            tippy(info, {
+                content: data.info.content,
+                theme: data.info.theme,
+            });
+        }
+
+        return input;
+    }
+
+    function createRadioGroup(data) {
+        const radioGroup = document.createElement('div');
+        radioGroup.classList.add('group-radio-buttons');
+
+        if (data.required) {
+            radioGroup.setAttribute('data-required', '');
+        }
+
+        const options = [];
+        data.options.forEach((el) => {
+            const option = document.createElement('label');
+            option.classList.add('radio');
+            option.innerHTML = `
+            <input type='radio' name='${data.name}' value='${el[0] || ''}'>
+            <span class='radio__fake'></span>
+            <span class='radio__label'>${el[1]}</span>
+            `;
+            options.push(option);
+        });
+
+        radioGroup.innerHTML = `
+        <div class='group-radio-buttons__title'>
+            <span>${data.title}</span>
+        </div>
+        <div class='group-radio-buttons__options'>
+        </div>
+        `;
+
+        const groupOptions = radioGroup.querySelector('.group-radio-buttons__options');
+        options.map((item) => {
+            groupOptions.append(item);
+        });
+
+        if (data.info) {
+            const info = document.createElement('div');
+            info.classList.add('info');
+            info.setAttribute('id', data.info.id);
+            info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
+            radioGroup.querySelector('.group-radio-buttons__title').append(info);
+            tippy(info, {
+                content: data.info.content,
+                theme: data.info.theme,
+            });
+        }
+
+        if (data.connected) {
+            radioGroup.setAttribute('data-connected', data.connected);
+            checkConnectionValue(radioGroup, connectedRules);
+        }
+
+        setRadioHandler(radioGroup);
+
+        return radioGroup;
+    }
+
+    function createSelect(data) {
+        const select = document.createElement('div');
+        select.setAttribute('id', data.name);
+        if (data.required) {
+            select.setAttribute('data-required', '');
+        }
+        initSelect(select, data);
+        if (data.hasConnection) {
+            select.setAttribute('data-has-connection', data.hasConnection);
+            setConnectionsForElements(select);
+        }
+        if (data.connected) {
+            select.setAttribute('data-connected', data.connected);
+            checkConnectionValue(select, connectedRules);
+        }
+        return select;
+    }
+
+    function createTextarea(data) {
+        const textarea = document.createElement('div');
+        textarea.classList.add('textarea');
+        textarea.innerHTML = `<textarea name='${data.name}' id='${data.id}' placeholder=''></textarea><label for='${data.id}'>${data.placeholder}</label>`;
+
+        if (data.addClass) {
+            textarea.classList.add(data.addClass);
+        }
+
+        return textarea;
+    }
+
+    function createSubtitle(data) {
+        const subtitle = document.createElement('div');
+        subtitle.classList.add('group__title-subgroup');
+        subtitle.innerHTML = `<span>${data.subtitle}</span>`;
+        return subtitle;
+    }
+
+    function createCheckbox(data) {
+        const checkbox = document.createElement('label');
+        checkbox.classList.add('checkbox');
+        checkbox.innerHTML = `<input type='checkbox' name='${data.name}' value='${data.value}'>
+        <span class='checkbox__fake'></span>
+        <span class='checkbox__label'>${data.label}</span>`;
+        return checkbox;
+    }
+
+    function initSelect(select, data) {
+        new ItcCustomSelect(select, {
+            name: data.name,
+            placeholder: data.placeholder,
+            options: data.options,
+            multiple: data.multiple,
+            targetValue: data.targetValue,
+        });
+    }
+
+    // проверка связи для созданных с помощью JS элементов.
+    function checkConnectionValue(element, connectedRules) {
+        // console.log(element);
+        const connectedKey = element.dataset.connected;
+        const connectionParent = document.querySelector(`[data-has-connection=${connectedKey}]`);
+        let monitoringElement;
+
+        if (!connectionParent) return;
+
+        function activeToggler(element, state) {
+            if (state) {
+                element.classList.add('is-active');
+            } else if (element.classList.contains('is-active')) {
+                element.classList.remove('is-active');
+            }
+        }
+
+        if (connectionParent.closest('.group-radio-buttons')) {
+            monitoringElement = connectionParent.closest('.group-radio-buttons');
+            activeToggler(element, connectedRules[connectedKey].includes(monitoringElement.dataset.value));
+            return;
+        }
+        if (connectionParent.closest('.itc-select')) {
+            monitoringElement = connectionParent.querySelector('button');
+            activeToggler(element, connectedRules[connectedKey].includes(monitoringElement.value));
+            return;
+        }
+        if (connectionParent.closest('.checkbox')) {
+            monitoringElement = connectionParent.closest('.group-radio-buttons');
+            activeToggler(element, monitoringElement.checked);
+            return;
+        }
     }
 });
