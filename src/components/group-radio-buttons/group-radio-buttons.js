@@ -3,17 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (radioGroups) {
         radioGroups.forEach((radioGroup) => {
-            const inputs = radioGroup.querySelectorAll('input');
-            function radioGroupField() {
-                // console.log('RADIO CHANGE');
-                radioGroup.classList.add('is-filled');
-                inputs.forEach((input) => input.removeEventListener('change', radioGroupField));
-            }
-            function setCurrentValue(value) {
-                radioGroup.dataset.value = value
-            }
-            inputs.forEach((input) => input.addEventListener('change', radioGroupField));
-            inputs.forEach((input) => input.addEventListener('change', () => setCurrentValue(input.value)));
+            setRadioHandler(radioGroup);
         });
     }
 });
+
+export function setRadioHandler(radioGroup) {
+    if (!radioGroup) return;
+    const inputs = radioGroup.querySelectorAll('input');
+    function radioGroupField() {
+        // console.log('RADIO CHANGE');
+        radioGroup.classList.add('is-filled');
+        inputs.forEach((input) => input.removeEventListener('change', radioGroupField));
+    }
+    function setCurrentValue(value) {
+        radioGroup.dataset.value = value;
+    }
+    inputs.forEach((input) => input.addEventListener('change', radioGroupField));
+    inputs.forEach((input) => input.addEventListener('change', () => setCurrentValue(input.value)));
+}
