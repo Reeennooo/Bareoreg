@@ -140,6 +140,10 @@
       padding-bottom: 0;
       border: none;
     }
+    display: none;
+    &.is-active {
+      display: block;
+    }
   }
 
   &--additional[data-connected] {
