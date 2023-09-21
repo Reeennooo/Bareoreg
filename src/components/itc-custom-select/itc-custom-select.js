@@ -26,11 +26,11 @@ export class ItcCustomSelect {
             items.push(`<li class="itc-select__option${selectedClass}" data-select="option"
         data-value="${option[0]}" data-index="${index}">${option[1]}</li>`);
         });
-        return `<button type="button" class="itc-select__toggle" name="${name}"
+        return `<input name="${name}" value="${selectedValue}"><button type="button" class="itc-select__toggle" name="${name}"
       value="${selectedValue}" data-select="toggle" data-index="${selectedIndex}">
       <span class='itc-select__text-selected'>${selectedContent}</span>
       </button><div class="itc-select__placeholder">${placeholder}</div><div class="itc-select__dropdown">
-      <ul class="itc-select__options">${items.join('')}</ul></div>`;
+      <ul class="itc-select__options">${items.join('')}</ul></div><div class='itc-select__message'></div>`;
     }
 
     static hideOpenSelect() {
@@ -63,6 +63,7 @@ export class ItcCustomSelect {
             this._el.classList.add(this.constructor.EL);
         }
         this._elToggle = this._el.querySelector(this.constructor.DATA_TOGGLE);
+        this._input = this._el.querySelector('input');
         this._textSelectedEl = this._el.querySelector(`.${ItcCustomSelect.TEXT_SELECTED_EL}`);
         // this._textSelectedEl = document.createElement('span');
         // this._textSelectedEl.classList.add('itc-select__text-selected');
@@ -100,12 +101,14 @@ export class ItcCustomSelect {
                 this._elToggle.value = updateValue(this._elToggle.value, elOption.dataset.value);
                 const index = updateValue(this._elToggle.dataset.index, elOption.dataset.index);
                 this._elToggle.dataset.index = index.length ? index : -1;
+                this._input.value = this._elToggle.value;
                 return;
             } else {
                 this._textSelectedEl.textContent = (this._elToggle.textContent + ', ' + elOption.textContent).trim().replace(/^\,|\,$/g, '');
                 // this._elToggle.textContent = (this._elToggle.textContent + ', ' + elOption.textContent).trim().replace(/^\,|\,$/g, '');
                 this._elToggle.value = this._elToggle.value ? this._elToggle.value + ', ' + elOption.dataset.value : elOption.dataset.value;
                 this._elToggle.dataset.index = this._elToggle.dataset.index === '-1' ? elOption.dataset.index : this._elToggle.dataset.index + ', ' + elOption.dataset.index;
+                this._input.value = this._elToggle.value;
             }
             // console.log(this._elToggle.textContent);
         } else {
@@ -117,6 +120,7 @@ export class ItcCustomSelect {
             this._textSelectedEl.textContent = elOption.textContent;
             this._elToggle.value = elOption.dataset.value;
             this._elToggle.dataset.index = elOption.dataset.index;
+            this._input.value = this._elToggle.value;
         }
         // if (elOptionSel) {
         //     elOptionSel.classList.remove(this.constructor.EL_OPTION_SELECTED);
@@ -137,6 +141,7 @@ export class ItcCustomSelect {
         }
         this._elToggle.textContent = '';
         this._elToggle.value = '';
+        this._input.value = '';
         this._elToggle.dataset.index = '-1';
         this._el.dispatchEvent(new CustomEvent('itc.select.change'));
         this._params.onSelected ? this._params.onSelected(this, null) : null;
