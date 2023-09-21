@@ -39,7 +39,9 @@ let config = {
         'what-input/dist/what-input.js',
         '../img/sprite-svg/sprite-svg.js',
         '../js/global-scripts.js',
-        'approvejs',
+        '../js/validate.js',
+        // 'tippy.js',
+        // 'approvejs',
         // '../blocks/header/header.js', // относительно папки src/js
         // 'somePackage/dist/somePackage.js', // для 'node_modules/somePackage/dist/somePackage.js',
     ],
