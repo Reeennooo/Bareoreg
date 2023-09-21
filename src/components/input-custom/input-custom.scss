@@ -162,7 +162,8 @@
   &__info {
     position: absolute;
     cursor: pointer;
-    top: 16px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 12px;
     width: 24px;
     height: 24px;
