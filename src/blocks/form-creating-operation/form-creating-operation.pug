@@ -452,32 +452,28 @@
         })
       +input-custom({type: 'text', placeholder: 'Дата выписки', name: 'discharge-from-hospital',})(autocomplete='off' data-required='').only-number#calendar-discharge
       +itc-custom-select({
-          id: 'discharge', 
-          name: 'discharge',
+          id: 'discharge-where', 
+          name: 'discharge-where',
           placeholder: 'Выписка',
           options: [
             {
               index: 0,
-              value: 'value1',
-              txt: 'List item 1'
+              value: 'Домой',
+              txt: 'Домой'
             },
             {
               index: 1,
-              value: 'value2',
-              txt: 'List item 2'
+              value: 'В другой госпиталь',
+              txt: 'В другой госпиталь'
             },
             {
               index: 2,
-              value: 'value3',
-              txt: 'List item 3'
-            },
-            {
-              index: 3,
-              value: 'value4',
-              txt: 'List item 4'
+              value: 'Летальный исход',
+              txt: 'Летальный исход'
             },
           ]
-        })
+        })(data-has-connection='fatal-outcome')
+      +input-custom({type: 'text', placeholder: 'Причина летального исхода', name: 'сause-of-death',})(data-connected='fatal-outcome')
       +checkbox({name: "Electrolyte-disturbances", value: 'yes', label: 'Электролитные нарушения'})
       +checkbox({name: "Rhabdomyolysis", value: 'yes', label: 'Рабдомиолиз'})
   .form__wrapper-btns

@@ -7,7 +7,7 @@ import { OPERATIONS } from '../../js/operation-data';
 import { OPERATIONS_RULES } from '../../js/operation-data';
 import tippy from 'tippy.js';
 
-const allRules = {
+const VALIDATION_RULES = {
     // key - это name инпута
     // value - это правила проверки инпута
     surgeon: {
@@ -40,7 +40,7 @@ const allRules = {
         range: {
             min: 10,
             max: 10,
-            message: 'Формат xx.xx.xxxx',
+            message: 'Формат: 16.09.2023',
         },
         required: {
             message: 'Обязательное поле',
@@ -79,9 +79,173 @@ const allRules = {
     },
 };
 
+const CONNECTED_RULES = {
+    // key - имя связи
+    // value - подходящие значений(для выпадающих списков можно использовать индексы(формат число)).
+    access: [
+        {
+            value: 'laparotomy',
+        },
+        {
+            value: 'conversion-to-laparotomy',
+        },
+    ],
+    revision: [
+        {
+            value: 1,
+        },
+        {
+            value: 3,
+        },
+    ],
+    'fatal-outcome': [
+        {
+            value: 'Летальный исход',
+        },
+    ],
+    'intraoperative-complications': [{}],
+    'emergency-situations': [{}],
+    'method-determination-small-gut': [
+        {
+            value: 'Отступ от илеоцекального угла',
+            connectedID: 'indent',
+            rules: {
+                'gut-indent': {
+                    customRange: {
+                        min: 250,
+                        max: 350,
+                        message: 'Минимальное значение: 250, максимальное значение 350',
+                    },
+                },
+            },
+        },
+        {
+            value: 'Отступ от связки трейца',
+            connectedID: 'indent',
+            rules: {
+                'gut-indent': {
+                    customRange: {
+                        min: 20,
+                        max: 350,
+                        message: 'Минимальное значение: 20, максимальное значение 350',
+                    },
+                },
+            },
+        },
+        {
+            value: 'Процент от общей длины тонкой кишки',
+            connectedID: 'percent-gut',
+        },
+    ],
+    'method-determination-duodenoenteroanastomosis': [
+        {
+            value: 'Отступ от илеоцекального угла',
+            connectedID: 'indent',
+            rules: {
+                'gut-indent': {
+                    customRange: {
+                        min: 250,
+                        max: 350,
+                        message: 'Минимальное значение: 250, максимальное значение 350',
+                    },
+                },
+            },
+        },
+        {
+            value: 'Отступ от связки Трейтца',
+            connectedID: 'indent',
+            rules: {
+                'gut-indent': {
+                    customRange: {
+                        min: 20,
+                        max: 350,
+                        message: 'Минимальное значение: 20, максимальное значение 350',
+                    },
+                },
+            },
+        },
+        {
+            value: 'Процент от общей длины тонкой кишки',
+            connectedID: 'percent-gut',
+        },
+    ],
+    gastroenteroanastomosis: [
+        {
+            value: 'Аппаратный циркулярный',
+            connectedID: 'circle',
+        },
+        {
+            value: 'Аппаратный линейный',
+            connectedID: 'linear',
+        },
+        {
+            value: 'Ручной',
+            connectedID: 'manual',
+        },
+    ],
+    herjunojunoanastomosis: [
+        {
+            value: 'Аппаратный с ручным закрытием',
+            connectedID: 'hardware-with-manual',
+        },
+        {
+            value: 'Аппаратный полностью',
+            connectedID: 'hardware-completely',
+        },
+        {
+            value: 'Ручной',
+            connectedID: 'fully-manual',
+        },
+    ],
+    treitz: [
+        {
+            value: 1,
+            connectedID: 'ident-treitz',
+        },
+    ],
+    'formation-gea': [
+        {
+            value: 'Аппаратный циркулярный',
+            connectedID: 'hardware',
+        },
+        {
+            value: 'Аппаратный линейный',
+            connectedID: 'hardware',
+        },
+        {
+            value: 'Ручной',
+            connectedID: 'manual',
+        },
+    ],
+    spur: [
+        {
+            value: 'Да',
+        },
+    ],
+    'drainage-tube': [
+        {
+            value: 'Да',
+        },
+    ],
+    'seam-row': [
+        {
+            value: 'Однорядный',
+            connectedID: '1',
+        },
+        {
+            value: 'Двухрядный',
+            connectedID: '2',
+        },
+        {
+            value: 'Трехрядный',
+            connectedID: '3',
+        },
+    ],
+};
+
 const selects = {
-    'general-information': ['surgeon', 'assistants', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation'],
-    hospital: ['vomiting'],
+    'general-information': ['surgeon', 'assistants', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
+    hospital: ['vomiting', 'discharge-where'],
 };
 
 function initSelects(selects) {
@@ -105,27 +269,18 @@ let selectTypeOperation;
 let selectKindOperation;
 
 document.addEventListener('DOMContentLoaded', () => {
-    assignInputRules(allRules);
+    assignInputRules(VALIDATION_RULES);
     initSelects(selects);
 
     // calendars
+    // Написать функцию которая делает календарь 100% ширины, под инпут.
+    // Считывать ширину инпута и задавать нужному календарю
     new AirDatepicker('#calendar-operation', {
         // inline: true,
     });
     new AirDatepicker('#calendar-discharge', {});
     new AirDatepicker('#calendar-adjustment-bandage', {});
     new AirDatepicker('#calendar-ballon-delete', {});
-
-    const connectedRules = {
-        // key - имя связи
-        // value - [] подходящих значений(для выпадающих списков можно использовать индексы(формат число)).
-        access: ['laparotomy', 'conversion-to-laparotomy'],
-        revision: [1, 3],
-        'intraoperative-complications': [],
-        'emergency-situations': [],
-        'gut-indent': ['value2', 'value4'],
-        surgeon: ['value2'],
-    };
 
     // СВЯЗИ
     const hasConnections = document.querySelectorAll('[data-has-connection]');
@@ -171,30 +326,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const kindOperationBtn = selectKindOperation._elToggle;
     if (kindOperationBtn) {
         let observer = new MutationObserver(() => {
-            if (selectKindOperation.selectedIndex === '8') {
-                assignInputRules({
-                    'duration-operation': {
-                        customRange: {
-                            min: 10,
-                            max: 30,
-                        },
-                        required: {
-                            message: 'Обязательное поле',
+            if (selectKindOperation.selectedIndex === '7') {
+                assignInputRules(
+                    {
+                        'duration-operation': {
+                            customRange: {
+                                min: 10,
+                                max: 30,
+                            },
+                            required: {
+                                message: 'Обязательное поле',
+                            },
                         },
                     },
-                });
+                    true
+                );
             } else {
-                assignInputRules({
-                    'duration-operation': {
-                        customRange: {
-                            min: 40,
-                            max: 120,
-                        },
-                        required: {
-                            message: 'Обязательное поле',
+                assignInputRules(
+                    {
+                        'duration-operation': {
+                            customRange: {
+                                min: 40,
+                                max: 120,
+                            },
+                            required: {
+                                message: 'Обязательное поле',
+                            },
                         },
                     },
-                });
+                    true
+                );
             }
         });
         observer.observe(kindOperationBtn, { attributeFilter: ['data-index', 'value'] });
@@ -211,14 +372,38 @@ document.addEventListener('DOMContentLoaded', () => {
     function setConnectionsForElements(element, rules) {
         let connectedKey = '';
 
+        if (element.dataset.hasConnection) {
+            connectedKey = element.dataset.hasConnection;
+            putObservation(element);
+        }
+
         function putObservation(element) {
             if (element.closest('.group-radio-buttons')) {
                 const monitoringElement = element.closest('.group-radio-buttons');
                 const elementObserver = new MutationObserver((mutations) => {
                     console.log(connectedKey);
                     let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                    if (connectedRules[connectedKey].includes(mutations[0].target.dataset.value)) {
-                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    const rulesItem = CONNECTED_RULES[connectedKey].find((el) => el.value === mutations[0].target.dataset.value);
+                    if (rulesItem) {
+                        if (rulesItem.connectedID) {
+                            connectedElements.forEach((connectedEL) => {
+                                // console.log(connectedEL);
+                                // console.log(connectedEL.dataset.id);
+                                // console.log(rulesItem);
+                                if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
+                                    connectedEL.classList.add('is-active');
+                                } else {
+                                    connectedEL.classList.remove('is-active');
+                                }
+                            });
+                        } else {
+                            connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                        }
+
+                        // connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                        if (rulesItem.rules) {
+                            assignInputRules(rulesItem.rules, true);
+                        }
                     } else {
                         connectedElements.forEach((connectedEL) => {
                             if (connectedEL.classList.contains('is-active')) {
@@ -234,11 +419,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const monitoringElement = element.querySelector('button');
                 const elementObserver = new MutationObserver((mutations) => {
                     let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                    // console.log(mutations[0].target.dataset.index);
-                    // console.log(mutations[0].target.value);
-                    if (connectedRules[connectedKey].includes(mutations[0].target.value) || connectedRules[connectedKey].includes(Number(mutations[0].target.dataset.index))) {
-                        console.log(connectedElements);
-                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
+                        if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
+                            return item;
+                        }
+                    });
+                    if (rulesItem) {
+                        if (rulesItem.connectedID) {
+                            connectedElements.forEach((connectedEL) => {
+                                console.log(connectedEL);
+                                console.log(connectedEL.dataset.id);
+                                console.log(rulesItem);
+                                if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
+                                    connectedEL.classList.add('is-active');
+                                } else {
+                                    connectedEL.classList.remove('is-active');
+                                }
+                            });
+                        } else {
+                            connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                        }
+                        if (rulesItem.rules) {
+                            assignInputRules(rulesItem.rules, true);
+                        }
                     } else {
                         connectedElements.forEach((connectedEL) => {
                             if (connectedEL.classList.contains('is-active')) {
@@ -266,15 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 monitoringElement.addEventListener('change', elementObserver);
                 return;
-            }
-        }
-
-        if (element.dataset.hasConnection) {
-            connectedKey = element.dataset.hasConnection;
-            putObservation(element);
-        } else if (element.dataset.connected) {
-            connectedKey = element.dataset.connected;
-            if (connectedRules[connectedKey]) {
             }
         }
     }
@@ -393,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Появление следующего этапа операции
         const observer = new MutationObserver((mutations) => {
             for (const mutation of mutations) {
-                if (mutation.target.classList.contains('is-filled')) {
+                if (mutation.target.classList.contains('is-filled') && mutation.target.classList.contains('is-active')) {
                     // console.log('Терперь группа is-flled:');
                     // console.log(mutation.target);
                     const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
@@ -419,6 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.required) {
             input?.querySelector('input')?.setAttribute('data-required', '');
         }
+
         if (data.mod === 'calendar') {
             new AirDatepicker(input.querySelector('input'), {});
         }
@@ -426,10 +621,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.addClass) {
             input?.querySelector('input').classList.add(data.addClass);
         }
-
+        console.log(data);
         if (data.connected) {
             input.setAttribute('data-connected', data.connected);
-            checkConnectionValue(input, connectedRules);
+            checkConnectionValue(input, CONNECTED_RULES);
+        }
+
+        if (data.connectedID) {
+            input.setAttribute('data-id', data.connectedID);
+            // `[${data.connectedId.join(',')}]`
         }
 
         if (data.info) {
@@ -495,7 +695,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (data.connected) {
             radioGroup.setAttribute('data-connected', data.connected);
-            checkConnectionValue(radioGroup, connectedRules);
+            checkConnectionValue(radioGroup, CONNECTED_RULES);
+        }
+        if (data.connectedID) {
+            radioGroup.setAttribute('data-id', data.connectedID);
+        }
+        if (data.hasConnection) {
+            radioGroup.setAttribute('data-has-connection', data.hasConnection);
+            setConnectionsForElements(radioGroup);
         }
 
         setRadioHandler(radioGroup);
@@ -514,9 +721,13 @@ document.addEventListener('DOMContentLoaded', () => {
             select.setAttribute('data-has-connection', data.hasConnection);
             setConnectionsForElements(select);
         }
+
         if (data.connected) {
             select.setAttribute('data-connected', data.connected);
-            checkConnectionValue(select, connectedRules);
+            checkConnectionValue(select, CONNECTED_RULES);
+        }
+        if (data.connectedID) {
+            select.setAttribute('data-id', data.connectedID);
         }
         return select;
     }
@@ -578,12 +789,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (connectionParent.closest('.group-radio-buttons')) {
             monitoringElement = connectionParent.closest('.group-radio-buttons');
-            activeToggler(element, connectedRules[connectedKey].includes(monitoringElement.dataset.value));
+            activeToggler(
+                element,
+                connectedRules[connectedKey].find((item) => item.value === monitoringElement.dataset.value)
+            );
             return;
         }
         if (connectionParent.closest('.itc-select')) {
             monitoringElement = connectionParent.querySelector('button');
-            activeToggler(element, connectedRules[connectedKey].includes(monitoringElement.value));
+            activeToggler(
+                element,
+                connectedRules[connectedKey].find((item) => item.value === monitoringElement.value)
+            );
             return;
         }
         if (connectionParent.closest('.checkbox')) {

@@ -4,12 +4,12 @@
     position: relative;
   }
 
-  &[data-connected] {
-    &.is-active {
-      display: block;
-    }
-
+  &:has(input[data-connected]) {
     display: none;
+  }
+
+  &:has(input[data-connected].is-active) {
+    display: block;
   }
 
   // &.is-invalid {

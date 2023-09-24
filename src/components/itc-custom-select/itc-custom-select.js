@@ -65,6 +65,7 @@ export class ItcCustomSelect {
         this._elToggle = this._el.querySelector(this.constructor.DATA_TOGGLE);
         this._input = this._el.querySelector('input');
         this._textSelectedEl = this._el.querySelector(`.${ItcCustomSelect.TEXT_SELECTED_EL}`);
+
         // this._textSelectedEl = document.createElement('span');
         // this._textSelectedEl.classList.add('itc-select__text-selected');
         // this._elToggle.append(this._textSelectedEl);
@@ -88,9 +89,15 @@ export class ItcCustomSelect {
 
         if (this._multiple) {
             const updateValue = (string, cutString) => {
-                const filter = new RegExp(`${cutString}(\,\\s|\,)|${cutString}`, 'g');
-                let resultString = string.replace(filter, '').trim();
-                resultString = resultString.replace(/,$/, '');
+                // console.log(string);
+                const startString = string.replace(/\s{2,}/g, '').trim();
+                let fixCutString = cutString.replace(/\s{2,}/g, '').trim();
+                // string.replace(/^ +| +$|( ) +/g, '$1');
+                // const filter = new RegExp(`${fixCutString}(\,\\s|\,)|${fixCutString}`, 'gi');
+
+                let resultString = startString.replace(fixCutString, '').trim();
+                resultString = resultString.replace(/^,|,$| ,/g, '');
+                // console.log(resultString)
                 return resultString;
             };
 
@@ -110,7 +117,6 @@ export class ItcCustomSelect {
                 this._elToggle.dataset.index = this._elToggle.dataset.index === '-1' ? elOption.dataset.index : this._elToggle.dataset.index + ', ' + elOption.dataset.index;
                 this._input.value = this._elToggle.value;
             }
-            // console.log(this._elToggle.textContent);
         } else {
             const elOptionSel = this._el.querySelector(`.${this.constructor.EL_OPTION_SELECTED}`);
             if (elOptionSel) {

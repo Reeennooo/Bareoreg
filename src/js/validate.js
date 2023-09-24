@@ -54,8 +54,9 @@ export function initGroupObserve(observers) {
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
                     observers.push(observer);
                 } else {
-                    requiredEl.addEventListener('change', () => checkFilledInput(group));
                     requiredEl.addEventListener('blur', () => checkFilledInput(group));
+                    // requiredEl.addEventListener('change', () => checkFilledInput(group));
+                    requiredEl.addEventListener('input', () => checkFilledInput(group));
                     observers.push(observer);
                 }
             });
@@ -90,6 +91,7 @@ export function initGroupObserve(observers) {
 }
 
 function checkFilledInput(group) {
+    // console.log(group);
     // console.log('INPUT CHECKING...');
     let requiredElements = [];
     let additionalGroupsFilled = undefined;

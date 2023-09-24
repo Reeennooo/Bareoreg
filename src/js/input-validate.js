@@ -58,22 +58,29 @@ export function checkValidate(element, rules) {
     }
 }
 
-export function assignInputRules(allRules) {
+export function assignInputRules(allRules, checkRightNow) {
     const AllElements = document.querySelectorAll('.input-custom input, .itc-select button');
     const rules = Object.keys(allRules);
 
     AllElements.forEach((element) => {
         if (rules.indexOf(element.name) !== -1) {
+            let currentElement;
             if (element.dataset.select === 'toggle') {
-                const select = element.closest('.itc-select');
+                currentElement = element.closest('.itc-select');
                 // const selectItems = select.querySelectorAll('.itc-select__option');
-                select.addEventListener('click', () => checkValidate(select, allRules[element.name]));
+                currentElement.addEventListener('click', () => checkValidate(currentElement, allRules[element.name]));
                 // selectItems.forEach((item) => item.addEventListener('click', () => checkValidate(select, allRules[element.name])));
-                const observer = new MutationObserver(() => checkValidate(select, allRules[element.name]));
+                const observer = new MutationObserver(() => checkValidate(currentElement, allRules[element.name]));
                 observer.observe(element, { attributes: true, attributeFilter: ['value'] });
             } else {
-                element.addEventListener('input', () => checkValidate(element, allRules[element.name]));
-                element.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
+                currentElement = element;
+                currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
+                currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
+                // element.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
+            }
+
+            if (checkRightNow) {
+                checkValidate(currentElement, allRules[element.name]);
             }
         }
     });
