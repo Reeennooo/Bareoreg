@@ -1,11 +1,14 @@
 import AirDatepicker from 'air-datepicker';
+import tippy from 'tippy.js';
 import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
 import { setRadioHandler } from '../../components/group-radio-buttons/group-radio-buttons';
 import { OPERATIONS } from '../../js/operation-data';
 import { OPERATIONS_RULES } from '../../js/operation-data';
-import tippy from 'tippy.js';
+import { initGroup } from '../../components/group/group';
+import { createButton } from '../../components/btn/btn';
+import { Complication } from '../complications/complication';
 
 const VALIDATION_RULES = {
     // key - это name инпута
@@ -241,6 +244,7 @@ const CONNECTED_RULES = {
             connectedID: '3',
         },
     ],
+    // Осложнения
 };
 
 const selects = {
@@ -369,110 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     selectOperationObserver.observe(selectKindOperation._elToggle, { attributeFilter: ['value'] });
 
-    function setConnectionsForElements(element, rules) {
-        let connectedKey = '';
-
-        if (element.dataset.hasConnection) {
-            connectedKey = element.dataset.hasConnection;
-            putObservation(element);
-        }
-
-        function putObservation(element) {
-            if (element.closest('.group-radio-buttons')) {
-                const monitoringElement = element.closest('.group-radio-buttons');
-                const elementObserver = new MutationObserver((mutations) => {
-                    console.log(connectedKey);
-                    let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                    const rulesItem = CONNECTED_RULES[connectedKey].find((el) => el.value === mutations[0].target.dataset.value);
-                    if (rulesItem) {
-                        if (rulesItem.connectedID) {
-                            connectedElements.forEach((connectedEL) => {
-                                // console.log(connectedEL);
-                                // console.log(connectedEL.dataset.id);
-                                // console.log(rulesItem);
-                                if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
-                                    connectedEL.classList.add('is-active');
-                                } else {
-                                    connectedEL.classList.remove('is-active');
-                                }
-                            });
-                        } else {
-                            connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
-                        }
-
-                        // connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
-                        if (rulesItem.rules) {
-                            assignInputRules(rulesItem.rules, true);
-                        }
-                    } else {
-                        connectedElements.forEach((connectedEL) => {
-                            if (connectedEL.classList.contains('is-active')) {
-                                connectedEL.classList.remove('is-active');
-                            }
-                        });
-                    }
-                });
-                elementObserver.observe(monitoringElement, { attributeFilter: ['data-value'] });
-                return;
-            }
-            if (element.closest('.itc-select')) {
-                const monitoringElement = element.querySelector('button');
-                const elementObserver = new MutationObserver((mutations) => {
-                    let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                    const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
-                        if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
-                            return item;
-                        }
-                    });
-                    if (rulesItem) {
-                        if (rulesItem.connectedID) {
-                            connectedElements.forEach((connectedEL) => {
-                                console.log(connectedEL);
-                                console.log(connectedEL.dataset.id);
-                                console.log(rulesItem);
-                                if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
-                                    connectedEL.classList.add('is-active');
-                                } else {
-                                    connectedEL.classList.remove('is-active');
-                                }
-                            });
-                        } else {
-                            connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
-                        }
-                        if (rulesItem.rules) {
-                            assignInputRules(rulesItem.rules, true);
-                        }
-                    } else {
-                        connectedElements.forEach((connectedEL) => {
-                            if (connectedEL.classList.contains('is-active')) {
-                                connectedEL.classList.remove('is-active');
-                            }
-                        });
-                    }
-                });
-                elementObserver.observe(monitoringElement, { attributeFilter: ['value'] });
-                return;
-            }
-            if (element.closest('.checkbox')) {
-                const monitoringElement = element;
-                let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                function elementObserver() {
-                    if (monitoringElement.checked) {
-                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
-                    } else {
-                        connectedElements.forEach((connectedEL) => {
-                            if (connectedEL.classList.contains('is-active')) {
-                                connectedEL.classList.remove('is-active');
-                            }
-                        });
-                    }
-                }
-                monitoringElement.addEventListener('change', elementObserver);
-                return;
-            }
-        }
-    }
-
     const operationForm = document.querySelector(`[data-group-name="operation"]`);
     const optionFormInner = operationForm.querySelector('.group__inner');
     const operationNameElement = operationForm?.querySelector('.group__add-info');
@@ -516,7 +416,244 @@ document.addEventListener('DOMContentLoaded', () => {
         initObservers = [];
     }
 
-    function createSingleField(item) {
+    // Осложнения
+    const addComplicationBtn = document.querySelector('.add-complication');
+    const buttonsBlock = document.querySelector('.form__wrapper-btns');
+
+    function setComplication() {
+        let count = 0;
+        return function () {
+            const complication = new Complication({ number: ++count, addClass: 'group--parent' });
+            // Добавляем правила к общим правилам.
+            complication.connectionRules.forEach((item) => {
+                CONNECTED_RULES[item.name] = item.rules;
+            });
+            buttonsBlock.before(complication.el);
+            assignInputRules(complication.fieldsRules);
+            initGroupObserve(initObservers);
+            initObservers = [];
+        };
+    }
+
+    function debounce(f, ms) {
+        let isCooldown = false;
+
+        return function () {
+            if (isCooldown) return;
+
+            f.apply(this, arguments);
+
+            isCooldown = true;
+
+            setTimeout(() => (isCooldown = false), ms);
+        };
+    }
+
+    let setComplicationDebounce = debounce(setComplication(), 1000);
+    addComplicationBtn.addEventListener('click', setComplicationDebounce);
+});
+
+function setConnectionsForElements(element, rules) {
+    let connectedKey = '';
+
+    if (element.dataset.hasConnection) {
+        connectedKey = element.dataset.hasConnection;
+        putObservation(element);
+    }
+
+    function putObservation(element) {
+        if (element.closest('.group-radio-buttons')) {
+            const monitoringElement = element.closest('.group-radio-buttons');
+            const elementObserver = new MutationObserver((mutations) => {
+                console.log(connectedKey);
+                let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                const rulesItem = CONNECTED_RULES[connectedKey].find((el) => el.value === mutations[0].target.dataset.value);
+                if (rulesItem) {
+                    if (rulesItem.connectedID) {
+                        connectedElements.forEach((connectedEL) => {
+                            // console.log(connectedEL);
+                            // console.log(connectedEL.dataset.id);
+                            // console.log(rulesItem);
+                            if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
+                                connectedEL.classList.add('is-active');
+                            } else {
+                                connectedEL.classList.remove('is-active');
+                            }
+                        });
+                    } else {
+                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    }
+
+                    // connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    if (rulesItem.rules) {
+                        assignInputRules(rulesItem.rules, true);
+                    }
+                } else {
+                    connectedElements.forEach((connectedEL) => {
+                        if (connectedEL.classList.contains('is-active')) {
+                            connectedEL.classList.remove('is-active');
+                        }
+                    });
+                }
+            });
+            elementObserver.observe(monitoringElement, { attributeFilter: ['data-value'] });
+            return;
+        }
+        if (element.closest('.itc-select')) {
+            const monitoringElement = element.querySelector('button');
+            const elementObserver = new MutationObserver((mutations) => {
+                let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
+                    if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
+                        return item;
+                    }
+                });
+                if (rulesItem) {
+                    if (rulesItem.connectedID) {
+                        connectedElements.forEach((connectedEL) => {
+                            console.log(connectedEL);
+                            console.log(connectedEL.dataset.id);
+                            console.log(rulesItem);
+                            if (rulesItem.changeSelect) {
+                                const newSelect = document.querySelector(`#${rulesItem.changeSelect.id}`);
+                                if (newSelect) {
+                                    const selectOptions = newSelect.querySelector('.itc-select__options');
+                                    selectOptions.innerHTML = '';
+                                    const selectBtn = newSelect.querySelector('button');
+                                    selectBtn.querySelector('.itc-select__text-selected').innerHTML = '';
+                                    selectBtn.dataset.index = '-1';
+                                    const newOptions = rulesItem.changeSelect.options.map((option, index) => {
+                                        return `<li class="itc-select__option" data-select="option" data-value='${option[0]}' data-index='${index}'>
+                                        ${option[1]}</li>`;
+                                    });
+                                    selectOptions.insertAdjacentHTML('afterbegin', newOptions.join(''));
+                                }
+                            }
+                            if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
+                                connectedEL.classList.add('is-active');
+                            } else {
+                                connectedEL.classList.remove('is-active');
+                            }
+                        });
+                    } else {
+                        connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                    }
+                    if (rulesItem.rules) {
+                        assignInputRules(rulesItem.rules, true);
+                    }
+                } else {
+                    connectedElements.forEach((connectedEL) => {
+                        if (connectedEL.classList.contains('is-active')) {
+                            connectedEL.classList.remove('is-active');
+                        }
+                    });
+                }
+            });
+            elementObserver.observe(monitoringElement, { attributeFilter: ['value'] });
+            return;
+        }
+        if (element.closest('.checkbox')) {
+            const monitoringElement = element;
+            let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+            function elementObserver() {
+                if (monitoringElement.checked) {
+                    connectedElements.forEach((connectedEL) => connectedEL.classList.add('is-active'));
+                } else {
+                    connectedElements.forEach((connectedEL) => {
+                        if (connectedEL.classList.contains('is-active')) {
+                            connectedEL.classList.remove('is-active');
+                        }
+                    });
+                }
+            }
+            monitoringElement.addEventListener('change', elementObserver);
+            return;
+        }
+    }
+}
+
+export function createGroup(data) {
+    const group = document.createElement('div');
+    group.classList.add('group', 'is-active', 'form-creating-operation__complication');
+    group.innerHTML = `
+        <div class='group__header'>
+            <div class='group__text'>
+                <div class='group__title'>
+                <div class='group__completed'>
+                    <svg class='svg'>
+                        <use href='img/sprite.svg#check'></use>
+                    </svg>
+                    </div>
+                    <span>${data.title}${data.number}</span>
+                    <span class='group__add-info'></span>
+                </div>
+            </div>
+            <div class='group__toggle'>
+                <svg class='svg'>
+                    <use href='img/sprite.svg#caret-up'></use>
+                </svg>
+            </div>
+        </div>
+        <div class='group__inner-wrapper'>
+            <div class='group__inner'>
+                <div class='group__form'></div>
+            </div>
+        </div>`;
+
+    const form = group.querySelector('.group__form');
+
+    if (data.addClass) {
+        group.classList.add(data.addClass);
+    }
+
+    let fields;
+
+    if (data.fields) {
+        fields = data.fields.map((item) => {
+            switch (item.type) {
+                case 'RADIO-GROUP':
+                    return createRadioGroup(item.data);
+                case 'SELECT':
+                    return createSelect(item.data);
+                case 'INPUT':
+                    return createInput(item.data);
+                case 'SUBTITLE':
+                    return createSubtitle(item.data);
+                case 'CHECKBOX':
+                    return createCheckbox(item.data);
+                case 'TEXTAREA':
+                    return createTextarea(item.data);
+                case 'BUTTON':
+                    return createButton(item.data);
+            }
+        });
+    }
+    fields.forEach((field) => form.append(field));
+    initGroup([group]);
+    return group;
+}
+
+function createSingleField(item) {
+    switch (item.type) {
+        case 'RADIO-GROUP':
+            return createRadioGroup(item.data);
+        case 'SELECT':
+            return createSelect(item.data);
+        case 'INPUT':
+            return createInput(item.data);
+        case 'SUBTITLE':
+            return createSubtitle(item.data);
+        case 'CHECKBOX':
+            return createCheckbox(item.data);
+        case 'TEXTAREA':
+            return createTextarea(item.data);
+    }
+}
+
+export function createAditionalGroup(groupData) {
+    const group = document.createElement('div');
+    // console.log(groupData);
+    const innerElements = groupData.content.map((item) => {
         switch (item.type) {
             case 'RADIO-GROUP':
                 return createRadioGroup(item.data);
@@ -531,38 +668,18 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'TEXTAREA':
                 return createTextarea(item.data);
         }
+    });
+    group.classList.add('group', 'group--additional');
+    if (groupData.active) {
+        group.classList.add('is-active');
     }
-
-    function createAditionalGroup(groupData) {
-        const group = document.createElement('div');
-        // console.log(groupData);
-        const innerElements = groupData.content.map((item) => {
-            switch (item.type) {
-                case 'RADIO-GROUP':
-                    return createRadioGroup(item.data);
-                case 'SELECT':
-                    return createSelect(item.data);
-                case 'INPUT':
-                    return createInput(item.data);
-                case 'SUBTITLE':
-                    return createSubtitle(item.data);
-                case 'CHECKBOX':
-                    return createCheckbox(item.data);
-                case 'TEXTAREA':
-                    return createTextarea(item.data);
-            }
-        });
-        group.classList.add('group', 'group--additional');
-        if (groupData.active) {
-            group.classList.add('is-active');
+    if (groupData.number) {
+        group.setAttribute('data-number', groupData.number);
+        if (groupData.number === 1) {
+            group.classList.add('border-none');
         }
-        if (groupData.number) {
-            group.setAttribute('data-number', groupData.number);
-            if (groupData.number === 1) {
-                group.classList.add('border-none');
-            }
-        }
-        group.innerHTML = `
+    }
+    group.innerHTML = `
         <div class='group__header'>
             <div class='group__title'>
                 <div class='group__completed'>
@@ -571,104 +688,115 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                 </div>
                 <span>${groupData.name}</span>
-            </div>
+            </div>  
         </div>
         <div class='group__inner'>
             <div class='group__additional-form'>
                 
             </div>
         </div>`;
-        // console.log(innerElements);
-        const groupAddForm = group.querySelector('.group__additional-form');
-        innerElements.map((item) => {
-            groupAddForm.append(item);
-        });
 
-        // Появление следующего этапа операции
-        const observer = new MutationObserver((mutations) => {
-            for (const mutation of mutations) {
-                if (mutation.target.classList.contains('is-filled') && mutation.target.classList.contains('is-active')) {
-                    // console.log('Терперь группа is-flled:');
-                    // console.log(mutation.target);
-                    const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
-                    nextStep?.classList.add('is-active');
-                }
-            }
-        });
-        observer.observe(group, { attributeFilter: ['class'] });
-
-        return group;
+    if (groupData.deleteButton) {
+        group.querySelector('.group__header').insertAdjacentHTML(
+            'beforeend',
+            `<button class='group__delete btn btn--text' type='button'>
+                <svg>
+                    <use href='img/sprite.svg#trash'></use>
+                </svg>
+            <span>Удалить</span>
+            </button>`
+        );
     }
+    // console.log(innerElements);
+    const groupAddForm = group.querySelector('.group__additional-form');
+    innerElements.map((item) => {
+        groupAddForm.append(item);
+    });
 
-    function createInput(data) {
-        const input = document.createElement('div');
-        input.classList.add('input-custom');
-        input.innerHTML = `
+    // Появление следующего этапа операции
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.target.classList.contains('is-filled') && mutation.target.classList.contains('is-active')) {
+                // console.log('Терперь группа is-flled:');
+                // console.log(mutation.target);
+                const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
+                nextStep?.classList.add('is-active');
+            }
+        }
+    });
+    observer.observe(group, { attributeFilter: ['class'] });
+
+    return group;
+}
+
+function createInput(data) {
+    const input = document.createElement('div');
+    input.classList.add('input-custom');
+    input.innerHTML = `
         <div class='input-custom__input'>
             <input type='${data.type}' name='${data.name}' placeholder='' id='${data.name}' value='${data.value ? data.value : ''}'>
             <label for='${data.name}'>${data.placeholder}</label>
         </div>
         <div class='input-custom__message'>${data.message}</div>`;
 
-        if (data.required) {
-            input?.querySelector('input')?.setAttribute('data-required', '');
-        }
-
-        if (data.mod === 'calendar') {
-            new AirDatepicker(input.querySelector('input'), {});
-        }
-
-        if (data.addClass) {
-            input?.querySelector('input').classList.add(data.addClass);
-        }
-        console.log(data);
-        if (data.connected) {
-            input.setAttribute('data-connected', data.connected);
-            checkConnectionValue(input, CONNECTED_RULES);
-        }
-
-        if (data.connectedID) {
-            input.setAttribute('data-id', data.connectedID);
-            // `[${data.connectedId.join(',')}]`
-        }
-
-        if (data.info) {
-            input.classList.add('input-custom--info');
-            const info = document.createElement('div');
-            info.classList.add('info', 'input-custom__info');
-            info.setAttribute('id', data.info.id);
-            info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
-            input.querySelector('.input-custom__input').append(info);
-            tippy(info, {
-                content: data.info.content,
-                theme: data.info.theme,
-            });
-        }
-
-        return input;
+    if (data.required) {
+        input?.querySelector('input')?.setAttribute('data-required', '');
     }
 
-    function createRadioGroup(data) {
-        const radioGroup = document.createElement('div');
-        radioGroup.classList.add('group-radio-buttons');
+    if (data.mod === 'calendar') {
+        new AirDatepicker(input.querySelector('input'), {});
+    }
 
-        if (data.required) {
-            radioGroup.setAttribute('data-required', '');
-        }
+    if (data.addClass) {
+        input?.querySelector('input').classList.add(data.addClass);
+    }
+    if (data.connected) {
+        input.setAttribute('data-connected', data.connected);
+        checkConnectionValue(input, CONNECTED_RULES);
+    }
 
-        const options = [];
-        data.options.forEach((el) => {
-            const option = document.createElement('label');
-            option.classList.add('radio');
-            option.innerHTML = `
+    if (data.connectedID) {
+        input.setAttribute('data-id', data.connectedID);
+        // `[${data.connectedId.join(',')}]`
+    }
+
+    if (data.info) {
+        input.classList.add('input-custom--info');
+        const info = document.createElement('div');
+        info.classList.add('info', 'input-custom__info');
+        info.setAttribute('id', data.info.id);
+        info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
+        input.querySelector('.input-custom__input').append(info);
+        tippy(info, {
+            content: data.info.content,
+            theme: data.info.theme,
+        });
+    }
+
+    return input;
+}
+
+function createRadioGroup(data) {
+    const radioGroup = document.createElement('div');
+    radioGroup.classList.add('group-radio-buttons');
+
+    if (data.required) {
+        radioGroup.setAttribute('data-required', '');
+    }
+
+    const options = [];
+    data.options.forEach((el) => {
+        const option = document.createElement('label');
+        option.classList.add('radio');
+        option.innerHTML = `
             <input type='radio' name='${data.name}' value='${el[0] || ''}'>
             <span class='radio__fake'></span>
             <span class='radio__label'>${el[1]}</span>
             `;
-            options.push(option);
-        });
+        options.push(option);
+    });
 
-        radioGroup.innerHTML = `
+    radioGroup.innerHTML = `
         <div class='group-radio-buttons__title'>
             <span>${data.title}</span>
         </div>
@@ -676,91 +804,102 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         `;
 
-        const groupOptions = radioGroup.querySelector('.group-radio-buttons__options');
-        options.map((item) => {
-            groupOptions.append(item);
+    const groupOptions = radioGroup.querySelector('.group-radio-buttons__options');
+    options.map((item) => {
+        groupOptions.append(item);
+    });
+
+    if (data.info) {
+        const info = document.createElement('div');
+        info.classList.add('info');
+        info.setAttribute('id', data.info.id);
+        info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
+        radioGroup.querySelector('.group-radio-buttons__title').append(info);
+        tippy(info, {
+            content: data.info.content,
+            theme: data.info.theme,
         });
-
-        if (data.info) {
-            const info = document.createElement('div');
-            info.classList.add('info');
-            info.setAttribute('id', data.info.id);
-            info.innerHTML = `<svg><use href='img/sprite.svg#info'></use></svg>`;
-            radioGroup.querySelector('.group-radio-buttons__title').append(info);
-            tippy(info, {
-                content: data.info.content,
-                theme: data.info.theme,
-            });
-        }
-
-        if (data.connected) {
-            radioGroup.setAttribute('data-connected', data.connected);
-            checkConnectionValue(radioGroup, CONNECTED_RULES);
-        }
-        if (data.connectedID) {
-            radioGroup.setAttribute('data-id', data.connectedID);
-        }
-        if (data.hasConnection) {
-            radioGroup.setAttribute('data-has-connection', data.hasConnection);
-            setConnectionsForElements(radioGroup);
-        }
-
-        setRadioHandler(radioGroup);
-
-        return radioGroup;
     }
 
-    function createSelect(data) {
-        const select = document.createElement('div');
-        select.setAttribute('id', data.name);
-        if (data.required) {
-            select.setAttribute('data-required', '');
-        }
-        initSelect(select, data);
-        if (data.hasConnection) {
-            select.setAttribute('data-has-connection', data.hasConnection);
-            setConnectionsForElements(select);
-        }
-
-        if (data.connected) {
-            select.setAttribute('data-connected', data.connected);
-            checkConnectionValue(select, CONNECTED_RULES);
-        }
-        if (data.connectedID) {
-            select.setAttribute('data-id', data.connectedID);
-        }
-        return select;
+    if (data.connected) {
+        radioGroup.setAttribute('data-connected', data.connected);
+        checkConnectionValue(radioGroup, CONNECTED_RULES);
+    }
+    if (data.connectedID) {
+        radioGroup.setAttribute('data-id', data.connectedID);
+    }
+    if (data.hasConnection) {
+        radioGroup.setAttribute('data-has-connection', data.hasConnection);
+        setConnectionsForElements(radioGroup);
     }
 
-    function createTextarea(data) {
-        const textarea = document.createElement('div');
-        textarea.classList.add('textarea');
-        textarea.innerHTML = `<textarea name='${data.name}' id='${data.id}' placeholder=''></textarea><label for='${data.id}'>${data.placeholder}</label>`;
+    setRadioHandler(radioGroup);
 
-        if (data.addClass) {
-            textarea.classList.add(data.addClass);
-        }
+    return radioGroup;
+}
 
-        return textarea;
+function createSelect(data) {
+    const select = document.createElement('div');
+    select.setAttribute('id', data.name);
+    if (data.required) {
+        select.setAttribute('data-required', '');
     }
 
-    function createSubtitle(data) {
-        const subtitle = document.createElement('div');
-        subtitle.classList.add('group__title-subgroup');
-        subtitle.innerHTML = `<span>${data.subtitle}</span>`;
-        return subtitle;
+    initSelect(select, data);
+
+    if (data.hasConnection) {
+        select.setAttribute('data-has-connection', data.hasConnection);
+        setConnectionsForElements(select);
     }
 
-    function createCheckbox(data) {
-        const checkbox = document.createElement('label');
-        checkbox.classList.add('checkbox');
-        checkbox.innerHTML = `<input type='checkbox' name='${data.name}' value='${data.value}'>
+    if (data.connected) {
+        select.setAttribute('data-connected', data.connected);
+        checkConnectionValue(select, CONNECTED_RULES);
+    }
+    if (data.connectedID) {
+        select.setAttribute('data-id', data.connectedID);
+    }
+    return select;
+}
+
+function createTextarea(data) {
+    const textarea = document.createElement('div');
+    textarea.classList.add('textarea');
+    textarea.innerHTML = `<textarea name='${data.name}' id='${data.name}' placeholder=''></textarea><label for='${data.name}'>${data.placeholder}</label>`;
+
+    if (data.addClass) {
+        textarea.classList.add(data.addClass);
+    }
+
+    return textarea;
+}
+
+function createSubtitle(data) {
+    const subtitle = document.createElement('div');
+    subtitle.classList.add('group__title-subgroup');
+    subtitle.innerHTML = `<span>${data.subtitle}</span>`;
+    return subtitle;
+}
+
+function createCheckbox(data) {
+    const checkbox = document.createElement('label');
+    checkbox.classList.add('checkbox');
+    checkbox.innerHTML = `<input type='checkbox' name='${data.name}' value='${data.value}'>
         <span class='checkbox__fake'></span>
         <span class='checkbox__label'>${data.label}</span>`;
-        return checkbox;
-    }
+    return checkbox;
+}
 
-    function initSelect(select, data) {
+function initSelect(select, data, variable) {
+    if (variable) {
+        variable = new ItcCustomSelect(select, {
+            name: data.name,
+            placeholder: data.placeholder,
+            options: data.options,
+            multiple: data.multiple,
+            targetValue: data.targetValue,
+        });
+    } else {
         new ItcCustomSelect(select, {
             name: data.name,
             placeholder: data.placeholder,
@@ -769,44 +908,44 @@ document.addEventListener('DOMContentLoaded', () => {
             targetValue: data.targetValue,
         });
     }
+}
 
-    // проверка связи для созданных с помощью JS элементов.
-    function checkConnectionValue(element, connectedRules) {
-        // console.log(element);
-        const connectedKey = element.dataset.connected;
-        const connectionParent = document.querySelector(`[data-has-connection=${connectedKey}]`);
-        let monitoringElement;
+// проверка связи для созданных с помощью JS элементов.
+function checkConnectionValue(element, connectedRules) {
+    // console.log(element);
+    const connectedKey = element.dataset.connected;
+    const connectionParent = document.querySelector(`[data-has-connection=${connectedKey}]`);
+    let monitoringElement;
 
-        if (!connectionParent) return;
+    if (!connectionParent) return;
 
-        function activeToggler(element, state) {
-            if (state) {
-                element.classList.add('is-active');
-            } else if (element.classList.contains('is-active')) {
-                element.classList.remove('is-active');
-            }
-        }
-
-        if (connectionParent.closest('.group-radio-buttons')) {
-            monitoringElement = connectionParent.closest('.group-radio-buttons');
-            activeToggler(
-                element,
-                connectedRules[connectedKey].find((item) => item.value === monitoringElement.dataset.value)
-            );
-            return;
-        }
-        if (connectionParent.closest('.itc-select')) {
-            monitoringElement = connectionParent.querySelector('button');
-            activeToggler(
-                element,
-                connectedRules[connectedKey].find((item) => item.value === monitoringElement.value)
-            );
-            return;
-        }
-        if (connectionParent.closest('.checkbox')) {
-            monitoringElement = connectionParent.closest('.group-radio-buttons');
-            activeToggler(element, monitoringElement.checked);
-            return;
+    function activeToggler(element, state) {
+        if (state) {
+            element.classList.add('is-active');
+        } else if (element.classList.contains('is-active')) {
+            element.classList.remove('is-active');
         }
     }
-});
+
+    if (connectionParent.closest('.group-radio-buttons')) {
+        monitoringElement = connectionParent.closest('.group-radio-buttons');
+        activeToggler(
+            element,
+            connectedRules[connectedKey].find((item) => item.value === monitoringElement.dataset.value)
+        );
+        return;
+    }
+    if (connectionParent.closest('.itc-select')) {
+        monitoringElement = connectionParent.querySelector('button');
+        activeToggler(
+            element,
+            connectedRules[connectedKey].find((item) => item.value === monitoringElement.value)
+        );
+        return;
+    }
+    if (connectionParent.closest('.checkbox')) {
+        monitoringElement = connectionParent.closest('.group-radio-buttons');
+        activeToggler(element, monitoringElement.checked);
+        return;
+    }
+}

@@ -40,6 +40,13 @@
     opacity: 0.5;
   }
 
+  &[data-connected] {
+    display: none;
+  }
+  &[data-connected].is-active {
+    display: inline-flex;
+  }
+
   &--ghost {
     background-color: transparent;
     border-color: $grey-light;

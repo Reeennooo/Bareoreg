@@ -3,13 +3,15 @@ function ucFirst(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-// console.log('Я выполнился');
-
 const observers = [];
-export function initGroupObserve(observers) {
-    if (observers.length > 0) {
-        observers.forEach((observer) => observer.disconect());
+export function initGroupObserve() {
+    // console.log(observers);
+    if (observers && observers.length > 0) {
+        observers.forEach((observer) => {
+            observer.disconnect();
+        });
     }
+    observers.length = 0;
 
     const groups = document.querySelectorAll('.group');
     if (groups) {
@@ -42,6 +44,9 @@ export function initGroupObserve(observers) {
                 if (requiredEl.hasAttribute('data-connected')) {
                     let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
+                    if (!observer) {
+                        console.log(observer);
+                    }
                     observers.push(observer);
                 }
                 if (requiredEl.classList.contains('itc-select')) {
@@ -52,12 +57,14 @@ export function initGroupObserve(observers) {
                 } else if (requiredEl.classList.contains('group-radio-buttons')) {
                     let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
+                    if (!observer) {
+                        console.log(observer);
+                    }
                     observers.push(observer);
                 } else {
                     requiredEl.addEventListener('blur', () => checkFilledInput(group));
                     // requiredEl.addEventListener('change', () => checkFilledInput(group));
                     requiredEl.addEventListener('input', () => checkFilledInput(group));
-                    observers.push(observer);
                 }
             });
 
@@ -72,6 +79,9 @@ export function initGroupObserve(observers) {
                 checkFilledForm(mutationRecords[0].target);
             });
             observer.observe(group, { attributeFilter: ['class'] });
+            if (!observer) {
+                console.log(observer);
+            }
             observers.push(observer);
 
             // несколько group__form
@@ -83,6 +93,9 @@ export function initGroupObserve(observers) {
                         checkFilledInput(group);
                     });
                     groupFormObserver.observe(groupForm, { attributeFilter: ['class'] });
+                    if (!groupFormObserver) {
+                        console.log(observer);
+                    }
                     observers.push(groupFormObserver);
                 });
             }

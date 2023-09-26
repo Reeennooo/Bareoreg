@@ -1,6 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let allGroups = document.querySelectorAll('.group');
-    allGroups.forEach((group) => {
+document.addEventListener('DOMContentLoaded', () => initGroup());
+
+export function initGroup(groups) {
+    const initGroups = groups ? groups : document.querySelectorAll('.group');
+
+    if (!initGroups) return;
+
+    initGroups.forEach((group) => {
         if (group.classList.contains('group--additional')) return;
 
         const toggleBtn = group.querySelector('.group__toggle');
@@ -17,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             wrapper.style.height = 'auto';
         }, 100);
     });
-});
+}
 
 function toggleGroup(group) {
     let wrapper = group.querySelector('.group__inner-wrapper');

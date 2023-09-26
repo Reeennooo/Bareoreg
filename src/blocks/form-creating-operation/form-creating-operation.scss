@@ -52,24 +52,13 @@
     grid-column-start: 1;
     grid-column-end: 3;
   }
-
-  // .textarea {
-  //   grid-column-start: 1;
-  //   grid-column-end: 3;
-  //   textarea {
-  //     height: 56px;
-  //   }
-
-  //   label {
-  //     top: 50%;
-  //   }
-  // }
   .group--additional.border-none {
     border-top: none;
   }
 }
 
-.form-creating-operation__complications {
+.form-creating-operation__complications,
+.form-creating-operation__complication {
   .group__form,
   .group__additional-form {
     display: grid;
@@ -80,6 +69,13 @@
 
   .group--additional:first-child {
     border-top: 0;
+  }
+}
+
+.form-creating-operation__complication {
+  .btn {
+    justify-self: self-start;
+    align-self: center;
   }
 }
 
