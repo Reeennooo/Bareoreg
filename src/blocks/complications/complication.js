@@ -104,12 +104,25 @@ export class Complication {
                 },
             },
             {
+                type: 'TEXTAREA',
+                data: {
+                    name: `note_${this._id}`,
+                    type: 'text',
+                    placeholder: 'Примечание',
+                    required: false,
+                    addClass: 'textarea--small',
+                    connected: `degree-complication${data.number}`,
+                    connectedID: 'note',
+                },
+            },
+            {
                 type: 'BUTTON',
                 data: {
                     text: 'Добавить повторное вмешательство',
                     icon: 'plus-icon',
                     mod: 'btn--text',
                     connected: `degree-complication${data.number}`,
+                    connectedID: 'intervention',
                     addClass: 'add-intervention',
                 },
             },
@@ -259,16 +272,28 @@ export class Complication {
                 name: `degree-complication${data.number}`,
                 rules: [
                     {
+                        value: 0,
+                        connectedID: 'note',
+                    },
+                    {
+                        value: 1,
+                        connectedID: 'note',
+                    },
+                    {
                         value: 2,
+                        connectedID: 'intervention',
                     },
                     {
                         value: 3,
+                        connectedID: 'intervention',
                     },
                     {
                         value: 4,
+                        connectedID: 'intervention',
                     },
                     {
                         value: 5,
+                        connectedID: 'intervention',
                     },
                 ],
             },

@@ -12,6 +12,10 @@ export function createButton(data) {
         // checkConnectionValue(input, CONNECTED_RULES);
     }
 
+    if (data.connectedID) {
+        button.setAttribute('data-id', data.connectedID);
+    }
+
     if (data.addClass) {
         button.classList.add(data.addClass);
     }

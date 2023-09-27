@@ -1,6 +1,14 @@
 .textarea {
   position: relative;
 
+  &[data-connected] {
+    display: none;
+  }
+
+  &[data-connected].is-active {
+    display: block;
+  }
+
   &.textarea--small {
     textarea {
       height: 56px;

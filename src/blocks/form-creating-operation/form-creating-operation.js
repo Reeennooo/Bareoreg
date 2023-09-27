@@ -871,6 +871,14 @@ function createTextarea(data) {
         textarea.classList.add(data.addClass);
     }
 
+    if (data.connected) {
+        textarea.setAttribute('data-connected', data.connected);
+    }
+
+    if (data.connectedID) {
+        textarea.setAttribute('data-id', data.connectedID);
+    }
+
     return textarea;
 }
 
