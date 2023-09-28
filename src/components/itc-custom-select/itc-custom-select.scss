@@ -75,6 +75,31 @@
 .itc-select__text-selected {
   text-overflow: ellipsis;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.itc-select__additional {
+  display: none;
+  width: 16px;
+  height: 16px;
+  background-color: $violet;
+  border-radius: 50%;
+  text-align: center;
+  // txt
+  color: $white;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+.itc-select:has(.itc-select__option_selected) {
+  .itc-select__additional {
+    display: block;
+  }
 }
 
 .itc-select__toggle:hover {
@@ -216,4 +241,61 @@
 .itc-select__option:hover {
   color: $violet;
   cursor: pointer;
+}
+
+.itc-select {
+  min-width: 170px;
+  width: auto;
+  display: inline-block;
+
+  &--simple {
+    .itc-select__toggle {
+      // width: auto;
+      column-gap: 8px;
+      border-radius: 10px;
+      padding: 6px 16px;
+      padding-right: 8px;
+    }
+
+    // стрелочка
+    .itc-select__toggle::after {
+      width: 18px;
+      height: 18px;
+      transform: rotate(180deg);
+      content: url('../img/icons/arrow-small.svg');
+    }
+
+    .itc-select__placeholder {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+    }
+
+    // селект открыть
+    &.itc-select_show {
+      .itc-select__toggle {
+        border-color: $violet;
+
+        &:after {
+          transform: rotate(0);
+        }
+      }
+
+      .itc-select__placeholder {
+        color: $violet;
+        top: 0;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.4px;
+      }
+    }
+
+    .itc-select__text-selected {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+    }
+  }
 }

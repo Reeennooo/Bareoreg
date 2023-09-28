@@ -47,6 +47,15 @@
     display: inline-flex;
   }
 
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: $violet;
+    transition: 0.25s linear;
+    transition-property: color, stroke;
+  }
+
   &--ghost {
     background-color: transparent;
     border-color: $grey-light;
@@ -60,15 +69,6 @@
     padding: 0;
     white-space: nowrap;
     color: $violet;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      fill: none;
-      stroke: $violet;
-      transition: 0.25s linear;
-      transition-property: color, stroke;
-    }
 
     span {
       // font-size: 16px;

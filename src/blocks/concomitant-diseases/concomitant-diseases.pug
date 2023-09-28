@@ -1,0 +1,149 @@
+- 
+  const data = [
+  {
+      name: 'Гипертензия',
+      tabs: [
+        {
+          stage: 'start',
+          type: "exist"
+        },
+        {
+          stage: '3months',
+          type: 'no-changes'
+        },
+        {
+          stage: '6months',
+          type: 'decline'
+        },
+        {
+          stage:'12months',
+          type: "improvement"
+        },
+        {
+          stage: '24months',
+          type: "no"
+        }
+    ]
+    },
+    {
+      name: 'Сахарный диабет',
+      tabs: [
+        {
+          stage: 'start',
+          type: "exist"
+        },
+        {
+          stage: '3months',
+          type: 'decline'
+        },
+        {
+          stage: '6months',
+          type: 'no-changes'
+        },
+        {
+          stage:'12months',
+          type: "improvement"
+        },
+        {
+          stage: '24months',
+          type: "exist"
+        }
+    ]
+    },
+    {
+      name: 'ГЭРБ',
+      tabs: [
+        {
+          stage: 'start',
+          type: "exist"
+        },
+        {
+          stage: '3months',
+          type: "improvement"
+        },
+        {
+          stage: '6months',
+          type: "improvement"
+        },
+        {
+          stage:'12months',
+          type: "improvement"
+        },
+        {
+          stage: '24months',
+          type: "no"
+        }
+    ]
+    },
+    {
+      name: 'Дислипидемия',
+      tabs: [
+        {
+          stage: 'start',
+          type: "no"
+        },
+        {
+          stage: '3months',
+          type: "no"
+        },
+        {
+          stage: '6months',
+          type: "exist"
+        },
+        {
+          stage:'12months',
+          type: "improvement"
+        },
+        {
+          stage: '24months',
+          type: "no"
+        }
+    ]
+    },
+  ]
+
+.concomitant-diseases
+  +page-section({
+    title: 'Сопутсвующие заболевания',
+    buttons: [{txt: 'Добавить заболевание', icon: 'heartbeat', mode: 'text'}]
+  })
+    .concomitant-diseases__table
+      .concomitant-diseases__header
+        .concomitant-diseases__title Заболевания
+        .concomitant-diseases__title Исходно
+        .concomitant-diseases__title 3 мес.
+        .concomitant-diseases__title 6 мес.
+        .concomitant-diseases__title 12 мес.
+        .concomitant-diseases__title 24 мес.
+      .concomitant-diseases__content
+        each item in data
+          .concomitant-diseases__diseases
+            .concomitant-diseases__name=item.name
+            .concomitant-diseases__changes
+              each tab in item.tabs
+                case tab.type
+                  when "exist"
+                    .concomitant-diseases__tab(data-stage=`${tab.stage}` class='tab-exist')
+                      svg
+                        use(href='img/sprite.svg#check')
+                      span Есть
+                  when "no-changes"
+                    .concomitant-diseases__tab(data-stage=`${tab.stage}` class='tab-no-changes')
+                      svg
+                        use(href='img/sprite.svg#check')
+                      span Без изм.
+                  when "decline"
+                    .concomitant-diseases__tab(data-stage=`${tab.stage}` class='tab-decline')
+                      svg
+                        use(href='img/sprite.svg#arrowDown')
+                      span Ухуд.
+                  when "improvement"
+                    .concomitant-diseases__tab(data-stage=`${tab.stage}` class='tab-improvement')
+                      svg
+                        use(href='img/sprite.svg#arrowUp')
+                      span Улуч.
+                  when "no"
+                    .concomitant-diseases__tab(data-stage=`${tab.stage}` class='tab-no')
+                      svg
+                        use(href='img/sprite.svg#x')
+                      span Нет

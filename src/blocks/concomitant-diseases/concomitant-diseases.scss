@@ -1,0 +1,97 @@
+.concomitant-diseases {
+  &__table {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 138px repeat(5, 1fr);
+    // display: flex;
+    // justify-content: space-between;
+    column-gap: 12px;
+  }
+
+  &__title,
+  &__name {
+    padding: 8px 16px;
+    text-align: center;
+    // txt
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: $grey-light;
+  }
+
+  &__title:first-child,
+  &__name {
+    text-align: end;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  &__diseases {
+    display: grid;
+    grid-template-columns: 138px 1fr;
+    column-gap: 12px;
+  }
+
+  &__name {
+    color: $grey-dark;
+  }
+
+  &__changes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 12px;
+  }
+}
+
+.concomitant-diseases__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  // txt
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: $grey-dark;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: $grey-dark;
+    opacity: 0.4;
+  }
+  &.tab-exist {
+    background-color: $beige;
+  }
+
+  &.tab-no-changes {
+    background-color: $beige;
+  }
+
+  &.tab-decline {
+    background-color: $red;
+  }
+
+  &.tab-improvement {
+    background-color: $green-light;
+  }
+
+  &.tab-no {
+    background-color: $grey-200;
+  }
+}

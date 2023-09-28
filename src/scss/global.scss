@@ -39,6 +39,12 @@
   // overflow-x: hidden;
   position: relative;
 
+  &.patient-card {
+    main {
+      padding-bottom: 67px;
+    }
+  }
+
   &.sticky {
     overflow: unset;
   }

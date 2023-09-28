@@ -1,0 +1,58 @@
+mixin general-info
+  aside.general-info
+    span.general-info__name Павлов Павел Павлович
+    .general-info__tab
+      .general-info__tab-el
+        span.general-info__tab-title Возраст
+        span.general-info__tab-value 35 лет
+      .general-info__tab-decor
+      .general-info__tab-el
+        span.general-info__tab-title ИМТ
+        span.general-info__tab-value 40
+      .general-info__tab-decor
+      .general-info__tab-el
+        span.general-info__tab-title EWL
+        span.general-info__tab-value -78%
+    .general-info__weight
+      .general-info__weight-el
+        span.general-info__weight-title Исходный вес
+        span.general-info__weight-value
+          span 94
+          | кг
+      .general-info__weight-el
+        span.general-info__weight-title Идеальный вес
+        span.general-info__weight-value 
+          span 67.2
+          | кг
+      .general-info__weight-el
+        span.general-info__weight-title Снижение веса
+        span.general-info__weight-value
+          span 21
+          | кг 
+      .general-info__weight-el
+        span.general-info__weight-title Избыточный вес
+        span.general-info__weight-value
+          span 26
+          | кг 
+    .general-info__decor
+    .general-info__contacts
+      .general-info__contacts-title Контакты
+      .general-info__contacts-content
+        .general-info__contacts-el
+          svg
+            use(href=`img/sprite.svg#phone`)
+          span 8 (999) 123-45-67
+        .general-info__contacts-el
+          svg
+            use(href=`img/sprite.svg#house`)
+          span Example@mail.ru
+        .general-info__contacts-el
+          svg
+            use(href=`img/sprite.svg#email`)
+          span Рождественский б-р, 10/7 стр. 1, Москва
+    .general-info__note
+      .general-info__note-title Примечание:
+      .general-info__note-content Звонить после 9:00 до 18:00 Только в рабочие дни.
+    .general-info__actions
+      +btn({txt: 'Редактировать карту', mode: 'ghost', icon: 'pencil'})(type='button')
+      +btn({txt: 'Распечатать карту', mode: 'ghost', icon: 'printer'})(type='button')

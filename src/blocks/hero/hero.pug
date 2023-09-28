@@ -14,14 +14,18 @@
     title = 'Создание <br>наблюдения';
     img = 'img/hero/observation.png';
   }
+  else if(pageName === 'patient-card') {
+    title = 'Карта пациента';
+  }
 
 .hero
   .container
     .hero__inner
       +btn({txt: 'Вернуться назад', icon: 'carret-left', href: '#', mode: 'text'}).hero__back
       h1.hero__title!=title
-      .hero__image
-        img(src=img, alt="background-image")
+      if(pageName !== 'patient-card')
+        .hero__image
+          img(src=img, alt="background-image")
       if(pageName === 'creating-observation')
         .hero__passed-time
           span 3 месяца после операции

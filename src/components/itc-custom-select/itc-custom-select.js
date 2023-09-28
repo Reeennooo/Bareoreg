@@ -3,7 +3,7 @@ export class ItcCustomSelect {
     static EL_SHOW = 'itc-select_show';
     static EL_OPTION = 'itc-select__option';
     static EL_OPTION_SELECTED = 'itc-select__option_selected';
-    static TEXT_SELECTED_EL = 'itc-select__text-selected';
+    static TEXT_SELECTED_EL = 'itc-select__text-selected span';
     static DATA = '[data-select]';
     static DATA_TOGGLE = '[data-select="toggle"]';
 

@@ -236,25 +236,20 @@ function checkFilledForm(mutationElement) {
 }
 
 const FORM = document.querySelector('form');
+if (FORM) {
+    FORM.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-FORM.addEventListener('submit', (e) => {
-    e.preventDefault();
+        const formData = new FormData(FORM);
 
-    const formData = new FormData(FORM);
+        for (let key of formData.keys()) {
+            console.log(`${key}: ${formData.get(key)}`);
+        }
 
-    for (let key of formData.keys()) {
-        console.log(`${key}: ${formData.get(key)}`);
-    }
-
-    // console.log(data);
-    // console.log(data.getAll());
-});
-
-// const BUTTON = document.querySelector('.submit-button');
-// BUTTON.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     console.log('click');
-// });
+        // console.log(data);
+        // console.log(data.getAll());
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // Ограничения при вводе

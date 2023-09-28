@@ -1,0 +1,41 @@
+.anamnesis {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  &__item {
+    background-color: $background;
+    border-radius: 10px;
+    padding: 8px 16px;
+
+    &.long {
+      grid-column: 1 / 4;
+    }
+  }
+
+  &__item-title {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: $grey-dark;
+  }
+
+  &__item-text {
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: $grey;
+  }
+
+  &__item-list {
+    color: $grey;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    padding-left: 30px;
+  }
+}

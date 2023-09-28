@@ -1,0 +1,32 @@
+.page-section {
+  padding: 32px;
+  background-color: $white;
+  border-radius: 20px;
+
+  &--additional {
+    padding: 0;
+    background-color: transparent;
+    border: initial;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 44px;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    color: $black;
+  }
+
+  &__actions {
+    display: flex;
+    column-gap: 16px;
+  }
+}

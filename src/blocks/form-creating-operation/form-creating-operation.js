@@ -273,6 +273,10 @@ let selectTypeOperation;
 let selectKindOperation;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // отключаю выполнение скрипта
+    console.log(window.location);
+    if (!window.location.pathname.includes('creating-operation')) return;
+
     assignInputRules(VALIDATION_RULES);
     initSelects(selects);
 

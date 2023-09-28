@@ -46,6 +46,7 @@ mixin itc-custom-select(data)
   .itc-select(
     id=data.id 
     data-multiple=data.multiple ? data.multiple : false
+    class=`${data.mod ? `itc-select--${data.mod}` : ''}`
     )&attributes(attributes)
     input(type="text" name=data.name value=data.selectedValue ? data.selectedValue : '')
     button(
@@ -54,7 +55,10 @@ mixin itc-custom-select(data)
       value=data.selectedValue ? data.selectedValue : ''  
       data-index=data.selectedIndex ? data.selectedIndex : "-1"
       data-select="toggle").itc-select__toggle
-      span.itc-select__text-selected=data.selectedTxt
+      .itc-select__text-selected
+        span=data.selectedTxt
+        if(data.mod === 'simple')
+          .itc-select__additional 6
     .itc-select__placeholder=data.placeholder
     if(data.options)
       .itc-select__dropdown

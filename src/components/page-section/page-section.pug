@@ -1,0 +1,23 @@
+mixin page-section(data)
+  if(data.type === 'additional')
+    .page-section.page-section--additional
+    .page-section__header
+      .page-section__title=data.title
+      .page-section__actions
+        if(data.buttons)
+          each button in data.buttons
+            +btn({txt: button.txt, icon: button.icon, mode: button.mode})
+    .page-section__content
+      if block
+        block
+  else
+    .page-section
+      .page-section__header
+        .page-section__title=data.title
+        .page-section__actions
+          if(data.buttons)
+            each button in data.buttons
+              +btn({txt: button.txt, icon: button.icon, mode: button.mode})
+      .page-section__content
+        if block
+          block

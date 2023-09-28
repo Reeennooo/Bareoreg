@@ -1,0 +1,61 @@
+-
+  const anamnesisData = [
+    {
+      title: 'Курение',
+      content: {
+        text: 'Редко'
+      }
+    },
+    {
+      title: 'Жировой фартук',
+      content: {
+        text: 'Значительная складка'
+      }
+    },
+    {
+      title: 'Операции в анамнезе',
+      content: {
+        list: ['Лапараскопия', 'Лапаратомия']
+      }
+    },
+    {
+      title: 'Виды операций в анамнезе',
+      content: {
+        list: ['КС', 'Гистерэктомия']
+      }
+    },
+    {
+      title: 'Попытки снижения веса',
+      content: {
+        list: ['Диета', 'Препараты']
+      }
+    },
+    {
+      title: 'Регулярный прием препаратов',
+      content: {
+        text: 'От давления, от СД'
+      }
+    },
+    {
+      title: 'Примечание',
+      content: {
+        text: 'Сладкоежка, отказ от регулярного приема витаминов.'
+      },
+      mod: 'long'
+    },
+  ]
+.anamnesis
+  +page-section({
+    title: 'Анамнез',
+    buttons: [{txt: 'Добавить заболевание', icon: 'heartbaet', mode: 'text'}]
+  })
+    .anamnesis__wrapper
+      each item in anamnesisData
+        .anamnesis__item(class=item.mod)
+          .anamnesis__item-title=item.title
+          if(item.content.text)
+            span.anamnesis__item-text=item.content.text
+          if(item.content.list)
+            ul.anamnesis__item-list
+              each el in item.content.list
+                li=el
