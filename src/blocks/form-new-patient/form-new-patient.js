@@ -3,6 +3,15 @@ import { inputValidate } from '../../js/input-validate';
 import IMask from 'imask/esm/index';
 import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import { assignInputRules } from '../../js/input-validate';
+
+const selects = {
+    'main-data': ['patient-status', 'who-directed'],
+    disease: ['disease1', 'disease2', 'disease3', 'disease4', 'disease5', 'disease6', 'disease7', 'disease8', 'disease9'],
+    anamnesis: ['anamnesis1', 'anamnesis2', 'anamnesis3', 'anamnesis4', 'anamnesis5', 'anamnesis6', 'anamnesis7'],
+    hospital: ['vomiting', 'discharge-where'],
+    women: ['menstrual-function', 'polycystic-ovary'],
+};
+
 // заболевания
 // disease1 - Артериальная гипертензия
 // disease2 - Сахарный диабет 2-го типа
@@ -14,19 +23,6 @@ import { assignInputRules } from '../../js/input-validate';
 // disease7 - Заболевания печени
 // disease8 - Грыжа
 // disease9 - Жировой фартук
-new ItcCustomSelect('#patient-status');
-new ItcCustomSelect('#who-directed');
-new ItcCustomSelect('#disease1');
-new ItcCustomSelect('#disease2');
-new ItcCustomSelect('#disease2-duration');
-new ItcCustomSelect('#disease3');
-new ItcCustomSelect('#disease4');
-new ItcCustomSelect('#disease5');
-new ItcCustomSelect('#disease6');
-new ItcCustomSelect('#disease7');
-new ItcCustomSelect('#disease8');
-new ItcCustomSelect('#disease9');
-
 // анамнез
 // anamnesis1 - Шкала АСА
 // anamnesis2 - Курение
@@ -35,22 +31,22 @@ new ItcCustomSelect('#disease9');
 // anamnesis5 - Попытки снижения веса
 // anamnesis6 - Предыдущая бариатрическая операция
 // anamnesis7 - Операции в анамнезе
-new ItcCustomSelect('#anamnesis1');
-new ItcCustomSelect('#anamnesis2');
-new ItcCustomSelect('#anamnesis3');
-new ItcCustomSelect('#anamnesis4');
-new ItcCustomSelect('#anamnesis5');
-new ItcCustomSelect('#anamnesis6');
-new ItcCustomSelect('#anamnesis7');
-
-// hidden
-new ItcCustomSelect('#menstrual-function');
-new ItcCustomSelect('#polycystic-ovary');
 
 // calendar
 new AirDatepicker('#calendar', {
     // inline: true,
 });
+
+function initSelects(selects) {
+    const selectsList = Object.entries(selects);
+    let allSelectsId = [];
+    selectsList.map((item) => {
+        allSelectsId = allSelectsId.concat(item[1]);
+    });
+    allSelectsId.forEach((selectId) => {
+        new ItcCustomSelect(`#${selectId}`);
+    });
+}
 
 const allRules = {
     // key - это name инпута
@@ -132,6 +128,7 @@ const allRules = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    initSelects(selects);
     // masks
     const elements = document.querySelectorAll("[data-mask='phone']");
     if (elements) {

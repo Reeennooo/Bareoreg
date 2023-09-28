@@ -159,6 +159,12 @@
     }
   }
 
+  &.have-message {
+    .input-custom__message {
+      display: block;
+    }
+  }
+
   &__info {
     position: absolute;
     cursor: pointer;

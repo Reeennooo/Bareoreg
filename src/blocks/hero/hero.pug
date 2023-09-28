@@ -4,11 +4,15 @@
 
   if(pageName === 'new-patient') {
     title='Создание карты <br>пациента';
-    img = 'img/1..png';
+    img = 'img/hero/new-patient.png';
   }
   else if(pageName === 'creating-operation') {
     title = 'Создание <br>операции';
-    img = 'img/3..png';
+    img = 'img/hero/operation.png';
+  }
+  else if(pageName === 'creating-observation') {
+    title = 'Создание <br>наблюдения';
+    img = 'img/hero/observation.png';
   }
 
 .hero
@@ -18,3 +22,7 @@
       h1.hero__title!=title
       .hero__image
         img(src=img, alt="background-image")
+      if(pageName === 'creating-observation')
+        .hero__passed-time
+          span 3 месяца после операции
+          

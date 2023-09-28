@@ -1,9 +1,9 @@
 mixin btn-circle(data = {})
   if(data.href)
-    a(href=data.href)(class=data.mode ? `btn-circle--${data.mode}` : '').btn-circle
+    a(href=data.href)(class=`btn-circle ${data.mode ? `btn-circle--${data.mode}` : ''}`)
       svg()
         use(xlink:href=`img/sprite.svg#${data.icon}`)
   else
-    button(type='button')(class=data.mode ? `btn-circle--${data.mode}` : '').btn-circle
+    button(type='button')(class=`btn-circle ${data.mode ? `btn-circle--${data.mode}` : ''}`)
       svg()
         use(xlink:href=`img/sprite.svg#${data.icon}`)

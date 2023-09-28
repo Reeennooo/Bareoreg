@@ -1,9 +1,7 @@
 +form().form-creating-operation
   +group({title: 'Общие сведения'}).form-creating-operation__general-information
     .group__form
-      .patient
-        .patient__title Пациент
-        .patient__name Павленко Павел Павлович
+      +data-block({title: 'Пациент', value: 'Павленко Павел Павлович'})
       +input-custom({type: 'number', placeholder: 'Вес на момент операции*', name: 'weight-operation'})(data-required='')
       +input-custom({type: 'text', placeholder: 'Дата операции*', name: 'date-operation',})(autocomplete='off' data-required='').only-number#calendar-operation
       +itc-custom-select({

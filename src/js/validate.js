@@ -76,9 +76,12 @@ export function initGroupObserve() {
                     // console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
                     checkFilledInput(parrentGroup);
                 }
-                checkFilledForm(mutationRecords[0].target);
+                console.log(mutationRecords[0]);
+                if (mutationRecords[0].target.classList.contains('is-filled') || mutationRecords[0].oldValue.includes('is-filled')) {
+                    checkFilledForm(mutationRecords[0].target);
+                }
             });
-            observer.observe(group, { attributeFilter: ['class'] });
+            observer.observe(group, { attributeFilter: ['class'], attributeOldValue: true });
             if (!observer) {
                 console.log(observer);
             }

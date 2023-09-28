@@ -1,0 +1,47 @@
+.form-creating-observation {
+  padding-bottom: 113px;
+}
+
+.form-creating-observation__patient-information {
+  .group__form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-creating-observation__gastric-bandage {
+  .group__form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-creating-observation__general-information {
+  .group__form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-creating-observation__course-of-diseases,
+.form-creating-observation__women-health {
+  .group__form,
+  .group__additional-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 44px 24px;
+  }
+}
+
+.form-creating-observation__additional-info {
+  .textarea {
+    margin-bottom: 44px;
+  }
+}

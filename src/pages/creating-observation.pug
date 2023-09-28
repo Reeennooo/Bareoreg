@@ -1,0 +1,27 @@
+extends ../pug/layout.pug
+
+block meta
+    title Создание наблюдения
+    meta(name='description', content='')
+    - const pageName = 'creating-observation'
+
+//- block append head
+//-    link(rel='stylesheet', href='css/some.css')
+
+//-block header
+
+block content
+    include ../blocks/hero/hero
+    .container
+        include ../blocks/form-creating-observation/form-creating-observation
+        //- h1 Заголовок контента
+        //- svg(width="13" height="10")
+        //-     use(xlink:href="img/sprite.svg#check")
+    +modal-upload()
+
+block footer
+
+//-block prepend page-bottom
+//-    include ../blocks/modal-test/modal-test
+//- block append page-bottom
+//-   script(src='js/some.js')

@@ -218,3 +218,4 @@ export class ItcCustomSelect {
 }
 
 ItcCustomSelect.hideOpenSelect();
+window.ItcCustomSelect = ItcCustomSelect;
