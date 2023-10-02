@@ -1,6 +1,5 @@
 import AirDatepicker from 'air-datepicker';
 import tippy from 'tippy.js';
-import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
 import { setRadioHandler } from '../../components/group-radio-buttons/group-radio-buttons';
@@ -260,11 +259,11 @@ function initSelects(selects) {
     });
     allSelectsId.forEach((selectId) => {
         if (selectId === 'type-of-operation') {
-            selectTypeOperation = new ItcCustomSelect(`#${selectId}`);
+            selectTypeOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else if (selectId === 'kind-of-operation') {
-            selectKindOperation = new ItcCustomSelect(`#${selectId}`);
+            selectKindOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else {
-            new ItcCustomSelect(`#${selectId}`);
+            new window.ItcCustomSelect(`#${selectId}`);
         }
     });
 }
@@ -904,7 +903,7 @@ function createCheckbox(data) {
 
 function initSelect(select, data, variable) {
     if (variable) {
-        variable = new ItcCustomSelect(select, {
+        variable = new window.ItcCustomSelect(select, {
             name: data.name,
             placeholder: data.placeholder,
             options: data.options,
@@ -912,7 +911,7 @@ function initSelect(select, data, variable) {
             targetValue: data.targetValue,
         });
     } else {
-        new ItcCustomSelect(select, {
+        new window.ItcCustomSelect(select, {
             name: data.name,
             placeholder: data.placeholder,
             options: data.options,

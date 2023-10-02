@@ -1,7 +1,5 @@
 import AirDatepicker from 'air-datepicker';
-import { inputValidate } from '../../js/input-validate';
 import IMask from 'imask/esm/index';
-import { ItcCustomSelect } from '../../components/itc-custom-select/itc-custom-select';
 import { assignInputRules } from '../../js/input-validate';
 
 const selects = {
@@ -44,7 +42,7 @@ function initSelects(selects) {
         allSelectsId = allSelectsId.concat(item[1]);
     });
     allSelectsId.forEach((selectId) => {
-        new ItcCustomSelect(`#${selectId}`);
+        new window.ItcCustomSelect(`#${selectId}`);
     });
 }
 

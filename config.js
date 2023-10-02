@@ -2,7 +2,6 @@
 let config = {
     addStyleBefore: [
         'air-datepicker/air-datepicker.css',
-        'chartist/dist/index.scss',
         'tippy.js/dist/tippy.css',
         // "swiper/swiper-bundle.css",
         // "swiper/css/swiper.min.css",//old version
