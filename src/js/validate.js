@@ -251,6 +251,7 @@ if (FORM) {
     });
 }
 
+// Из-за класса only-txt не работает табуляция по инпутам.
 document.addEventListener('DOMContentLoaded', () => {
     // Ограничения при вводе
     // only-text input

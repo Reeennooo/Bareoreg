@@ -28,7 +28,7 @@ export class ItcCustomSelect {
         });
         return `<input name="${name}" value="${selectedValue}"><button type="button" class="itc-select__toggle" name="${name}"
       value="${selectedValue}" data-select="toggle" data-index="${selectedIndex}">
-      <span class='itc-select__text-selected'>${selectedContent}</span>
+      <div class='itc-select__text-selected'><span>${selectedContent}</span></div>
       </button><div class="itc-select__placeholder">${placeholder}</div><div class="itc-select__dropdown">
       <ul class="itc-select__options">${items.join('')}</ul></div><div class='itc-select__message'></div>`;
     }

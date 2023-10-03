@@ -1,0 +1,73 @@
+.profile
+  +page-section({
+    title: 'Персональные данные',
+    buttons: [{txt: 'Редактировать', icon: 'pencil', mode: 'text'}]
+  })
+    .profile__personal-data
+      .avatar-loader
+        .avatar-loader__avatar
+        label(for='avatar-loader')
+          input(type="file" name='avatar-loader' id='avatar-loader' accept="image/*")
+          .avatar-loader__title
+            svg.svg
+              use(href='img/sprite.svg#paperclip')
+            | Загрузить<br> новое фото
+
+      .profile__personal-grid
+        +input-custom({type: 'text', placeholder: 'Фамилия', name: 'surname',})(class='only-txt' data-required='')
+        +input-custom({type: 'text', placeholder: 'Имя', name: 'name',})(class='only-txt' data-required='')
+        +input-custom({type: 'text', placeholder: 'Отчество', name: 'middle-name',})(class='only-txt' data-required='')
+        +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
+        +input-custom({type: 'email', placeholder: 'Электронная почта', name: 'email'})(data-mask='email')
+        +checkbox({name: "demonstration-of-static-data", value: 'yes', label: 'Участвовать в демонстрации статистических данных'})
+  +page-section({
+    title: 'Место работы',
+    buttons: [{txt: 'Добавить', icon: 'plus-icon', mode: 'text', modal: 'side-modal', modalName: 'new-work-place'}]
+  }).not-empty
+    .profile__places-of-work
+      .place-of-work
+        .place-of-work__content
+          .place-of-work__number №1
+          .place-of-work__text
+            .place-of-work__name Европейский медицинский центр (ЕМС)
+            .place-of-work__place Санкт-Петербург
+        +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
+      .place-of-work
+        .place-of-work__content
+          .place-of-work__number №2
+          .place-of-work__text
+            .place-of-work__name Европейский медицинский центр (ЕМС)
+            .place-of-work__place Санкт-Петербург
+        +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
+      .place-of-work
+        .place-of-work__content
+          .place-of-work__number №3
+          .place-of-work__text
+            span.place-of-work__name Европейский медицинский центр (ЕМС)
+            span.place-of-work__place Санкт-Петербург
+        +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
+    +placeholder({title: 'Добавьте место работы'})
+    .profile__hint В случае отсутствия вашей клиники в списке, сообщите об этом в поддержку.
+  +page-section({
+    title: 'Ассистенты',
+    buttons: [{txt: 'Добавить', icon: 'plus-icon', mode: 'text', modal: 'side-modal', modalName: 'new-assistant'}]
+  }).not-empty
+    .profile__assistants
+      .assistant
+        .assistant__content
+          .assistant__number №1
+          .assistant__text
+            span.assistant__name Павленко Павел Павлович
+        .assistant__btns
+          +btn({mode: 'only-icon', icon: 'pencil'}).assistant__edit
+          +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-assistant').assistant__remove
+      +placeholder({title: 'Добавьте ассистента'})
+  +page-section({
+    title: 'Смена пароля',
+  })
+    form.profile__change-password
+      +input-custom({type: 'text', placeholder: 'Текущий пароль', name: 'password',})
+      +input-custom({type: 'text', placeholder: 'Новый пароль', name: 'new-password',})
+      +input-custom({type: 'text', placeholder: 'Повторите новый пароль', name: 'repeat-new-password',})
+      +btn({txt: 'Сменить пароль'})(disabled)
+    

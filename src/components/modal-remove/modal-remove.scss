@@ -1,0 +1,22 @@
+.modal-remove {
+  &__title {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 36px;
+    color: $black;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &__buttons {
+    margin-top: 44px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    .btn {
+      width: auto;
+      flex-grow: 1;
+    }
+  }
+}

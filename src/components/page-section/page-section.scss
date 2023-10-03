@@ -3,6 +3,12 @@
   background-color: $white;
   border-radius: 20px;
 
+  &.not-empty {
+    .placeholder {
+      display: none;
+    }
+  }
+
   &--additional {
     padding: 0;
     background-color: transparent;
@@ -14,7 +20,7 @@
     align-items: center;
     justify-content: space-between;
     column-gap: 44px;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
   }
 
   &__title {

@@ -273,7 +273,7 @@ let selectKindOperation;
 
 document.addEventListener('DOMContentLoaded', () => {
     // отключаю выполнение скрипта
-    console.log(window.location);
+    // console.log(window.location);
     if (!window.location.pathname.includes('creating-operation')) return;
 
     assignInputRules(VALIDATION_RULES);
@@ -732,7 +732,7 @@ export function createAditionalGroup(groupData) {
     return group;
 }
 
-function createInput(data) {
+export function createInput(data) {
     const input = document.createElement('div');
     input.classList.add('input-custom');
     input.innerHTML = `
@@ -841,7 +841,7 @@ function createRadioGroup(data) {
     return radioGroup;
 }
 
-function createSelect(data) {
+export function createSelect(data) {
     const select = document.createElement('div');
     select.setAttribute('id', data.name);
     if (data.required) {

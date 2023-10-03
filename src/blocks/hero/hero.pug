@@ -17,13 +17,16 @@
   else if(pageName === 'patient-card') {
     title = 'Карта пациента';
   }
+  else if(pageName === 'profile') {
+    title = 'Профиль';
+  }
 
 .hero
   .container
     .hero__inner
       +btn({txt: 'Вернуться назад', icon: 'carret-left', href: '#', mode: 'text'}).hero__back
       h1.hero__title!=title
-      if(pageName !== 'patient-card')
+      if(pageName !== 'patient-card' && pageName !== 'profile')
         .hero__image
           img(src=img, alt="background-image")
       if(pageName === 'creating-observation')

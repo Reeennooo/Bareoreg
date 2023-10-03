@@ -5,7 +5,7 @@
     .patient-card__main
       +page-section({
         title: 'Операции и наблюдения',
-        buttons: [{txt: 'Добавить операцию', icon: 'mask', mode: 'text'}, {txt: 'Добавить наблюдение', icon: 'list', mode: 'text'}]
+        buttons: [{txt: 'Добавить операцию', icon: 'mask', mode: 'text', href: '/creating-operation.html'}, {txt: 'Добавить наблюдение', icon: 'list', mode: 'text'}]
       })
         .patient-card__operations
           +itc-custom-select({
@@ -92,5 +92,7 @@
           canvas(id='myChart')
       include ../concomitant-diseases/concomitant-diseases
       include ../anamnesis/anamnesis
+      .patient-card__bottom
+        +btn({txt: 'Передать другому врачу', mode: 'ghost'})
 
       

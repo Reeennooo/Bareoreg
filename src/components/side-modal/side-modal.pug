@@ -1,0 +1,13 @@
+mixin side-modal(data)
+  +modal().side-modal
+    form
+      .side-modal__header
+        .side-modal__title=data.title
+        .side-modal__header-buttons
+          +btn({icon: 'ArrowLineRight', mode: 'only-icon'})(data-modal-close type='button')
+      .side-modal__main
+        if block
+          block
+      .side-modal__bottom
+        +btn({txt: 'Отменить', mode: 'ghost'})(data-modal-close type='button')
+        +btn({txt: 'Сохранить'}).side-modal__submit

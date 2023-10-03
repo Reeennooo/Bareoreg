@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded',function () {
 	let currentPage = (window.location.pathname).replace('/','');
 	// Страницы и ссылки на них
 	let pagesList = {
-		"1.Главная": "index.html",
-		"2.Новый пациент": 'new-patient.html',
-		"3.Создание операции": 'creating-operation.html',
+		// "1.Главная": "index.html",
+		"1.Новый пациент": 'new-patient.html',
+		"2.Создание операции": 'creating-operation.html',
 		"3.Создание наблюдения": 'creating-observation.html',
-		"3.Карта пациента": 'patient-card.html'
+		"4.Карта пациента": 'patient-card.html'
 	};
 
 	let link = ''+

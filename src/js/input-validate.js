@@ -27,7 +27,7 @@ let customRange = {
 approve.addTest(customRange, 'customRange');
 
 export function checkValidate(element, rules) {
-    console.log(element);
+    // console.log(element);
     let message;
     let result;
 

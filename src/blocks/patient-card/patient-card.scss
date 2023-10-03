@@ -19,6 +19,16 @@
     background-color: $grey-super-light;
     margin: 24px 0;
   }
+
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn {
+      max-width: 325px;
+      width: 100%;
+    }
+  }
 }
 
 .patient-card__operations {

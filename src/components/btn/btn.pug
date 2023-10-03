@@ -1,10 +1,6 @@
 mixin btn(data)
   if(data.href) 
-    a(data.href=data.href class=`
-      btn 
-      ${data.mode ? `btn--${data.mode}` : ''} 
-      ${data.disabled ? 'disabled' : ''}
-    `)&attributes(attributes)
+    a(href=data.href class=`btn ${data.mode ? `btn--${data.mode}` : ''} ${data.disabled ? 'disabled' : ''}`)&attributes(attributes)
       if(data.icon)
         svg
           use(xlink:href=`img/sprite.svg#${data.icon}`)

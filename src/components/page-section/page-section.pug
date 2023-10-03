@@ -1,23 +1,26 @@
 mixin page-section(data)
   if(data.type === 'additional')
-    .page-section.page-section--additional
+    .page-section.page-section--additional&attributes(attributes)
     .page-section__header
       .page-section__title=data.title
       .page-section__actions
         if(data.buttons)
           each button in data.buttons
-            +btn({txt: button.txt, icon: button.icon, mode: button.mode})
+            +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})(button.attribute)
     .page-section__content
       if block
         block
   else
-    .page-section
+    .page-section&attributes(attributes)
       .page-section__header
         .page-section__title=data.title
         .page-section__actions
           if(data.buttons)
             each button in data.buttons
-              +btn({txt: button.txt, icon: button.icon, mode: button.mode})
+              if (button.modal && button.modalName)
+                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})(data-modal=`${button.modal}` data-modal-name=`${button.modalName}`)
+              else
+                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})
       .page-section__content
         if block
           block

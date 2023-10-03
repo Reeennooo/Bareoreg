@@ -1,0 +1,20 @@
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  &__title,
+  &__text {
+    display: block;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: $violet-deep;
+  }
+
+  &__text {
+    color: $grey-light;
+  }
+}

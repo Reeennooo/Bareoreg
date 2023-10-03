@@ -77,4 +77,22 @@
       @include transition('color');
     }
   }
+
+  &--only-icon {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &--red {
+    background-color: #dc362e;
+    border-color: #dc362e;
+  }
 }
