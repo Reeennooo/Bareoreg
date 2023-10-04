@@ -1,9 +1,9 @@
 .profile
   +page-section({
     title: 'Персональные данные',
-    buttons: [{txt: 'Редактировать', icon: 'pencil', mode: 'text'}]
+    buttons: [{txt: 'Редактировать', icon: 'pencil', mode: 'text', addClass: 'profile__edit-btn'}]
   })
-    .profile__personal-data
+    form.profile__personal-data
       .avatar-loader
         .avatar-loader__avatar
         label(for='avatar-loader')
@@ -25,21 +25,21 @@
     buttons: [{txt: 'Добавить', icon: 'plus-icon', mode: 'text', modal: 'side-modal', modalName: 'new-work-place'}]
   }).not-empty
     .profile__places-of-work
-      .place-of-work
+      .place-of-work(data-number=1)
         .place-of-work__content
           .place-of-work__number №1
           .place-of-work__text
             .place-of-work__name Европейский медицинский центр (ЕМС)
             .place-of-work__place Санкт-Петербург
         +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
-      .place-of-work
+      .place-of-work(data-number=2)
         .place-of-work__content
           .place-of-work__number №2
           .place-of-work__text
             .place-of-work__name Европейский медицинский центр (ЕМС)
             .place-of-work__place Санкт-Петербург
         +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
-      .place-of-work
+      .place-of-work(data-number=3)
         .place-of-work__content
           .place-of-work__number №3
           .place-of-work__text
@@ -48,18 +48,23 @@
         +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-work').place-of-work__remove
     +placeholder({title: 'Добавьте место работы'})
     .profile__hint В случае отсутствия вашей клиники в списке, сообщите об этом в поддержку.
+    
   +page-section({
     title: 'Ассистенты',
     buttons: [{txt: 'Добавить', icon: 'plus-icon', mode: 'text', modal: 'side-modal', modalName: 'new-assistant'}]
   }).not-empty
     .profile__assistants
-      .assistant
+      .assistant(data-number=1)
         .assistant__content
           .assistant__number №1
-          .assistant__text
-            span.assistant__name Павленко Павел Павлович
+          .assistant__person
+            span.assistant__surname Павленко
+            | 
+            span.assistant__name Павел
+            | 
+            span.assistant__middle-name Павлович
         .assistant__btns
-          +btn({mode: 'only-icon', icon: 'pencil'}).assistant__edit
+          +btn({mode: 'only-icon', icon: 'pencil'})(data-modal='side-modal' data-modal-name='editing-assistant').assistant__edit
           +btn({mode: 'only-icon', icon: 'trash'})(type='button' data-modal='modal-remove' data-modal-name='remove-assistant').assistant__remove
       +placeholder({title: 'Добавьте ассистента'})
   +page-section({
@@ -70,4 +75,9 @@
       +input-custom({type: 'text', placeholder: 'Новый пароль', name: 'new-password',})
       +input-custom({type: 'text', placeholder: 'Повторите новый пароль', name: 'repeat-new-password',})
       +btn({txt: 'Сменить пароль'})(disabled)
+  .profile__footer
+    .container.profile__footer-inner
+      +btn({txt: 'Отменить', mode: 'ghost'}).profile__cancel-changes
+      +btn({txt: 'Сохранить изменения'}).profile__save-changes(disabled)
+
     

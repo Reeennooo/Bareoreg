@@ -1,8 +1,8 @@
 mixin modal-remove()
   +modal().modal-remove
     .modal-remove__wrapper
-      .modal-remove__title
+      .modal-remove__title Удаление элемента
       .modal-remove__item
       .modal-remove__buttons
         +btn({txt:  'Отменить', mode: 'ghost'})(data-modal-close)
-        +btn({txt:  'Удалить', mode: 'red'})
+        +btn({txt:  'Удалить', mode: 'red'}).modal-remove__remove-btn

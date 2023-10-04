@@ -4,10 +4,11 @@ mixin side-modal(data)
       .side-modal__header
         .side-modal__title=data.title
         .side-modal__header-buttons
+          +btn({icon: 'trash', mode: 'only-icon'})(data-modal='modal-remove' type='button').side-modal__remove
           +btn({icon: 'ArrowLineRight', mode: 'only-icon'})(data-modal-close type='button')
       .side-modal__main
         if block
           block
       .side-modal__bottom
         +btn({txt: 'Отменить', mode: 'ghost'})(data-modal-close type='button')
-        +btn({txt: 'Сохранить'}).side-modal__submit
+        +btn({txt: 'Сохранить'})(disabled).side-modal__submit

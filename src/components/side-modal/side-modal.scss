@@ -21,6 +21,12 @@
     }
   }
 
+  &.editing-assistant {
+    .side-modal__remove {
+      display: block;
+    }
+  }
+
   .i-modal__content {
     max-width: 940px;
     opacity: 1;
@@ -58,6 +64,14 @@
     display: flex;
     align-items: center;
     column-gap: 16px;
+  }
+
+  .side-modal__remove {
+    display: none;
+
+    svg {
+      stroke: $red-btn;
+    }
   }
 
   .side-modal__title {

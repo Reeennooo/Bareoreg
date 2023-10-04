@@ -151,6 +151,7 @@ class NoScroll {
     }
 }
 const noScroll = new NoScroll();
+// const noScroll = new NoScroll('.header');
 // const noScroll = new NoScroll('.header__inner');//'.header__inner, .catalog-video'
 window.noScroll = noScroll;
 

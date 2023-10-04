@@ -18,9 +18,9 @@ mixin page-section(data)
           if(data.buttons)
             each button in data.buttons
               if (button.modal && button.modalName)
-                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})(data-modal=`${button.modal}` data-modal-name=`${button.modalName}`)
+                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})(data-modal=`${button.modal}` data-modal-name=`${button.modalName}` class=`${button.addClass ? button.addClass : ''}`)
               else
-                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})
+                +btn({txt: button.txt, icon: button.icon, mode: button.mode, href: button.href})(class=`${button.addClass ? button.addClass : ''}`)
       .page-section__content
         if block
           block

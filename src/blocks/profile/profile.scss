@@ -3,6 +3,22 @@
   flex-direction: column;
   row-gap: 20px;
 
+  &.is-editable {
+    .profile__footer {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .profile__edit-btn {
+      display: none;
+    }
+
+    .profile__personal-data {
+      pointer-events: initial;
+    }
+  }
+
   &__personal-data {
     display: flex;
     column-gap: 24px;
@@ -36,6 +52,44 @@
     line-height: 24px;
     letter-spacing: 0.15px;
     color: $grey-light;
+  }
+
+  &__personal-data {
+    pointer-events: none;
+  }
+
+  &__assistants {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(auto, 642px));
+    gap: 12px;
+  }
+
+  &__footer {
+    @include transition('visibility, transform, opacity');
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    padding: 24px 40px;
+    background-color: $white;
+    box-shadow: 0px -8px 44px 0px rgba(0, 0, 0, 0.04);
+    border-top: 2px solid $grey-super-light;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+
+    &-inner {
+      display: flex;
+      column-gap: 20px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .btn {
+      max-width: 240px;
+      width: 100%;
+    }
   }
 }
 
@@ -139,5 +193,20 @@
   &__edit {
     width: 18px;
     height: 18px;
+  }
+}
+
+.assistant {
+  &__person {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: $grey-dark;
+  }
+
+  &__name {
+    display: inline;
   }
 }
