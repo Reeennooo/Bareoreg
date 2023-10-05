@@ -18,7 +18,7 @@
         +input-custom({type: 'text', placeholder: 'Имя', name: 'name',})(class='only-txt' data-required='')
         +input-custom({type: 'text', placeholder: 'Отчество', name: 'middle-name',})(class='only-txt' data-required='')
         +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
-        +input-custom({type: 'email', placeholder: 'Электронная почта', name: 'email'})(data-mask='email')
+        +input-custom({type: 'email', placeholder: 'Электронная почта', name: 'email'})(data-mask='email' data-required='')
         +checkbox({name: "demonstration-of-static-data", value: 'yes', label: 'Участвовать в демонстрации статистических данных'})
   +page-section({
     title: 'Место работы',
@@ -70,11 +70,11 @@
   +page-section({
     title: 'Смена пароля',
   })
-    form.profile__change-password
-      +input-custom({type: 'text', placeholder: 'Текущий пароль', name: 'password',})
-      +input-custom({type: 'text', placeholder: 'Новый пароль', name: 'new-password',})
-      +input-custom({type: 'text', placeholder: 'Повторите новый пароль', name: 'repeat-new-password',})
-      +btn({txt: 'Сменить пароль'})(disabled)
+    form.change-password
+      +input-custom({type: 'text', placeholder: 'Текущий пароль', name: 'password',})(data-required='')
+      +input-custom({type: 'text', placeholder: 'Новый пароль', name: 'new-password',})(data-required='')
+      +input-custom({type: 'text', placeholder: 'Повторите новый пароль', name: 'repeat-new-password',})(data-required='')
+      +btn({txt: 'Сменить пароль'}).submit-button(disabled)
   .profile__footer
     .container.profile__footer-inner
       +btn({txt: 'Отменить', mode: 'ghost'}).profile__cancel-changes

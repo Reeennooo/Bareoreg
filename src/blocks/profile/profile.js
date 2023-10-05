@@ -1,5 +1,5 @@
 // Требуется разделить код. И подключить нужный код к нужным страницам.
-
+import { assignInputRules } from '../../js/input-validate';
 import { createInput, createSelect } from '../../blocks/form-creating-operation/form-creating-operation';
 
 const avatarLoader = document.querySelector('.avatar-loader');
@@ -30,7 +30,7 @@ const sideModalData = {
                         ['Нижневартовская городская поликлиника', 'Нижневартовская городская поликлиника'],
                         ['Клиническая больница №85 ФМБА Российской Федерации', 'Клиническая больница №85 ФМБА Российской Федерации'],
                     ],
-                    required: false,
+                    required: true,
                 },
             },
             {
@@ -43,7 +43,7 @@ const sideModalData = {
                         ['Москва', 'Москва'],
                         ['Верхненовокутлумбетьево', 'Верхненовокутлумбетьево'],
                     ],
-                    required: false,
+                    required: true,
                 },
             },
         ],
@@ -58,7 +58,7 @@ const sideModalData = {
                     name: 'surname',
                     type: 'text',
                     placeholder: 'Фамилия',
-                    required: false,
+                    required: true,
                 },
             },
             {
@@ -67,7 +67,7 @@ const sideModalData = {
                     name: 'name',
                     type: 'text',
                     placeholder: 'Имя',
-                    required: false,
+                    required: true,
                 },
             },
             {
@@ -76,7 +76,7 @@ const sideModalData = {
                     name: 'middle-name',
                     type: 'text',
                     placeholder: 'Отчество',
-                    required: false,
+                    required: true,
                 },
             },
         ],
@@ -88,7 +88,28 @@ const sideModalData = {
     },
 };
 
+const RULES_FOR_FIELDS = {
+    password: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'new-password': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'repeat-new-password': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Установим правила для полей
+    assignInputRules(RULES_FOR_FIELDS);
+
     // Редактирование прфоиля
     const profile = document.querySelector('.profile');
     const editBtn = document.querySelector('.profile__edit-btn');
@@ -96,30 +117,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSaveChanges = profile.querySelector('.profile__save-changes');
     const profileForm = document.querySelector('.profile__personal-data');
 
-    profileForm.querySelectorAll('input').forEach((input) => {
-        if (input.hasAttribute('data-required')) {
-            input.addEventListener('input', checkFilled);
-        }
+    profileForm.querySelectorAll('input[data-required]').forEach((input, i, arr) => {
+        input.addEventListener('input', () => checkFilledInputs(profileForm, arr));
     });
 
     // Аналогичная функция уже существует в файле validate.
     // Правила проверки этих инпут полей установлены в файле form-new-patient.
-    function checkFilled() {
-        console.log('INPUT');
-        let result = [...profileForm.querySelectorAll('input[data-required]')].map((input) => {
+
+    function checkFilledInputs(form, inputsArr) {
+        const inputs = inputsArr ? inputsArr : form.querySelectorAll('input[data-required], .itc-select[data-required] input');
+        let btnSave = form.querySelector('.submit-button');
+
+        if (form.classList.contains('profile__personal-data')) {
+            btnSave = btnSaveChanges;
+        }
+
+        console.log(inputs);
+
+        let result = [...inputs].map((input) => {
             if (input.value && !input.classList.contains('is-invalid')) {
                 return true;
             } else {
                 return false;
             }
         });
-        console.log(result);
+
+        // console.log(result);
         if (result.indexOf(false) === -1) {
-            btnSaveChanges.removeAttribute('disabled');
+            btnSave.removeAttribute('disabled');
         } else {
-            btnSaveChanges.setAttribute('disabled', 'disabled');
+            btnSave.setAttribute('disabled', 'disabled');
         }
     }
+
+    btnSaveChanges.addEventListener('click', saveChanges);
+    btnCancelChanges.addEventListener('click', cancelChanges);
 
     editBtn.addEventListener('click', enableEditProfile);
     btnCancelChanges.addEventListener('click', disableEditProfile);
@@ -134,14 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function cancelChanges() {}
 
-    function savelChanges() {}
+    function saveChanges() {
+        disableEditProfile();
+    }
 
     // Открытие боковой модалки
     const sideModal = document.querySelector('.side-modal');
     if (!sideModal) return;
-
+    const sideModalForm = sideModal.querySelector('form');
     const mainBlock = sideModal.querySelector('.side-modal__main');
-    const submitBtn = sideModal.querySelector('.side-modal__submit');
+    const submitBtn = sideModal.querySelector('.submit-button');
 
     const content = {
         'new-work-place': undefined,
@@ -158,9 +192,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         },
     };
-
+    Object.defineProperty(content, 'createElements', { enumerable: false });
     content.createElements(sideModalData, 'new-work-place');
     content.createElements(sideModalData, 'new-assistant');
+
+    // Будем следить за изменениями input внутри форм.
+    Object.entries(content).forEach((item) => {
+        item[1].forEach((el) => {
+            if (el.classList.contains('input-custom')) {
+                el.querySelector('input').addEventListener('input', () => {
+                    checkFilledInputs(sideModalForm);
+                });
+            } else if (el.classList.contains('itc-select')) {
+                let buttonToggle = el.querySelector('button');
+                let observer = new MutationObserver(() => checkFilledInputs(sideModalForm));
+                observer.observe(buttonToggle, { attributeFilter: ['value'] });
+            }
+        });
+    });
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
@@ -176,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         switch (form.dataset.name) {
             case 'new-assistant':
-                console.log('new-assistant');
                 let assistantData = {};
                 let assistantsBlock = document.querySelector('.profile__assistants');
                 assistantData.surname = form.querySelector(`input[name='surname']`).value;
@@ -203,9 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function fillSideModal(element) {
         let modalName = element.dataset.modalName;
         let currentEl = sideModalData[modalName];
-        console.log(currentEl);
+        const form = sideModal.querySelector('form');
         sideModal.querySelector('.side-modal__title').innerText = currentEl.title;
-        sideModal.querySelector('form').dataset.name = modalName;
+        form.dataset.name = modalName;
 
         // columns-style
         if (modalName === 'new-assistant' || modalName === 'editing-assistant') {
@@ -229,6 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         submitBtn.querySelector('span').innerText = currentEl.btnText;
+        submitBtn.setAttribute('disabled', 'disabled');
+        checkFilledInputs(form);
     }
 
     function setAssistantData(element) {
@@ -248,6 +298,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sideModal.querySelector('input[name="name"]').value = assistant.querySelector('.assistant__name').innerText.trim();
         sideModal.querySelector('input[name="middle-name"]').value = assistant.querySelector('.assistant__middle-name').innerText.trim();
     }
+
+    // Смена пароля
+    const chnagePassForm = document.querySelector('form.change-password');
+    const inputs = chnagePassForm.querySelectorAll('input[data-required]');
+    inputs.forEach((input) => {
+        input.addEventListener('input', () => checkFilledInputs(chnagePassForm));
+    });
 });
 
 function createWorkPlace(data) {
