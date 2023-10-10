@@ -77,7 +77,7 @@ export function assignInputRules(allRules, checkRightNow) {
                 currentElement = element;
                 currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
                 currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
-                element.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
+                // element.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
             }
 
             if (checkRightNow) {

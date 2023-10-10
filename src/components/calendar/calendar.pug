@@ -1,0 +1,183 @@
+mixin calendar()
+  .calendar
+    header.calendar__header
+      .calendar__months
+        +btn({icon: 'navigate_prev', mode: 'only-icon'}).calendar__switcher.prev-month
+        +itc-custom-select({
+          id: 'test-calendar', 
+          name: 'test-calendar',
+          placeholder: 'Месяц',
+          mod: 'classic',
+          selectedIndex: 10,
+          selectedValue: 'Окт',
+          selectedTxt: 'Окт',
+          options: [
+            {
+              index: 0,
+              value: 'Янв',
+              txt: 'Янв',
+              selected: true,
+            },
+            {
+              index: 1,
+              value: 'Фев',
+              txt: 'Фев'
+            },
+            {
+              index: 2,
+              value: 'Мар',
+              txt: 'Мар'
+            },
+            {
+              index: 3,
+              value: 'Апр',
+              txt: 'Апр'
+            },
+            {
+              index: 4,
+              value: 'Май',
+              txt: 'Май'
+            },
+            {
+              index: 5,
+              value: 'Июн',
+              txt: 'Июн',
+            },
+            {
+              index: 6,
+              value: 'Июл',
+              txt: 'Июл'
+            },
+            {
+              index: 7,
+              value: 'Авг',
+              txt: 'Авг'
+            },
+            {
+              index: 8,
+              value: 'Сен',
+              txt: 'Сен'
+            },
+            {
+              index: 9,
+              value: 'Окт',
+              txt: 'Окт'
+            },
+            {
+              index: 10,
+              value: 'Ноя',
+              txt: 'Ноя'
+            },
+            {
+              index: 11,
+              value: 'Дек',
+              txt: 'Дек'
+            },
+          ]
+        })
+        +btn({icon: 'navigate_next', mode: 'only-icon'}).calendar__switcher.next-month
+      .calendar__years
+        +btn({icon: 'navigate_prev', mode: 'only-icon'}).calendar__switcher.prev-year
+        +itc-custom-select({
+          id: 'test-calendar-years', 
+          name: 'test-calendar-years',
+          placeholder: 'Годы',
+          mod: 'classic',
+          selectedIndex: 5,
+          selectedValue: '2023',
+          selectedTxt: '2023',
+          options: [
+            {
+              index: 0,
+              value: '2018',
+              txt: '2018'
+            },
+            {
+              index: 1,
+              value: '2019',
+              txt: '2019'
+            },
+            {
+              index: 2,
+              value: '2020',
+              txt: '2020',
+            },
+            {
+              index: 3,
+              value: '2021',
+              txt: '2021'
+            },
+            {
+              index: 4,
+              value: '2022',
+              txt: '2022',
+            },
+            {
+              index: 5,
+              value: '2023',
+              txt: '2023',
+              selected: true,
+            },
+            {
+              index: 6,
+              value: '2024',
+              txt: '2024'
+            },
+            {
+              index: 7,
+              value: '2025',
+              txt: '2025'
+            },
+            {
+              index: 8,
+              value: '2026',
+              txt: '2026'
+            },
+            {
+              index: 9,
+              value: '2027',
+              txt: '2027'
+            },
+          ]
+        })
+        +btn({icon: 'navigate_next', mode: 'only-icon'}).calendar__switcher.next-year
+    .calendar__body
+      ul.calendar__weekdays
+        li Пн
+        li Вт
+        li Ср
+        li Чт
+        li Пт
+        li Сб
+        li Вс
+      ul.calendar__dates
+        li 1
+        li 2
+        li 3
+        li 4
+        li 5
+        li 6
+        li 7
+        li 4
+        li 5
+        li 6
+        li 7
+        li 1
+        li 2
+        li 3
+        li 4
+        li 5
+        li 6
+        li 7
+        li 4
+        li 5
+        li 6
+        li 7
+        li 4
+        li 5
+        li 6
+        li 7
+        li 4
+        li 5
+        li 6
+        li 7

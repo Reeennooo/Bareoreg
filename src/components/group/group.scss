@@ -22,7 +22,9 @@
 
     .group__inner-wrapper {
       // height: auto;
-      overflow: initial;
+      overflow-x: visible;
+      overflow-y: initial;
+      // overflow: initial;
     }
 
     .group__inner {

@@ -263,7 +263,9 @@ function initSelects(selects) {
         } else if (selectId === 'kind-of-operation') {
             selectKindOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else {
-            new window.ItcCustomSelect(`#${selectId}`);
+ 
+            let select = new window.ItcCustomSelect(`#${selectId}`);
+            console.log(select)
         }
     });
 }
@@ -282,12 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // calendars
     // Написать функцию которая делает календарь 100% ширины, под инпут.
     // Считывать ширину инпута и задавать нужному календарю
-    new AirDatepicker('#calendar-operation', {
-        // inline: true,
-    });
-    new AirDatepicker('#calendar-discharge', {});
-    new AirDatepicker('#calendar-adjustment-bandage', {});
-    new AirDatepicker('#calendar-ballon-delete', {});
+    new window.Calendar('#calendar-operation')
+    new window.Calendar('#calendar-discharge')
 
     // СВЯЗИ
     const hasConnections = document.querySelectorAll('[data-has-connection]');
@@ -514,9 +512,9 @@ function setConnectionsForElements(element, rules) {
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
-                            console.log(connectedEL);
-                            console.log(connectedEL.dataset.id);
-                            console.log(rulesItem);
+                            // console.log(connectedEL);
+                            // console.log(connectedEL.dataset.id);
+                            // console.log(rulesItem);
                             if (rulesItem.changeSelect) {
                                 const newSelect = document.querySelector(`#${rulesItem.changeSelect.id}`);
                                 if (newSelect) {
@@ -747,7 +745,16 @@ export function createInput(data) {
     }
 
     if (data.mod === 'calendar') {
-        new AirDatepicker(input.querySelector('input'), {});
+        
+        // new AirDatepicker(input.querySelector('input'), {});
+        let calendarToggler = `
+        <div class='calendar-toggler'>
+            <svg>
+                <use href='img/sprite.svg#calendar'></use>
+            </svg>
+        </div>`
+        input.querySelector('.input-custom__input').insertAdjacentHTML('afterend', calendarToggler)
+        new window.Calendar(input.querySelector('input'))
     }
 
     if (data.addClass) {

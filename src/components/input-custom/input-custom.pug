@@ -24,4 +24,8 @@ mixin input-custom(data)
       label(for=attributes.id ? attributes.id : data.name)=data.placeholder
       if(data.info)
         +info({id: data.info.id}).input-custom__info
+      if(data.calendar)
+        .calendar-toggler
+          svg
+            use(href='img/sprite.svg#calendar')
     .input-custom__message=data.message

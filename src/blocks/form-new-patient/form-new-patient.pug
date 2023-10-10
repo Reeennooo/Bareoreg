@@ -4,7 +4,7 @@
       +input-custom({type: 'text', placeholder: 'Фамилия*', name: 'surname',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Имя*', name: 'name',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Отчество*', name: 'middle-name',})(class='only-txt' data-required='')
-      +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth',})(autocomplete='off' data-required='').only-number#calendar
+      +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth', calendar: true})(autocomplete='off' data-required='')#calendar-date-birth.only-number
       +group-radio-buttons({title: 'Пол*'})(data-required='' data-has-connection="gender")
         +radio({name: 'gender', value: 'man', label: 'Мужской'})
         +radio({name: 'gender', value: 'woman', label: 'Женский'})

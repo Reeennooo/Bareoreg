@@ -4,7 +4,6 @@
   "description": "Startkit",
   "main": "gulpfile.js",
   "dependencies": {
-    "air-datepicker": "^3.4.0",
     "approvejs": "^3.1.2",
     "chart.js": "^4.4.0",
     "imask": "^7.1.3",

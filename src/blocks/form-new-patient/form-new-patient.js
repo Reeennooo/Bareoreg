@@ -6,7 +6,6 @@ const selects = {
     'main-data': ['patient-status', 'who-directed'],
     disease: ['disease1', 'disease2', 'disease3', 'disease4', 'disease5', 'disease6', 'disease7', 'disease8', 'disease9'],
     anamnesis: ['anamnesis1', 'anamnesis2', 'anamnesis3', 'anamnesis4', 'anamnesis5', 'anamnesis6', 'anamnesis7'],
-    hospital: ['vomiting', 'discharge-where'],
     women: ['menstrual-function', 'polycystic-ovary'],
 };
 
@@ -31,9 +30,7 @@ const selects = {
 // anamnesis7 - Операции в анамнезе
 
 // calendar
-new AirDatepicker('#calendar', {
-    // inline: true,
-});
+new window.Calendar('#calendar-date-birth', { position: 'absolute' })
 
 function initSelects(selects) {
     const selectsList = Object.entries(selects);

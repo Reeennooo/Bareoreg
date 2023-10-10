@@ -137,7 +137,6 @@
     top: 0;
     font-size: 12px;
     line-height: 16px;
-    letter-spacing: 0.4px;
   }
 }
 
@@ -154,6 +153,7 @@
   padding: 0 4px;
   // txt
   font-size: 16px;
+  letter-spacing: 0.4px;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -171,7 +171,6 @@
   pointer-events: none;
   opacity: 0;
   // display: none;
-  background-color: #fff;
   background: $background-violet;
   border: 1px solid #ccc;
   padding: 8px 5px 8px 0;
@@ -243,6 +242,7 @@
   cursor: pointer;
 }
 
+// Простой simple
 .itc-select {
   min-width: 170px;
   width: auto;
@@ -293,6 +293,75 @@
 
     .itc-select__text-selected {
       font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+    }
+  }
+}
+
+// classic mode
+.itc-select {
+  &--classic {
+    min-width: 70px;
+    .itc-select__toggle {
+      border: none;
+      background-color: transparent;
+      column-gap: 8px;
+      padding: 0 8px;
+
+      &::after {
+        width: 18px;
+        height: 18px;
+        content: url('../img/icons/calendar-carret.svg');
+        transform: rotate(0);
+      }
+    }
+
+    .itc-select__placeholder {
+      display: none;
+      // background-color: transparent;
+      // font-size: 14px;
+      // font-weight: 500;
+      // line-height: 20px;
+      // letter-spacing: 0.1px;
+      // left: 0;
+    }
+
+    &.itc-select_show {
+      .itc-select__toggle {
+        &:after {
+          transform: rotate(180deg);
+        }
+      }
+      // .itc-select__placeholder {
+      //   top: 50%;
+      //   font-size: 14px;
+      //   font-weight: 500;
+      //   line-height: 20px;
+      //   letter-spacing: 0.1px;
+      // }
+    }
+
+    // &:has(.itc-select__option_selected) .itc-select__placeholder {
+    //   top: 50%;
+    //   opacity: 0;
+    //   visibility: hidden;
+    //   font-size: 14px;
+    //   font-weight: 500;
+    //   line-height: 20px;
+    //   letter-spacing: 0.1px;
+    // }
+
+    .itc-select__option {
+      padding: 5px;
+      // text-align: center;
+      // justify-content: center;
+    }
+
+    .itc-select__text-selected {
+      font-size: 14px;
+      font-style: normal;
       font-weight: 500;
       line-height: 20px;
       letter-spacing: 0.1px;

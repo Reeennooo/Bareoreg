@@ -4,7 +4,7 @@
       +data-block({title: 'Пациент', value: 'Павленко Павел Павлович'})
       +data-block({title: 'Операция', value: 'RYGB (Гастрошунтирование)'})
       +data-block({title: 'Дата операции', value: '01.01.2022'})
-      +input-custom({type: 'text', placeholder: 'Дата наблюдения*', name: 'date-observation',})(autocomplete='off' data-required='').only-number#calendar-observation
+      +input-custom({type: 'text', placeholder: 'Дата наблюдения*', name: 'date-observation', calendar: true})(autocomplete='off' data-required='').only-number#calendar-observation
       +input-custom({type: 'number', placeholder: 'Вес на момент наблюдения*', name: 'weight-observation', message: 'Предыдущий показатель 83.2 кг'})(data-required='' class='have-message')
       +data-block({title: '%EWL', value: '0%'})
   +group({title: 'Бандажирование желудка'}).form-creating-observation__gastric-bandage
@@ -43,7 +43,7 @@
             ]
           })
       +input-custom({type: 'text', placeholder: 'Изменение объема заполнения', name: 'changing-filling-volume'})(data-required='')
-      +input-custom({type: 'text', placeholder: 'Планируемая дата регулировки', name: 'date-adjusting-bandage',})(autocomplete='off').only-number#calendar-adjusting-bandage
+      +input-custom({type: 'text', placeholder: 'Планируемая дата регулировки', name: 'date-adjusting-bandage', calendar: true})(autocomplete='off').only-number#calendar-adjusting-bandage
   +group({title: 'Общие сведения'}).form-creating-observation__general-information
     .group__form
       +group-radio-buttons({title: 'Приём витаминов и микроэлементов*'})(data-required='')

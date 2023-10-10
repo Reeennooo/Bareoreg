@@ -169,7 +169,7 @@ export class ItcCustomSelect {
     }
 
     show() {
-        document.querySelectorAll(this.constructor.EL_SHOW).forEach((el) => {
+        document.querySelectorAll(`.${this.constructor.EL_SHOW}`).forEach((el) => {
             el.classList.remove(this.constructor.EL_SHOW);
         });
         this._el.classList.add(`${this.constructor.EL_SHOW}`);
@@ -193,7 +193,7 @@ export class ItcCustomSelect {
 
     set value(value) {
         let isExists = false;
-        this._el.querySelectorAll('.select__option').forEach((option) => {
+        this._el.querySelectorAll('.itc-select__option').forEach((option) => {
             if (option.dataset.value === value) {
                 isExists = true;
                 this._updateOption(option);
@@ -209,11 +209,12 @@ export class ItcCustomSelect {
     }
 
     set selectedIndex(index) {
-        const option = this._el.querySelector(`.select__option[data-index="${index}"]`);
+        const option = this._el.querySelector(`.itc-select__option[data-index="${index}"]`);
         if (option) {
             this._updateOption(option);
+        } else {
+            this._reset();
         }
-        this._reset();
     }
 }
 

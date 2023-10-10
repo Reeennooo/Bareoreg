@@ -28,6 +28,6 @@ function initSelects(selects) {
 document.addEventListener('DOMContentLoaded', () => {
     initSelects(selects);
     assignInputRules(rules);
-    new AirDatepicker('#calendar-observation', {});
-    new AirDatepicker('#calendar-adjusting-bandage', {});
+    new window.Calendar('#calendar-observation')
+    new window.Calendar('#calendar-adjusting-bandage')
 });

@@ -107,11 +107,12 @@ const RULES_FOR_FIELDS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    const profile = document.querySelector('.profile');
+    if (!profile) return;
     // Установим правила для полей
     assignInputRules(RULES_FOR_FIELDS);
 
     // Редактирование прфоиля
-    const profile = document.querySelector('.profile');
     const editBtn = document.querySelector('.profile__edit-btn');
     const btnCancelChanges = profile.querySelector('.profile__cancel-changes');
     const btnSaveChanges = profile.querySelector('.profile__save-changes');
@@ -132,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSave = btnSaveChanges;
         }
 
-        console.log(inputs);
+        // console.log(inputs);
 
         let result = [...inputs].map((input) => {
             if (input.value && !input.classList.contains('is-invalid')) {

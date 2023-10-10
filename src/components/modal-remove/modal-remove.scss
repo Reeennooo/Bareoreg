@@ -1,4 +1,7 @@
 .modal-remove {
+  .i-modal__content {
+    max-width: 670px;
+  }
   &__title {
     font-size: 28px;
     font-style: normal;

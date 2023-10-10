@@ -12,9 +12,13 @@ block meta
 block content
     .container
         //- include ../blocks/chart/chart
-        h1 Заголовок контента
-        svg(width="13" height="10")
-            use(xlink:href="img/sprite.svg#check")
+        //- +calendar
+        +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth', calendar: true})(autocomplete='off' data-required='')#my-test-calendar
+        //- input#my-test-calendar
+        //- input#my-test-calendar-two
+        //- h1 Заголовок контента
+        //- svg(width="13" height="10")
+        //-     use(xlink:href="img/sprite.svg#check")
 
 //-block footer
 
