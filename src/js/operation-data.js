@@ -17,6 +17,7 @@ export const OPERATIONS = {
                 name: 'Формирование малого желудочка',
                 active: true,
                 number: 1,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -144,6 +145,7 @@ export const OPERATIONS = {
                 name: 'Формирование анастамозов',
                 active: false,
                 number: 2,
+                observe: true,
                 content: [
                     {
                         type: 'SELECT',
@@ -156,7 +158,6 @@ export const OPERATIONS = {
                                 ['Процент от общей длины тонкой кишки', 'Процент от общей длины тонкой кишки'],
                             ],
                             hasConnection: 'method-determination-small-gut',
-                            required: false,
                         },
                     },
                     {
@@ -534,6 +535,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 active: false,
                 number: 3,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -726,6 +728,7 @@ export const OPERATIONS = {
             {
                 name: 'Завершающий этап',
                 active: true,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -788,6 +791,7 @@ export const OPERATIONS = {
                 name: 'Формирование желудочной трубки',
                 number: 1,
                 active: true,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -869,6 +873,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 number: 2,
                 active: false,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -931,6 +936,7 @@ export const OPERATIONS = {
                 name: 'Формирование малого желудочка',
                 active: true,
                 number: 1,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1054,6 +1060,7 @@ export const OPERATIONS = {
                 name: 'Формирование анастомозов',
                 active: false,
                 number: 2,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1319,6 +1326,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 number: 3,
                 active: false,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1393,6 +1401,7 @@ export const OPERATIONS = {
                 name: 'Формирование желудочной трубки',
                 number: 1,
                 active: true,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1512,6 +1521,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 number: 2,
                 active: false,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1622,6 +1632,7 @@ export const OPERATIONS = {
                 name: 'Формирование желудочной трубки',
                 number: 1,
                 active: true,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1745,6 +1756,7 @@ export const OPERATIONS = {
                 name: 'Формирование анастомоза',
                 number: 2,
                 active: false,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1883,6 +1895,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 active: false,
                 number: 3,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -1945,6 +1958,7 @@ export const OPERATIONS = {
                 name: 'Формирование малого желудочка',
                 number: 1,
                 active: true,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -2066,6 +2080,7 @@ export const OPERATIONS = {
                 name: 'Формирование анастомоза',
                 number: 2,
                 active: false,
+                observe: true,
                 content: [
                     {
                         type: 'SELECT',
@@ -2257,6 +2272,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 active: false,
                 number: 3,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -2332,6 +2348,7 @@ export const OPERATIONS = {
                 name: 'Формирование малого желудочка',
                 number: 1,
                 active: true,
+                observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',
@@ -2452,6 +2469,7 @@ export const OPERATIONS = {
                 name: 'Формирование анастомоза',
                 number: 2,
                 active: false,
+                observe: true,
                 content: [
                     {
                         type: 'SELECT',
@@ -2643,6 +2661,7 @@ export const OPERATIONS = {
                 name: 'Завершающий этап',
                 active: false,
                 number: 3,
+                // observe: true,
                 content: [
                     {
                         type: 'RADIO-GROUP',

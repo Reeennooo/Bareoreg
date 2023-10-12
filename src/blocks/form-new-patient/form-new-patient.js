@@ -1,4 +1,3 @@
-import AirDatepicker from 'air-datepicker';
 import IMask from 'imask/esm/index';
 import { assignInputRules } from '../../js/input-validate';
 

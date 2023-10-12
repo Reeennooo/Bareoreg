@@ -10,6 +10,23 @@ mixin group(data)
       .group__inner
         if block
             block
+  else if (data.type === 'simple')
+    .group.group--simple&attributes(attributes).is-active
+      .group__header
+        .group__text
+          .group__title
+            span=data.title
+            if(data.operation)
+              span.group__add-info
+          if(data.subtitle)
+            .group__subtitle=data.subtitle
+        .group__toggle
+          svg.svg
+            use(xlink:href="img/sprite.svg#caret-up")
+      .group__inner-wrapper
+        .group__inner
+          if block
+              block
   else
     .group&attributes(attributes).is-active
       .group__header

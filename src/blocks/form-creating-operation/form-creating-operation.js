@@ -1,4 +1,3 @@
-import AirDatepicker from 'air-datepicker';
 import tippy from 'tippy.js';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
@@ -263,9 +262,8 @@ function initSelects(selects) {
         } else if (selectId === 'kind-of-operation') {
             selectKindOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else {
- 
             let select = new window.ItcCustomSelect(`#${selectId}`);
-            console.log(select)
+            console.log(select);
         }
     });
 }
@@ -284,8 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // calendars
     // Написать функцию которая делает календарь 100% ширины, под инпут.
     // Считывать ширину инпута и задавать нужному календарю
-    new window.Calendar('#calendar-operation')
-    new window.Calendar('#calendar-discharge')
+    new window.Calendar('#calendar-operation');
+    new window.Calendar('#calendar-discharge');
 
     // СВЯЗИ
     const hasConnections = document.querySelectorAll('[data-has-connection]');
@@ -585,7 +583,7 @@ export function createGroup(data) {
                         <use href='img/sprite.svg#check'></use>
                     </svg>
                     </div>
-                    <span>${data.title}${data.number}</span>
+                    <span>${data.title}${data.number ? data.number : ''}</span>
                     <span class='group__add-info'></span>
                 </div>
             </div>
@@ -604,7 +602,11 @@ export function createGroup(data) {
     const form = group.querySelector('.group__form');
 
     if (data.addClass) {
-        group.classList.add(data.addClass);
+        if (typeof data.addClass === 'object') {
+            data.addClass.forEach((el) => group.classList.add(el));
+        } else {
+            group.classList.add(data.addClass);
+        }
     }
 
     let fields;
@@ -628,8 +630,13 @@ export function createGroup(data) {
                     return createButton(item.data);
             }
         });
+        fields.forEach((field) => form.append(field));
     }
-    fields.forEach((field) => form.append(field));
+
+    if (data.dataBlocks) {
+        data.dataBlocks.forEach((item) => form.append(item));
+    }
+
     initGroup([group]);
     return group;
 }
@@ -654,7 +661,7 @@ function createSingleField(item) {
 export function createAditionalGroup(groupData) {
     const group = document.createElement('div');
     // console.log(groupData);
-    const innerElements = groupData.content.map((item) => {
+    const innerElements = groupData.content?.map((item) => {
         switch (item.type) {
             case 'RADIO-GROUP':
                 return createRadioGroup(item.data);
@@ -708,24 +715,38 @@ export function createAditionalGroup(groupData) {
             </button>`
         );
     }
+
+    if (groupData.addClass) {
+        if (typeof groupData.addClass === 'object') {
+            groupData.addClass.forEach((el) => group.classList.add(el));
+        } else {
+            group.classList.add(groupData.addClass);
+        }
+    }
     // console.log(innerElements);
     const groupAddForm = group.querySelector('.group__additional-form');
-    innerElements.map((item) => {
-        groupAddForm.append(item);
+    innerElements?.map((item) => {
+        if (item) groupAddForm.append(item);
     });
 
-    // Появление следующего этапа операции
-    const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-            if (mutation.target.classList.contains('is-filled') && mutation.target.classList.contains('is-active')) {
-                // console.log('Терперь группа is-flled:');
-                // console.log(mutation.target);
-                const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
-                nextStep?.classList.add('is-active');
+    if (groupData.dataBlocks) {
+        groupData.dataBlocks.forEach((item) => groupAddForm.append(item));
+    }
+
+    if (groupData.observe) {
+        // Появление следующего этапа операции
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (mutation.target.classList.contains('is-filled') && mutation.target.classList.contains('is-active')) {
+                    // console.log('Терперь группа is-flled:');
+                    // console.log(mutation.target);
+                    const nextStep = document.querySelector(`.form-creating-operation__operation [data-number='${groupData.number + 1}']`);
+                    nextStep?.classList.add('is-active');
+                }
             }
-        }
-    });
-    observer.observe(group, { attributeFilter: ['class'] });
+        });
+        observer.observe(group, { attributeFilter: ['class'] });
+    }
 
     return group;
 }
@@ -745,16 +766,15 @@ export function createInput(data) {
     }
 
     if (data.mod === 'calendar') {
-        
         // new AirDatepicker(input.querySelector('input'), {});
         let calendarToggler = `
         <div class='calendar-toggler'>
             <svg>
                 <use href='img/sprite.svg#calendar'></use>
             </svg>
-        </div>`
-        input.querySelector('.input-custom__input').insertAdjacentHTML('afterend', calendarToggler)
-        new window.Calendar(input.querySelector('input'))
+        </div>`;
+        input.querySelector('.input-custom__input').insertAdjacentHTML('afterend', calendarToggler);
+        new window.Calendar(input.querySelector('input'));
     }
 
     if (data.addClass) {

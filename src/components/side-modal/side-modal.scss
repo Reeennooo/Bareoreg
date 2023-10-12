@@ -1,4 +1,5 @@
 .side-modal.i-modal {
+  overflow: hidden;
   z-index: 0;
   left: 0;
   bottom: 0;
@@ -27,6 +28,39 @@
     }
   }
 
+  &.side-modal-operation {
+    .side-modal__main {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      padding: 0;
+    }
+
+    .group__form,
+    .group__additional-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      // align-items: flex-start;
+      gap: 24px;
+    }
+
+    .side-modal__edit,
+    .side-modal__print,
+    .side-modal__remove {
+      display: inline-flex;
+    }
+  }
+
+  &.view-mode {
+    .side-modal__bottom {
+      transform: translateY(100%);
+    }
+
+    .i-modal__inner {
+      padding-bottom: 0;
+    }
+  }
+
   .i-modal__content {
     max-width: 940px;
     opacity: 1;
@@ -42,22 +76,38 @@
 
   .i-modal__inner {
     height: 100%;
+    padding-bottom: 90px;
+    overflow: auto;
   }
 
   form {
-    padding: 24px 40px 90px;
-    height: 100%;
     display: flex;
     flex-direction: column;
   }
 
   .side-modal__header {
+    position: relative;
     display: flex;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 24px;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid #e8eaee;
+    // border-bottom: 2px solid #e8eaee;
+
     padding-bottom: 24px;
     margin-bottom: 24px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: calc(100% - 80px);
+      height: 2px;
+      position: absolute;
+      background-color: #e8eaee;
+      bottom: 0;
+      left: 40px;
+    }
   }
 
   .side-modal__header-buttons {
@@ -66,9 +116,15 @@
     column-gap: 16px;
   }
 
-  .side-modal__remove {
+  .btn {
     display: none;
+  }
 
+  .btn.side-modal__close {
+    display: inline-flex;
+  }
+
+  .side-modal__remove {
     svg {
       stroke: $red-btn;
     }
@@ -83,7 +139,8 @@
   }
 
   .side-modal__main {
-    // flex-grow: 1;
+    padding-left: 40px;
+    padding-right: 40px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
@@ -99,6 +156,7 @@
     left: 0;
     bottom: 0;
     padding: 24px 40px;
+    background-color: $white;
     border-top: 2px solid #e8eaee;
     width: 100%;
     display: flex;

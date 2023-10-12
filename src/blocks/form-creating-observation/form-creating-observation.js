@@ -1,5 +1,5 @@
 import { assignInputRules } from '../../js/input-validate';
-import AirDatepicker from 'air-datepicker';
+
 const selects = {
     'gastric-bandage': ['reason-adjusting-bandage'],
     'general-information': ['arterial-hypertension', 'compensation-SD', 'GERD', 'bronchial-asthma', 'functional-status', 'back-and-limb-pain', 'hernia', 'sagging-skin', 'fat-apron'],
