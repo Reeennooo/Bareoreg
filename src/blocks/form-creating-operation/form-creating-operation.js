@@ -80,15 +80,15 @@ const VALIDATION_RULES = {
     },
 };
 
-const CONNECTED_RULES = {
+export const CONNECTED_RULES = {
     // key - имя связи
     // value - подходящие значений(для выпадающих списков можно использовать индексы(формат число)).
     access: [
         {
-            value: 'laparotomy',
+            value: 'Лапаратомия',
         },
         {
-            value: 'conversion-to-laparotomy',
+            value: 'Конверсия из лапароскопии в лапаротомию',
         },
     ],
     revision: [
@@ -519,7 +519,8 @@ function setConnectionsForElements(element, rules) {
                                     const selectOptions = newSelect.querySelector('.itc-select__options');
                                     selectOptions.innerHTML = '';
                                     const selectBtn = newSelect.querySelector('button');
-                                    selectBtn.querySelector('.itc-select__text-selected').innerHTML = '';
+                                    console.log(selectBtn);
+                                    selectBtn.querySelector('.itc-select__text-selected span').innerHTML = '';
                                     selectBtn.dataset.index = '-1';
                                     const newOptions = rulesItem.changeSelect.options.map((option, index) => {
                                         return `<li class="itc-select__option" data-select="option" data-value='${option[0]}' data-index='${index}'>
@@ -718,7 +719,9 @@ export function createAditionalGroup(groupData) {
 
     if (groupData.addClass) {
         if (typeof groupData.addClass === 'object') {
-            groupData.addClass.forEach((el) => group.classList.add(el));
+            groupData.addClass.forEach((el) => {
+                group.classList.add(el);
+            });
         } else {
             group.classList.add(groupData.addClass);
         }
@@ -765,6 +768,10 @@ export function createInput(data) {
         input?.querySelector('input')?.setAttribute('data-required', '');
     }
 
+    if (data.value) {
+        input.querySelector('input').value = data.value;
+    }
+
     if (data.mod === 'calendar') {
         // new AirDatepicker(input.querySelector('input'), {});
         let calendarToggler = `
@@ -778,8 +785,23 @@ export function createInput(data) {
     }
 
     if (data.addClass) {
-        input?.querySelector('input').classList.add(data.addClass);
+        if (typeof data.addClass === 'object') {
+            data.addClass.forEach((el) => {
+                if (el === 'long') {
+                    input.classList.add(el);
+                } else {
+                    input?.querySelector('.input-custom__input input').classList.add(el);
+                }
+            });
+        } else {
+            if (data.addClass === 'long') {
+                input.classList.add(data.addClass);
+            } else {
+                input?.querySelector('input').classList.add(data.addClass);
+            }
+        }
     }
+
     if (data.connected) {
         input.setAttribute('data-connected', data.connected);
         checkConnectionValue(input, CONNECTED_RULES);
@@ -823,6 +845,9 @@ function createRadioGroup(data) {
             <span class='radio__fake'></span>
             <span class='radio__label'>${el[1]}</span>
             `;
+        if (data.value === el[0]) {
+            option.querySelector('input').checked = true;
+        }
         options.push(option);
     });
 
@@ -851,6 +876,14 @@ function createRadioGroup(data) {
         });
     }
 
+    if (data.addClass) {
+        if (typeof data.addClass === 'object') {
+            data.addClass.forEach((el) => radioGroup.classList.add(el));
+        } else {
+            radioGroup.classList.add(data.addClass);
+        }
+    }
+
     if (data.connected) {
         radioGroup.setAttribute('data-connected', data.connected);
         checkConnectionValue(radioGroup, CONNECTED_RULES);
@@ -875,7 +908,19 @@ export function createSelect(data) {
         select.setAttribute('data-required', '');
     }
 
-    initSelect(select, data);
+    const itcSelect = initSelect(select, data);
+
+    if (data.value) {
+        if (typeof data.value === 'object') {
+            data.value.forEach((val) => (itcSelect.value = val));
+        } else {
+            itcSelect.value = data.value;
+        }
+    }
+
+    if (data.addClass) {
+        select?.classList.add(data.addClass);
+    }
 
     if (data.hasConnection) {
         select.setAttribute('data-has-connection', data.hasConnection);
@@ -938,7 +983,7 @@ function initSelect(select, data, variable) {
             targetValue: data.targetValue,
         });
     } else {
-        new window.ItcCustomSelect(select, {
+        return new window.ItcCustomSelect(select, {
             name: data.name,
             placeholder: data.placeholder,
             options: data.options,
@@ -949,8 +994,7 @@ function initSelect(select, data, variable) {
 }
 
 // проверка связи для созданных с помощью JS элементов.
-function checkConnectionValue(element, connectedRules) {
-    // console.log(element);
+export function checkConnectionValue(element, connectedRules) {
     const connectedKey = element.dataset.connected;
     const connectionParent = document.querySelector(`[data-has-connection=${connectedKey}]`);
     let monitoringElement;
@@ -958,6 +1002,8 @@ function checkConnectionValue(element, connectedRules) {
     if (!connectionParent) return;
 
     function activeToggler(element, state) {
+        // console.log(element);
+        // console.log(state);
         if (state) {
             element.classList.add('is-active');
         } else if (element.classList.contains('is-active')) {
@@ -975,10 +1021,18 @@ function checkConnectionValue(element, connectedRules) {
     }
     if (connectionParent.closest('.itc-select')) {
         monitoringElement = connectionParent.querySelector('button');
-        activeToggler(
-            element,
-            connectedRules[connectedKey].find((item) => item.value === monitoringElement.value)
-        );
+
+        let dataId = element.getAttribute('data-id');
+        if (dataId) {
+            let state = connectedRules[connectedKey].find((item) => (item.value === Number(monitoringElement.dataset.index) || item.value === monitoringElement.value) && item.connectedID === dataId);
+            activeToggler(element, state);
+        } else {
+            activeToggler(
+                element,
+                connectedRules[connectedKey].find((item) => item.value === monitoringElement.value)
+            );
+        }
+
         return;
     }
     if (connectionParent.closest('.checkbox')) {

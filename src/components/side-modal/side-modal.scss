@@ -28,32 +28,9 @@
     }
   }
 
-  &.side-modal-operation {
-    .side-modal__main {
-      display: flex;
-      flex-direction: column;
-      row-gap: 20px;
-      padding: 0;
-    }
-
-    .group__form,
-    .group__additional-form {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      // align-items: flex-start;
-      gap: 24px;
-    }
-
-    .side-modal__edit,
-    .side-modal__print,
-    .side-modal__remove {
-      display: inline-flex;
-    }
-  }
-
   &.view-mode {
     .side-modal__bottom {
-      transform: translateY(100%);
+      display: none;
     }
 
     .i-modal__inner {
@@ -75,8 +52,8 @@
   }
 
   .i-modal__inner {
+    position: relative;
     height: 100%;
-    padding-bottom: 90px;
     overflow: auto;
   }
 
@@ -86,7 +63,12 @@
   }
 
   .side-modal__header {
-    position: relative;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    background-color: $white;
+    left: 0;
+    width: 100%;
     display: flex;
     padding-left: 40px;
     padding-right: 40px;
@@ -108,16 +90,22 @@
       bottom: 0;
       left: 40px;
     }
+
+    &.is-scrolled {
+      &::before {
+        display: none;
+      }
+    }
   }
 
   .side-modal__header-buttons {
     display: flex;
     align-items: center;
     column-gap: 16px;
-  }
 
-  .btn {
-    display: none;
+    .btn {
+      display: none;
+    }
   }
 
   .btn.side-modal__close {
@@ -152,7 +140,7 @@
   }
 
   .side-modal__bottom {
-    position: absolute;
+    position: sticky;
     left: 0;
     bottom: 0;
     padding: 24px 40px;
@@ -166,6 +154,63 @@
     .btn {
       max-width: 240px;
       width: 100%;
+    }
+  }
+
+  .long {
+    grid-column-end: span 2;
+  }
+}
+
+.side-modal.side-modal-operation {
+  .side-modal__main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 0;
+  }
+
+  .group__form,
+  .group__additional-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    // align-items: flex-start;
+    gap: 24px;
+  }
+
+  .side-modal__header-buttons {
+    .side-modal__edit,
+    .side-modal__print,
+    .side-modal__remove {
+      display: inline-flex;
+    }
+  }
+
+  .side-modal__bottom {
+    margin-top: 24px;
+  }
+
+  // input
+  .input-custom {
+    input,
+    input ~ label {
+      background-color: $background;
+    }
+  }
+
+  // select
+  .itc-select {
+    .itc-select__toggle,
+    .itc-select__placeholder {
+      background-color: $background;
+    }
+  }
+
+  // textarea
+  .textarea {
+    textarea,
+    label {
+      background-color: $background;
     }
   }
 }

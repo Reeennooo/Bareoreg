@@ -4,6 +4,13 @@
   width: 100%;
 }
 
+.itc-select.itc-select--violet {
+  .itc-select__toggle,
+  .itc-select__placeholder {
+    background-color: $background;
+  }
+}
+
 .itc-select input {
   width: 0.5px;
   height: 0.5px;

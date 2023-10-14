@@ -106,7 +106,7 @@ export class Complication {
             {
                 type: 'TEXTAREA',
                 data: {
-                    name: `note_${this._id}`,
+                    name: `note_${data.number}`,
                     type: 'text',
                     placeholder: 'Примечание',
                     required: false,
@@ -298,6 +298,12 @@ export class Complication {
                 ],
             },
         ];
+        this.fieldsValue = data.fieldsValue;
+        if (this.fieldsValue) {
+            this._setComplicationValue();
+        }
+
+        this.interventionClass = data.interventionClass;
         this.el = createGroup({ number: this.number, title: this.title, fields: this.fields, addClass: data.addClass });
         this.complicationName = this.el.querySelector('.group__add-info');
         this._buttonIntervention = this.el.querySelector('.add-intervention');
@@ -327,18 +333,34 @@ export class Complication {
             this._setComplicationName(selectedTxt);
         });
         complicationObserver.observe(mainComplication, { attributeFilter: ['data-index', 'value'] });
-        console.log(this.fieldsRules);
+
+        if (this.fieldsValue) {
+            this._setComplicationName(this.fieldsValue['main-complication']);
+        }
     }
 
     _setComplicationName(txt) {
         this.complicationName.innerText = txt;
     }
 
+    _setComplicationValue() {
+        const valueKeys = Object.keys(this.fieldsValue);
+
+        this.fields.find((element) => {
+            valueKeys.forEach((key) => {
+                if (element.data.name && element.data.name.includes(key)) {
+                    element.data.value = this.fieldsValue[key];
+                }
+            });
+        });
+        console.log(this.fields);
+    }
+
     _addIntervention() {
         let interventionNumber = 1;
 
         return function () {
-            let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}` });
+            let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass });
 
             interventionNumber++;
 
@@ -450,6 +472,7 @@ export class RepeatedIntervention {
             content: this.fields,
             deleteButton: true,
             active: true,
+            addClass: data.addClass,
         });
     }
 

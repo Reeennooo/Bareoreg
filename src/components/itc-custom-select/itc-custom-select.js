@@ -145,7 +145,7 @@ export class ItcCustomSelect {
         if (selected) {
             selected.classList.remove(this.constructor.EL_OPTION_SELECTED);
         }
-        this._elToggle.textContent = '';
+        this._textSelectedEl.textContent = '';
         this._elToggle.value = '';
         this._input.value = '';
         this._elToggle.dataset.index = '-1';
@@ -199,6 +199,15 @@ export class ItcCustomSelect {
                 this._updateOption(option);
             }
         });
+
+        // if (this._multiple && typeof value === 'object') {
+        //     this._el.querySelectorAll('.itc-select__option').forEach((option) => {
+        //         if (value.indexOf(option) !== -1) {
+        //             this._updateOption(option);
+        //         }
+        //     });
+        // }
+
         if (!isExists) {
             this._reset();
         }

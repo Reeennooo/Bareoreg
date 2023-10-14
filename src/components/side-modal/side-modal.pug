@@ -10,8 +10,8 @@ mixin side-modal(data)
       .side-modal__header
         .side-modal__title=data.title
         .side-modal__header-buttons
-          +btn({icon: 'pencil', mode: 'only-icon'}).side-modal__edit
-          +btn({icon: 'printer', mode: 'only-icon'}).side-modal__print
+          +btn({icon: 'pencil', mode: 'only-icon'})(type='button').side-modal__edit
+          +btn({icon: 'printer', mode: 'only-icon'})(type='button').side-modal__print
           +btn({icon: 'trash', mode: 'only-icon'})(data-modal='modal-remove' type='button').side-modal__remove
           +btn({icon: 'ArrowLineRight', mode: 'only-icon'})(data-modal-close type='button').side-modal__close
           

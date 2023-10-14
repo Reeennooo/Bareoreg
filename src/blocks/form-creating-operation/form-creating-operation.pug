@@ -188,17 +188,17 @@
         options: [
           {
             index: 0,
-            value: 'value1',
+            value: 'Лапароскопия',
             txt: 'Лапароскопия'
           },
           {
             index: 1,
-            value: 'laparotomy',
+            value: 'Лапаратомия',
             txt: 'Лапаратомия'
           },
           {
             index: 2,
-            value: 'conversion-to-laparotomy',
+            value: 'Конверсия из лапароскопии в лапаротомию',
             txt: 'Конверсия из лапароскопии в лапаротомию'
           },
           {
@@ -419,7 +419,7 @@
         +checkbox({name: "emergency-situation9", value: 'yes', label: 'Поломка элементов оборудования'})
         +checkbox({name: "emergency-situation10", value: 'yes', label: 'Резкое ухудшение состояния хирурга/ассистента'})
         +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment'})
-  +group({title: 'Прибывание в стационаре и исход'}).form-creating-operation__hospital
+  +group({title: 'Пребывание в стационаре и исход'}).form-creating-operation__hospital
     .group__form
       +itc-custom-select({
           id: 'vomiting', 

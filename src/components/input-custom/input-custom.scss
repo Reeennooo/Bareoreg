@@ -48,6 +48,13 @@
     border-radius: 4px;
     appearance: none;
     @include transition('border-color, box-shadow');
+
+    &.input-custom--violet {
+      background-color: $background;
+      & ~ label {
+        background-color: $background;
+      }
+    }
   }
 
   input[type='search']::-webkit-search-decoration,
