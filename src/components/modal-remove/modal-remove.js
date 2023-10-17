@@ -1,9 +1,19 @@
 const removeData = {
     'remove-work': {
         title: 'Удаление места работы',
+        subtitle: 'Это действие безвозвратно, вы уверены?',
     },
     'remove-assistant': {
         title: 'Удаление ассистента',
+        subtitle: 'Это действие безвозвратно, вы уверены?',
+    },
+    'remove-operation': {
+        title: 'Удаление операции',
+        subtitle: 'Это действие безвозвратно, вы уверены?',
+    },
+    'remove-observation': {
+        title: 'Удаление наблюдения',
+        subtitle: 'Это действие безвозвратно, вы уверены?',
     },
 };
 
@@ -55,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (removeData[trashBtn.dataset.modalName]) {
             removeModal.querySelector('.modal-remove__title').innerText = removeData[trashBtn.dataset.modalName].title;
+            removeModal.querySelector('.modal-remove__subtitle').innerText = removeData[trashBtn.dataset.modalName]?.subtitle;
         }
     });
 

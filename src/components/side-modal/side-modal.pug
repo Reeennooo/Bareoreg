@@ -19,5 +19,6 @@ mixin side-modal(data)
         if block
           block
       .side-modal__bottom
-        +btn({txt: 'Отменить', mode: 'ghost'})(data-modal-close type='button')
+        //- data-modal-close
+        +btn({txt: 'Отменить', mode: 'ghost'})(type='button' class='cancel-button')
         +btn({txt: 'Сохранить'})(disabled).submit-button

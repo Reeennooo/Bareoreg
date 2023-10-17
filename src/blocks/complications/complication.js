@@ -308,7 +308,7 @@ export class Complication {
         this.complicationName = this.el.querySelector('.group__add-info');
         this._buttonIntervention = this.el.querySelector('.add-intervention');
         this._allInterventions = [];
-        this._buttonIntervention.addEventListener('click', this._addIntervention().bind(this));
+        this._buttonIntervention.addEventListener('click', this.addIntervention.bind(this));
         this.fieldsRules = {
             [`date-of-detection-complication${data.number}`]: {
                 required: {
@@ -353,14 +353,13 @@ export class Complication {
                 }
             });
         });
-        console.log(this.fields);
     }
 
-    _addIntervention() {
+    _createInterventionFn() {
         let interventionNumber = 1;
 
-        return function () {
-            let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass });
+        return function (repeatedIntData) {
+            let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass, interventionData: repeatedIntData });
 
             interventionNumber++;
 
@@ -386,6 +385,8 @@ export class Complication {
             intervention.el.querySelector('.group__delete').addEventListener('click', deleteIntervention.bind(this));
         };
     }
+
+    addIntervention = this._createInterventionFn();
 }
 
 export class RepeatedIntervention {
@@ -467,6 +468,15 @@ export class RepeatedIntervention {
                 },
             },
         ];
+        if (data.interventionData) {
+            Object.entries(data.interventionData).forEach((item) => {
+                this.fields.forEach((field) => {
+                    if (field.data.name.includes(item[0])) {
+                        field.data.value = item[1];
+                    }
+                });
+            });
+        }
         this.el = createAditionalGroup({
             name: this.title + this.number,
             content: this.fields,

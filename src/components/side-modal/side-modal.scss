@@ -162,7 +162,29 @@
   }
 }
 
+// Модальное окно операции
 .side-modal.side-modal-operation {
+  &.is-editable {
+    .group__form,
+    .group__additional-form {
+      gap: 44px 24px;
+    }
+
+    .group__header {
+      padding-bottom: 44px;
+    }
+
+    .side-modal__header {
+      &::before {
+        display: none;
+      }
+    }
+
+    .side-modal__header {
+      margin-bottom: 0;
+    }
+  }
+
   .side-modal__main {
     display: flex;
     flex-direction: column;

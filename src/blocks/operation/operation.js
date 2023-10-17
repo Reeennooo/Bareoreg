@@ -9,294 +9,297 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sideModalData = {
         observations: ['45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.'],
-        operation: [
-            {
-                name: 'Общие сведения',
-                addClass: ['group--simple'],
-                dataBlocks: [
-                    {
-                        name: 'Вес на момент операции',
-                        value: '83.2 кг',
-                    },
-                    {
-                        name: 'Дата операции',
-                        value: '02.06.2023',
-                    },
-                    {
-                        name: 'Хирург',
-                        value: 'Петров Петр Петрович',
-                    },
-                    {
-                        name: 'Ассистент №1',
-                        value: 'Анастасьевна Анастасия Петрова',
-                    },
-                    {
-                        name: 'Ассистент №2',
-                        value: 'Викториан Виктор Викторович',
-                    },
-                    {
-                        name: 'Тип операции',
-                        value: 'Ревизия после бариатрической операции в другой клинике',
-                    },
-                    {
-                        name: 'Причина ревизии',
-                        value: 'Рецидив набора веса',
-                    },
-                    {
-                        name: 'Доступ',
-                        value: 'Лапароскопия',
-                    },
-                    {
-                        name: 'Длительность операции (мин)',
-                        value: '52',
-                    },
-                    {
-                        name: 'Обезболивание',
-                        value: 'ЭТН + пластырь',
-                    },
-                    {
-                        name: 'Обезболивание',
-                        value: 'ЭТН + пластырь',
-                    },
-                ],
-            },
-            {
-                name: 'Этапы операции',
-                addClass: 'group--simple',
-                additionalGroup: [
-                    {
-                        name: 'Формирование малого желудочка',
-                        addClass: 'group--simple',
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Желудочек сформирован по зонду',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Сшивающий аппарат',
-                                value: 'Endopath Echelon 60, Endopath Echelon 45',
-                            },
-                            {
-                                name: 'Укрепление линии шва',
-                                value: 'Нужны варианты ответа',
-                            },
-                            {
-                                name: 'Количество кассет',
-                                value: '2',
-                            },
-                            {
-                                name: 'Диаметр зонда (Fr)',
-                                value: '36',
-                            },
-                            {
-                                name: 'Использованные кассеты',
-                                value: 'Черные (4-4.5-5 мм)',
-                            },
-                            {
-                                name: 'Отступ от привратника (см)',
-                                value: 'Ушивание',
-                            },
-                            {
-                                name: 'Обработка хиатуса',
-                                value: 'Мобилизация абдоминального отдела пищевода',
-                            },
-                            {
-                                name: 'Количество кассет',
-                                value: '2',
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Формирование анастомозов',
-                        addClass: ['group--simple'],
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Метод определения места пересечения тонкой кишки',
-                                value: 'Отступ от илеоцекального угла',
-                            },
-                            {
-                                name: 'Длина тонкой кишки (см)',
-                                value: '4000',
-                            },
-                            {
-                                name: 'Длина общей петли (см)',
-                                value: '4000',
-                            },
-                            {
-                                name: 'Длина алиментарной петли (см)',
-                                value: '4000',
-                            },
-                            {
-                                name: 'Длина общей петли (см)',
-                                value: '4000',
-                            },
-                            {
-                                name: 'Использованные кассеты',
-                                value: 'Черные (4-4.5-5 мм)',
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Гастроэнтероанастомоз',
-                        addClass: ['group--simple'],
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Расположение гастроэнтероанастомоза',
-                                value: 'Впередиободочное',
-                            },
-                            {
-                                name: 'Расположение алиментарной петли',
-                                value: '4000',
-                            },
-                            {
-                                name: 'Отсечение торцевой степлерной линии',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Формирование ГЭА',
-                                value: 'Аппаратный циркулярный',
-                            },
-                            {
-                                name: 'Сшивающий аппарат',
-                                value: 'Ethicon',
-                            },
-                            {
-                                name: 'Количество кассет',
-                                value: '8',
-                            },
-                            {
-                                name: 'Использованные кассеты',
-                                value: 'Зеленые (4.1 мм), Синие (3.5 мм)',
-                            },
-                            {
-                                name: 'Закрытие технологического отверстия',
-                                value: 'Ручное',
-                            },
-                            {
-                                name: 'Ручной анастомоз',
-                                value: 'Однорядный, нитью Stratafix',
-                            },
-                            {
-                                name: 'Диаметр анастомоза (см)',
-                                value: '1,5 - 3 см',
-                            },
-                            {
-                                name: 'Была ли сформирована шпора?',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Высота шпоры (см)',
-                                value: '2',
-                            },
-                            {
-                                name: 'Комментарий к ручному анастомозу',
-                                value: 'Без осложнений',
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Завершающий этап',
-                        addClass: ['group--simple'],
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Дренирование брюшной полости и зон анастомоза',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Закрытие внутренных грыжевых дефектов',
-                                value: 'Дефект в зоне тонкокишечного анастамоза',
-                            },
-                            {
-                                name: 'Толщина дренажной трубки',
-                                value: '12 Fr',
-                            },
-                            {
-                                name: 'Гемостаз из степлерных линий',
-                                value: 'Частичное ушивание, Гемостаз клипсами',
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Интраоперационные осложнения',
-                addClass: ['group--simple'],
-                additionalGroup: [
-                    {
-                        name: 'Интраоперационные осложнения',
-                        addClass: ['group--simple'],
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Кровотечение',
-                                value: 'Из троакарной раны',
-                            },
-                            {
-                                name: 'Позитивный тест на герметичность',
-                                value: 'Степлерной линии',
-                            },
-                            {
-                                name: 'Перфорация и ранение органов',
-                                value: 'Поджелудочной железы',
-                            },
-                            {
-                                name: 'Элекротравма органов',
-                                value: 'Поджелудочной железы',
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Нештатные ситуации',
-                        addClass: ['group--simple'],
-                        active: true,
-                        dataBlocks: [
-                            {
-                                name: 'Неправильное срабатывание кассеты',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Резкое ухудшение состояния хирурга/ ассистента',
-                                value: 'Да',
-                            },
-                            {
-                                name: 'Другое/уточнить',
-                                value: 'Без осложнений',
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                name: 'Пребывание в стационаре и исход',
-                addClass: ['group--simple'],
-                dataBlocks: [
-                    {
-                        name: 'Наличие рвоты после операции',
-                        value: 'Кратковременная, прошла самостоятельно',
-                    },
-                    {
-                        name: 'Дата выписки',
-                        value: '02.05.2023',
-                    },
-                    {
-                        name: 'Выписка',
-                        value: 'В другой госпиталь',
-                    },
-                    {
-                        name: 'Электролитные нарушения',
-                        value: 'Да',
-                    },
-                    {
-                        name: 'Рабдомиолиз',
-                        value: 'Да',
-                    },
-                ],
-            },
-        ],
+        operation: {
+            removeBtnName: 'remove-operation',
+            fields: [
+                {
+                    name: 'Общие сведения',
+                    addClass: ['group--simple'],
+                    dataBlocks: [
+                        {
+                            name: 'Вес на момент операции',
+                            value: '83.2 кг',
+                        },
+                        {
+                            name: 'Дата операции',
+                            value: '02.06.2023',
+                        },
+                        {
+                            name: 'Хирург',
+                            value: 'Петров Петр Петрович',
+                        },
+                        {
+                            name: 'Ассистент №1',
+                            value: 'Анастасьевна Анастасия Петрова',
+                        },
+                        {
+                            name: 'Ассистент №2',
+                            value: 'Викториан Виктор Викторович',
+                        },
+                        {
+                            name: 'Тип операции',
+                            value: 'Ревизия после бариатрической операции в другой клинике',
+                        },
+                        {
+                            name: 'Причина ревизии',
+                            value: 'Рецидив набора веса',
+                        },
+                        {
+                            name: 'Доступ',
+                            value: 'Лапароскопия',
+                        },
+                        {
+                            name: 'Длительность операции (мин)',
+                            value: '52',
+                        },
+                        {
+                            name: 'Обезболивание',
+                            value: 'ЭТН + пластырь',
+                        },
+                        {
+                            name: 'Обезболивание',
+                            value: 'ЭТН + пластырь',
+                        },
+                    ],
+                },
+                {
+                    name: 'Этапы операции',
+                    addClass: 'group--simple',
+                    additionalGroup: [
+                        {
+                            name: 'Формирование малого желудочка',
+                            addClass: 'group--simple',
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Желудочек сформирован по зонду',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Сшивающий аппарат',
+                                    value: 'Endopath Echelon 60, Endopath Echelon 45',
+                                },
+                                {
+                                    name: 'Укрепление линии шва',
+                                    value: 'Нужны варианты ответа',
+                                },
+                                {
+                                    name: 'Количество кассет',
+                                    value: '2',
+                                },
+                                {
+                                    name: 'Диаметр зонда (Fr)',
+                                    value: '36',
+                                },
+                                {
+                                    name: 'Использованные кассеты',
+                                    value: 'Черные (4-4.5-5 мм)',
+                                },
+                                {
+                                    name: 'Отступ от привратника (см)',
+                                    value: 'Ушивание',
+                                },
+                                {
+                                    name: 'Обработка хиатуса',
+                                    value: 'Мобилизация абдоминального отдела пищевода',
+                                },
+                                {
+                                    name: 'Количество кассет',
+                                    value: '2',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Формирование анастомозов',
+                            addClass: ['group--simple'],
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Метод определения места пересечения тонкой кишки',
+                                    value: 'Отступ от илеоцекального угла',
+                                },
+                                {
+                                    name: 'Длина тонкой кишки (см)',
+                                    value: '4000',
+                                },
+                                {
+                                    name: 'Длина общей петли (см)',
+                                    value: '4000',
+                                },
+                                {
+                                    name: 'Длина алиментарной петли (см)',
+                                    value: '4000',
+                                },
+                                {
+                                    name: 'Длина общей петли (см)',
+                                    value: '4000',
+                                },
+                                {
+                                    name: 'Использованные кассеты',
+                                    value: 'Черные (4-4.5-5 мм)',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Гастроэнтероанастомоз',
+                            addClass: ['group--simple'],
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Расположение гастроэнтероанастомоза',
+                                    value: 'Впередиободочное',
+                                },
+                                {
+                                    name: 'Расположение алиментарной петли',
+                                    value: '4000',
+                                },
+                                {
+                                    name: 'Отсечение торцевой степлерной линии',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Формирование ГЭА',
+                                    value: 'Аппаратный циркулярный',
+                                },
+                                {
+                                    name: 'Сшивающий аппарат',
+                                    value: 'Ethicon',
+                                },
+                                {
+                                    name: 'Количество кассет',
+                                    value: '8',
+                                },
+                                {
+                                    name: 'Использованные кассеты',
+                                    value: 'Зеленые (4.1 мм), Синие (3.5 мм)',
+                                },
+                                {
+                                    name: 'Закрытие технологического отверстия',
+                                    value: 'Ручное',
+                                },
+                                {
+                                    name: 'Ручной анастомоз',
+                                    value: 'Однорядный, нитью Stratafix',
+                                },
+                                {
+                                    name: 'Диаметр анастомоза (см)',
+                                    value: '1,5 - 3 см',
+                                },
+                                {
+                                    name: 'Была ли сформирована шпора?',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Высота шпоры (см)',
+                                    value: '2',
+                                },
+                                {
+                                    name: 'Комментарий к ручному анастомозу',
+                                    value: 'Без осложнений',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Завершающий этап',
+                            addClass: ['group--simple'],
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Дренирование брюшной полости и зон анастомоза',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Закрытие внутренных грыжевых дефектов',
+                                    value: 'Дефект в зоне тонкокишечного анастамоза',
+                                },
+                                {
+                                    name: 'Толщина дренажной трубки',
+                                    value: '12 Fr',
+                                },
+                                {
+                                    name: 'Гемостаз из степлерных линий',
+                                    value: 'Частичное ушивание, Гемостаз клипсами',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: 'Интраоперационные осложнения',
+                    addClass: ['group--simple'],
+                    additionalGroup: [
+                        {
+                            name: 'Интраоперационные осложнения',
+                            addClass: ['group--simple'],
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Кровотечение',
+                                    value: 'Из троакарной раны',
+                                },
+                                {
+                                    name: 'Позитивный тест на герметичность',
+                                    value: 'Степлерной линии',
+                                },
+                                {
+                                    name: 'Перфорация и ранение органов',
+                                    value: 'Поджелудочной железы',
+                                },
+                                {
+                                    name: 'Элекротравма органов',
+                                    value: 'Поджелудочной железы',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Нештатные ситуации',
+                            addClass: ['group--simple'],
+                            active: true,
+                            dataBlocks: [
+                                {
+                                    name: 'Неправильное срабатывание кассеты',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Резкое ухудшение состояния хирурга/ ассистента',
+                                    value: 'Да',
+                                },
+                                {
+                                    name: 'Другое/уточнить',
+                                    value: 'Без осложнений',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: 'Пребывание в стационаре и исход',
+                    addClass: ['group--simple'],
+                    dataBlocks: [
+                        {
+                            name: 'Наличие рвоты после операции',
+                            value: 'Кратковременная, прошла самостоятельно',
+                        },
+                        {
+                            name: 'Дата выписки',
+                            value: '02.05.2023',
+                        },
+                        {
+                            name: 'Выписка',
+                            value: 'В другой госпиталь',
+                        },
+                        {
+                            name: 'Электролитные нарушения',
+                            value: 'Да',
+                        },
+                        {
+                            name: 'Рабдомиолиз',
+                            value: 'Да',
+                        },
+                    ],
+                },
+            ],
+        },
     };
 
     const fieldsOperationData = [
@@ -1341,22 +1344,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 'type-of-complication': '1',
                 'complications-by-Clavien-Dindo': 'IVa степень - интенсивная терапия (полиорганная недостаточность)',
             },
+            interventions: [
+                {
+                    'date-repeated-operation': '12.12.2012',
+                    'hours-from-main-operation': 12,
+                    'method-repeated-operation': 'Конверсионная лапаротомия - Лапароскопия',
+                    'type-repeated-operation': 'Остановка кровотечения',
+                    'note-intervention': 'Всё в порядке',
+                },
+            ],
+        },
+        {
+            complication: true,
+            data: {
+                addClass: 'group--simple',
+                'date-of-detection-complication': '02.04.2016',
+                'main-complication': 'Декомпенсация сопутствующих заболеваний',
+                'scale-complication': 'Внутрипросветное',
+                'localization-complication': 'Из гастроэнтероанастомоза',
+                'type-of-complication': '1',
+                'complications-by-Clavien-Dindo': 'IVa степень - интенсивная терапия (полиорганная недостаточность)',
+            },
+        },
+        {
+            complication: true,
+            data: {
+                addClass: 'group--simple',
+                'date-of-detection-complication': '01.01.2015',
+                'main-complication': 'Декомпенсация сопутствующих заболеваний',
+                'scale-complication': 'Внутрипросветное',
+                'localization-complication': 'Из гастроэнтероанастомоза',
+                'type-of-complication': '1',
+                'complications-by-Clavien-Dindo': 'IVa степень - интенсивная терапия (полиорганная недостаточность)',
+            },
         },
     ];
 
     const sideModal = document.querySelector('.side-modal');
-
+    const removeBtn = sideModal.querySelector('.side-modal__remove');
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
         if (!element) return;
-        if (sideModalData[element.dataset.modalName]) {
-            fillSideModal(element.dataset.modalName);
+        let modalName = element.dataset.modalName;
+        if (sideModalData[modalName]) {
+            fillSideModal(modalName);
+            removeBtn.setAttribute('data-modal-name', sideModalData[modalName].removeBtnName);
             sideModal.classList.add('view-mode');
         }
     });
 
     const editBtn = sideModal.querySelector('.side-modal__edit');
-    editBtn.addEventListener('click', enableEditSideModal);
+    const cancelBtn = sideModal.querySelector('.cancel-button');
+    editBtn.addEventListener('click', enableEditMode);
+    cancelBtn.addEventListener('click', disabledEditMode);
 
     function createDataBlock(data) {
         const element = document.createElement('div');
@@ -1377,6 +1417,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class='observations__wrapper'></div>
             `;
         const wrapper = observationsBlock.querySelector('.observations__wrapper');
+
+        const addBtn = document.createElement('button');
+        addBtn.classList.add('observations__add');
+        addBtn.setAttribute('type', 'button');
+        addBtn.innerHTML = `<svg><use href='img/sprite.svg#plus-icon'></use></svg>`;
+        wrapper.append(addBtn);
 
         function createObservationPill(data) {
             const observationPill = document.createElement('div');
@@ -1402,7 +1448,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderObservations(sideModalData.observations);
         }
 
-        sideModalData[modalName].forEach((item) => {
+        sideModalData[modalName].fields.forEach((item) => {
             let dataBlocks;
             let group;
 
@@ -1431,10 +1477,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function enableEditSideModal() {
+    function enableEditMode() {
         sideModal.classList.remove('view-mode');
         sideModal.classList.add('is-editable');
         renderFields();
+    }
+
+    function disabledEditMode() {
+        sideModal.classList.add('view-mode');
+        sideModal.classList.remove('is-editable');
+        fillSideModal('operation');
     }
 
     function renderFields() {
@@ -1443,13 +1495,19 @@ document.addEventListener('DOMContentLoaded', () => {
         main.innerHTML = '';
         fieldsOperationData.forEach((el) => {
             if (el.complication) {
-                console.log('complication');
-                const complicationBlock = createComplication(el.data);
+                const complicationInstance = createComplication(el.data);
+                const complicationBlock = complicationInstance.el;
                 main.append(complicationBlock);
                 let connectedEls = complicationBlock.querySelectorAll('[data-connected]');
                 connectedEls.forEach((el) => {
                     checkConnectionValue(el, CONNECTED_RULES);
                 });
+
+                if (el.interventions && el.interventions.length) {
+                    el.interventions.forEach((repeatedInt) => {
+                        complicationInstance.addIntervention(repeatedInt);
+                    });
+                }
                 return;
             }
 
@@ -1480,12 +1538,11 @@ document.addEventListener('DOMContentLoaded', () => {
             complication.connectionRules.forEach((item) => {
                 CONNECTED_RULES[item.name] = item.rules;
             });
-            console.log(CONNECTED_RULES);
             assignInputRules(complication.fieldsRules);
             initGroupObserve(initObservers);
             initObservers = [];
 
-            return complication.el;
+            return complication;
         };
     }
 

@@ -76,7 +76,7 @@ export function initGroupObserve() {
                     // console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
                     checkFilledInput(parrentGroup);
                 }
-                console.log(mutationRecords[0]);
+                // console.log(mutationRecords[0]);
                 if (mutationRecords[0].target.classList.contains('is-filled') || mutationRecords[0].oldValue.includes('is-filled')) {
                     checkFilledForm(mutationRecords[0].target);
                 }

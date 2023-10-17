@@ -9,6 +9,16 @@
     line-height: 36px;
     color: $black;
     text-align: center;
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: $grey-light;
     margin-bottom: 24px;
   }
 

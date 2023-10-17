@@ -946,6 +946,10 @@ function createTextarea(data) {
         textarea.classList.add(data.addClass);
     }
 
+    if (data.value) {
+        textarea.querySelector('textarea').value = data.value;
+    }
+
     if (data.connected) {
         textarea.setAttribute('data-connected', data.connected);
     }
