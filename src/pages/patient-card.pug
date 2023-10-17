@@ -22,7 +22,9 @@ block content
 block footer
 
 block prepend page-bottom
-   include ../blocks/operation/operation
+   +side-modal({ title: 'Операция'})
    +modal-remove()
+//-    +side-modal({classes: ['side-modal-observation'], title: 'Наблюдение'})
+   
 //- block append page-bottom
 //-   script(src='js/some.js')

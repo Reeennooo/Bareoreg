@@ -602,6 +602,13 @@ export function createGroup(data) {
 
     const form = group.querySelector('.group__form');
 
+    if (data.subtitle) {
+        const subtitle = document.createElement('div');
+        subtitle.classList.add('group__subtitle');
+        subtitle.innerHTML = data.subtitle;
+        group.querySelector('.group__title').after(subtitle);
+    }
+
     if (data.addClass) {
         if (typeof data.addClass === 'object') {
             data.addClass.forEach((el) => group.classList.add(el));

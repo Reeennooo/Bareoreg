@@ -69,12 +69,10 @@
     background-color: $white;
     left: 0;
     width: 100%;
-    display: flex;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 24px;
-    align-items: center;
-    justify-content: space-between;
+
     // border-bottom: 2px solid #e8eaee;
 
     padding-bottom: 24px;
@@ -96,6 +94,34 @@
         display: none;
       }
     }
+  }
+
+  .side-modal__add-txt {
+    display: none;
+    align-items: center;
+    column-gap: 8px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    margin-bottom: 8px;
+    color: $grey;
+    cursor: pointer;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      stroke: $grey;
+      fill: none;
+      transform: rotate(90deg);
+    }
+  }
+
+  .side-modal__header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .side-modal__header-buttons {
@@ -163,7 +189,8 @@
 }
 
 // Модальное окно операции
-.side-modal.side-modal-operation {
+.side-modal[data-side-modal-name='operation'],
+.side-modal[data-side-modal-name='observation'] {
   &.is-editable {
     .group__form,
     .group__additional-form {
@@ -200,6 +227,13 @@
     gap: 24px;
   }
 
+  .group.three-columns {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   .side-modal__header-buttons {
     .side-modal__edit,
     .side-modal__print,
@@ -234,5 +268,11 @@
     label {
       background-color: $background;
     }
+  }
+}
+
+.side-modal[data-side-modal-name='observation'] {
+  .side-modal__add-txt {
+    display: inline-flex;
   }
 }

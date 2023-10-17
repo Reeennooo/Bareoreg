@@ -8,12 +8,17 @@ mixin side-modal(data)
   +modal().side-modal(class=classes)
     form
       .side-modal__header
-        .side-modal__title=data.title
-        .side-modal__header-buttons
-          +btn({icon: 'pencil', mode: 'only-icon'})(type='button').side-modal__edit
-          +btn({icon: 'printer', mode: 'only-icon'})(type='button').side-modal__print
-          +btn({icon: 'trash', mode: 'only-icon'})(data-modal='modal-remove' type='button').side-modal__remove
-          +btn({icon: 'ArrowLineRight', mode: 'only-icon'})(data-modal-close type='button').side-modal__close
+        .side-modal__add-txt
+          span
+          svg
+            use(href='img/sprite.svg#caret-up')
+        .side-modal__header-main
+          .side-modal__title=data.title
+          .side-modal__header-buttons
+            +btn({icon: 'pencil', mode: 'only-icon'})(type='button').side-modal__edit
+            +btn({icon: 'printer', mode: 'only-icon'})(type='button').side-modal__print
+            +btn({icon: 'trash', mode: 'only-icon'})(data-modal='modal-remove' type='button').side-modal__remove
+            +btn({icon: 'ArrowLineRight', mode: 'only-icon'})(data-modal-close type='button').side-modal__close
           
       .side-modal__main
         if block

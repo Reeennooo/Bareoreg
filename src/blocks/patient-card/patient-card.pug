@@ -27,6 +27,13 @@
           canvas(id='myChart')
       include ../concomitant-diseases/concomitant-diseases
       include ../anamnesis/anamnesis
+      +page-section({
+        title: 'Файлы',
+        buttons: [{txt: 'Прикрепить файл', icon: 'paperclip', mode: 'text'}]
+      })
+        .patient-card__files-wrapper
+          +file({addClass: 'file--advanced'})
+          +file({addClass: 'file--advanced', img: 'img/logo.svg', menu: [{txt: 'Посмотреть', icon: 'eye'}, {txt: 'Скачать', icon: 'download'}]})
       .patient-card__bottom
         +btn({txt: 'Передать другому врачу', mode: 'ghost'})
 

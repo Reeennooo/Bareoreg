@@ -1,14 +1,37 @@
-mixin file()
-  .file
+mixin file(data = {})
+  .file(class=data.addClass ? data.addClass : '')
     .file__name-wrapper
-      .file__icon
-        svg
-          use(href='img/sprite.svg#file')
-      //- .file__image
-      //-   img(src="", alt="")
+      if(data.img)
+        .file__image
+          img(src=data.img, alt="file-image")
+      else
+        .file__icon
+          svg
+            use(href='img/sprite.svg#file') 
       .file__info
         .file__name Изначальное название файла
         .file__type Название формата файла
+    .file__carret
+      svg.file__carret-arrow
+          use(href='img/sprite.svg#caret-up')
+      ul.file__menu
+        if(data.menu)
+          each item in data.menu
+            li.file__menu-item
+              svg
+                use(href=`img/sprite.svg#${item.icon}`)
+              span=item.txt
+        else
+          li.file__menu-item
+            svg
+              use(href='img/sprite.svg#download')
+            span Скачать
+          li.file__menu-item
+            svg
+              use(href='img/sprite.svg#trash')
+            span Удалить
+
+
     .loader
     .file__uploaded
       svg

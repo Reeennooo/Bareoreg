@@ -26,7 +26,7 @@ mixin pill(data)
             .pill-inner__content-wrap
               each item in data.content
                 if(item.type === 'observation')
-                  .pill__observation=item.period
+                  .pill__observation(data-modal='side-modal' data-modal-name='observation')=item.period
                 else
                   .pill__complication
                     span.pill__complication-name=item.name
