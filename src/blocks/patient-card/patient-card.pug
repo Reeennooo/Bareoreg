@@ -8,81 +8,16 @@
         buttons: [{txt: 'Добавить операцию', icon: 'mask', mode: 'text', href: '/creating-operation.html'}, {txt: 'Добавить наблюдение', icon: 'list', mode: 'text'}]
       })
         .patient-card__operations
-          +itc-custom-select({
-              id: 'test-select2', 
-              name: 'test-select2',
-              placeholder: 'ВЖБ (22.02.2015)',
-              mod: 'simple',
-              options: [
-                {
-                  index: 0,
-                  value: 'Наблюдение 1',
-                  txt: 'Наблюдение 1'
-                },
-                {
-                  index: 1,
-                  value: 'Наблюдение 2',
-                  txt: 'Это было самое интересное наблюдение'
-                },
-                {
-                  index: 2,
-                  value: 'Наблюдение 3',
-                  txt: 'Наблюдение 3'
-                },
-              ]
-            })
-          +itc-custom-select({
-              id: 'test-select3', 
-              name: 'test-select3',
-              placeholder: 'MGB-OAGB (01.07.2019)',
-              mod: 'simple',
-              options: [
-                {
-                  index: 0,
-                  value: 'Наблюдение 1',
-                  txt: 'Наблюдение 1'
-                },
-                {
-                  index: 1,
-                  value: 'Наблюдение 2',
-                  txt: 'Это было самое интересное наблюдение'
-                },
-                {
-                  index: 2,
-                  value: 'Наблюдение 3',
-                  txt: 'Наблюдение 3'
-                },
-              ]
-            }).patient-card__mgb
+          +pill({type: 'operation', name: 'ВЖБ (22.02.2015)', content: []})
+          +pill({type: 'operation', name: 'RYGB (24.04.2021)', content: [{type: 'observation', period: '45 мес.'}, {type: 'observation', period: '45 мес.'}, {type: 'observation', period: '45 мес.'}, {type: 'observation', period: '45 мес.'}]})
+          +pill({type: 'operation', name: 'Гастропликация (22.02.2022)', content: [{type: 'observation', period: '3 мес.'}]})
         .patient-card__decor-line
         +page-section({
         title: 'Осложнения',
         buttons: [{txt: 'Добавить осложнение', icon: 'plus', mode: 'text'}],
         type: 'additional'
       })
-        +itc-custom-select({
-              id: 'test-select4', 
-              name: 'test-select4',
-              placeholder: 'ВЖБ (22.02.2015)',
-              mod: 'simple',
-              options: [
-                {
-                  index: 0,
-                  value: 'Наблюдение 1',
-                  txt: 'Наблюдение 1'
-                },
-                {
-                  index: 1,
-                  value: 'Наблюдение 2',
-                  txt: 'Это было самое интересное наблюдение'
-                },
-                {
-                  index: 2,
-                  value: 'Наблюдение 3',
-                  txt: 'Наблюдение 3'
-                },
-              ]
-            })
+        +pill({type: 'complication', name: 'ВЖБ (22.02.2015)', content: [{type: 'complication', name: 'Кровотечение', period: '3 мес.'}, {type: 'complication', name: 'Декомпенсация сопутст. заболеваний', period: '3 мес.'}, {type: 'complication', name: 'Перфорация и ранение органов', period: '3 мес.'}]})
       +page-section({
         title: 'Потеря лишнего веса EWL график',
         buttons: [{txt: 'Настройка графика', icon: 'settings', mode: 'text'}]

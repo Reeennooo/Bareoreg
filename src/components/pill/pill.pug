@@ -1,0 +1,57 @@
+mixin pill(data)
+  - 
+    let classes = '';
+    if(data.type === 'operation')
+      classes = 'pill--operation'
+    if(data.type === 'complication')
+      classes = 'pill--complication'
+    if(data.addClass)
+      classes = classes + ' ' + data.addClass
+    
+  if(data.type === 'operation')
+    .pill(class=classes)
+      span.pill__name=data.name
+      if(data.content && data.content.length)
+        .pill__count=data.content.length
+      svg.pill__arrow
+        use(href='img/sprite.svg#caret-up')
+      .pill-inner
+        .pill-inner__link(data-modal='side-modal' data-modal-name='operation')
+          span Перейти к операции
+          svg
+            use(href='img/sprite.svg#caret-up')
+        if(data.content.length)
+          .pill-inner__content
+            span.pill-inner__content-name=data.type === 'operation' ? 'Наблюдения:' : 'Осложнения:'
+            .pill-inner__content-wrap
+              each item in data.content
+                if(item.type === 'observation')
+                  .pill__observation=item.period
+                else
+                  .pill__complication
+                    span.pill__complication-name=item.name
+                    span=item.period
+  else
+    .pill(class=classes)
+      span.pill__name=data.name
+      if(data.content && data.content.length)
+        .pill__count=data.content.length
+      svg.pill__arrow
+        use(href='img/sprite.svg#caret-up')
+      .pill-inner
+        .pill-inner__link
+          span Перейти к операции
+          svg
+            use(href='img/sprite.svg#caret-up')
+        if(data.content.length)
+          .pill-inner__content
+            span.pill-inner__content-name=data.type === 'operation' ? 'Наблюдения:' : 'Осложнения:'
+            .pill-inner__content-wrap
+              each item in data.content
+                if(item.type === 'observation')
+                  .pill__observation=item.period
+                else
+                  .pill__complication
+                    span.pill__complication-name=item.name
+                    span=item.period
+
