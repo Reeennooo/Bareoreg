@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sideModalData = {
         operation: {
-            title: 'RYGB (Гастрошунтирование)',
             observations: ['45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.'],
-            removeBtnName: 'remove-operation',
             groups: [
                 {
                     name: 'Общие сведения',
@@ -305,9 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
         },
         observation: {
-            title: 'Наблюдение: 3 месяца после операции',
-            operationName: 'RYGB (Гастрошунтирование)',
-            removeBtnName: 'remove-observation',
             fileloader: true,
             // - - - Этот код можно удалить при работе с настоящими файлами
             // files: [
@@ -1999,19 +1994,596 @@ document.addEventListener('DOMContentLoaded', () => {
                 ],
             },
         ],
+        patient: [
+            {
+                title: 'Персональные данные пациента',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'surname',
+                            type: 'text',
+                            placeholder: 'Фамилия*',
+                            required: true,
+
+                            value: 'Павленко',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'name',
+                            type: 'text',
+                            placeholder: 'Имя*',
+                            required: true,
+                            value: 'Павел',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'middle-name',
+                            type: 'text',
+                            placeholder: 'Отчество*',
+                            required: true,
+                            value: 'Павлович',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'date-of-birth',
+                            type: 'text',
+                            placeholder: 'Дата рождения*',
+                            required: true,
+                            mod: 'calendar',
+                            value: '09.01.1985',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Пол*',
+                            name: 'gender',
+                            options: [
+                                ['Мужской', 'Мужской'],
+                                ['Женский', 'Женский'],
+                            ],
+                            value: 'Мужской',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'weight',
+                            type: 'number',
+                            placeholder: 'Вес кг*',
+                            required: true,
+                            value: 88.3,
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'height',
+                            type: 'number',
+                            placeholder: 'Рост (см)*',
+                            required: true,
+                            value: 178,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'patient-status',
+                            placeholder: 'Статус',
+                            options: [
+                                ['Новый пациент', 'Новый пациент'],
+                                ['Наблюдается', 'Наблюдается'],
+                                ['Выбыл из наблюдения', 'Выбыл из наблюдения'],
+                                ['Летальный исход', 'Летальный исход'],
+                            ],
+                            hasConnection: 'status',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'reason-for-disposal',
+                            type: 'text',
+                            placeholder: 'Причина выбытия*',
+                            required: true,
+                            value: 'Отказался от лечения. Ушел в лес жить в единении с природой',
+                            addClass: 'long',
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Общая информация и контактные данные',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'who-directed',
+                            type: 'text',
+                            placeholder: 'Кем направлен',
+                            required: false,
+                            value: 'Самостоятельно',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'phone',
+                            type: 'text',
+                            placeholder: 'Телефон',
+                            required: false,
+                            value: '8(999)123-45-67',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'email',
+                            type: 'text',
+                            placeholder: 'E-mail',
+                            required: false,
+                            value: 'Example@mail.ru',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'city',
+                            type: 'text',
+                            placeholder: 'Город',
+                            required: false,
+                            value: 'Москва',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'address',
+                            type: 'text',
+                            placeholder: 'Адрес (с почтовым индексом)',
+                            required: false,
+                            value: 'Рождественский б-р, 10/7 стр. 1 (111538)',
+                        },
+                    },
+                    {
+                        type: 'CHECKBOX',
+                        data: {
+                            name: 'permission for videomaterial',
+                            value: 'Получено разрешение на использование <br>фото- и видеоматериалов',
+                            label: 'Получено разрешение на использование <br>фото- и видеоматериалов',
+                        },
+                    },
+                    {
+                        type: 'CHECKBOX',
+                        data: {
+                            name: 'permission for Email mailing',
+                            value: 'Получено разрешение на email-рассылку',
+                            label: 'Получено разрешение на email-рассылку',
+                        },
+                    },
+                    {
+                        type: 'CHECKBOX',
+                        data: {
+                            name: 'permission for SMS mailing',
+                            value: 'Получено разрешение на sms-рассылку',
+                            label: 'Получено разрешение на sms-рассылку',
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Сопутствующие заболевания',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'arterial-hypertension',
+                            placeholder: 'Артериальная гипертензия',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Есть терапию не получает', 'Есть терапию не получает'],
+                                ['Компенсирована терапией', 'Компенсирована терапией'],
+                                ['Не компенсирована терапией', 'Не компенсирована терапией'],
+                            ],
+                            required: false,
+                            value: 'Есть терапию не получает',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'diabetes-mellitus-2',
+                            placeholder: 'Сахарный диабет 2-го типа',
+                            options: [
+                                ['Нет признаков', 'Нет признаков'],
+                                ['Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе', 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе'],
+                                ['Прием пероральных гипогликемических препаратов', 'Прием пероральных гипогликемических препаратов'],
+                                ['Инсулинотерапия', 'Инсулинотерапия'],
+                            ],
+                            required: false,
+                            value: 'Нет признаков',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'diabetes-mellitus-2-duraation',
+                            placeholder: 'Сахарный диабет 2-го типа',
+                            options: [
+                                ['Впервые выявлен', 'Впервые выявлен'],
+                                ['Менее 1 года', 'Менее 1 года'],
+                                ['1 год', '1 год'],
+                                ['2 года', '2 года'],
+                                ['3 года', '3 года'],
+                                ['4 года', '4 года'],
+                                ['5 лет', '5 лет'],
+                                ['6 лет', '6 лет'],
+                                ['7 лет', '7 лет'],
+                                ['8 лет', '8 лет'],
+                                ['9 лет', '9 лет'],
+                                ['10 лет', '10 лет'],
+                                ['Более 10 лет', 'Более 10 лет'],
+                            ],
+                            required: false,
+                            value: 'Впервые выявлен',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'GERD',
+                            placeholder: 'ГЭРБ',
+                            options: [
+                                ['Нет признаков', 'Нет признаков'],
+                                ['Периодически возникающие симптомы, купируются самостоятельно', 'Периодически возникающие симптомы, купируются самостоятельно'],
+                                ['Периодические возникающие симптомы, купируются препаратами', 'Периодические возникающие симптомы, купируются препаратами'],
+                                ['Ежедневный прием препаратов', 'Ежедневный прием препаратов'],
+                            ],
+                            value: 'Ежедневный прием препаратов',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Дислипидемия',
+                            name: 'dyslipidemia',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Да',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Атеросклероз',
+                            name: 'atherosclerosis',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Апноэ',
+                            name: 'apnea',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'bronchial-asthma',
+                            placeholder: 'Бронхиальная астма',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ингалятор', 'Ингалятор'],
+                                ['Небулайзер/пероральные стероиды', 'Небулайзер/пероральные стероиды'],
+                            ],
+                            value: 'Ингалятор',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'functional-status',
+                            placeholder: 'Функциональный статус',
+                            options: [
+                                ['3 этажа без отдыха', '3 этажа без отдыха'],
+                                ['1 этаж без отдыха', '1 этаж без отдыха'],
+                                ['Половина лестничного пролета', 'Половина лестничного пролета'],
+                                ['Не передвигается самостоятельно / Не выходит из дом', 'Не передвигается самостоятельно / Не выходит из дом'],
+                            ],
+                            value: '1 этаж без отдыха',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'back-and-limb-pain',
+                            placeholder: 'Боль в спине и конечностях',
+                            options: [
+                                ['Нет симптомов', 'Нет симптомов'],
+                                ['Периодически возникающие симптомы', 'Периодически возникающие симптомы'],
+                                ['Регулярный прием препаратов', 'Регулярный прием препаратов'],
+                            ],
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'liver-diseases',
+                            placeholder: 'Боль в спине и конечностях',
+                            options: [
+                                ['Нет данных', 'Нет данных'],
+                                ['Признаки стеатогепатоза', 'Признаки стеатогепатоза'],
+                                ['Неалкогольная жировая болезнь печени', 'Неалкогольная жировая болезнь печени'],
+                                ['Цирроз печени', 'Цирроз печени'],
+                            ],
+                            value: 'Признаки стеатогепатоза',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'hernia',
+                            placeholder: 'Грыжа',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Вентральная', 'Вентральная'],
+                                ['Паховая', 'Паховая'],
+                                ['Under', 'Under'],
+                            ],
+                        },
+                        value: 'Пупочная',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'fat-apron',
+                            placeholder: 'Жировой фартук',
+                            options: [
+                                ['Значительная кожно-жировая складка', 'Значительная кожно-жировая складка'],
+                                ['Воспаление в складках', 'Воспаление в складках'],
+                                ['Затрудняет ходьбу', 'Затрудняет ходьбу'],
+                                ['Целлюлит/изъязвление', 'Целлюлит/изъязвление'],
+                                ['Дерматолипэктомия в анамнезе', 'Дерматолипэктомия в анамнезе'],
+                            ],
+                        },
+                        value: 'Целлюлит/изъязвление',
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Недержание мочи',
+                            name: 'urinary-incontinence',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Депрессия',
+                            name: 'depression',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Желчнокаменная болезнь',
+                            name: 'cholelithiasis',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Сопутствующие заболевания',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'ASA Scale',
+                            placeholder: 'Жировой фартук',
+                            options: [
+                                ['ASA I', 'ASA I (здоровый пациент)'],
+                                ['ASA II', 'ASA II (системное заболевание умеренной тяжести)'],
+                                ['ASA III', 'ASA III (тяжелое, но компенсированное либо субкомпенсированное заболевание)'],
+                                ['ASA IV', 'ASA IV (тяжелое заболевание, представляющее постоянную угрозу жизни)'],
+                            ],
+                        },
+                        value: 'ASA III',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'smoking',
+                            placeholder: 'Курение',
+                            options: [
+                                ['Никогда не курил / бросил', 'Никогда не курил / бросил'],
+                                ['Курит иногда / Редко', 'Курит иногда / Редко'],
+                                ['До 20 сигарет в день', 'До 20 сигарет в день'],
+                                ['Более 20 сигарет в день', 'Более 20 сигарет в день'],
+                            ],
+                        },
+                        value: 'Курит иногда / Редко',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'PE risk Factors',
+                            placeholder: 'Факторы риска ТЭЛА',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Тромбоз глубоких вен или ТЭЛА', 'Тромбоз глубоких вен или ТЭЛА'],
+                                ['Венозный отек с изъязвлением', 'Венозный отек с изъязвлением'],
+                                ['Кава-фильтр', 'Кава-фильтр'],
+                                ['Гиповентиляция', 'Гиповентиляция'],
+                            ],
+                        },
+                        value: 'Тромбоз глубоких вен или ТЭЛА',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'Regular-intake-of-medications',
+                            placeholder: 'Регулярный прием препаратов',
+                            options: [
+                                ['От давления', 'От давления'],
+                                ['От сахараного диабета 2-го типа', 'От сахараного диабета 2-го типа'],
+                                ['НПВС/Обезболивающие', 'НПВС/Обезболивающие'],
+                                ['ВИЧ-терапия', 'ВИЧ-терапия'],
+                                ['От психо-неврологических заболеваний', 'От психо-неврологических заболеваний'],
+                                ['Противозачаточные', 'Противозачаточные'],
+                                ["Другое(Дополните 'Примечание')", "Другое(Дополните 'Примечание')"],
+                            ],
+                        },
+                        value: "Другое(Дополните 'Примечание')",
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'Weight loss attempts',
+                            placeholder: 'Попытки снижения веса',
+                            options: [
+                                ['Не было', 'Не было'],
+                                ['Диета', 'Диета'],
+                                ['Психологические методы', 'Психологические методы'],
+                                ['Лечение в клинике питания', 'Лечение в клинике питания'],
+                                ['Ксеникал (Орлистат)', 'Ксеникал (Орлистат)'],
+                                ['Сибутрамин (Меридиа)', 'Сибутрамин (Меридиа)'],
+                                ['Агонисты (ингибиторы) ГПП-1 и ГИП', 'Агонисты (ингибиторы) ГПП-1 и ГИП'],
+                                ['Другие препараты', 'Другие препараты'],
+                            ],
+                        },
+                        value: 'Другие препараты',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'previous-bariatric-surgery',
+                            placeholder: 'Предыдущая бариотрическая операция',
+                            options: [
+                                ['Не было', 'Не было'],
+                                ['Sleeve (Продольная резекция)', 'Sleeve (Продольная резекция)'],
+                                ['MGB-OAGB (Минигастрошунтирование)', 'MGB-OAGB (Минигастрошунтирование)'],
+                                ['RYGB (Гастрошунтирование)', 'RYGB (Гастрошунтирование)'],
+                                ['BPD (Билиопанкреатическое шунтирование)', 'BPD (Билиопанкреатическое шунтирование)'],
+                                ['SADI (Дуоденоилешунтирование)', 'SADI (Дуоденоилешунтирование)'],
+                                ['SLIM OAGB (Гастрошунтирование на короткой петле)', 'SLIM OAGB (Гастрошунтирование на короткой петле)'],
+                                ['Бандажирование', 'Бандажирование'],
+                                ['Гастропликация', 'Гастропликация'],
+                                ['Другая операция', 'Другая операция'],
+                            ],
+                        },
+                        value: 'Другие препараты',
+                    },
+                ],
+            },
+            {
+                title: 'Дополнительная информация',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'TEXTAREA',
+                        data: {
+                            name: 'observation-additional',
+                            type: 'text',
+                            placeholder: 'Примечания',
+                            addClass: 'long',
+                            value: 'Звонить после 9:00 до 18:00 Только в рабочие дни.',
+                        },
+                    },
+                ],
+            },
+        ],
     };
 
     const sideModal = document.querySelector('.side-modal');
-    const removeBtn = sideModal.querySelector('.side-modal__remove');
+    const trashBtn = sideModal.querySelector('.side-modal__remove');
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
         if (!element) return;
         let modalName = element.dataset.modalName;
+
+        setGeneralInfo(modalName, event.target);
+
         if (sideModalData[modalName]) {
             fillSideModal(modalName);
+        } else if (fields[modalName]) {
+            renderFields(modalName);
+            enableEditMode(modalName);
         }
     });
+
+    function setGeneralInfo(modalName, element) {
+        if (!modalName) return;
+        const title = sideModal.querySelector('.side-modal__title');
+        const operationName = sideModal.querySelector('.side-modal__add-txt span');
+
+        switch (modalName) {
+            case 'operation':
+                title.innerText = 'RYGB (Гастрошунтирование)';
+                trashBtn.setAttribute('data-modal-name', 'remove-operation');
+                sideModal.dataset.sideModalName = modalName;
+                const pill = element.closest('.pill');
+                trashBtn.setAttribute('data-operation-id', pill.dataset.operationId);
+                break;
+            case 'observation':
+                trashBtn.setAttribute('data-modal-name', 'remove-observation');
+                operationName.innerText = 'RYGB (Гастрошунтирование)';
+                sideModal.dataset.sideModalName = modalName;
+                const pillObservation = element.closest('.pill__observation');
+                trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
+                title.innerText = `Наблюдение: ${pillObservation.innerText} после операции`;
+                break;
+            case 'patient':
+                title.innerText = 'Редактирование карты пациента';
+                sideModal.dataset.sideModalName = modalName;
+                break;
+            // default:
+            //     title.innerText = 'Просмотр данных';
+        }
+    }
 
     const editBtn = sideModal.querySelector('.side-modal__edit');
     const cancelBtn = sideModal.querySelector('.cancel-button');
@@ -2063,15 +2635,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fillSideModal(modalName) {
         const main = document.querySelector('.side-modal__main');
         main.innerHTML = '';
-
-        removeBtn.setAttribute('data-modal-name', sideModalData[modalName].removeBtnName);
         sideModal.classList.add('view-mode');
-        sideModal.dataset.sideModalName = modalName;
-        sideModal.querySelector('.side-modal__title').innerHTML = sideModalData[modalName].title;
-
-        if (sideModalData[modalName].operationName) {
-            sideModal.querySelector('.side-modal__add-txt span').innerText = sideModalData[modalName].operationName;
-        }
 
         if (sideModalData[modalName].fileloader) {
             const loader = new FileLoader();
@@ -2124,6 +2688,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function disabledEditMode(modalName) {
+        if (modalName === 'patient') return;
         sideModal.classList.add('view-mode');
         sideModal.classList.remove('is-editable');
         fillSideModal(modalName);
@@ -2132,6 +2697,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderFields(modalName) {
         const main = document.querySelector('.side-modal__main');
         main.innerHTML = '';
+        sideModal.dataset.sideModalName = modalName;
 
         if (modalName === 'observation') {
             console.log(modalName);
@@ -2198,8 +2764,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const createComplication = createComplicationFn();
-
-    // function createObsevationFileloader() {
-
-    // }
 });

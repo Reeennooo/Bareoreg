@@ -121,6 +121,7 @@ export class FileLoader {
                 URL.revokeObjectURL(imageLink);
                 modalRemove.querySelector('.modal-remove__remove-btn').removeEventListener('click', removeFile);
                 window.closeModal();
+                removeObserver.disconnect();
             }
 
             const removeObserver = new MutationObserver((mutations) => {

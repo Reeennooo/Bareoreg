@@ -54,5 +54,5 @@ mixin general-info
       .general-info__note-title Примечание:
       .general-info__note-content Звонить после 9:00 до 18:00 Только в рабочие дни.
     .general-info__actions
-      +btn({txt: 'Редактировать карту', mode: 'ghost', icon: 'pencil'})(type='button')
+      +btn({txt: 'Редактировать карту', mode: 'ghost', icon: 'pencil'})(type='button' data-modal='side-modal' data-modal-name='patient')
       +btn({txt: 'Распечатать карту', mode: 'ghost', icon: 'printer'})(type='button')

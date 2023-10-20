@@ -187,7 +187,8 @@
 
 // Модальное окно операции
 .side-modal[data-side-modal-name='operation'],
-.side-modal[data-side-modal-name='observation'] {
+.side-modal[data-side-modal-name='observation'],
+.side-modal[data-side-modal-name='patient'] {
   &.is-editable {
     .group__form,
     .group__additional-form {
@@ -274,8 +275,15 @@
   }
 }
 
-.side-modal[data-side-modal-name='observation'] {
-  .side-modal__add-txt {
-    display: inline-flex;
+.side-modal[data-side-modal-name='patient'] {
+  .side-modal__header-buttons {
+    .side-modal__edit,
+    .side-modal__print,
+    .side-modal__remove {
+      display: none;
+    }
+    .side-modal__add-file {
+      display: inline-flex;
+    }
   }
 }

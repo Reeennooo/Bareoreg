@@ -9,7 +9,7 @@ mixin pill(data)
       classes = classes + ' ' + data.addClass
     
   if(data.type === 'operation')
-    .pill(class=classes)
+    .pill(class=classes)&attributes(attributes)
       span.pill__name=data.name
       if(data.content && data.content.length)
         .pill__count=data.content.length
@@ -26,13 +26,13 @@ mixin pill(data)
             .pill-inner__content-wrap
               each item in data.content
                 if(item.type === 'observation')
-                  .pill__observation(data-modal='side-modal' data-modal-name='observation')=item.period
+                  .pill__observation(data-modal='side-modal' data-modal-name='observation' data-observation-id=item.id)=item.period
                 else
                   .pill__complication
                     span.pill__complication-name=item.name
                     span=item.period
   else
-    .pill(class=classes)
+    .pill(class=classes)&attributes(attributes)
       span.pill__name=data.name
       if(data.content && data.content.length)
         .pill__count=data.content.length
@@ -49,7 +49,7 @@ mixin pill(data)
             .pill-inner__content-wrap
               each item in data.content
                 if(item.type === 'observation')
-                  .pill__observation=item.period
+                  .pill__observation(data-observation-id=item.id)=item.period
                 else
                   .pill__complication
                     span.pill__complication-name=item.name

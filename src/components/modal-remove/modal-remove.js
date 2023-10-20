@@ -65,6 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 removeModal.querySelector('.modal-remove__item').append(assistantClone);
 
                 break;
+            case 'remove-observation':
+                btnRemove.dataset.removeObservationId = trashBtn.dataset.observationId;
+            case 'remove-operation':
+                btnRemove.dataset.removeOperationId = trashBtn.dataset.operationId;
         }
 
         if (removeData[trashBtn.dataset.modalName]) {
@@ -102,10 +106,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             changeItemNumbers('assistant');
             window.closeModal();
+        } else if (btnRemove.dataset.removeObservationId) {
+            deletedEl = document.querySelector(`.pill__observation[data-observation-id='${btnRemove.dataset.removeObservationId}']`);
+            deletedEl?.remove();
+            window.closeModal(true);
+        } else if (btnRemove.dataset.removeOperationId) {
+            deletedEl = document.querySelector(`.pill[data-operation-id='${btnRemove.dataset.removeOperationId}']`);
+            deletedEl?.remove();
+            window.closeModal(true);
         }
 
+        clearBtnRemove();
+    }
+
+    const removeObserver = new MutationObserver((mutations) => {
+        if (!mutations[0].target.classList.contains('is-active')) {
+            console.log(mutations[0].target);
+            clearBtnRemove();
+        }
+    });
+    removeObserver.observe(removeModal, { attributeFilter: ['class'] });
+
+    function clearBtnRemove() {
         btnRemove.removeAttribute('data-remove-work');
         btnRemove.removeAttribute('data-remove-assistant');
+        btnRemove.removeAttribute('data-remove-observation-id');
+        btnRemove.removeAttribute('data-remove-operation-id');
     }
 
     function changeItemNumbers(selector) {
