@@ -55,6 +55,7 @@
     position: relative;
     height: 100%;
     overflow: auto;
+    overflow-x: hidden;
   }
 
   form {
@@ -159,10 +160,6 @@
     grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
-
-    &.three-columns {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   .side-modal__bottom {
@@ -201,15 +198,9 @@
       padding-bottom: 44px;
     }
 
-    .side-modal__header {
-      &::before {
-        display: none;
-      }
-    }
-
-    .side-modal__header {
-      margin-bottom: 0;
-    }
+    // .side-modal__header {
+    //   margin-bottom: 0;
+    // }
   }
 
   .side-modal__main {
@@ -231,6 +222,10 @@
     .group__form,
     .group__additional-form {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    .long {
+      grid-column-end: span 3;
     }
   }
 
@@ -267,6 +262,14 @@
     textarea,
     label {
       background-color: $background;
+    }
+  }
+}
+
+.side-modal[data-side-modal-name='observation'] {
+  .side-modal__header-buttons {
+    .side-modal__add-file {
+      display: inline-flex;
     }
   }
 }

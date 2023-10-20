@@ -24,7 +24,8 @@ block footer
 block prepend page-bottom
    +side-modal({ title: 'Операция'})
    +modal-remove()
-//-    +side-modal({classes: ['side-modal-observation'], title: 'Наблюдение'})
+   +viewing-modal()
+   +modal-upload()
    
 //- block append page-bottom
 //-   script(src='js/some.js')

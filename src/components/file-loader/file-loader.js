@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSave = modalUpload?.querySelector('.modal-upload__save');
     const btnCancel = modalUpload?.querySelector('.modal-upload__cancel');
 
+    // Это не выход. Нужно будет менять решение
+    if (!dropZones.length) return;
+
     if (dropZones) {
         dropZones.forEach((zone) => {
             let inputFile = zone.querySelector("input[type='file']");
@@ -92,9 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class='loader'></div>
             <div class='file__uploaded'><svg><use href='img/sprite.svg#check-bold'></use></svg></div>
-            <div class='file__delete'><svg><use href='img/sprite.svg#close'></use></svg></div>`;
+            <div class='file__delete' data-delete-file><svg><use href='img/sprite.svg#close'></use></svg></div>`;
 
-        currentFile.querySelector('.file__delete').addEventListener('click', (event) => {
+        currentFile.querySelector('[data-delete-file]').addEventListener('click', (event) => {
             let deletedFile = event.target.closest('.file');
             // Удаление file из FileList
             // Фильруем FileList и создаём новый из тех файлов которые нам нужны
@@ -111,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             mainFileList = DT;
             deletedFile.remove();
-            URL.createObjectURL(imageLink);
+            URL.revokeObjectURL(imageLink);
             console.log(mainFileList.files);
         });
 

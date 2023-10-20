@@ -1,0 +1,139 @@
+.viewing-modal {
+  padding: 0;
+  background: transparent;
+
+  .i-modal__content {
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.6);
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 96px;
+  }
+
+  .i-modal__inner {
+    overflow: hidden;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 24px 40px;
+    width: 100%;
+    height: 96px;
+    background-color: $grey-dark;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 32px;
+  }
+
+  &__file-name {
+    flex: 1 1 0;
+    color: $white;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+  }
+
+  &__buttons {
+    flex: 1 1 0;
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 16px;
+  }
+
+  &__file {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+      width: auto;
+      user-select: none;
+      object-fit: cover;
+      // border-radius: 20px;
+    }
+  }
+
+  .btn {
+    color: $white;
+
+    svg {
+      stroke: $white;
+    }
+  }
+
+  .btn-circle {
+    border-color: $white;
+    svg {
+      stroke: $white;
+    }
+  }
+
+  &__close {
+    margin-left: 32px;
+  }
+}
+
+.viewing-zoom {
+  width: 128px;
+  height: 40px;
+  padding: 10px 16px;
+  border: 1px solid $white;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+
+  &__value {
+    user-select: none;
+  }
+
+  &__percents {
+    width: 44px;
+    text-align: center;
+    // txt
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: $white;
+  }
+
+  &__plus,
+  &__minus {
+    width: 18px;
+    height: 18px;
+
+    svg {
+      @include transition(stroke);
+      cursor: pointer;
+      fill: none;
+      stroke: $white;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      svg {
+        stroke: $violet;
+      }
+    }
+  }
+}

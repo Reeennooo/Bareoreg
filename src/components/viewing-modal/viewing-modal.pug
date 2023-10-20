@@ -1,0 +1,21 @@
+mixin viewing-modal()
+  +modal().viewing-modal
+    .viewing-modal__header
+      .viewing-modal__file-name Название вложения
+      .viewing-zoom
+        .viewing-zoom__minus
+          svg
+            use(href='img/sprite.svg#minus')
+        .viewing-zoom__percents
+          span.viewing-zoom__value 100
+          | %
+        .viewing-zoom__plus
+          svg
+            use(href='img/sprite.svg#plus-icon')
+      .viewing-modal__buttons
+        +btn({txt: 'Скачать', mode: 'text', icon: 'download'})
+        +btn({txt: 'Удалить', mode: 'text', icon: 'trash'})(data-modal-next='modal-remove' data-modal-name='remove-file')
+        +btn-circle({icon: 'close', mode: 'ghost' })(data-modal-close class='viewing-modal__close')
+    .viewing-modal__file
+      img(src='img/hero/image.png' alt='file-name')
+

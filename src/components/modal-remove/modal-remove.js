@@ -15,6 +15,10 @@ const removeData = {
         title: 'Удаление наблюдения',
         subtitle: 'Это действие безвозвратно, вы уверены?',
     },
+    'remove-file': {
+        title: 'Удаление файла',
+        subtitle: 'Это действие безвозвратно, вы уверены?',
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -86,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pageSection.classList.remove('not-empty');
             }
             changeItemNumbers('place-of-work');
+            window.closeModal();
         } else if (btnRemove.dataset.removeAssistant) {
             itemNumber = btnRemove.dataset.removeAssistant;
             deletedEl = document.querySelector(`.assistant[data-number='${itemNumber}']`);
@@ -96,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 pageSection.classList.remove('not-empty');
             }
             changeItemNumbers('assistant');
+            window.closeModal();
         }
 
-        window.closeModal();
         btnRemove.removeAttribute('data-remove-work');
         btnRemove.removeAttribute('data-remove-assistant');
     }

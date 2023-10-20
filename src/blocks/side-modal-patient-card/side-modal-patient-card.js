@@ -1,9 +1,9 @@
 import { createAditionalGroup, createGroup, checkConnectionValue, CONNECTED_RULES } from '../form-creating-operation/form-creating-operation';
-import { createObservationFileloader } from '../../components/observation-file-loader/observation-file-loader';
+import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { Complication } from '../complications/complication';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
-import { createFileElement } from '../../components/observation-file-loader/observation-file-loader';
+// import { createFileElement } from '../../components/observation-file-loader/observation-file-loader';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('patient-card')) return;
@@ -309,10 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
             operationName: 'RYGB (Гастрошунтирование)',
             removeBtnName: 'remove-observation',
             fileloader: true,
-            files: [
-                { name: 'Название файла', type: 'file' },
-                { name: 'Название изображения', type: 'PNG', src: 'img/logo.svg' },
-            ],
+            // - - - Этот код можно удалить при работе с настоящими файлами
+            // files: [
+            //     { template: true, name: 'Название файла', type: 'file' },
+            //     { template: true, name: 'Название изображения', type: 'PNG', src: 'img/logo.svg' },
+            // ],
             groups: [
                 {
                     name: 'Сведения о пациенте',
@@ -483,7 +484,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const fields = {
-        observation: [],
         operation: [
             {
                 title: 'Общие сведения',
@@ -1562,6 +1562,443 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             },
         ],
+        observation: [
+            {
+                title: 'Сведения о пациенте',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'date-operation',
+                            type: 'text',
+                            placeholder: 'Дата наблюдения',
+                            required: false,
+                            mod: 'calendar',
+                            addClass: ['only-number', 'input-custom--violet'],
+                            value: '01.01.2023',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'weight-observation',
+                            type: 'number',
+                            placeholder: 'Вес на момент наблюдения',
+                            required: false,
+                            value: 86,
+                        },
+                    },
+                ],
+                additionalGroups: [
+                    {
+                        name: 'Женское здоровье',
+                        addClass: ['group--simple'],
+                        active: true,
+                        number: 1,
+                        content: [
+                            {
+                                type: 'SELECT',
+                                data: {
+                                    name: 'polycystic-ovary',
+                                    placeholder: 'Синдром поликистозных яичников',
+                                    options: [
+                                        ['Нет', 'Нет'],
+                                        ['СПКЯ без терапии', 'СПКЯ без терапии'],
+                                        ['СПКЯ с терапией', 'СПКЯ с терапией'],
+                                        ['Бесплодие', 'Бесплодие'],
+                                    ],
+                                },
+                            },
+                            {
+                                type: 'SELECT',
+                                data: {
+                                    name: 'menstrual-function',
+                                    placeholder: 'Менструальная функция',
+                                    options: [
+                                        ['Регулярный цикл', 'Регулярный цикл'],
+                                        ['Нерегулярный цикл', 'Нерегулярный цикл'],
+                                        ['Гиперменорея', 'Гиперменорея'],
+                                        ['Гистерэктомия в анамнезе', 'Гистерэктомия в анамнезе'],
+                                    ],
+                                },
+                            },
+                            {
+                                type: 'SELECT',
+                                data: {
+                                    name: 'onset-of-pregnancy',
+                                    placeholder: 'Наступление беремности',
+                                    options: [
+                                        ['Беременнось не наступила', 'Беременнось не наступила'],
+                                        ['Беременность в результате ЭКО', 'Беременность в результате ЭКО'],
+                                        ['Безуспешное ЭКО', 'Безуспешное ЭКО'],
+                                        ['Естественная беременность', 'Естественная беременность'],
+                                    ],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                title: 'Бандажирование желудка',
+                addClass: ['group--simple', 'three-columns'],
+                fields: [
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'reason-adjusting-bandage',
+                            placeholder: 'Причина регулировки',
+                            options: [
+                                ['Первичная регулировка после операции', 'Первичная регулировка после операции'],
+                                ['Дисфагия', 'Дисфагия'],
+                                ['Повторный набор веса', 'Повторный набор веса'],
+                                ['Неудовлетворенность пациента', 'Неудовлетворенность пациента'],
+                            ],
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'changing-filling-volume',
+                            type: 'text',
+                            placeholder: 'Изменение объема заполнения',
+                            required: false,
+                            value: '+ 2л',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'date-adjusting-bandage',
+                            type: 'text',
+                            placeholder: 'Планируемая дата регулировки',
+                            required: false,
+                            mod: 'calendar',
+                            addClass: ['only-number', 'input-custom--violet'],
+                            value: '02.04.2023',
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Общие сведения',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Чувство голода',
+                            name: 'feeling-hungry',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Сниженое', 'Сниженое'],
+                                ['Обычное', 'Обычное'],
+                                ['Выраженное', 'Выраженное'],
+                            ],
+                            addClass: 'long',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Приём витаминов и микроэлементов',
+                            name: 'intake-of-vitamins',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Признаки питательной недостаточности',
+                            name: 'intake-of-vitamins',
+                            options: [
+                                ['Есть', 'Есть'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Есть',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Комфортность питания',
+                            name: 'intake-of-vitamins',
+                            options: [
+                                ['Нормальная', 'Нормальная'],
+                                ['Дискомфорт при приеме пищи', 'Дискомфорт при приеме пищи'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Диарея',
+                            name: 'diarrhea',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Наличие запора',
+                            name: 'has-constipation',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'how-often-poop',
+                            type: 'text',
+                            placeholder: 'Частота стула',
+                            required: false,
+                            value: '1-2 раза в день',
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Течение сопутствующих заболеваний',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'arterial-hypertension',
+                            placeholder: 'Артериальная гипертензия',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Есть, терапию не получает', 'Есть, терапию не получает'],
+                                ['Компенсирована терапией', 'Компенсирована терапией'],
+                                ['Не компенсирована терапией', 'Не компенсирована терапией'],
+                            ],
+                            value: 'Есть, терапию не получает',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'compensation-SD',
+                            placeholder: 'Срок наступления компенсации СД?',
+                            options: [
+                                ['Нет признаков', 'Нет признаков'],
+                                ['Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе', 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе'],
+                                ['Снижение доз пероральных препаратов', 'Снижение доз пероральных препаратов'],
+                                ['Прежние дозы пероральных препаратов', 'Прежние дозы пероральных препаратов'],
+                                ['Инсулинотерапия', 'Инсулинотерапия'],
+                            ],
+                            value: 'Снижение доз пероральных препаратов',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'GERD',
+                            placeholder: 'ГЭРБ',
+                            options: [
+                                ['Нет признаков', 'Нет признаков'],
+                                ['Периодически возникающие симптомы, купируются самостоятельно', 'Периодически возникающие симптомы, купируются самостоятельно'],
+                                ['Периодические возникающие симптомы, купируются препаратами', 'Периодические возникающие симптомы, купируются препаратами'],
+                                ['Ежедневный прием препаратов', 'Ежедневный прием препаратов'],
+                            ],
+                            value: 'Ежедневный прием препаратов',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Дислипидемия',
+                            name: 'dyslipidemia',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Да',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Атеросклероз',
+                            name: 'atherosclerosis',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Апноэ',
+                            name: 'apnea',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'bronchial-asthma',
+                            placeholder: 'Бронхиальная астма',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ингалятор', 'Ингалятор'],
+                                ['Небулайзер/пероральные стероиды', 'Небулайзер/пероральные стероиды'],
+                            ],
+                            value: 'Ингалятор',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'functional-status',
+                            placeholder: 'Функциональный статус',
+                            options: [
+                                ['3 этажа без отдыха', '3 этажа без отдыха'],
+                                ['1 этаж без отдыха', '1 этаж без отдыха'],
+                                ['Половина лестничного пролета', 'Половина лестничного пролета'],
+                                ['Не передвигается самостоятельно / Не выходит из дом', 'Не передвигается самостоятельно / Не выходит из дом'],
+                            ],
+                            value: '1 этаж без отдыха',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'back-and-limb-pain',
+                            placeholder: 'Боль в спине и конечностях',
+                            options: [
+                                ['Нет симптомов', 'Нет симптомов'],
+                                ['Периодически возникающие симптомы', 'Периодически возникающие симптомы'],
+                                ['Регулярный прием препаратов', 'Регулярный прием препаратов'],
+                            ],
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'hernia',
+                            placeholder: 'Грыжа',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Вентральная', 'Вентральная'],
+                                ['Паховая', 'Паховая'],
+                                ['Under', 'Under'],
+                            ],
+                        },
+                        value: 'Пупочная',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'sagging-skin',
+                            placeholder: 'Обвисание кожи',
+                            options: [
+                                ['Выраженное обвисание кожи на руках, бедрах', 'Выраженное обвисание кожи на руках, бедрах'],
+                                ['Выраженное обвисание кожи на животе', 'Выраженное обвисание кожи на животе'],
+                                ['Обвисания кожи нет, есть морщинистость', 'Обвисания кожи нет, есть морщинистость'],
+                                ['Обвисания, морщинистость отсутствуют', 'Обвисания, морщинистость отсутствуют'],
+                            ],
+                        },
+                        value: 'Обвисания кожи нет, есть морщинистость',
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'fat-apron',
+                            placeholder: 'Жировой фартук',
+                            options: [
+                                ['Значительная кожно-жировая складка', 'Значительная кожно-жировая складка'],
+                                ['Воспаление в складках', 'Воспаление в складках'],
+                                ['Затрудняет ходьбу', 'Затрудняет ходьбу'],
+                                ['Целлюлит/изъязвление', 'Целлюлит/изъязвление'],
+                                ['Дерматолипэктомия в анамнезе', 'Дерматолипэктомия в анамнезе'],
+                            ],
+                        },
+                        value: 'Целлюлит/изъязвление',
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Недержание мочи',
+                            name: 'urinary-incontinence',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Депрессия',
+                            name: 'depression',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Желчнокаменная болезнь',
+                            name: 'cholelithiasis',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            value: 'Нет',
+                            required: true,
+                        },
+                    },
+                ],
+            },
+            {
+                title: 'Дополнительная информация',
+                addClass: ['group--simple'],
+                fields: [
+                    {
+                        type: 'TEXTAREA',
+                        data: {
+                            name: 'observation-additional',
+                            type: 'text',
+                            placeholder: 'Примечания',
+                            addClass: 'long',
+                            value: 'Звонить после 9:00 до 18:00 Только в рабочие дни.',
+                        },
+                    },
+                ],
+            },
+        ],
     };
 
     const sideModal = document.querySelector('.side-modal');
@@ -1579,7 +2016,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editBtn = sideModal.querySelector('.side-modal__edit');
     const cancelBtn = sideModal.querySelector('.cancel-button');
     editBtn.addEventListener('click', () => enableEditMode(sideModal.dataset.sideModalName));
-    cancelBtn.addEventListener('click', disabledEditMode);
+    cancelBtn.addEventListener('click', () => disabledEditMode(sideModal.dataset.sideModalName));
 
     function createDataBlock(data) {
         const element = document.createElement('div');
@@ -1637,14 +2074,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (sideModalData[modalName].fileloader) {
-            const loader = createObservationFileloader();
+            const loader = new FileLoader();
 
-            if (sideModalData[modalName].files) {
-                sideModalData[modalName].files.forEach((file) => {
-                    loader.querySelector('.observation-file-loader__content').append(createFileElement(file));
-                });
-            }
-            main.append(loader);
+            // if (sideModalData[modalName].files) {
+            //     sideModalData[modalName].files.forEach((file) => {
+            //         loader.addFile(file);
+            //     });
+            // }
+            main.append(loader.fileLoader);
         }
 
         if (sideModalData[modalName].observations) {
@@ -1686,16 +2123,27 @@ document.addEventListener('DOMContentLoaded', () => {
         renderFields(modalName);
     }
 
-    function disabledEditMode() {
+    function disabledEditMode(modalName) {
         sideModal.classList.add('view-mode');
         sideModal.classList.remove('is-editable');
-        fillSideModal('operation');
+        fillSideModal(modalName);
     }
 
     function renderFields(modalName) {
         const main = document.querySelector('.side-modal__main');
-
         main.innerHTML = '';
+
+        if (modalName === 'observation') {
+            console.log(modalName);
+            const loader = new FileLoader();
+            // if (sideModalData[modalName].files) {
+            //     sideModalData[modalName].files.forEach((file) => {
+            //         loader.addFile(loader.fileLoader);
+            //     });
+            // }
+            main.append(loader);
+        }
+
         fields[modalName].forEach((el) => {
             if (el.complication) {
                 const complicationInstance = createComplication(el.data);

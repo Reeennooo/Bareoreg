@@ -6,6 +6,6 @@ mixin modal-upload()
     +input-custom({type: text, name: 'file-name', placeholder: 'Название файла'})
     .modal-upload__btns
       +btn({txt: 'Сохранить'}).modal-upload__save
-      +btn({txt: 'Отменить', mode: 'ghost'}).modal-upload__cancel
+      +btn({txt: 'Отменить', mode: 'ghost'})(data-modal-close).modal-upload__cancel
 
   

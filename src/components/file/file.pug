@@ -17,7 +17,7 @@ mixin file(data = {})
       ul.file__menu
         if(data.menu)
           each item in data.menu
-            li.file__menu-item
+            li.file__menu-item(data-modal=item.modalAttribute)
               svg
                 use(href=`img/sprite.svg#${item.icon}`)
               span=item.txt
