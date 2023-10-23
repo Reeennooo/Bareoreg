@@ -3,7 +3,6 @@ import { FileLoader } from '../../components/observation-file-loader/observation
 import { Complication } from '../complications/complication';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
-// import { createFileElement } from '../../components/observation-file-loader/observation-file-loader';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('patient-card')) return;
@@ -2539,18 +2538,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sideModal = document.querySelector('.side-modal');
     const trashBtn = sideModal.querySelector('.side-modal__remove');
+    const main = sideModal.querySelector('.side-modal__main');
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
         if (!element) return;
         let modalName = element.dataset.modalName;
-
+        console.log('RENDER');
         setGeneralInfo(modalName, event.target);
 
         if (sideModalData[modalName]) {
             fillSideModal(modalName);
         } else if (fields[modalName]) {
-            renderFields(modalName);
             enableEditMode(modalName);
         }
     });
@@ -2559,6 +2558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modalName) return;
         const title = sideModal.querySelector('.side-modal__title');
         const operationName = sideModal.querySelector('.side-modal__add-txt span');
+        main.innerHTML = '';
 
         switch (modalName) {
             case 'operation':
@@ -2572,6 +2572,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 trashBtn.setAttribute('data-modal-name', 'remove-observation');
                 operationName.innerText = 'RYGB (Гастрошунтирование)';
                 sideModal.dataset.sideModalName = modalName;
+                const obsLoader = new FileLoader();
+                main.append(obsLoader.fileLoader);
                 const pillObservation = element.closest('.pill__observation');
                 trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
                 title.innerText = `Наблюдение: ${pillObservation.innerText} после операции`;
@@ -2579,6 +2581,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'patient':
                 title.innerText = 'Редактирование карты пациента';
                 sideModal.dataset.sideModalName = modalName;
+                const patientLoader = new FileLoader();
+                main.append(patientLoader.fileLoader);
                 break;
             // default:
             //     title.innerText = 'Просмотр данных';
@@ -2633,20 +2637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillSideModal(modalName) {
-        const main = document.querySelector('.side-modal__main');
-        main.innerHTML = '';
         sideModal.classList.add('view-mode');
-
-        if (sideModalData[modalName].fileloader) {
-            const loader = new FileLoader();
-
-            // if (sideModalData[modalName].files) {
-            //     sideModalData[modalName].files.forEach((file) => {
-            //         loader.addFile(file);
-            //     });
-            // }
-            main.append(loader.fileLoader);
-        }
 
         if (sideModalData[modalName].observations) {
             renderObservations(sideModalData[modalName].observations);
@@ -2695,8 +2686,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderFields(modalName) {
-        const main = document.querySelector('.side-modal__main');
-        main.innerHTML = '';
+        console.log('RENDER FIELD');
+        // const main = document.querySelector('.side-modal__main');
+        // main.innerHTML = '';
         sideModal.dataset.sideModalName = modalName;
 
         if (modalName === 'observation') {

@@ -1,7 +1,7 @@
 export class FileLoader {
     constructor() {
         this.fileList = new DataTransfer();
-        this.fileLoader = this.createObservationFileloader();
+        this.fileLoader = this.createFileloader();
         this.loaderInput = this.fileLoader.querySelector(`input`);
         this.currentFile;
         this.fileEl;
@@ -14,7 +14,7 @@ export class FileLoader {
         this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
     }
 
-    createObservationFileloader() {
+    createFileloader() {
         const fileLoader = document.createElement('div');
         fileLoader.classList.add('observation-file-loader');
         fileLoader.innerHTML = `
@@ -24,7 +24,14 @@ export class FileLoader {
         <svg><use href='img/sprite.svg#plus-icon'></use></svg>
         </label>`;
 
-        console.log(fileLoader);
+        const paperclipBtn = document.querySelector('.side-modal__add-file');
+        if (paperclipBtn) {
+            paperclipBtn.addEventListener('click', triggerLoader.bind(this));
+        }
+        function triggerLoader() {
+            this.loaderInput.click();
+        }
+
         return fileLoader;
     }
 
@@ -52,7 +59,7 @@ export class FileLoader {
         }
 
         currentFile = document.createElement('div');
-        currentFile.dataset.index = this.fileList.files.length - 1;
+        currentFile.dataset.index = this.fileList.files.length;
         currentFile.classList.add('file');
         currentFile.innerHTML = `
           <div class='file__name-wrapper'>
@@ -112,16 +119,17 @@ export class FileLoader {
             window.openModal('modal-remove', true);
 
             console.log('Добавляем EVEN LISTENER');
-            removeBtn.addEventListener('click', removeFile);
+            removeBtn.addEventListener('click', removeFile.bind(this));
 
             function removeFile() {
-                console.log('УДАЛЯЮ');
                 this.fileList = DT;
                 deletedFile.remove();
                 URL.revokeObjectURL(imageLink);
                 modalRemove.querySelector('.modal-remove__remove-btn').removeEventListener('click', removeFile);
                 window.closeModal();
                 removeObserver.disconnect();
+                this.correctIndex();
+                console.log(this.fileList);
             }
 
             const removeObserver = new MutationObserver((mutations) => {
@@ -132,8 +140,6 @@ export class FileLoader {
                 }
             });
             removeObserver.observe(modalRemove, { attributeFilter: ['class'] });
-
-            // console.log(mainFileList.files);
         });
 
         // if (modalUpload) {
@@ -145,9 +151,17 @@ export class FileLoader {
         return currentFile;
     }
 
+    correctIndex() {
+        const filesWrap = this.fileLoader.querySelector('.observation-file-loader__content');
+        const files = filesWrap.querySelectorAll('.file');
+        files.forEach((el, i) => {
+            console.log(i);
+            el.dataset.index = i;
+        });
+    }
+
     addFile(file) {
         const filesWrapper = this.fileLoader.querySelector('.observation-file-loader__content');
-        console.log(this);
 
         // if (file) {
         //     filesWrapper.append(this.createFileElement(file));
@@ -161,23 +175,25 @@ export class FileLoader {
         this.fileEl.classList.add('file--advanced');
         filesWrapper.append(this.fileEl);
         window.closeModal();
+        console.log(this.fileList);
     }
 
-    removeFile() {
-        let deletedFile = event.target.closest('.file');
-        // Удаление file из FileList
-        // Фильруем FileList и создаём новый из тех файлов которые нам нужны
-        const DT = new DataTransfer();
-        for (let i = 0; i < this.fileList.files.length; i++) {
-            const file = this.fileList.files[i];
-            if (Number(deletedFile.dataset.index) !== i) {
-                DT.items.add(file);
-            }
-        }
-        this.fileList = DT;
-        deletedFile.remove();
-        URL.revokeObjectURL(imageLink);
-    }
+    // removeFile() {
+    //     let deletedFile = event.target.closest('.file');
+    //     // Удаление file из FileList
+    //     // Фильруем FileList и создаём новый из тех файлов которые нам нужны
+    //     const DT = new DataTransfer();
+    //     for (let i = 0; i < this.fileList.files.length; i++) {
+    //         const file = this.fileList.files[i];
+    //         if (Number(deletedFile.dataset.index) !== i) {
+    //             DT.items.add(file);
+    //         }
+    //     }
+    //     this.fileList = DT;
+    //     deletedFile.remove();
+    //     URL.revokeObjectURL(imageLink);
+    //     console.log(this.fileList);
+    // }
 
     uploadFile(file) {
         this.currentFile = file;
