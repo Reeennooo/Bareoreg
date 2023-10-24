@@ -2540,6 +2540,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sideModal = document.querySelector('.side-modal');
     const trashBtn = sideModal.querySelector('.side-modal__remove');
     const main = sideModal.querySelector('.side-modal__main');
+    const obsLoader = new FileLoader({ name: 'observation-fileloader', type: 'loader' });
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
@@ -2572,7 +2573,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 trashBtn.setAttribute('data-modal-name', 'remove-observation');
                 operationName.innerText = 'RYGB (Гастрошунтирование)';
                 sideModal.dataset.sideModalName = modalName;
-                const obsLoader = new FileLoader({ name: 'observation-fileloader' });
                 main.append(obsLoader.fileLoader);
                 const pillObservation = element.closest('.pill__observation');
                 trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
@@ -2674,21 +2674,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enableEditMode(modalName) {
+        main.innerHTML = '';
         sideModal.classList.remove('view-mode');
         sideModal.classList.add('is-editable');
         renderFields(modalName);
         if (modalName === 'patient') {
+            patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
+            main.prepend(patientLoader.fileLoader);
+            console.log(patientLoader.fileLoader);
+
             patientLoader.createDropZone({ name: 'patient-files' });
             patientLoader.dropZone.classList.add('long');
+            console.log(main.querySelector('.patient-additional-info .group__form'));
             main.querySelector('.patient-additional-info .group__form')?.append(patientLoader.dropZone);
+        }
+
+        if (modalName === 'observation') {
+            main.prepend(obsLoader.fileLoader);
         }
     }
 
     function disabledEditMode(modalName) {
         if (modalName === 'patient') return;
+        main.innerHTML = '';
         sideModal.classList.add('view-mode');
         sideModal.classList.remove('is-editable');
         fillSideModal(modalName);
+        if (modalName === 'obsrevation') {
+            main.append(obsLoader.fileLoader);
+        }
     }
 
     function renderFields(modalName) {

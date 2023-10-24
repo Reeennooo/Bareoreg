@@ -1,0 +1,10 @@
+mixin drop-zone(data)
+  .drop-zone
+    input(type="file" name=data.name id=data.id)
+    label(for=data.id)
+      span.drop-zone__title
+        svg.svg
+          use(href='img/sprite.svg#paperclip')
+        | Перетащите файл или нажмите для загрузки
+      span.drop-zone__subtitle Максимальный размер одного файла: 10Мб. Максимальное количество файлов 20.
+    .drop-zone__uploaded-files

@@ -749,7 +749,7 @@
   +group({title: 'Дополнительная информация'}).form-new-patient__additional-info
     .group__form
       +textarea({name: 'new-patient-additional', id: 'new-patient-additional', placeholder: 'Примечания'}).form-new-patient__textarea
-      +file-loader({name: 'new-patient-files', id: 'new-patient-files'})
+      +drop-zone({name: 'new-patient-files', id: 'new-patient-files'})
 
   .form__wrapper-btns
     +btn({txt: 'Создать'})(type='submit')(disabled).submit-button.form-new-patient__btn

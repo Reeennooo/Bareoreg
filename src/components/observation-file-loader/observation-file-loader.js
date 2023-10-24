@@ -62,23 +62,23 @@ export class FileLoader {
         let dropZone;
         if (!options.target) {
             dropZone = document.createElement('div');
-            dropZone.classList.add('file-loader');
+            dropZone.classList.add('drop-zone');
             dropZone.innerHTML = `
                 <input type='file' name='${options.name}' id='${options.name}'>
                 <label for='${options.name}'>
-                    <span class='file-loader__title'>
+                    <span class='drop-zone__title'>
                         <svg>
                             <use href='img/sprite.svg#paperclip'></use>
                         </svg>
                         Перетащите файл или нажмите для загрузки
                     </span>
-                    <span class='file-loader__subtitle'>
+                    <span class='drop-zone__subtitle'>
                         Максимальный размер одного файла: 10Мб. Максимальное количество файлов 20.
                     </span>
                 </label>
-                <div class='file-loader__uploaded-files'></div>`;
+                <div class='drop-zone__uploaded-files'></div>`;
         } else {
-            dropZone = document.querySelector(options.target)?.closest('.file-loader');
+            dropZone = document.querySelector(options.target)?.closest('.drop-zone');
         }
 
         if (!dropZone) return;
@@ -266,7 +266,7 @@ export class FileLoader {
 
         // добавление файлов в dropzone
         if (this.dropZone) {
-            const dropZoneWrapper = this.dropZone.querySelector('.file-loader__uploaded-files');
+            const dropZoneWrapper = this.dropZone.querySelector('.drop-zone__uploaded-files');
             this.fileElDropzone.classList.add('attached');
             dropZoneWrapper.append(this.fileElDropzone);
         }
