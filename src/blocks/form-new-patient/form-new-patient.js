@@ -1,5 +1,6 @@
 import IMask from 'imask/esm/index';
 import { assignInputRules } from '../../js/input-validate';
+import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
@@ -29,7 +30,14 @@ const selects = {
 // anamnesis7 - Операции в анамнезе
 
 // calendar
-new window.Calendar('#calendar-date-birth', { position: 'absolute' })
+new window.Calendar('#calendar-date-birth', { position: 'absolute' });
+
+// dropZone
+const newPatientFiles = new FileLoader({
+    type: 'dropzone',
+    name: 'new-patient-files',
+    target: '#new-patient-files',
+});
 
 function initSelects(selects) {
     const selectsList = Object.entries(selects);

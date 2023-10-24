@@ -61,6 +61,7 @@
 
     svg {
       @include transition('stroke');
+      fill: none;
       stroke: $grey;
       width: 24px;
       height: 24px;

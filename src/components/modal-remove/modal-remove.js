@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const removeObserver = new MutationObserver((mutations) => {
         if (!mutations[0].target.classList.contains('is-active')) {
-            console.log(mutations[0].target);
             clearBtnRemove();
         }
     });

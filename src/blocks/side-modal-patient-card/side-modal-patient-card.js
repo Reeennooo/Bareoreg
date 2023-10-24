@@ -7,6 +7,7 @@ import { initGroupObserve } from '../../js/validate';
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('patient-card')) return;
     let initObservers = [];
+    let patientLoader;
 
     const sideModalData = {
         operation: {
@@ -2519,12 +2520,12 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 title: 'Дополнительная информация',
-                addClass: ['group--simple'],
+                addClass: ['group--simple', 'patient-additional-info'],
                 fields: [
                     {
                         type: 'TEXTAREA',
                         data: {
-                            name: 'observation-additional',
+                            name: 'new-patient-files',
                             type: 'text',
                             placeholder: 'Примечания',
                             addClass: 'long',
@@ -2544,7 +2545,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const element = event.target.closest('[data-modal-name]');
         if (!element) return;
         let modalName = element.dataset.modalName;
-        console.log('RENDER');
         setGeneralInfo(modalName, event.target);
 
         if (sideModalData[modalName]) {
@@ -2572,7 +2572,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 trashBtn.setAttribute('data-modal-name', 'remove-observation');
                 operationName.innerText = 'RYGB (Гастрошунтирование)';
                 sideModal.dataset.sideModalName = modalName;
-                const obsLoader = new FileLoader();
+                const obsLoader = new FileLoader({ name: 'observation-fileloader' });
                 main.append(obsLoader.fileLoader);
                 const pillObservation = element.closest('.pill__observation');
                 trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
@@ -2581,8 +2581,9 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'patient':
                 title.innerText = 'Редактирование карты пациента';
                 sideModal.dataset.sideModalName = modalName;
-                const patientLoader = new FileLoader();
+                patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
                 main.append(patientLoader.fileLoader);
+
                 break;
             // default:
             //     title.innerText = 'Просмотр данных';
@@ -2676,6 +2677,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sideModal.classList.remove('view-mode');
         sideModal.classList.add('is-editable');
         renderFields(modalName);
+        if (modalName === 'patient') {
+            patientLoader.createDropZone({ name: 'patient-files' });
+            patientLoader.dropZone.classList.add('long');
+            main.querySelector('.patient-additional-info .group__form')?.append(patientLoader.dropZone);
+        }
     }
 
     function disabledEditMode(modalName) {
@@ -2686,21 +2692,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderFields(modalName) {
-        console.log('RENDER FIELD');
         // const main = document.querySelector('.side-modal__main');
         // main.innerHTML = '';
-        sideModal.dataset.sideModalName = modalName;
+        // sideModal.dataset.sideModalName = modalName;
 
-        if (modalName === 'observation') {
-            console.log(modalName);
-            const loader = new FileLoader();
-            // if (sideModalData[modalName].files) {
-            //     sideModalData[modalName].files.forEach((file) => {
-            //         loader.addFile(loader.fileLoader);
-            //     });
-            // }
-            main.append(loader);
-        }
+        // if (modalName === 'observation') {
+        //     console.log(modalName);
+        //     const loader = new FileLoader();
+        //     // if (sideModalData[modalName].files) {
+        //     //     sideModalData[modalName].files.forEach((file) => {
+        //     //         loader.addFile(loader.fileLoader);
+        //     //     });
+        //     // }
+        //     main.append(loader);
+        // }
 
         fields[modalName].forEach((el) => {
             if (el.complication) {

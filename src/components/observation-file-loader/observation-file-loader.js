@@ -1,26 +1,49 @@
+// const options = {
+//     target: '',
+//     type: 'loader' | 'dropzone',
+//     name: '',
+//     id: '',
+// };
 export class FileLoader {
-    constructor() {
+    constructor(options) {
+        if (options.type === 'loader') {
+            this.fileLoader = this.createFileloader({ name: options.name });
+        }
+        if (options.type === 'dropzone' && options.target) {
+            this.createDropZone({ name: options.name, target: options.target });
+            // console.log(document.querySelector(`${options.target}`));
+            // if (document.querySelector(`${options.target}`)) {
+            //     this.createDropZone({ name: options.name, target: options.target });
+            // }
+        }
+        this.dropZone;
         this.fileList = new DataTransfer();
-        this.fileLoader = this.createFileloader();
-        this.loaderInput = this.fileLoader.querySelector(`input`);
         this.currentFile;
         this.fileEl;
-        this.loaderInput.addEventListener('change', (event) => {
-            this.uploadFile(event.target.files[0]);
-            event.target.value = '';
-        });
+        this.fileElDropzone;
         this.modalUpload = document.querySelector('.modal-upload');
 
-        this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+        if (this.fileLoader) {
+            this.loaderInput = this.fileLoader.querySelector(`input`);
+            this.loaderInput.addEventListener('change', (event) => {
+                this.uploadFile(event.target.files[0]);
+                event.target.value = '';
+            });
+            this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+        } else if (this.dropZone) {
+            this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+        } else {
+            return;
+        }
     }
 
-    createFileloader() {
+    createFileloader(args) {
         const fileLoader = document.createElement('div');
         fileLoader.classList.add('observation-file-loader');
         fileLoader.innerHTML = `
         <div class='observation-file-loader__content'></div>
-        <label for='observation-fileloader' class='observation-file-loader__add-file'>
-        <input type="file" name='observation-fileloader' id='observation-fileloader' >
+        <label for='${args.name}' class='observation-file-loader__add-file'>
+        <input type="file" name='${args.name}' id='${args.name}' >
         <svg><use href='img/sprite.svg#plus-icon'></use></svg>
         </label>`;
 
@@ -35,9 +58,58 @@ export class FileLoader {
         return fileLoader;
     }
 
+    createDropZone(options) {
+        let dropZone;
+        if (!options.target) {
+            dropZone = document.createElement('div');
+            dropZone.classList.add('file-loader');
+            dropZone.innerHTML = `
+                <input type='file' name='${options.name}' id='${options.name}'>
+                <label for='${options.name}'>
+                    <span class='file-loader__title'>
+                        <svg>
+                            <use href='img/sprite.svg#paperclip'></use>
+                        </svg>
+                        Перетащите файл или нажмите для загрузки
+                    </span>
+                    <span class='file-loader__subtitle'>
+                        Максимальный размер одного файла: 10Мб. Максимальное количество файлов 20.
+                    </span>
+                </label>
+                <div class='file-loader__uploaded-files'></div>`;
+        } else {
+            dropZone = document.querySelector(options.target)?.closest('.file-loader');
+        }
+
+        if (!dropZone) return;
+
+        dropZone.querySelector('input').addEventListener('change', (event) => {
+            this.uploadFile(event.target.files[0]);
+            event.target.value = '';
+        });
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            this.dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            this.dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            this.dropZone.classList.remove('dragover');
+            this.uploadFile(event.dataTransfer.files[0]);
+        });
+
+        this.dropZone = dropZone;
+        // return dropZone;
+    }
+
     createFileElement(file) {
         let currentFile;
-        console.log(file);
         let fileName = file.name;
         let fileType = file.type;
 
@@ -52,8 +124,6 @@ export class FileLoader {
         // - - - Этот код можно удалить при работе с настоящими файлами(оставить тольо код ниже этой строки)
         // else
         if (fileType.match(/png|jpeg|jpg/i)) {
-            console.log('Это Картинка!!!');
-            console.log(file);
             imageLink = URL.createObjectURL(file);
             image = `<img class='file__img' src='${imageLink}'></img>`;
         }
@@ -93,20 +163,23 @@ export class FileLoader {
               </ul>
           </div>
           <div class='loader'></div>
-          <div class='file__uploaded'><svg><use href='img/sprite.svg#check-bold'></use></svg></div>`;
+          <div class='file__uploaded'><svg><use href='img/sprite.svg#check-bold'></use></svg></div>
+          <div class='file__delete' data-delete-file><svg><use href='img/sprite.svg#close'></use></svg></div>`;
 
-        currentFile.querySelector('[data-delete-file]').addEventListener('click', (event) => {
+        const deleteFileFunc = deleteFile.bind(this);
+        currentFile.querySelectorAll('[data-delete-file]').forEach((deleteBtn) => {
+            deleteBtn.addEventListener('click', (event) => deleteFileFunc(event));
+        });
+
+        function deleteFile(event) {
             let deletedFile = event.target.closest('.file');
+            let deletedFilesArr = document.querySelectorAll(`.file[data-index='${deletedFile.dataset.index}']`);
             // Удаление file из FileList
             // Фильруем FileList и создаём новый из тех файлов которые нам нужны
             const DT = new DataTransfer();
             for (let i = 0; i < this.fileList.files.length; i++) {
                 const file = this.fileList.files[i];
                 if (Number(deletedFile.dataset.index) !== i) {
-                    // console.log(`index: ${deletedFile.dataset.index}`);
-                    // console.log(`i: ${i}`);
-                    // console.log(filesData);
-                    // console.log(file);
                     DT.items.add(file);
                 }
             }
@@ -116,100 +189,118 @@ export class FileLoader {
             const removeBtn = modalRemove.querySelector('.modal-remove__remove-btn');
             modalRemove.querySelector('.modal-remove__title').innerText = 'Удаление файла';
             modalRemove.querySelector('.modal-remove__subtitle').innerText = 'Это действие безвозвратно, вы уверены?';
-            window.openModal('modal-remove', true);
-
-            console.log('Добавляем EVEN LISTENER');
-            removeBtn.addEventListener('click', removeFile.bind(this));
+            let openModals = document.querySelectorAll('.i-modal.is-active');
+            if (openModals.length) {
+                window.openModal('modal-remove', true);
+            } else {
+                window.openModal('modal-remove');
+            }
 
             function removeFile() {
                 this.fileList = DT;
-                deletedFile.remove();
+                deletedFilesArr.forEach((el) => {
+                    el.remove();
+                });
                 URL.revokeObjectURL(imageLink);
-                modalRemove.querySelector('.modal-remove__remove-btn').removeEventListener('click', removeFile);
+                modalRemove.querySelector('.modal-remove__remove-btn').removeEventListener('click', removeFileWithContext);
                 window.closeModal();
                 removeObserver.disconnect();
-                this.correctIndex();
-                console.log(this.fileList);
+                this._correctIndex();
             }
+
+            const removeFileWithContext = removeFile.bind(this);
+
+            removeBtn.addEventListener('click', removeFileWithContext);
 
             const removeObserver = new MutationObserver((mutations) => {
                 if (!mutations[0].target.classList.contains('is-active')) {
-                    console.log('Удаляю обработчик');
-                    removeBtn.removeEventListener('click', removeFile);
+                    removeBtn.removeEventListener('click', removeFileWithContext);
                     removeObserver.disconnect();
                 }
             });
             removeObserver.observe(modalRemove, { attributeFilter: ['class'] });
-        });
+        }
 
-        // if (modalUpload) {
-        //     filesWrapper.append(currentFile);
-        //     // input
-        //     modalUpload.querySelector('input').dataset.for = mainFileList.files.length - 1;
-        // }
+        if (this.dropZone) {
+            this.fileElDropzone = currentFile.cloneNode(true);
+            this.fileElDropzone.querySelector('.file__carret').remove();
+            this.fileElDropzone.querySelectorAll('[data-delete-file]').forEach((deleteBtn) => {
+                deleteBtn.addEventListener('click', (event) => deleteFileFunc(event));
+            });
+        }
 
         return currentFile;
     }
 
-    correctIndex() {
-        const filesWrap = this.fileLoader.querySelector('.observation-file-loader__content');
-        const files = filesWrap.querySelectorAll('.file');
-        files.forEach((el, i) => {
-            console.log(i);
-            el.dataset.index = i;
-        });
+    _correctIndex() {
+        if (this.fileLoader) {
+            const files = this.fileLoader.querySelectorAll('.file');
+            files.forEach((el, i) => {
+                el.dataset.index = i;
+            });
+        }
+        if (this.dropZone) {
+            const dropzoneFiles = this.dropZone.querySelectorAll('.file');
+            dropzoneFiles.forEach((el, i) => {
+                el.dataset.index = i;
+            });
+        }
     }
 
     addFile(file) {
-        const filesWrapper = this.fileLoader.querySelector('.observation-file-loader__content');
-
+        const filesWrapper = this.fileLoader?.querySelector('.observation-file-loader__content');
         // if (file) {
         //     filesWrapper.append(this.createFileElement(file));
         //     return;
         // }
 
-        // добавление файлов в список
         this.fileList.items.add(this.currentFile);
         this.modalUpload.querySelector('input').dataset.for = this.fileList.files.length - 1;
         this.changeFileName();
-        this.fileEl.classList.add('file--advanced');
-        filesWrapper.append(this.fileEl);
-        window.closeModal();
-        console.log(this.fileList);
-    }
 
-    // removeFile() {
-    //     let deletedFile = event.target.closest('.file');
-    //     // Удаление file из FileList
-    //     // Фильруем FileList и создаём новый из тех файлов которые нам нужны
-    //     const DT = new DataTransfer();
-    //     for (let i = 0; i < this.fileList.files.length; i++) {
-    //         const file = this.fileList.files[i];
-    //         if (Number(deletedFile.dataset.index) !== i) {
-    //             DT.items.add(file);
-    //         }
-    //     }
-    //     this.fileList = DT;
-    //     deletedFile.remove();
-    //     URL.revokeObjectURL(imageLink);
-    //     console.log(this.fileList);
-    // }
+        // добавление файлов в обычный fileLoader.
+        if (filesWrapper) {
+            this.fileEl.classList.add('file--advanced');
+            filesWrapper.append(this.fileEl);
+        }
+
+        // добавление файлов в dropzone
+        if (this.dropZone) {
+            const dropZoneWrapper = this.dropZone.querySelector('.file-loader__uploaded-files');
+            this.fileElDropzone.classList.add('attached');
+            dropZoneWrapper.append(this.fileElDropzone);
+        }
+
+        window.closeModal();
+        this.modalUpload.querySelector(`input[name='file-name']`).value = '';
+    }
 
     uploadFile(file) {
         this.currentFile = file;
         this.fileEl = this.createFileElement(file);
         this.modalUpload.querySelector('.modal-upload__files').innerHTML = '';
         this.modalUpload.querySelector('.modal-upload__files').append(this.fileEl);
-        window.openModal('modal-upload', true);
+
+        let openModals = document.querySelectorAll('.i-modal.is-active');
+        if (openModals.length) {
+            window.openModal('modal-upload', true);
+        } else {
+            window.openModal('modal-upload');
+        }
     }
 
     changeFileName() {
         const inputFileName = this.modalUpload?.querySelector('input');
         if (inputFileName.value) {
-            // console.log(file)
+            // обычный файл
             let fileName = this.fileEl.querySelector('.file__name');
-            Object.defineProperty(this.fileList.files[inputFileName.dataset.for], 'name', { value: inputFileName.value, writable: true });
             fileName.innerHTML = inputFileName.value;
+            // файл для dropZone
+            if (this.fileElDropzone) {
+                this.fileElDropzone.querySelector('.file__name').innerHTML = inputFileName.value;
+            }
+            // изменяем имя внутри fileList
+            Object.defineProperty(this.fileList.files[inputFileName.dataset.for], 'name', { value: inputFileName.value, writable: true });
         }
     }
 }
