@@ -110,7 +110,7 @@ function checkFilledInput(group) {
     // console.log(group);
     // console.log('INPUT CHECKING...');
     let requiredElements = [];
-    let additionalGroupsFilled = undefined;
+    let additionalGroupsFilled = [];
     // group
     if (!group.classList.contains('group--additional')) {
         // несколько форм внутри
@@ -139,9 +139,11 @@ function checkFilledInput(group) {
         if (additionalGroups.length) {
             additionalGroups.forEach((addGroup) => {
                 if (addGroup.classList.contains('is-active') && !addGroup.classList.contains('is-filled')) {
-                    additionalGroupsFilled = false;
+                    // console.log(addGroup);
+                    // console.log(addGroup.classList.contains('is-filled'));
+                    additionalGroupsFilled.push(false);
                 } else if (addGroup.classList.contains('is-active') && addGroup.classList.contains('is-filled')) {
-                    additionalGroupsFilled = true;
+                    additionalGroupsFilled.push(true);
                 }
             });
         }
@@ -188,18 +190,12 @@ function checkFilledInput(group) {
         inputsField = true;
     }
 
-    // Отключаем галочку для блока Операция
-    // if (group.dataset.groupName === 'operation') {
-    //     console.log(group);
-    //     inputsField = false;
-    // }
-
     // Если нет активных обязательных элементов
     // и поле имеет class required, то не добавляем is-filled. (Например группа операция. data-group-name='operation')
 
-    if (additionalGroupsFilled !== undefined) {
+    if (additionalGroupsFilled.length) {
         // console.log(additionalGroupsFilled);
-        if (inputsField && additionalGroupsFilled) {
+        if (inputsField && additionalGroupsFilled.indexOf(false) === -1) {
             group.classList.add('is-filled');
         } else if (group.classList.contains('is-filled')) {
             group.classList.remove('is-filled');
