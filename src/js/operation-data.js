@@ -2735,6 +2735,73 @@ export const OPERATIONS = {
 
 export const OPERATIONS_RULES = {
     // ОБЩИЕ ПОЛЯ
+    surgeon: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    access: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'duration-operation': {
+        customRange: {
+            min: 40,
+            max: 120,
+        },
+    },
+    'weight-operation': {
+        customRange: {
+            min: 60,
+            max: 300,
+        },
+        required: {
+            message: 'Обязательное поле',
+        },
+        // сюда можно добавить еще тесты
+    },
+    'date-operation': {
+        range: {
+            min: 10,
+            max: 10,
+            message: 'Формат: 16.09.2023',
+        },
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'type-of-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'kind-of-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'reason-for-revision': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    // Внутрижелудочный баллон
+    'ballon-type': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'fullness-of-the-balloon': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'date-ballon-delete': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
     'probe-diameter': {
         customRange: {
             min: 32,

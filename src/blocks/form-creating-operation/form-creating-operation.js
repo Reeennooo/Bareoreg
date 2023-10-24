@@ -8,81 +8,91 @@ import { initGroup } from '../../components/group/group';
 import { createButton } from '../../components/btn/btn';
 import { Complication } from '../complications/complication';
 
-const VALIDATION_RULES = {
-    // key - это name инпута
-    // value - это правила проверки инпута
-    surgeon: {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    access: {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'duration-operation': {
-        customRange: {
-            min: 40,
-            max: 120,
-        },
-    },
-    'weight-operation': {
-        customRange: {
-            min: 60,
-            max: 300,
-        },
-        required: {
-            message: 'Обязательное поле',
-        },
-        // сюда можно добавить еще тесты
-    },
-    'date-operation': {
-        range: {
-            min: 10,
-            max: 10,
-            message: 'Формат: 16.09.2023',
-        },
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'type-of-operation': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'kind-of-operation': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'reason-for-revision': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    // Внутрижелудочный баллон
-    'ballon-type': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'fullness-of-the-balloon': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-    'date-ballon-delete': {
-        required: {
-            message: 'Обязательное поле',
-        },
-    },
-};
+// export const VALIDATION_RULES = {
+//     // key - это name инпута
+//     // value - это правила проверки инпута
+//     surgeon: {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     access: {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'duration-operation': {
+//         customRange: {
+//             min: 40,
+//             max: 120,
+//         },
+//     },
+//     'weight-operation': {
+//         customRange: {
+//             min: 60,
+//             max: 300,
+//         },
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//         // сюда можно добавить еще тесты
+//     },
+//     'date-operation': {
+//         range: {
+//             min: 10,
+//             max: 10,
+//             message: 'Формат: 16.09.2023',
+//         },
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'type-of-operation': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'kind-of-operation': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'reason-for-revision': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     // Внутрижелудочный баллон
+//     'ballon-type': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'fullness-of-the-balloon': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+//     'date-ballon-delete': {
+//         required: {
+//             message: 'Обязательное поле',
+//         },
+//     },
+// };
 
 export const CONNECTED_RULES = {
     // key - имя связи
     // value - подходящие значений(для выпадающих списков можно использовать индексы(формат число)).
+    // статус пациента
+    status: [
+        {
+            value: 2,
+        },
+        {
+            value: 3,
+        },
+    ],
+
     access: [
         {
             value: 'Лапаратомия',
@@ -263,7 +273,7 @@ function initSelects(selects) {
             selectKindOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else {
             let select = new window.ItcCustomSelect(`#${selectId}`);
-            console.log(select);
+            // console.log(select);
         }
     });
 }
@@ -276,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log(window.location);
     if (!window.location.pathname.includes('creating-operation')) return;
 
-    assignInputRules(VALIDATION_RULES);
+    assignInputRules(OPERATIONS_RULES);
     initSelects(selects);
 
     // calendars
@@ -470,7 +480,6 @@ function setConnectionsForElements(element, rules) {
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
-                            // console.log(connectedEL);
                             // console.log(connectedEL.dataset.id);
                             // console.log(rulesItem);
                             if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
@@ -502,11 +511,14 @@ function setConnectionsForElements(element, rules) {
             const monitoringElement = element.querySelector('button');
             const elementObserver = new MutationObserver((mutations) => {
                 let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
+                console.log(connectedKey);
+                console.log(connectedElements);
                 const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
                     if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
                         return item;
                     }
                 });
+                console.log(rulesItem);
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
@@ -544,6 +556,7 @@ function setConnectionsForElements(element, rules) {
                 } else {
                     connectedElements.forEach((connectedEL) => {
                         if (connectedEL.classList.contains('is-active')) {
+                            console.log(connectedEL);
                             connectedEL.classList.remove('is-active');
                         }
                     });
