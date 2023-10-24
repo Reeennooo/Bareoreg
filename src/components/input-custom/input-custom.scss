@@ -5,6 +5,13 @@
     position: relative;
   }
 
+  &[data-connected] {
+    display: none;
+  }
+  &[data-connected].is-active {
+    display: block;
+  }
+
   &:has(input[data-connected]) {
     display: none;
   }

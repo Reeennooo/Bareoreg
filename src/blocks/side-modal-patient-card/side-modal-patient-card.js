@@ -1,4 +1,6 @@
 import { createAditionalGroup, createGroup, checkConnectionValue, CONNECTED_RULES } from '../form-creating-operation/form-creating-operation';
+import { PATIENT_RULES } from '../form-new-patient/form-new-patient';
+import { OPERATIONS_RULES } from '../../js/operation-data';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { Complication } from '../complications/complication';
 import { assignInputRules } from '../../js/input-validate';
@@ -7,7 +9,6 @@ import { initGroupObserve } from '../../js/validate';
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('patient-card')) return;
     let initObservers = [];
-    let patientLoader;
 
     const sideModalData = {
         operation: {
@@ -490,8 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             name: 'weight-operation',
                             type: 'number',
                             placeholder: 'Вес на момент операции*',
-                            required: false,
-
+                            required: true,
                             value: '150',
                         },
                     },
@@ -518,7 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ['List item 1', 'List item 1'],
                                 ['List item 1', 'List item 1'],
                             ],
-
                             required: false,
                             value: 'List item 1',
                         },
@@ -1199,6 +1198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         ['Нет', 'Нет'],
                                     ],
                                     hasConnection: 'drainage-tube',
+                                    required: true,
                                 },
                             },
                             {
@@ -1560,7 +1560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observation: [
             {
                 title: 'Сведения о пациенте',
-                addClass: ['group--simple'],
+                addClass: ['group--simple', 'group--parent'],
                 fields: [
                     {
                         type: 'INPUT',
@@ -1712,7 +1712,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'RADIO-GROUP',
                         data: {
                             title: 'Признаки питательной недостаточности',
-                            name: 'intake-of-vitamins',
+                            name: 'signs-of-nutritional-deficiency',
                             options: [
                                 ['Есть', 'Есть'],
                                 ['Нет', 'Нет'],
@@ -1725,7 +1725,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'RADIO-GROUP',
                         data: {
                             title: 'Комфортность питания',
-                            name: 'intake-of-vitamins',
+                            name: 'сomfort-of-nutrition',
                             options: [
                                 ['Нормальная', 'Нормальная'],
                                 ['Дискомфорт при приеме пищи', 'Дискомфорт при приеме пищи'],
@@ -2097,6 +2097,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             required: true,
                             value: 'Отказался от лечения. Ушел в лес жить в единении с природой',
                             addClass: 'long',
+                            connected: 'status',
                         },
                     },
                 ],
@@ -2541,6 +2542,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trashBtn = sideModal.querySelector('.side-modal__remove');
     const main = sideModal.querySelector('.side-modal__main');
     const obsLoader = new FileLoader({ name: 'observation-fileloader', type: 'loader' });
+    const patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
@@ -2581,8 +2583,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'patient':
                 title.innerText = 'Редактирование карты пациента';
                 sideModal.dataset.sideModalName = modalName;
-                patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
-                main.append(patientLoader.fileLoader);
+                // patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
+                // main.append(patientLoader.fileLoader);
 
                 break;
             // default:
@@ -2679,14 +2681,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sideModal.classList.add('is-editable');
         renderFields(modalName);
         if (modalName === 'patient') {
-            patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
             main.prepend(patientLoader.fileLoader);
-            console.log(patientLoader.fileLoader);
-
-            patientLoader.createDropZone({ name: 'patient-files' });
-            patientLoader.dropZone.classList.add('long');
-            console.log(main.querySelector('.patient-additional-info .group__form'));
-            main.querySelector('.patient-additional-info .group__form')?.append(patientLoader.dropZone);
+            // console.log(patientLoader.fileLoader);
+            // patientLoader.createDropZone({ name: 'patient-files' });
+            // patientLoader.dropZone.classList.add('long');
+            // main.querySelector('.patient-additional-info .group__form')?.append(patientLoader.dropZone);
         }
 
         if (modalName === 'observation') {
@@ -2706,21 +2705,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderFields(modalName) {
-        // const main = document.querySelector('.side-modal__main');
-        // main.innerHTML = '';
-        // sideModal.dataset.sideModalName = modalName;
-
-        // if (modalName === 'observation') {
-        //     console.log(modalName);
-        //     const loader = new FileLoader();
-        //     // if (sideModalData[modalName].files) {
-        //     //     sideModalData[modalName].files.forEach((file) => {
-        //     //         loader.addFile(loader.fileLoader);
-        //     //     });
-        //     // }
-        //     main.append(loader);
-        // }
-
         fields[modalName].forEach((el) => {
             if (el.complication) {
                 const complicationInstance = createComplication(el.data);
@@ -2756,6 +2740,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkConnectionValue(el, CONNECTED_RULES);
             });
         });
+        initGroupObserve();
+
+        if (modalName === 'operation') {
+            // console.log(modalName);
+            assignInputRules(OPERATIONS_RULES);
+        }
+        if (modalName === 'patient') {
+            // console.log(modalName);
+            assignInputRules(PATIENT_RULES);
+        }
     }
 
     function createComplicationFn() {

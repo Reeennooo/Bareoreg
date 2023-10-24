@@ -50,7 +50,7 @@ function initSelects(selects) {
     });
 }
 
-const allRules = {
+export const PATIENT_RULES = {
     // key - это name инпута
     // value - это правила проверки инпута
     name: {
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // устанавливаем правила
-    assignInputRules(allRules);
+    assignInputRules(PATIENT_RULES);
 
     // СВЯЗИ
     // искать по всему документу или только внутри конкретной группы?

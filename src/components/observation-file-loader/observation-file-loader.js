@@ -30,6 +30,7 @@ export class FileLoader {
                 event.target.value = '';
             });
             this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+            return;
         } else if (this.dropZone) {
             this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
         } else {
@@ -253,6 +254,8 @@ export class FileLoader {
         //     filesWrapper.append(this.createFileElement(file));
         //     return;
         // }
+
+        if (!this.currentFile) return;
 
         this.fileList.items.add(this.currentFile);
         this.modalUpload.querySelector('input').dataset.for = this.fileList.files.length - 1;
