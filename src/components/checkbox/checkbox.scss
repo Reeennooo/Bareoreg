@@ -35,6 +35,11 @@
     background-size: 50% 50%;
   }
 
+  // Состояние фокус
+  input:focus + .checkbox__fake::before {
+    border-color: $violet;
+  }
+
   // Вид чекбокса в состоянии checked
   input:checked + .checkbox__fake::before {
     background-color: $violet;
