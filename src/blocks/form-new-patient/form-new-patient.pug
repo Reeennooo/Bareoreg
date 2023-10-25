@@ -4,7 +4,7 @@
       +input-custom({type: 'text', placeholder: 'Фамилия*', name: 'surname',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Имя*', name: 'name',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Отчество*', name: 'middle-name',})(class='only-txt' data-required='')
-      +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth', calendar: true})(autocomplete='off' data-required='')#calendar-date-birth.only-number
+      +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth', calendar: true})(autocomplete='off' data-required='' data-mask='date')#calendar-date-birth
       +group-radio-buttons({title: 'Пол*'})(data-required='' data-has-connection="gender")
         +radio({name: 'gender', value: 'man', label: 'Мужской'})
         +radio({name: 'gender', value: 'woman', label: 'Женский'})
@@ -72,7 +72,7 @@
           ]
           })
       +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
-      +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})(data-mask='email')
+      +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})()
       +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'city-info'}, mods: ['info']})(data-required='')
       +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address'}).long-input
       +checkbox({name: "permission for videomaterial", value: 'yes', label: 'Получено разрешение на использование <br>фото- и видеоматериалов'})

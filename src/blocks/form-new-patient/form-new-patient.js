@@ -1,5 +1,5 @@
 import IMask from 'imask/esm/index';
-import { assignInputRules } from '../../js/input-validate';
+import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 
 const selects = {
@@ -131,16 +131,7 @@ export const PATIENT_RULES = {
 
 document.addEventListener('DOMContentLoaded', () => {
     initSelects(selects);
-    // masks
-    const elements = document.querySelectorAll("[data-mask='phone']");
-    if (elements) {
-        const phoneOptions = {
-            mask: '+{7}(000)000-00-00',
-        };
-        elements.forEach((el) => {
-            IMask(el, phoneOptions);
-        });
-    }
+    setMasks();
     // устанавливаем правила
     assignInputRules(PATIENT_RULES);
 

@@ -3,7 +3,7 @@
     .group__form
       +data-block({title: 'Пациент', value: 'Павленко Павел Павлович'})
       +input-custom({type: 'number', placeholder: 'Вес на момент операции*', name: 'weight-operation'})(data-required='')
-      +input-custom({type: 'text', placeholder: 'Дата операции*', name: 'date-operation', calendar: true})(autocomplete='off' data-required='').only-number#calendar-operation
+      +input-custom({type: 'text', placeholder: 'Дата операции*', name: 'date-operation', calendar: true})(autocomplete='off' data-required='' data-mask='date').only-number#calendar-operation
       +itc-custom-select({
         id: 'surgeon', 
         name: 'surgeon',
@@ -448,7 +448,7 @@
             },
           ]
         })
-      +input-custom({type: 'text', placeholder: 'Дата выписки', name: 'discharge-from-hospital', calendar: true})(autocomplete='off' data-required='').only-number#calendar-discharge
+      +input-custom({type: 'text', placeholder: 'Дата выписки', name: 'discharge-from-hospital', calendar: true})(autocomplete='off' data-required='' data-mask='date').only-number#calendar-discharge
       +itc-custom-select({
           id: 'discharge-where', 
           name: 'discharge-where',

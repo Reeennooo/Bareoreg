@@ -85,3 +85,24 @@ export function assignInputRules(allRules, checkRightNow) {
         }
     });
 }
+
+export function setMasks() {
+    // masks
+    const maskRules = {
+        phone: {
+            mask: '+{7}(000)000-00-00',
+        },
+        date: {
+            mask: Date,
+            // min: new Date(1990, 0, 1),
+            // max: new Date(2020, 0, 1),
+            // lazy: false,
+        },
+    };
+    const elements = document.querySelectorAll('[data-mask]');
+    if (elements) {
+        elements.forEach((el) => {
+            IMask(el, maskRules[el.dataset.mask]);
+        });
+    }
+}
