@@ -41,7 +41,7 @@
           },
         ]
         })(data-required='')(data-has-connection='status')
-      +input-custom({type: 'text', placeholder: 'Причина выбытия*', name: 'reason-for-disposal', connected: 'status'})(class='long-input')
+      +input-custom({type: 'text', placeholder: 'Причина выбытия*', name: 'reason-for-disposal', connected: 'status', addClass: 'long-input'})
 
   +group({title: 'Общая информация и контактные данные'}).form-new-patient__main-data
     .group__form
@@ -72,9 +72,9 @@
           ]
           })
       +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
-      +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})()
+      +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})
       +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'city-info'}, mods: ['info']})(data-required='')
-      +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address'}).long-input
+      +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address', addClass: 'long-input'})
       +checkbox({name: "permission for videomaterial", value: 'yes', label: 'Получено разрешение на использование <br>фото- и видеоматериалов'})
       +checkbox({name: "permission for Email mailing", value: 'yes', label: 'Получено разрешение на email-рассылку'})
       +checkbox({name: "permission for SMS mailing", value: 'yes', label: 'Получено разрешение на sms-рассылку'})
@@ -82,8 +82,8 @@
   +group({title: 'Сопутствующие заболевания'}).group--parent.form-new-patient__concomitant-diseases
     .group__form
       +itc-custom-select({
-          id: 'disease1', 
-          name: 'disease1',
+          id: 'arterial-hypertension', 
+          name: 'arterial-hypertension',
           placeholder: 'Артериальная гипертензия',
           options: [
             {
@@ -109,8 +109,8 @@
           ]
         })(data-required='')
       +itc-custom-select({
-          id: 'disease2', 
-          name: 'disease2',
+          id: 'diabetes-mellitus-2-type', 
+          name: 'diabetes-mellitus-2-type',
           placeholder: 'Сахарный диабет 2-го типа',
           options: [
             {
@@ -136,8 +136,8 @@
           ]
         })(data-has-connection='diabetes')
       +itc-custom-select({
-          id: 'disease2-duration', 
-          name: 'disease2-duration',
+          id: 'duration-diabetes-mellitus', 
+          name: 'duration-diabetes-mellitus',
           placeholder: 'Длительность течения СД2',
           options: [
             {
@@ -208,8 +208,8 @@
           ]
         })(data-connected='diabetes' data-required='')
       +itc-custom-select({
-          id: 'disease3', 
-          name: 'disease3',
+          id: 'GERD', 
+          name: 'GERD',
           placeholder: 'ГЭРБ',
           options: [
             {
@@ -244,8 +244,8 @@
         +radio({name: 'apnea', value: 'yes', label: 'Да'})
         +radio({name: 'apnea', value: 'no', label: 'Нет'})
       +itc-custom-select({
-          id: 'disease4', 
-          name: 'disease4',
+          id: 'bronchial-asthma', 
+          name: 'bronchial-asthma',
           placeholder: 'Бронхиальная астма',
           options: [
             {
@@ -266,8 +266,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'disease5', 
-          name: 'disease5',
+          id: 'functional-status', 
+          name: 'functional-status',
           placeholder: 'Функциональный статус',
           options: [
             {
@@ -293,8 +293,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'disease6', 
-          name: 'disease6',
+          id: 'back-and-limb-pain', 
+          name: 'back-and-limb-pain',
           placeholder: 'Боль в спине и конечностях',
           options: [
             {
@@ -315,8 +315,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'disease7', 
-          name: 'disease7',
+          id: 'liver-diseases', 
+          name: 'liver-diseases',
           placeholder: 'Заболевания печени',
           options: [
             {
@@ -337,45 +337,45 @@
             {
               index: 3,
               value: 'Cirrhosis of the liver',
-              txt: 'Неалкогольная жировая болезнь печени'
+              txt: 'Цирроз печени'
             },
           ]
         })
       +itc-custom-select({
-          id: 'disease8', 
-          name: 'disease8',
+          id: 'hernia', 
+          name: 'hernia',
           placeholder: 'Грыжа',
           options: [
             {
               index: 0,
-              value: 'No',
+              value: 'Нет',
               txt: 'Нет'
             },
             {
               index: 1,
-              value: 'Umbilical',
+              value: 'Пупочная',
               txt: 'Пупочная'
             },
             {
               index: 2,
-              value: 'Ventral',
+              value: 'Вентральная',
               txt: 'Вентральная'
             },
             {
               index: 3,
-              value: 'Inguinal',
+              value: 'Паховая',
               txt: 'Паховая'
             },
             {
               index: 4,
-              value: 'Under',
-              txt: 'Под'
+              value: 'ПОД',
+              txt: 'ПОД'
             },
           ]
         })
       +itc-custom-select({
-          id: 'disease9', 
-          name: 'disease9',
+          id: 'fat-apron', 
+          name: 'fat-apron',
           placeholder: 'Жировой фартук',
           options: [
             {
@@ -428,23 +428,33 @@
             options: [
               {
                 index: 0,
-                value: 'value1',
-                txt: 'List item 1'
+                value: 'Регулярный цикл',
+                txt: 'Регулярный цикл'
               },
               {
                 index: 1,
-                value: 'value2',
-                txt: 'List item 2'
+                value: 'Нерегулярный цикл',
+                txt: 'Нерегулярный цикл'
               },
               {
                 index: 2,
-                value: 'value3',
-                txt: 'List item 3'
+                value: 'Гиперменорея',
+                txt: 'Гиперменорея'
               },
               {
                 index: 3,
-                value: 'value4',
-                txt: 'List item 4'
+                value: 'Гистерэктомия в анамнезе',
+                txt: 'Гистерэктомия в анамнезе'
+              },
+              {
+                index: 4,
+                value: 'Постменопауза',
+                txt: 'Постменопауза'
+              },
+              {
+                index: 5,
+                value: 'Аменорея',
+                txt: 'Аменорея'
               },
             ]
           })(data-required='')
@@ -455,23 +465,23 @@
             options: [
               {
                 index: 0,
-                value: 'value1',
-                txt: 'List item 1'
+                value: 'Нет',
+                txt: 'Нет'
               },
               {
                 index: 1,
-                value: 'value2',
-                txt: 'List item 2'
+                value: 'СПКЯ без терапии',
+                txt: 'СПКЯ без терапии'
               },
               {
                 index: 2,
-                value: 'value3',
-                txt: 'List item 3'
+                value: 'СПКЯ с терапией',
+                txt: 'СПКЯ с терапией'
               },
               {
                 index: 3,
-                value: 'value4',
-                txt: 'List item 4'
+                value: 'Бесплодие',
+                txt: 'Бесплодие'
               },
             ]
           })
@@ -482,8 +492,8 @@
   +group({title: 'Анамнез'}).form-new-patient__anamnesis
     .group__form
       +itc-custom-select({
-          id: 'anamnesis1', 
-          name: 'anamnesis1',
+          id: 'ASA-scale', 
+          name: 'ASA-scale',
           placeholder: 'Шкала ASA',
           options: [
             {
@@ -509,8 +519,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'anamnesis2', 
-          name: 'anamnesis2',
+          id: 'smoking', 
+          name: 'smoking',
           placeholder: 'Курение',
           options: [
             {
@@ -536,8 +546,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'anamnesis3', 
-          name: 'anamnesis3',
+          id: 'PE-risk-factors', 
+          name: 'PE-risk-factors',
           placeholder: 'Факторы риска ТЭЛА',
           options: [
             {
@@ -568,8 +578,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'anamnesis4', 
-          name: 'anamnesis4',
+          id: 'regular-medication-intake', 
+          name: 'regular-medication-intake',
           placeholder: 'Регулярный прием препаратов',
           options: [
             {
@@ -610,8 +620,8 @@
           ]
         })
       +itc-custom-select({
-          id: 'anamnesis5', 
-          name: 'anamnesis5',
+          id: 'weight-loss-attempts', 
+          name: 'weight-loss-attempts',
           placeholder: 'Попытки снижения веса',
           options: [
             {
@@ -657,8 +667,8 @@
           ]
         })(data-multiple=true)
       +itc-custom-select({
-          id: 'anamnesis6', 
-          name: 'anamnesis6',
+          id: 'previous-bariatric-surgery', 
+          name: 'previous-bariatric-surgery',
           placeholder: 'Предыдущая бариотрическая операция',
           options: [
             {
@@ -717,10 +727,10 @@
               txt: 'Другая операция'
             },
           ]
-        })
+        })(data-multiple=true)
       +itc-custom-select({
-          id: 'anamnesis7', 
-          name: 'anamnesis7',
+          id: 'history-of-operations', 
+          name: 'history-of-operations',
           placeholder: 'Операции в Анамнезе',
           options: [
             {
@@ -744,7 +754,7 @@
               txt: 'Множественные лапаротомии'
             },
           ]
-        })
+        })(data-multiple=true)
 
   +group({title: 'Дополнительная информация'}).form-new-patient__additional-info
     .group__form
@@ -753,4 +763,4 @@
 
   .form__wrapper-btns
     +btn({txt: 'Создать'})(type='submit')(disabled).submit-button.form-new-patient__btn
-    +btn({txt: 'Оценить комплаентность', mode: 'ghost'})(type='button').form-new-patient__btn
+    //- +btn({txt: 'Оценить комплаентность', mode: 'ghost'})(type='button').form-new-patient__btn

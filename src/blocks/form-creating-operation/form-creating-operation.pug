@@ -2,7 +2,7 @@
   +group({title: 'Общие сведения'}).form-creating-operation__general-information
     .group__form
       +data-block({title: 'Пациент', value: 'Павленко Павел Павлович'})
-      +input-custom({type: 'number', placeholder: 'Вес на момент операции*', name: 'weight-operation'})(data-required='')
+      +input-custom({type: 'number', placeholder: 'Вес на момент операции*', name: 'weight-operation'})(data-required='').only-number
       +input-custom({type: 'text', placeholder: 'Дата операции*', name: 'date-operation', calendar: true})(autocomplete='off' data-required='' data-mask='date').only-number#calendar-operation
       +itc-custom-select({
         id: 'surgeon', 
@@ -65,7 +65,7 @@
         options: [
           {
             index: 0,
-            value: 'value1',
+            value: 'Первичная',
             txt: 'Первичная'
           },
           {
@@ -75,7 +75,7 @@
           },
           {
             index: 2,
-            value: 'value3',
+            value: 'Плановый второй этап',
             txt: 'Плановый второй этап'
           },
           {
@@ -84,7 +84,7 @@
             txt: 'Ревизия после бариатрической операции в другой клинике'
           },
         ]
-      })(data-required='' data-has-connection='revision')
+      })(data-required='' data-has-connection='operation-type')
       
       +itc-custom-select({
         id: 'reason-for-revision', 
@@ -117,7 +117,7 @@
             txt: 'Эстетическая, кометологическая, иная причина'
           },
         ]
-      })(data-required='' data-connected='revision')
+      })(data-required='' data-connected='operation-type' data-id='revision')
       +itc-custom-select({
         id: 'kind-of-operation', 
         name: 'kind-of-operation',
@@ -305,104 +305,149 @@
           options: [
             {
               index: 0,
-              value: 'value1',
-              txt: 'List item 1'
+              value: 'Из троакарной раны',
+              txt: 'Из троакарной раны'
             },
             {
               index: 1,
-              value: 'value2',
-              txt: 'List item 2'
+              value: 'Из артерии/вены',
+              txt: 'Из артерии/вены'
             },
             {
               index: 2,
-              value: 'value3',
-              txt: 'List item 3'
-            },
-            {
-              index: 3,
-              value: 'value4',
-              txt: 'List item 4'
+              value: 'Другое',
+              txt: 'Другое'
             },
           ]
         })
         +itc-custom-select({
-          id: 'Positive leak test', 
-          name: 'Positive leak test',
+          id: 'positive-leak-test', 
+          name: 'positive-leak-test',
           placeholder: 'Позитивный тест на герметичность',
           options: [
             {
               index: 0,
-              value: 'value1',
-              txt: 'List item 1'
+              value: 'Степлерной линии',
+              txt: 'Степлерной линии'
             },
             {
               index: 1,
-              value: 'value2',
-              txt: 'List item 2'
-            },
-            {
-              index: 2,
-              value: 'value3',
-              txt: 'List item 3'
-            },
-            {
-              index: 3,
-              value: 'value4',
-              txt: 'List item 4'
+              value: 'Степлерной линии',
+              txt: 'Анастомоза'
             },
           ]
         })
         +itc-custom-select({
-          id: 'injury of organs', 
-          name: 'injury of organs',
+          id: 'injury-of-organs', 
+          name: 'injury-of-organs',
           placeholder: 'Перфорация и ранение органов',
           options: [
             {
               index: 0,
-              value: 'value1',
-              txt: 'List item 1'
+              value: 'Тонкой кишки',
+              txt: 'Тонкой кишки'
             },
             {
               index: 1,
-              value: 'value2',
-              txt: 'List item 2'
+              value: '12-перстной кишки',
+              txt: '12-перстной кишки'
             },
             {
               index: 2,
-              value: 'value3',
-              txt: 'List item 3'
+              value: 'Ободочной кишки',
+              txt: 'Ободочной кишки'
             },
             {
               index: 3,
-              value: 'value4',
-              txt: 'List item 4'
+              value: 'Желудка',
+              txt: 'Желудка'
+            },
+            {
+              index: 4,
+              value: 'Пищевода',
+              txt: 'Пищевода'
+            },
+            {
+              index: 5,
+              value: 'Диафрагмы',
+              txt: 'Диафрагмы'
+            },
+            {
+              index: 6,
+              value: 'Печени',
+              txt: 'Печени'
+            },
+            {
+              index: 7,
+              value: 'Селезенки',
+              txt: 'Селезенки'
+            },
+            {
+              index: 8,
+              value: 'Поджелудочной железы',
+              txt: 'Поджелудочной железы'
+            },
+            {
+              index: 9,
+              value: 'Другое',
+              txt: 'Другое'
             },
           ]
         })
         +itc-custom-select({
-          id: 'Electrotrauma of organs', 
-          name: 'Electrotrauma of organs',
+          id: 'electrotrauma-of-organs', 
+          name: 'electrotrauma-of-organs',
           placeholder: 'Электротравма органов',
           options: [
             {
               index: 0,
-              value: 'value1',
-              txt: 'List item 1'
+              value: 'Тонкой кишки',
+              txt: 'Тонкой кишки'
             },
             {
               index: 1,
-              value: 'value2',
-              txt: 'List item 2'
+              value: '12-перстной кишки',
+              txt: '12-перстной кишки'
             },
             {
               index: 2,
-              value: 'value3',
-              txt: 'List item 3'
+              value: 'Ободочной кишки',
+              txt: 'Ободочной кишки'
             },
             {
               index: 3,
-              value: 'value4',
-              txt: 'List item 4'
+              value: 'Желудка',
+              txt: 'Желудка'
+            },
+            {
+              index: 4,
+              value: 'Пищевода',
+              txt: 'Пищевода'
+            },
+            {
+              index: 5,
+              value: 'Диафрагмы',
+              txt: 'Диафрагмы'
+            },
+            {
+              index: 6,
+              value: 'Печени',
+              txt: 'Печени'
+            },
+            {
+              index: 7,
+              value: 'Селезенки',
+              txt: 'Селезенки'
+            },
+            {
+              index: 8,
+              value: 'Поджелудочной железы',
+              txt: 'Поджелудочной железы'
+            },
+            {
+              index: 9,
+              value: 'Другое',
+              txt: 'Другое'
             },
           ]
         })

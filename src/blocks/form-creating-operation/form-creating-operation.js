@@ -1,6 +1,6 @@
 import tippy from 'tippy.js';
-import { assignInputRules } from '../../js/input-validate';
-import { initGroupObserve } from '../../js/validate';
+import { assignInputRules, setMasks } from '../../js/input-validate';
+import { initGroupObserve, setValidCharacters } from '../../js/validate';
 import { setRadioHandler } from '../../components/group-radio-buttons/group-radio-buttons';
 import { OPERATIONS } from '../../js/operation-data';
 import { OPERATIONS_RULES } from '../../js/operation-data';
@@ -98,12 +98,18 @@ export const CONNECTED_RULES = {
             value: 'Конверсия из лапароскопии в лапаротомию',
         },
     ],
-    revision: [
+    'operation-type': [
+        {
+            value: 0,
+            connectedID: 'dissection',
+        },
         {
             value: 1,
+            connectedID: 'revision',
         },
         {
             value: 3,
+            connectedID: 'revision',
         },
     ],
     'fatal-outcome': [
@@ -255,6 +261,7 @@ export const CONNECTED_RULES = {
 const selects = {
     'general-information': ['surgeon', 'assistants', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
     hospital: ['vomiting', 'discharge-where'],
+    complications: ['bleeding', 'positive-leak-test', 'injury-of-organs', 'electrotrauma-of-organs'],
 };
 
 function initSelects(selects) {
@@ -282,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // отключаю выполнение скрипта
     // console.log(window.location);
     if (!window.location.pathname.includes('creating-operation')) return;
-
+    setMasks();
     assignInputRules(OPERATIONS_RULES);
     initSelects(selects);
 
@@ -459,6 +466,15 @@ document.addEventListener('DOMContentLoaded', () => {
     addComplicationBtn.addEventListener('click', setComplicationDebounce);
 });
 
+// function isJsonString(str) {
+//     try {
+//         JSON.parse(str);
+//     } catch (e) {
+//         return false;
+//     }
+//     return true;
+// }
+
 function setConnectionsForElements(element, rules) {
     let connectedKey = '';
 
@@ -508,7 +524,6 @@ function setConnectionsForElements(element, rules) {
             const monitoringElement = element.querySelector('button');
             const elementObserver = new MutationObserver((mutations) => {
                 let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                console.log(connectedKey);
                 console.log(connectedElements);
                 const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
                     if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
@@ -791,6 +806,7 @@ export function createInput(data) {
 
     if (data.mod === 'calendar') {
         // new AirDatepicker(input.querySelector('input'), {});
+        const inputField = input.querySelector('input');
         let calendarToggler = `
         <div class='calendar-toggler'>
             <svg>
@@ -798,7 +814,9 @@ export function createInput(data) {
             </svg>
         </div>`;
         input.querySelector('.input-custom__input').insertAdjacentHTML('afterend', calendarToggler);
-        new window.Calendar(input.querySelector('input'));
+        inputField.dataset.mask = 'date';
+        new window.Calendar(inputField);
+        setMasks(inputField);
     }
 
     if (data.addClass) {
@@ -842,6 +860,7 @@ export function createInput(data) {
         });
     }
 
+    setValidCharacters(input);
     return input;
 }
 

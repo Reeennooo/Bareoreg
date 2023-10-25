@@ -1,3 +1,4 @@
+import { setMasks } from '../../js/input-validate';
 import { assignInputRules } from '../../js/input-validate';
 
 const selects = {
@@ -26,8 +27,10 @@ function initSelects(selects) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (!location.pathname.includes('creating-observation')) return;
+    setMasks();
     initSelects(selects);
     assignInputRules(rules);
-    new window.Calendar('#calendar-observation')
-    new window.Calendar('#calendar-adjusting-bandage')
+    new window.Calendar('#calendar-observation');
+    new window.Calendar('#calendar-adjusting-bandage');
 });

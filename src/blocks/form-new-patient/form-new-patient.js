@@ -1,33 +1,12 @@
-import IMask from 'imask/esm/index';
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
-    disease: ['disease1', 'disease2', 'disease3', 'disease4', 'disease5', 'disease6', 'disease7', 'disease8', 'disease9'],
-    anamnesis: ['anamnesis1', 'anamnesis2', 'anamnesis3', 'anamnesis4', 'anamnesis5', 'anamnesis6', 'anamnesis7'],
+    disease: ['arterial-hypertension', 'diabetes-mellitus-2-type', 'duration-diabetes-mellitus', 'GERD', 'bronchial-asthma', 'functional-status', 'back-and-limb-pain', 'liver-diseases', 'hernia', 'fat-apron'],
+    anamnesis: ['ASA-scale', 'smoking', 'PE-risk-factors', 'regular-medication-intake', 'weight-loss-attempts', 'previous-bariatric-surgery', 'history-of-operations'],
     women: ['menstrual-function', 'polycystic-ovary'],
 };
-
-// заболевания
-// disease1 - Артериальная гипертензия
-// disease2 - Сахарный диабет 2-го типа
-// disease2-duration - Длительность течения СД2
-// disease3 - ГЭРБ
-// disease4 - Бронхиальная астма
-// disease5 - Функциональный статус
-// disease6 - Боль в спине и конечностях
-// disease7 - Заболевания печени
-// disease8 - Грыжа
-// disease9 - Жировой фартук
-// анамнез
-// anamnesis1 - Шкала АСА
-// anamnesis2 - Курение
-// anamnesis3 - Факторы риска ТЭЛА
-// anamnesis4 - Регулярный прием препаратов
-// anamnesis5 - Попытки снижения веса
-// anamnesis6 - Предыдущая бариатрическая операция
-// anamnesis7 - Операции в анамнезе
 
 // calendar
 new window.Calendar('#calendar-date-birth', { position: 'absolute' });
@@ -130,6 +109,7 @@ export const PATIENT_RULES = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (!location.pathname.includes('new-patient')) return;
     initSelects(selects);
     setMasks();
     // устанавливаем правила

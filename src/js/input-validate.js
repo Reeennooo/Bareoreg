@@ -1,3 +1,4 @@
+import IMask from 'imask';
 let approve = require('approvejs');
 /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
 // customRange
@@ -86,7 +87,7 @@ export function assignInputRules(allRules, checkRightNow) {
     });
 }
 
-export function setMasks() {
+export function setMasks(input) {
     // masks
     const maskRules = {
         phone: {
@@ -99,6 +100,12 @@ export function setMasks() {
             // lazy: false,
         },
     };
+
+    if (input) {
+        IMask(input, maskRules[input.dataset.mask]);
+        return;
+    }
+
     const elements = document.querySelectorAll('[data-mask]');
     if (elements) {
         elements.forEach((el) => {
