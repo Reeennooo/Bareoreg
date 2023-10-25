@@ -5,8 +5,8 @@ mixin input-custom(data)
     if(data.mods) {
       data.mods.map(mod => classes.push(`input-custom--${mod}`))
     }
-    if(attributes.class) {
-        classes.push(attributes.class)
+    if(data.addClass) {
+        classes.push(data.addClass)
     }
     classesString = classes.join(' ')    
     
