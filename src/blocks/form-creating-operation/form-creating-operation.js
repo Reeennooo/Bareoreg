@@ -88,9 +88,6 @@ export const CONNECTED_RULES = {
         {
             value: 2,
         },
-        {
-            value: 3,
-        },
     ],
 
     access: [
