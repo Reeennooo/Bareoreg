@@ -54,9 +54,7 @@ export class ItcCustomSelect {
         this._el = typeof target === 'string' ? document.querySelector(target) : target;
         if (!this._el) return;
         this._params = params || {};
-        // добавлено мной
         this._multiple = this._el.dataset.multiple || this._params.multiple ? true : false;
-        // - - -
         this._onClickFn = this._onClick.bind(this);
         if (this._params.options) {
             this._el.innerHTML = this.constructor.template(this._params);
@@ -65,6 +63,8 @@ export class ItcCustomSelect {
         this._elToggle = this._el.querySelector(this.constructor.DATA_TOGGLE);
         this._input = this._el.querySelector('input');
         this._textSelectedEl = this._el.querySelector(`.${ItcCustomSelect.TEXT_SELECTED_EL}`);
+        this._input.addEventListener('focus', () => this.show());
+        this._input.addEventListener('blur', () => this.hide());
 
         // this._textSelectedEl = document.createElement('span');
         // this._textSelectedEl.classList.add('itc-select__text-selected');

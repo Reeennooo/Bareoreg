@@ -247,6 +247,7 @@ if (FORM) {
     });
 }
 
+// ОГРАНИЧЕНИЯ НА ВВОД В ИНПУТ.
 // Из-за класса only-txt не работает табуляция по инпутам.
 document.addEventListener('DOMContentLoaded', () => {
     // Ограничения при вводе
@@ -262,7 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace') return;
+            console.log(event.key);
+            if (event.key === 'Backspace' || event.key === 'Tab') return;
             if (!/[А-я]|-/.test(event.key)) event.preventDefault();
         });
     });
@@ -271,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let onlyNumberInputs = document.querySelectorAll('.only-number input');
     onlyNumberInputs.forEach((input) => {
         input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace') return;
+            if (event.key === 'Backspace' || event.key === 'Tab') return;
             if (!/[0-9]|\./.test(event.key)) event.preventDefault();
         });
     });
