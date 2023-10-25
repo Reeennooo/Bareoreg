@@ -80,10 +80,11 @@
 }
 
 .itc-select__text-selected {
+  max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
   column-gap: 8px;
 }
 

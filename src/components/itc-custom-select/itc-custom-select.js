@@ -3,7 +3,7 @@ export class ItcCustomSelect {
     static EL_SHOW = 'itc-select_show';
     static EL_OPTION = 'itc-select__option';
     static EL_OPTION_SELECTED = 'itc-select__option_selected';
-    static TEXT_SELECTED_EL = 'itc-select__text-selected span';
+    static TEXT_SELECTED_EL = 'itc-select__text-selected';
     static DATA = '[data-select]';
     static DATA_TOGGLE = '[data-select="toggle"]';
 
@@ -28,7 +28,7 @@ export class ItcCustomSelect {
         });
         return `<input name="${name}" value="${selectedValue}"><button type="button" class="itc-select__toggle" name="${name}"
       value="${selectedValue}" data-select="toggle" data-index="${selectedIndex}">
-      <div class='itc-select__text-selected'><span>${selectedContent}</span></div>
+      <div class='itc-select__text-selected'>${selectedContent}</div>
       </button><div class="itc-select__placeholder">${placeholder}</div><div class="itc-select__dropdown">
       <ul class="itc-select__options">${items.join('')}</ul></div><div class='itc-select__message'></div>`;
     }
