@@ -250,34 +250,74 @@ if (FORM) {
 // ОГРАНИЧЕНИЯ НА ВВОД В ИНПУТ.
 // Из-за класса only-txt не работает табуляция по инпутам.
 document.addEventListener('DOMContentLoaded', () => {
-    // Ограничения при вводе
-    // only-text input
-    let onlyTxtInputs = document.querySelectorAll('.only-txt input');
-
-    onlyTxtInputs.forEach((input) => {
-        if (input.name === 'name' || input.name === 'middle-name' || input.name === 'surname') {
-            input.addEventListener('blur', () => {
-                if (input.value) {
-                    input.value = ucFirst(input.value);
-                }
-            });
-        }
-        input.addEventListener('keydown', (event) => {
-            console.log(event.key);
-            if (event.key === 'Backspace' || event.key === 'Tab') return;
-            if (!/[А-я]|-/.test(event.key)) event.preventDefault();
-        });
-    });
-
-    // only-number input
-    let onlyNumberInputs = document.querySelectorAll('.only-number input');
-    onlyNumberInputs.forEach((input) => {
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace' || event.key === 'Tab') return;
-            if (!/[0-9]|\./.test(event.key)) event.preventDefault();
-        });
-    });
-
+    console.log('WORK');
+    setValidCharacters();
     // Инициализируем observers
     initGroupObserve(observers);
 });
+
+// Ограничения при вводе
+export function setValidCharacters(element) {
+    if (element) {
+        const input = element.querySelector('input');
+        if (input.classList.contains('only-txt')) {
+            onlyTxt(input);
+            return;
+        }
+        if (input.classList.contains('only-number')) {
+            onlyNumber(input);
+            return;
+        }
+        if (input.classList.contains('only-number-strict')) {
+            onlyNumberStrict(input);
+            return;
+        }
+        return;
+    }
+
+    let onlyTxtInputs = document.querySelectorAll('.only-txt');
+    console.log(onlyTxtInputs);
+    onlyTxtInputs.forEach((input) => {
+        if (input.name === 'name' || input.name === 'middle-name' || input.name === 'surname') {
+            console.log(input);
+            firstLetterCapital(input);
+        }
+        onlyTxt(input);
+    });
+
+    let onlyNumberInputs = document.querySelectorAll('.only-number');
+    onlyNumberInputs.forEach((input) => {
+        onlyNumber(input);
+    });
+}
+
+function onlyTxt(input) {
+    input.addEventListener('keydown', (event) => {
+        console.log(event.key);
+        if (event.key === 'Backspace' || event.key === 'Tab') return;
+        if (!/[А-я]|-/.test(event.key)) event.preventDefault();
+    });
+}
+
+function onlyNumber(input) {
+    input.addEventListener('keydown', (event) => {
+        console.log(input);
+        if (event.key === 'Backspace' || event.key === 'Tab') return;
+        if (!/[0-9]|\./.test(event.key)) event.preventDefault();
+    });
+}
+
+function onlyNumberStrict(input) {
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace' || event.key === 'Tab') return;
+        if (!/[0-9]/.test(event.key)) event.preventDefault();
+    });
+}
+
+function firstLetterCapital(input) {
+    input.addEventListener('blur', () => {
+        if (input.value) {
+            input.value = ucFirst(input.value);
+        }
+    });
+}
