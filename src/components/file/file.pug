@@ -1,5 +1,5 @@
 mixin file(data = {})
-  .file(class=data.addClass ? data.addClass : '')
+  .file(class=data.addClass ? data.addClass : '')&attributes(attributes)
     .file__name-wrapper
       if(data.img)
         .file__image
