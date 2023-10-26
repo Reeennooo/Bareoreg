@@ -48,15 +48,20 @@ export class FileLoader {
         <svg><use href='img/sprite.svg#plus-icon'></use></svg>
         </label>`;
 
-        const paperclipBtn = document.querySelector('.side-modal__add-file');
-        if (paperclipBtn) {
-            paperclipBtn.addEventListener('click', triggerLoader.bind(this));
-        }
-        function triggerLoader() {
-            this.loaderInput.click();
-        }
+        // const paperclipBtn = document.querySelector('.side-modal__add-file');
+        // if (paperclipBtn) {
+        //     paperclipBtn.addEventListener('click', triggerLoader.bind(this));
+        // }
+        // function triggerLoader() {
+        //     console.log('TRIGGER LOADER');
+        //     this.loaderInput.click();
+        // }
 
         return fileLoader;
+    }
+
+    triggerLoader() {
+        this.loaderInput.click();
     }
 
     createDropZone(options) {

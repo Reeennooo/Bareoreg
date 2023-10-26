@@ -567,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ],
 
                             required: false,
-                            hasConnection: 'revision',
+                            hasConnection: 'operation-type',
                             value: 'Плановый второй этап',
                         },
                     },
@@ -584,7 +584,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             ],
 
                             required: false,
-                            connected: 'revision',
+                            connected: 'operation-type',
+                            connectedID: 'revision',
                             value: 'Удаление БЖ/ВЖБ',
                         },
                     },
@@ -2542,7 +2543,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const trashBtn = sideModal.querySelector('.side-modal__remove');
     const main = sideModal.querySelector('.side-modal__main');
     const obsLoader = new FileLoader({ name: 'observation-fileloader', type: 'loader' });
-    const patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
+    const patientLoader = new FileLoader({ name: 'patient-files', type: 'loader' });
+    patientLoader.createDropZone({ name: 'patient-file-zone' });
+    patientLoader.dropZone.classList.add('long');
+    let paperclipBtn = document.querySelector('.side-modal__add-file');
+
+    const obsLoaderTrigger = obsLoader.triggerLoader.bind(obsLoader);
+    const patientLoaderTrigger = patientLoader.triggerLoader.bind(patientLoader);
+
+    function rerenderPaperclip(modaName) {
+        const paperClone = paperclipBtn.cloneNode(true);
+        switch (modaName) {
+            case 'observation':
+                paperClone.addEventListener('click', obsLoaderTrigger);
+                break;
+            case 'patient':
+                paperClone.addEventListener('click', patientLoaderTrigger);
+                break;
+        }
+        sideModal.querySelector('.side-modal__header-buttons').replaceChild(paperClone, paperclipBtn);
+        paperclipBtn = paperClone;
+    }
 
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
@@ -2562,7 +2583,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = sideModal.querySelector('.side-modal__title');
         const operationName = sideModal.querySelector('.side-modal__add-txt span');
         main.innerHTML = '';
-
+        rerenderPaperclip(modalName);
         switch (modalName) {
             case 'operation':
                 title.innerText = 'RYGB (Гастрошунтирование)';
@@ -2576,6 +2597,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 operationName.innerText = 'RYGB (Гастрошунтирование)';
                 sideModal.dataset.sideModalName = modalName;
                 main.append(obsLoader.fileLoader);
+                // paperclipBtn.addEventListener('click', obsLoaderTrigger);
                 const pillObservation = element.closest('.pill__observation');
                 trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
                 title.innerText = `Наблюдение: ${pillObservation.innerText} после операции`;
@@ -2618,7 +2640,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         const wrapper = observationsBlock.querySelector('.observations__wrapper');
 
-        const addBtn = document.createElement('button');
+        const addBtn = document.createElement('a');
+        addBtn.setAttribute('href', 'creating-observation.html');
         addBtn.classList.add('observations__add');
         addBtn.setAttribute('type', 'button');
         addBtn.innerHTML = `<svg><use href='img/sprite.svg#plus-icon'></use></svg>`;
@@ -2682,10 +2705,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderFields(modalName);
         if (modalName === 'patient') {
             main.prepend(patientLoader.fileLoader);
-            // console.log(patientLoader.fileLoader);
-            // patientLoader.createDropZone({ name: 'patient-files' });
-            // patientLoader.dropZone.classList.add('long');
-            // main.querySelector('.patient-additional-info .group__form')?.append(patientLoader.dropZone);
+            main.querySelector('.group__form .textarea').after(patientLoader.dropZone);
         }
 
         if (modalName === 'observation') {
@@ -2701,10 +2721,12 @@ document.addEventListener('DOMContentLoaded', () => {
         fillSideModal(modalName);
         if (modalName === 'obsrevation') {
             main.append(obsLoader.fileLoader);
+            paperclipBtn.addEventListener('click', obsLoader.triggerLoader);
         }
     }
 
     function renderFields(modalName) {
+        createComplication.count = 0;
         fields[modalName].forEach((el) => {
             if (el.complication) {
                 const complicationInstance = createComplication(el.data);
@@ -2743,19 +2765,32 @@ document.addEventListener('DOMContentLoaded', () => {
         initGroupObserve();
 
         if (modalName === 'operation') {
-            // console.log(modalName);
             assignInputRules(OPERATIONS_RULES);
         }
         if (modalName === 'patient') {
-            // console.log(modalName);
             assignInputRules(PATIENT_RULES);
         }
     }
 
-    function createComplicationFn() {
-        let count = 0;
-        return function (data) {
-            const complication = new Complication({ number: ++count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data });
+    // function createComplicationFn() {
+    //     let count = 0;
+    //     return function (data) {
+    //         const complication = new Complication({ number: ++count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data });
+    //         // Добавляем правила к общим правилам.
+    //         complication.connectionRules.forEach((item) => {
+    //             CONNECTED_RULES[item.name] = item.rules;
+    //         });
+    //         assignInputRules(complication.fieldsRules);
+    //         initGroupObserve(initObservers);
+    //         initObservers = [];
+
+    //         return complication;
+    //     };
+    // }
+
+    function makeCreateComplication() {
+        function createComplication(data) {
+            const complication = new Complication({ number: ++createComplication.count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data });
             // Добавляем правила к общим правилам.
             complication.connectionRules.forEach((item) => {
                 CONNECTED_RULES[item.name] = item.rules;
@@ -2765,8 +2800,10 @@ document.addEventListener('DOMContentLoaded', () => {
             initObservers = [];
 
             return complication;
-        };
+        }
+        createComplication.count = 0;
+        return createComplication;
     }
 
-    const createComplication = createComplicationFn();
+    const createComplication = makeCreateComplication();
 });
