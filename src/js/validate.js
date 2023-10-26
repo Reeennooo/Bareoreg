@@ -250,7 +250,6 @@ if (FORM) {
 // ОГРАНИЧЕНИЯ НА ВВОД В ИНПУТ.
 // Из-за класса only-txt не работает табуляция по инпутам.
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('WORK');
     setValidCharacters();
     // Инициализируем observers
     initGroupObserve(observers);
@@ -276,7 +275,6 @@ export function setValidCharacters(element) {
     }
 
     let onlyTxtInputs = document.querySelectorAll('.only-txt');
-    console.log(onlyTxtInputs);
     onlyTxtInputs.forEach((input) => {
         if (input.name === 'name' || input.name === 'middle-name' || input.name === 'surname') {
             console.log(input);
@@ -293,7 +291,6 @@ export function setValidCharacters(element) {
 
 function onlyTxt(input) {
     input.addEventListener('keydown', (event) => {
-        console.log(event.key);
         if (event.key === 'Backspace' || event.key === 'Tab') return;
         if (!/[А-я]|-/.test(event.key)) event.preventDefault();
     });
@@ -301,7 +298,6 @@ function onlyTxt(input) {
 
 function onlyNumber(input) {
     input.addEventListener('keydown', (event) => {
-        console.log(input);
         if (event.key === 'Backspace' || event.key === 'Tab') return;
         if (!/[0-9]|\./.test(event.key)) event.preventDefault();
     });
