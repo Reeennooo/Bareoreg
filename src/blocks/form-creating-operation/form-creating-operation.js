@@ -407,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fieldWrapper = document.createElement('div');
                 fieldWrapper.classList.add('group__form');
 
-                console.log(operation.mainFields);
                 operation.mainFields.forEach((item) => {
                     const node = createSingleField(item);
                     fieldWrapper.append(node);
@@ -524,13 +523,11 @@ function setConnectionsForElements(element, rules) {
             const monitoringElement = element.querySelector('button');
             const elementObserver = new MutationObserver((mutations) => {
                 let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                console.log(connectedElements);
                 const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
                     if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
                         return item;
                     }
                 });
-                console.log(rulesItem);
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
@@ -543,7 +540,7 @@ function setConnectionsForElements(element, rules) {
                                     const selectOptions = newSelect.querySelector('.itc-select__options');
                                     selectOptions.innerHTML = '';
                                     const selectBtn = newSelect.querySelector('button');
-                                    console.log(selectBtn);
+                                    // console.log(selectBtn);
                                     selectBtn.querySelector('.itc-select__text-selected span').innerHTML = '';
                                     selectBtn.dataset.index = '-1';
                                     const newOptions = rulesItem.changeSelect.options.map((option, index) => {
@@ -568,7 +565,6 @@ function setConnectionsForElements(element, rules) {
                 } else {
                     connectedElements.forEach((connectedEL) => {
                         if (connectedEL.classList.contains('is-active')) {
-                            console.log(connectedEL);
                             connectedEL.classList.remove('is-active');
                         }
                     });
@@ -883,6 +879,7 @@ function createRadioGroup(data) {
             `;
         if (data.value === el[0]) {
             option.querySelector('input').checked = true;
+            radioGroup.classList.add('is-filled');
         }
         options.push(option);
     });
