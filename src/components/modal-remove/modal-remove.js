@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnRemove.dataset.removeObservationId = trashBtn.dataset.observationId;
             case 'remove-operation':
                 btnRemove.dataset.removeOperationId = trashBtn.dataset.operationId;
+            case 'remove-file':
+                btnRemove.dataset.removeFileId = trashBtn.dataset.fileId;
         }
 
         if (removeData[trashBtn.dataset.modalName]) {
@@ -112,6 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.closeModal(true);
         } else if (btnRemove.dataset.removeOperationId) {
             deletedEl = document.querySelector(`.pill[data-operation-id='${btnRemove.dataset.removeOperationId}']`);
+            deletedEl?.remove();
+            window.closeModal(true);
+        } else if (btnRemove.dataset.removeFileId) {
+            deletedEl = document.querySelector(`.file[data-file-id='${btnRemove.dataset.removeFileId}']`);
             deletedEl?.remove();
             window.closeModal(true);
         }

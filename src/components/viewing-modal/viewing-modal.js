@@ -2,6 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewingModal = document.querySelector('.viewing-modal');
     if (!viewingModal) return;
 
+    // remove
+    document.addEventListener('click', (e) => {
+        const openModalBtn = e.target.closest("[data-modal='viewing-modal']");
+        if (openModalBtn) {
+            const file = openModalBtn.closest('.file');
+            viewingModal.querySelector("[data-modal-name='remove-file']").dataset.fileId = file.dataset.fileId;
+        }
+    });
+
+    // zoom
     let scale = 1;
     const zoom = 0.1;
     let zoomPercents = 100;
