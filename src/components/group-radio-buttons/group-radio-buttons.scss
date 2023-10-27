@@ -20,6 +20,11 @@
   }
   &__options {
     display: flex;
-    column-gap: 24px;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    label {
+      white-space: nowrap;
+    }
   }
 }

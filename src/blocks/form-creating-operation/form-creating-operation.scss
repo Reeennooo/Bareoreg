@@ -63,12 +63,12 @@
 }
 
 .form-creating-operation__emergency-situations {
-  .input-custom {
+  .group__form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .long-input {
     grid-column-start: 2;
     grid-column-end: 4;
-  }
-  .group__form {
-    align-items: center;
   }
 }
 
@@ -78,5 +78,53 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .form-creating-operation__general-information {
+    .group__form {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+}
+
+@media (max-width: $desktop) {
+  .form-creating-operation__general-information,
+  .form-creating-operation__operation,
+  .form-creating-operation__complications,
+  .form-creating-operation__complication,
+  .form-creating-operation__emergency-situations,
+  .form-creating-operation__hospital {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .form-creating-operation__general-information,
+  .form-creating-operation__operation,
+  .form-creating-operation__complications,
+  .form-creating-operation__complication,
+  .form-creating-operation__emergency-situations,
+  .form-creating-operation__hospital {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
   }
 }

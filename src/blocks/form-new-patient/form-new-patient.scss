@@ -1,6 +1,6 @@
 .form-new-patient {
   // overflow: hidden;
-  padding-bottom: 92px;
+  // padding-bottom: 92px;
   &__textarea {
     margin-bottom: 44px;
   }
@@ -35,12 +35,11 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
-
-    .long-input {
-      display: flex;
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
+  }
+  .long-input {
+    display: flex;
+    grid-column-start: 2;
+    grid-column-end: 4;
   }
 }
 
@@ -51,12 +50,12 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
+  }
 
-    .long-input {
-      display: flex;
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
+  .long-input {
+    display: flex;
+    grid-column-start: 2;
+    grid-column-end: 4;
   }
 }
 
@@ -66,5 +65,49 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
     gap: 44px 24px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .form-new-patient__pesonal-data {
+    .group__form {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+}
+
+@media (max-width: $desktop) {
+  .form-new-patient__pesonal-data,
+  .form-new-patient__main-data,
+  .form-new-patient__concomitant-diseases,
+  .form-new-patient__anamnesis {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .form-new-patient__pesonal-data,
+  .form-new-patient__main-data,
+  .form-new-patient__concomitant-diseases,
+  .form-new-patient__anamnesis {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
   }
 }

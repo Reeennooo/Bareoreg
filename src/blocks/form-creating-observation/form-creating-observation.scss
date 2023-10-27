@@ -45,3 +45,51 @@
     margin-bottom: 44px;
   }
 }
+
+@media (max-width: 1400px) {
+  .form-creating-observation__gastric-bandage {
+    .group__form {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+}
+
+@media (max-width: $desktop) {
+  .form-creating-observation__patient-information,
+  .form-creating-observation__gastric-bandage,
+  .form-creating-observation__general-information,
+  .form-creating-observation__course-of-diseases,
+  .form-creating-observation__women-health,
+  .form-creating-observation__additional-info {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .form-creating-observation__patient-information,
+  .form-creating-observation__gastric-bandage,
+  .form-creating-observation__general-information,
+  .form-creating-observation__course-of-diseases,
+  .form-creating-observation__women-health,
+  .form-creating-observation__additional-info {
+    .group__form,
+    .group__additional-form {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .long-input {
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+  }
+}

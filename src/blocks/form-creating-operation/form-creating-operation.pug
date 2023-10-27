@@ -463,7 +463,7 @@
         +checkbox({name: "emergency-situation8", value: 'yes', label: 'Обнаружено новообразование'})
         +checkbox({name: "emergency-situation9", value: 'yes', label: 'Поломка элементов оборудования'})
         +checkbox({name: "emergency-situation10", value: 'yes', label: 'Резкое ухудшение состояния хирурга/ассистента'})
-        +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment'})
+        +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment', addClass: 'long-input'})
   +group({title: 'Пребывание в стационаре и исход'}).form-creating-operation__hospital
     .group__form
       +itc-custom-select({

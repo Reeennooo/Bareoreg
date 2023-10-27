@@ -51,6 +51,12 @@
     padding-top: 96px;
   }
 
+  &.new-patient {
+    main {
+      padding-bottom: 92px;
+    }
+  }
+
   &.patient-card {
     main {
       padding-bottom: 67px;
@@ -118,4 +124,22 @@
   fill: none;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: $mobile-big) {
+  .wrapper {
+    main {
+      padding-top: 202px;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .wrapper {
+    &.new-patient {
+      main {
+        padding-bottom: 40px;
+      }
+    }
+  }
 }

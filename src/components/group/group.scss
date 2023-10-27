@@ -3,6 +3,7 @@
   opacity: 0;
   background-color: $white;
   border-radius: 20px;
+  // overflow: hidden;
 
   &.is-filled {
     & > .group__header {
@@ -118,7 +119,7 @@
   }
 
   &__inner-wrapper {
-    // position: relative;
+    position: relative;
     height: 0;
     overflow-y: hidden;
     // visibility: hidden;

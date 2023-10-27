@@ -1,5 +1,6 @@
 import { setMasks } from '../../js/input-validate';
 import { assignInputRules } from '../../js/input-validate';
+import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 
 const selects = {
     'gastric-bandage': ['reason-adjusting-bandage'],
@@ -28,6 +29,11 @@ function initSelects(selects) {
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('creating-observation')) return;
+    new FileLoader({
+        type: 'dropzone',
+        name: 'create-observation-files',
+        target: '#create-observation-files',
+    });
     setMasks();
     initSelects(selects);
     assignInputRules(rules);
