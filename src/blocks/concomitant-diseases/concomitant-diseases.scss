@@ -30,6 +30,12 @@
     text-align: end;
   }
 
+  &__title {
+    br {
+      display: none;
+    }
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -93,5 +99,48 @@
 
   &.tab-no {
     background-color: $grey-200;
+  }
+}
+
+@media (max-width: $tablet) {
+  .concomitant-diseases__tab {
+    padding: 4px;
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .concomitant-diseases {
+    &__header {
+      grid-template-columns: 80px repeat(5, 1fr);
+    }
+    &__name,
+    &__title {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    &__diseases {
+      grid-template-columns: 80px 1fr;
+    }
+  }
+  .concomitant-diseases__tab {
+    align-self: center;
+    justify-self: center;
+    border-radius: 50%;
+    span {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .concomitant-diseases {
+    &__title {
+      br {
+        display: block;
+      }
+    }
   }
 }

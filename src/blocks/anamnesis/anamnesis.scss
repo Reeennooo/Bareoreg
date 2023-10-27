@@ -39,3 +39,31 @@
     padding-left: 30px;
   }
 }
+
+@media (max-width: $mobile-big) {
+  .anamnesis {
+    &__wrapper {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__item {
+      &.long {
+        grid-column: 1 / 3;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .anamnesis {
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    &__item {
+      &.long {
+        grid-column: 1 / 2;
+      }
+    }
+  }
+}

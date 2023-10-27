@@ -260,3 +260,12 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: $mobile-big) {
+  .file {
+    &__menu {
+      left: auto;
+      right: 0;
+    }
+  }
+}

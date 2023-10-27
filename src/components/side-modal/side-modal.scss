@@ -288,3 +288,11 @@
     }
   }
 }
+
+@media (max-width: $mobile-big) {
+  .side-modal.i-modal {
+    .i-modal__content {
+      padding-top: 68px;
+    }
+  }
+}

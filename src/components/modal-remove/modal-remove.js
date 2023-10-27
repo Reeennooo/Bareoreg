@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.closeModal(true);
         } else if (btnRemove.dataset.removeOperationId) {
             deletedEl = document.querySelector(`.pill[data-operation-id='${btnRemove.dataset.removeOperationId}']`);
+            console.log('УДАЛЯЮ');
             deletedEl?.remove();
             window.closeModal(true);
         } else if (btnRemove.dataset.removeFileId) {

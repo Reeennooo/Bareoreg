@@ -62,7 +62,10 @@
 
 @media (max-width: $tablet) {
   .hero {
-    padding-bottom: 194px;
+    &:has(.hero__image) {
+      padding-bottom: 194px;
+    }
+
     &__title {
       font-size: 44px;
       br {

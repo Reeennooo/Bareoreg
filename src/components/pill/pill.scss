@@ -170,3 +170,42 @@
     color: $grey;
   }
 }
+
+@media (max-width: $mobile-big) {
+  .pill {
+    &--operation {
+      .pill-inner__content-wrap {
+        grid-template-columns: repeat(2, auto);
+      }
+    }
+
+    &__observation {
+      padding: 4px;
+    }
+  }
+
+  .pill-inner {
+    width: 250px;
+    // padding: 5px;
+    &__content-wrap {
+      max-height: 136px;
+      overflow: auto;
+      overflow-x: hidden;
+      padding-right: 4px;
+      @include scrollbar(2px, transparent, $grey-light);
+      &::-webkit-scrollbar-track,
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .pill-inner {
+    width: 200px;
+  }
+}

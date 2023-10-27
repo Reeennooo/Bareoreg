@@ -3,17 +3,25 @@ function makeGetScroll() {
     const header = document.querySelector('.header');
 
     function openHeader() {
-        header.classList.remove('is-scrolled');
+        header.classList.remove('is-close');
     }
     header.addEventListener('click', openHeader);
 
     function checkHeaderScroll() {
-        if (window.scrollY > header.clientHeight && !header.classList.contains('is-scrolled')) {
-            header.classList.add('is-scrolled');
+        console.log('scroll');
+        if (window.scrollY > header.clientHeight && !header.classList.contains('is-close')) {
+            header.classList.add('is-close');
         }
 
         if (window.scrollY < header.clientHeight) {
             openHeader();
+        }
+
+        if (document.documentElement.classList.contains('noScroll')) {
+            header.classList.add('is-close');
+            header.classList.add('is-blocked');
+        } else if (header.classList.contains('is-blocked')) {
+            header.classList.remove('is-blocked');
         }
 
         // if (window.scrollY > lastScrollValue) {
@@ -21,7 +29,7 @@ function makeGetScroll() {
         // }
 
         // if (window.scrollY < lastScrollValue) {
-        //     header.classList.remove('is-scrolled');
+        //     header.classList.remove('is-close');
         // }
 
         // lastScrollValue = window.scrollY;

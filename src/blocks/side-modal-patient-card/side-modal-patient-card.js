@@ -2582,7 +2582,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modalName) return;
         const title = sideModal.querySelector('.side-modal__title');
         const operationName = sideModal.querySelector('.side-modal__add-txt span');
-        main.innerHTML = '';
         rerenderPaperclip(modalName);
         switch (modalName) {
             case 'operation':
@@ -2663,6 +2662,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillSideModal(modalName) {
+        main.innerHTML = '';
         sideModal.classList.add('view-mode');
 
         if (sideModalData[modalName].observations) {

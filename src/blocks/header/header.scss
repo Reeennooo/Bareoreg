@@ -64,13 +64,17 @@
       row-gap: 20px;
     }
 
-    &.is-scrolled {
+    &.is-close {
       padding: 10px 0;
 
       .header__buttons,
       .header__nav {
         display: none;
       }
+    }
+
+    &.is-blocked {
+      pointer-events: none;
     }
   }
 }

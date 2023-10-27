@@ -139,9 +139,9 @@ if (myChartCanvas) {
                 //     enabled: false,
                 // },
             },
-            // maintainAspectRatio: false,
-            // responsive: true,
-            aspectRatio: 3.3,
+            maintainAspectRatio: false,
+            responsive: true,
+            // aspectRatio: 3.3,
         },
     });
 }
