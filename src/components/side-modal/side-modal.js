@@ -19,7 +19,7 @@ if (sideModal) {
         theme: 'light',
     });
 
-    const modalInner = document.querySelector('.i-modal__inner');
+    const modalInner = document.querySelector('.side-modal__main');
     modalInner.addEventListener('scroll', (event) => {
         addHeaderClass(event.target);
     });

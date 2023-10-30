@@ -595,7 +595,8 @@ function setConnectionsForElements(element, rules) {
 
 export function createGroup(data) {
     const group = document.createElement('div');
-    group.classList.add('group', 'is-active', 'form-creating-operation__complication');
+    // удалил form-creating-operation__complication
+    group.classList.add('group', 'is-active');
     group.innerHTML = `
         <div class='group__header'>
             <div class='group__text'>

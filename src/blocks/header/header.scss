@@ -59,6 +59,7 @@
 
 @media (max-width: $mobile-big) {
   .header {
+    width: 100vw;
     &__inner {
       flex-direction: column;
       row-gap: 20px;
@@ -75,6 +76,14 @@
 
     &.is-blocked {
       pointer-events: none;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .header {
+    &__nav-el {
+      font-size: 16px;
     }
   }
 }

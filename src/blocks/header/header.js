@@ -8,7 +8,6 @@ function makeGetScroll() {
     header.addEventListener('click', openHeader);
 
     function checkHeaderScroll() {
-        console.log('scroll');
         if (window.scrollY > header.clientHeight && !header.classList.contains('is-close')) {
             header.classList.add('is-close');
         }
