@@ -1,0 +1,24 @@
+.control-panel {
+  &__tools {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  &__active-filters {
+    @include transition('margin');
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &:not(:empty) {
+      margin-bottom: 24px;
+    }
+  }
+}

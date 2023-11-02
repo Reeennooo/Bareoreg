@@ -1,0 +1,15 @@
+.control-panel
+  .control-panel__tools
+    +tabs({tabs: [
+        {name: 'Все пациенты', count: 6918, active: true},
+        {name: 'Время заполнить наблюдение', count: 2918},
+        {name: 'Регулировка бандажа', count: 918},
+        {name: 'Удаление баллона', count: 2012}
+      ]})
+    .control-panel__btns
+      +btn({txt: 'Поиск', icon: 'search', mode: 'text'})
+      +filters()
+      //- +btn({txt: 'Фильтры', icon: 'settings', mode: 'text'})
+      +btn({txt: 'Экспорт', icon: 'export', mode: 'text'})
+  .control-panel__active-filters
+    //- +chip({txt: 'йцукенгшщзхъ', mod: 'search'})

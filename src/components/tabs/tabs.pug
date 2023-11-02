@@ -1,0 +1,6 @@
+mixin tabs(data)
+  .tabs-wrapper
+    each tab in data.tabs
+      .tab(class=tab.active ? 'is-active' : '')
+        span.tab__name=tab.name
+        span.tab__count=`(${tab.count})`

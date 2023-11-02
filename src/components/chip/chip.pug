@@ -1,0 +1,18 @@
+mixin chip(data)
+  if(data.mod === 'search')
+    .chip(class=`${data.mod ? `chip--${data.mod}` : ''}`)
+      svg
+        use(href='img/sprite.svg#search')
+      .chip__txt=data.txt
+      .chip__remove
+        svg
+          use(href='img/sprite.svg#close')
+  else if(data.mod === 'selected-filter')
+    .chip(class=`${data.mod ? `chip--${data.mod}` : ''}`)
+      .chip__txt=data.txt
+      .chip__remove
+        svg
+          use(href='img/sprite.svg#close')
+  else
+    .chip(class=`${data.mod ? `chip--${data.mod}` : ''}`)&attributes(attributes)
+      .chip__txt=data.txt

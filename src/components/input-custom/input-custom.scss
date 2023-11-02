@@ -207,4 +207,44 @@
       padding-right: 40px;
     }
   }
+
+  &--ghost {
+    input {
+      height: auto;
+      border: none;
+      padding: 12px 0;
+    }
+
+    input:focus {
+      box-shadow: none;
+    }
+
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      opacity: 0;
+      top: 50%;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: normal;
+    }
+
+    .calendar-toggler {
+      width: 24px;
+      height: 24px;
+      right: 0;
+      svg {
+        @include transition('stroke');
+        stroke: $grey;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: transparent;
+          svg {
+            stroke: $violet;
+          }
+        }
+      }
+    }
+  }
 }

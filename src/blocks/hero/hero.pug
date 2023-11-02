@@ -21,16 +21,21 @@
   else if(pageName === 'profile') {
     title = 'Профиль';
   }
+  else if(pageName === 'patient-list') {
+    title = 'Список пациентов';
+  }
 
 .hero
   .container
     .hero__inner
-      +btn({txt: 'Вернуться назад', icon: 'carret-left', href: '#', mode: 'text'}).hero__back
+      if(pageName !== 'patient-list')
+        +btn({txt: 'Вернуться назад', icon: 'carret-left', href: '#', mode: 'text'}).hero__back
       h1.hero__title!=title
-      if(pageName !== 'patient-card' && pageName !== 'profile')
+      if(pageName !== 'patient-card' && pageName !== 'profile' && pageName !== 'patient-list')
         .hero__image
           img(src=img, alt="background-image")
       if(pageName === 'creating-observation')
         .hero__passed-time
           span 3 месяца после операции
-          
+      if(pageName === 'patient-list')
+        +btn({txt: 'Добавить пациента', icon: 'add-patient'}).hero__add-patient

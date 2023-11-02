@@ -1,0 +1,163 @@
+-
+  const headerItems = [
+    {
+      name: 'Полное имя'
+    },
+    {
+      name: 'Возраст'
+    },
+    {
+      name: 'Пол'
+    },
+    {
+      name: 'Исх.ИМТ'
+    },
+    {
+      name: 'Вид операции'
+    },
+    {
+      name: 'Последняя<br> операция'
+    },
+    {
+      name: 'Последнее<br> наблюдение'
+    },
+    {
+      name: 'Следующее<br> наблюдение'
+    },
+    {
+      name: 'Последний<br> %EWL'
+    },
+  ]
+  const patients = [
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'}, 
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'}, 
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'}, 
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'}, 
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'}, 
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+    
+    {
+      name: 'Иванов Александр <br>Александрович',
+      age: 99,
+      gender: 'М',
+      imt: 40.1,
+      operations: [
+        {name: 'MGB-OAGB'}, 
+        {name: 'ВЖБ'},
+        {name: 'ВЖБ'}, 
+        {name: 'ВЖБ'}, 
+        {name: 'ВЖБ'}, 
+        
+      ],
+      lastOperation: '23.04.2022',
+      lastObserv: '6 мес. назад',
+      nextObserv: {date: '23.09.2023', event: 'Удаление баллона'},
+      ewl: '139.4',
+    },
+  ]
+
+.patient-table
+  .patient-table__header
+    each item in headerItems
+      .parametr
+        span.parametr__name!=item.name
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class='parametr__icon'>
+          <g id="CaretDown">
+          <path id="Vector" d="M10.9375 8.75L7 12.25L3.0625 8.75" class='up' stroke="#CAC4D0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Vector_2" d="M3.0625 5.25L7 1.75L10.9375 5.25" class='down' stroke="#CAC4D0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+  .patient-table__body
+    each patient in patients
+      .patient
+        .patient__param.patient__param.patient__name!=patient.name
+        .patient__param.patient__age=patient.age
+        .patient__param.patient__gender=patient.gender
+        .patient__param.patient__IMT=patient.imt
+        .patient__param.patient__operations
+          each el in patient.operations
+            +chip({txt: el.name})
+        .patient__param.patient__last-operation=patient.lastOperation
+        .patient__param.patient__last-observation=patient.lastObserv
+        .patient__param.patient__next-observation=patient.nextObserv.date
+        .patient__param.patient__EWL=patient.ewl
+        .patient__actions
+          svg.dots-icon
+            use(href='img/sprite.svg#dots-three-vertical')
+          //- ul.tooltip-menu
+          //-   li.tooltip-menu__option
+          //-     svg
+          //-       use(href='img/sprite.svg#mask')
+          //-     span Добавить операцию
+          //-   li.tooltip-menu__option
+          //-     svg
+          //-       use(href='img/sprite.svg#list')
+          //-     span Добавить наблюдение
+          //-   li.tooltip-menu__option
+          //-     svg
+          //-       use(href='img/sprite.svg#user')
+          //-     span Карта пациента

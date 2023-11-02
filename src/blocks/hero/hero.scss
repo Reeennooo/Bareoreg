@@ -1,8 +1,11 @@
 .hero {
-  position: relative;
   overflow: hidden;
   padding-top: 52px;
   padding-bottom: 40px;
+
+  &__inner {
+    position: relative;
+  }
 
   &__title {
     color: $violet;
@@ -13,6 +16,13 @@
 
   &__back {
     margin-bottom: 8px;
+  }
+
+  &__add-patient {
+    width: 210px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 
   &__image {

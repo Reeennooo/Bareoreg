@@ -1,0 +1,54 @@
+mixin filters(data)
+  .filters
+    .filters__btn
+      svg
+        use(href='img/sprite.svg#settings')
+      span Фильтры
+    .filters-tooltip
+      .filters-tooltip__header
+        span Фильтры
+        +btn({txt: 'Сбросить фильтры', mode: 'text'})(data-reset-filters)
+      .filters-tooltip__body
+        .filters-tooltip__section(data-section-name='date-operation')
+          .filters-tooltip__section-name Дата операции
+          .filters-tooltip__wrapper
+            +chip({txt: 'Текущий месяц', mod: 'filter'})
+            +chip({txt: 'Текущий год', mod: 'filter'})
+            +chip({txt: 'Текущий прошлый год', mod: 'filter'})
+          .filters-tooltip__calendars
+            +input-custom({type: 'number', placeholder: 'Начало периода', name: 'filter-start-period', mods: ["ghost"], calendar: true})
+            .vertical-line
+            +input-custom({type: 'number', placeholder: 'Конец периода', name: 'filter-end-period', mods: ["ghost"], calendar: true})
+        .filters-tooltip__section
+          .filters-tooltip__section-name Тип операции
+          .filters-tooltip__wrapper
+            +chip({txt: 'Первичная', mod: 'filter'})(data-filter-id='type-operation-1')
+            +chip({txt: 'Ревизионная', mod: 'filter'})(data-filter-id='type-operation-2')
+            +chip({txt: 'Плановый второй этап', mod: 'filter'})(data-filter-id='type-operation-3')
+            +chip({txt: 'Ревизия после бариатрической операции в другой клинике', mod: 'filter'})(data-filter-id='type-operation-4')
+        .filters-tooltip__section
+          .filters-tooltip__section-name Вид операции
+          .filters-tooltip__wrapper
+            +chip({txt: 'Sleeve', mod: 'filter'})(data-filter-id='kind-operation-1')
+            +chip({txt: 'MGB-OAGB', mod: 'filter'})(data-filter-id='kind-operation-2')
+            +chip({txt: 'RYGB', mod: 'filter'})(data-filter-id='kind-operation-3')
+            +chip({txt: 'BPD', mod: 'filter'})(data-filter-id='kind-operation-4')
+            +chip({txt: 'SADI', mod: 'filter'})(data-filter-id='kind-operation-5')
+            +chip({txt: 'SLIM OAGB', mod: 'filter'})(data-filter-id='kind-operation-6')
+            +chip({txt: 'Бандажирование', mod: 'filter'})(data-filter-id='kind-operation-7')
+            +chip({txt: 'Гастропликация', mod: 'filter'})(data-filter-id='kind-operation-8')
+        .filters-tooltip__section
+          .filters-tooltip__section-name Статус пациента
+          .filters-tooltip__wrapper
+            +chip({txt: 'Летальный исход', mod: 'filter'})(data-filter-id='patient-status-1')
+            +chip({txt: 'Оперированный', mod: 'filter'})(data-filter-id='patient-status-2')
+            +chip({txt: 'Неоперированный', mod: 'filter'})(data-filter-id='patient-status-3')
+            +chip({txt: 'Наблюдение продолжается', mod: 'filter'})(data-filter-id='patient-status-4')
+            +chip({txt: 'Наблюдение прекращено', mod: 'filter'})(data-filter-id='patient-status-5')
+            +chip({txt: 'С осложнениями', mod: 'filter'})(data-filter-id='patient-status-6')
+        .filters-tooltip__section
+          .filters-tooltip__section-name Место проведения операции
+          .filters-tooltip__wrapper
+            +chip({txt: 'Европейский медицинский центр (ЕМС)', mod: 'filter'})(data-filter-id='place-of-operation-1')
+            +chip({txt: 'Клиническая больница №85 ФМБА Российской Федерации', mod: 'filter'})(data-filter-id='place-of-operation-2')
+            +chip({txt: 'Нижневартовская городская поликлиника', mod: 'filter'})(data-filter-id='place-of-operation-3')

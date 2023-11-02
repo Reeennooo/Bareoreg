@@ -1,0 +1,51 @@
+.chip {
+  border-radius: 8px;
+  border: 1px solid $grey-light;
+  background-color: transparent;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  column-gap: 8px;
+  // txt
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.1px;
+  color: $grey;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: $grey;
+    fill: none;
+  }
+
+  &__remove {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        svg {
+          stroke: $violet;
+        }
+      }
+    }
+  }
+
+  &--filter {
+    cursor: pointer;
+    @media (hover: hover) {
+      &:hover {
+        border-color: $violet;
+      }
+    }
+
+    &.is-active {
+      background-color: $violet;
+      color: $white;
+    }
+  }
+}
