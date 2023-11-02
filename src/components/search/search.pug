@@ -1,0 +1,8 @@
+mixin search()
+  .search
+    +btn({txt: 'Поиск', icon: 'search', mode: 'text'}).search__btn
+    label(for="search" class='search__input')
+      input(type='text' name='search' id='search' autocomplete="off")
+      .search__clear
+        svg
+          use(href='img/sprite.svg#close')
