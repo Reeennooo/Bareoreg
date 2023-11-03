@@ -73,7 +73,7 @@
           })
       +input-custom({type: 'phone', placeholder: 'Телефон', name: 'phone'})(data-mask='phone' data-required='')
       +input-custom({type: 'email', placeholder: 'E-mail', name: 'email'})
-      //- +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'city-info'}, mods: ['info']})(data-required='')
+      //- +input-custom({type: 'text', placeholder: 'Город', name: 'city', info: {id: 'city-info', value: '{"content": "Если игнорировать это поле, пациента не будет на географической карте", "theme": "violet"}'}, mods: ['info']})(data-required='')
       +input-custom({type: 'text', placeholder: 'Адрес (с почтовым индексом)', name: 'address', addClass: 'long-input'})
       +checkbox({name: "permission for videomaterial", value: 'yes', label: 'Получено разрешение на использование <br>фото- и видеоматериалов'})
       +checkbox({name: "permission for Email mailing", value: 'yes', label: 'Получено разрешение на email-рассылку'})
@@ -234,13 +234,13 @@
             },
           ]
         })
-      +group-radio-buttons({title: 'Дислипидемия', info: {id: '1'}})(data-required='')
+      +group-radio-buttons({title: 'Дислипидемия', info: {id: 'dyslipidemia-info', value: '{"content": "Только для повышенного уровня липидов/холестерола без учета терапии статинами", "theme": "violet"}'}})(data-required='')
         +radio({name: 'dyslipidemia', value: 'yes', label: 'Да'})
         +radio({name: 'dyslipidemia', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Атеросклероз', info: {id: '2'}})
+      +group-radio-buttons({title: 'Атеросклероз', info: {id: 'atherosclerosis-info', value: '{"content": "Включая ИБС, ОИМ, коронарное шунтирование, ОНМК, перемежающуюся хромоту", "theme": "violet"}'}})
         +radio({name: 'atherosclerosis', value: 'yes', label: 'Да'})
         +radio({name: 'atherosclerosis', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Апноэ', info: {id: '3'}})
+      +group-radio-buttons({title: 'Апноэ'})
         +radio({name: 'apnea', value: 'yes', label: 'Да'})
         +radio({name: 'apnea', value: 'no', label: 'Нет'})
       +itc-custom-select({
@@ -288,7 +288,7 @@
             {
               index: 3,
               value: 'Does not move independently / Does not leave the house',
-              txt: 'Не передвигается самостоятельно / Не выходит из дом'
+              txt: 'Не передвигается самостоятельно / Не выходит из дома'
             },
           ]
         })
@@ -368,8 +368,8 @@
             },
             {
               index: 4,
-              value: 'ПОД',
-              txt: 'ПОД'
+              value: 'ГПОД',
+              txt: 'ГПОД'
             },
           ]
         })

@@ -23,7 +23,7 @@ mixin input-custom(data)
         )&attributes(attributes)
       label(for=attributes.id ? attributes.id : data.name)=data.placeholder
       if(data.info)
-        +info({id: data.info.id}).input-custom__info
+        +info({id: data.info.id})(data-info=data.info.value class='input-custom__info')
       if(data.calendar)
         .calendar-toggler
           svg

@@ -3,7 +3,7 @@ mixin group-radio-buttons(data)
     .group-radio-buttons__title
       span=data.title
       if(data.info)
-        +info({id: data.info.id})
+        +info({id: data.info.id})(data-info=data.info.value)
     .group-radio-buttons__options
       if (block)
         block
