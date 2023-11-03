@@ -4,7 +4,7 @@ let approve = require('approvejs');
 // customRange
 let customRange = {
     expects: ['min', 'max'],
-    message: 'Минимальное значение: {min}, максимальное значение {max}',
+    message: 'Диапазон значений: {min}-{max}',
     validate: function (value, params) {
         let result = {
             valid: true,

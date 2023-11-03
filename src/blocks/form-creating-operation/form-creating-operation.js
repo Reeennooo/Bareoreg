@@ -128,7 +128,7 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 250,
                         max: 350,
-                        message: 'Минимальное значение: 250, максимальное значение 350',
+                        // message: 'Диапазон значений: 250-350',
                     },
                 },
             },
@@ -141,7 +141,7 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 20,
                         max: 350,
-                        message: 'Минимальное значение: 20, максимальное значение 350',
+                        // message: 'Диапазон значений: 20-350',
                     },
                 },
             },
@@ -160,7 +160,7 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 250,
                         max: 350,
-                        message: 'Минимальное значение: 250, максимальное значение 350',
+                        // message: 'Диапазон значений: 250-350',
                     },
                 },
             },
@@ -173,7 +173,7 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 20,
                         max: 350,
-                        message: 'Минимальное значение: 20, максимальное значение 350',
+                        // message: 'Диапазон значений: 20-350',
                     },
                 },
             },

@@ -2935,7 +2935,7 @@ export const OPERATIONS_RULES = {
         customRange: {
             min: 32,
             max: 46,
-            message: 'Минимальное значение: 32, максимальное значение 46',
+            // message: 'Минимальное значение: 32, максимальное значение 46',
         },
     },
     // Внутрижелудочный баллон
@@ -2951,7 +2951,7 @@ export const OPERATIONS_RULES = {
         customRange: {
             min: 200,
             max: 700,
-            message: 'Минимальное значение: 200, максимальное значение 700',
+            // message: 'Минимальное значение: 200, максимальное значение 700',
         },
     },
     'date-ballon-delete': {
@@ -2984,21 +2984,21 @@ export const OPERATIONS_RULES = {
         customRange: {
             min: 1,
             max: 10,
-            message: 'Минимальное значение: 1, максимальное значение 10',
+            // message: 'Минимальное значение: 1, максимальное значение 10',
         },
     },
     'gastroenteroanastomosis-number-of-cassettes': {
         customRange: {
             min: 1,
             max: 10,
-            message: 'Минимальное значение: 1, максимальное значение 10',
+            // message: 'Минимальное значение: 1, максимальное значение 10',
         },
     },
     'herjunojunoanastomosis-number-of-cassettes': {
         customRange: {
             min: 1,
             max: 10,
-            message: 'Минимальное значение: 1, максимальное значение 10',
+            // message: 'Минимальное значение: 1, максимальное значение 10',
         },
     },
     // Формирование анастомоза
@@ -3006,7 +3006,7 @@ export const OPERATIONS_RULES = {
         customRange: {
             min: 2500,
             max: 6000,
-            message: 'Минимальное значение: 2500, максимальное значение 6000',
+            // message: 'Минимальное значение: 2500, максимальное значение 6000',
         },
     },
     'length-biliopancreatic-loop': {
@@ -3018,14 +3018,14 @@ export const OPERATIONS_RULES = {
         customRange: {
             min: 1,
             max: 10,
-            message: 'Минимальное значение: 2500, максимальное значение 6000',
+            // message: 'Минимальное значение: 2500, максимальное значение 6000',
         },
     },
     'ident-treitz': {
         customRange: {
             min: 20,
             max: 350,
-            message: 'Минимальное значение: 20, максимальное значение 350',
+            // message: 'Минимальное значение: 20, максимальное значение 350',
         },
     },
 };
