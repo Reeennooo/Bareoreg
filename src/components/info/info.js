@@ -10,7 +10,6 @@ function initTippy() {
     infoCirles.forEach((circle) => {
         let circleId = circle.getAttribute('id');
         if (circleId && circle.dataset.info) {
-            console.log(circleId);
             const infoObj = JSON.parse(circle.dataset.info);
             tippy(`#${circleId}`, infoObj);
         }

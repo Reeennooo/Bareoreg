@@ -67,7 +67,7 @@
         +radio({name: 'has-constipation', value: 'Да', label: 'Да'})
         +radio({name: 'has-constipation', value: 'Нет или очень редко', label: 'Нет или очень редко'})
       +input-custom({type: 'text', placeholder: 'Частота стула', name: 'how-often-poop',})
-  +group({title: 'Течение сопутствующих заболеваний'}).form-creating-observation__course-of-diseases
+  +group({title: 'Течение сопутствующих заболеваний'}).form-creating-observation__course-of-diseases.group--parent
     .group__form
       +itc-custom-select({
             id: 'arterial-hypertension', 
@@ -155,13 +155,13 @@
               },
             ]
           })
-      +group-radio-buttons({title: 'Дислипидемия', info: {id: '1'}})(data-required='')
+      +group-radio-buttons({title: 'Дислипидемия', info: {id: 'dyslipidemia-info', value: '{"content": "Только для повышенного уровня липидов/холестерола без учета терапии статинами", "theme": "violet"}'}})(data-required='')
         +radio({name: 'dyslipidemia', value: 'yes', label: 'Да'})
         +radio({name: 'dyslipidemia', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Атеросклероз', info: {id: '2'}})
+      +group-radio-buttons({title: 'Атеросклероз', info: {id: 'atherosclerosis-info', value: '{"content": "Включая ИБС, ОИМ, коронарное шунтирование, ОНМК, перемежающуюся хромоту", "theme": "violet"}'}})
         +radio({name: 'atherosclerosis', value: 'yes', label: 'Да'})
         +radio({name: 'atherosclerosis', value: 'no', label: 'Нет'})
-      +group-radio-buttons({title: 'Апноэ', info: {id: '3'}})
+      +group-radio-buttons({title: 'Апноэ'})
         +radio({name: 'apnea', value: 'yes', label: 'Да'})
         +radio({name: 'apnea', value: 'no', label: 'Нет'})
       +itc-custom-select({
@@ -274,23 +274,23 @@
           options: [
             {
               index: 0,
-              value: 'Выраженное обвисание кожи на руках, бедрах',
-              txt: 'Выраженное обвисание кожи на руках, бедрах'
+              value: 'Нет',
+              txt: 'Нет'
             },
             {
               index: 1,
-              value: 'Выраженное обвисание кожи на животе',
-              txt: 'Выраженное обвисание кожи на животе'
-            },
-            {
-              index: 2,
               value: 'Обвисания кожи нет, есть морщинистость',
               txt: 'Обвисания кожи нет, есть морщинистость'
             },
             {
+              index: 2,
+              value: 'Выраженное обвисание кожи на руках, бедрах',
+              txt: 'Выраженное обвисание кожи на руках, бедрах'
+            },
+            {
               index: 3,
-              value: 'Обвисания, морщинистость отсутствуют',
-              txt: 'Обвисания, морщинистость отсутствуют'
+              value: 'Выраженное обвисание кожи на животе',
+              txt: 'Выраженное обвисание кожи на животе'
             },
           ]
         })
@@ -326,8 +326,8 @@
             },
             {
               index: 5,
-              value: 'History of dermatolipectomy',
-              txt: 'Дерматолипэктомия в анамнезе'
+              value: 'Выполнена дерматолипэктомия',
+              txt: 'Выполнена дерматолипэктомия'
             },
           ]
         })
@@ -392,18 +392,18 @@
               },
               {
                 index: 3,
-                value: 'Гистерэктомия в анамнезе',
-                txt: 'Гистерэктомия в анамнезе'
-              },
-              {
-                index: 4,
                 value: 'Постменопауза',
                 txt: 'Постменопауза'
               },
               {
-                index: 5,
+                index: 4,
                 value: 'Аменорея',
                 txt: 'Аменорея'
+              },
+              {
+                index: 5,
+                value: 'Гистерэктомия в анамнезе',
+                txt: 'Гистерэктомия в анамнезе'
               },
             ]
           })

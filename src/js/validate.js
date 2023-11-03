@@ -36,7 +36,6 @@ export function initGroupObserve() {
                     requiredElements = groupForm.querySelectorAll('[data-required]');
                 }
             }
-            // console.log(groups);
             checkFilledInput(group);
 
             requiredElements.forEach((requiredEl) => {
