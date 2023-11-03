@@ -1,3 +1,4 @@
+import { setMasks } from '../../js/input-validate';
 class TooltipActions {
     static _createTooltip(options) {
         const tooltip = document.createElement('ul');
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // table header
     const patientTable = document.querySelector('.patient-table');
     if (!patientTable) return;
+    setMasks();
     const tableHeader = patientTable.querySelector('.patient-table__header');
     window.addEventListener('scroll', tableScroll);
 
