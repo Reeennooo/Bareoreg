@@ -136,7 +136,7 @@ export class FileLoader {
 
         currentFile = document.createElement('div');
         currentFile.dataset.index = this.fileList.files.length;
-        currentFile.classList.add('file');
+        currentFile.classList.add('file', 'uploaded');
         currentFile.innerHTML = `
           <div class='file__name-wrapper'>
               ${
@@ -269,6 +269,7 @@ export class FileLoader {
         // добавление файлов в обычный fileLoader.
         if (filesWrapper) {
             this.fileEl.classList.add('file--advanced');
+            this.fileEl.classList.remove('uploaded');
             filesWrapper.append(this.fileEl);
         }
 
@@ -276,6 +277,7 @@ export class FileLoader {
         if (this.dropZone) {
             const dropZoneWrapper = this.dropZone.querySelector('.drop-zone__uploaded-files');
             this.fileElDropzone.classList.add('attached');
+            this.fileElDropzone.classList.remove('uploaded');
             dropZoneWrapper.append(this.fileElDropzone);
         }
 
