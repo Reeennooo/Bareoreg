@@ -91,7 +91,10 @@ export function setMasks(input) {
     // masks
     const maskRules = {
         phone: {
-            mask: '+{7}(000)000-00-00',
+            mask: '+{7}(#00)000-00-00',
+            definitions: {
+                '#': /9/,
+            },
         },
         date: {
             mask: Date,
