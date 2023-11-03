@@ -28,8 +28,8 @@
   &__image {
     position: absolute;
     z-index: -1;
-    top: 15px;
-    right: 120px;
+    top: -53px;
+    right: 115px;
 
     img {
       object-fit: cover;
@@ -60,7 +60,7 @@
     }
 
     &__image {
-      top: 53px;
+      top: 0;
       right: 50px;
       width: 540px;
     }
@@ -84,7 +84,7 @@
     }
 
     &__image {
-      top: 130px;
+      top: 75px;
       right: 55px;
       position: absolute;
       // display: none;
@@ -98,7 +98,7 @@
 @media (max-width: $mobile-big) {
   .hero {
     padding-top: 32px;
-    padding-bottom: 32px;
+    padding-bottom: 32px !important;
 
     &__title {
       line-height: 1.2;

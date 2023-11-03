@@ -21,24 +21,25 @@
 
   &.is-active {
     &:before {
-      opacity: 1;
+      width: 100%;
     }
 
     color: $violet;
   }
 
   &:before {
-    opacity: 0;
+    @include transition('width');
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 0;
     height: 4px;
     border-radius: 20px;
     background-color: $violet;
   }
 
+  @include transition('color');
   // font
   font-size: 16px;
   font-style: normal;

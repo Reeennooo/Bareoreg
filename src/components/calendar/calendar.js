@@ -131,16 +131,15 @@ class Calendar {
 
     static hideOpenCalendar() {
         document.addEventListener('click', (event) => {
+            if (event.target.closest('.inactive.calendar__day')) return;
 
-            if(event.target.closest('.inactive.calendar__day')) return
-            
-            if(!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler')) {
+            if (!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler')) {
                 const activeCalendars = document.querySelectorAll(`.${this.EL}`);
-                activeCalendars.forEach(el => {
-                    el.classList.remove('is-active')
-                })
+                activeCalendars.forEach((el) => {
+                    el.classList.remove('is-active');
+                });
             }
-        })
+        });
     }
 
     constructor(target, params) {
@@ -169,30 +168,32 @@ class Calendar {
 
         // Список месяцев
         this._monthsSelect = Calendar.createMonthSelect();
-        
+
         // Список годов
         this._yearsSelect = Calendar.createYearsSelect(this._years, this._year);
         this._yearsSelect._elToggle.addEventListener('click', () => {
-            let wrapper = this._yearsSelect._el.querySelector('.itc-select__options')
-            wrapper.scrollTop = wrapper.scrollHeight/2;
-        })
+            let wrapper = this._yearsSelect._el.querySelector('.itc-select__options');
+            wrapper.scrollTop = wrapper.scrollHeight / 2;
+        });
 
         this._parrentTag = typeof target === 'string' ? document.querySelector(target) : target;
-        if(!this._parrentTag) return
+        if (!this._parrentTag) return;
 
         if (this._parrentTag.tagName === 'DIV') {
             this._parrent = typeof target === 'string' ? document.querySelector(target) : target;
         } else if (this._parrentTag.tagName === 'INPUT') {
             this._parrent = typeof target === 'string' ? document.querySelector(target).closest('.input-custom') : target.closest('.input-custom');
             const input = this._parrent.querySelector('input');
-            const calendarBtn = this._parrent.querySelector('.calendar-toggler')
-            if(calendarBtn) {
-                calendarBtn.addEventListener('click', handleCalendar.bind(this))
+            const calendarBtn = this._parrent.querySelector('.calendar-toggler');
+            if (calendarBtn) {
+                calendarBtn.addEventListener('click', handleCalendar.bind(this));
             }
 
             function handleCalendar() {
+                const activeCalendar = document.querySelector(`.${Calendar.EL}.is-active`);
+                activeCalendar?.classList.remove('is-active');
                 this._el.classList.toggle('is-active');
-                input.focus()
+                input.focus();
             }
 
             this._el.addEventListener('click', (event) => {
@@ -202,6 +203,9 @@ class Calendar {
 
         if (this._params.position !== 'static') {
             this._el.classList.add('absolute');
+        }
+        if (this._params.side === 'right') {
+            this._el.classList.add('right-side');
         }
 
         // Переключатели даты
@@ -373,12 +377,12 @@ class Calendar {
             day = '0' + day;
         }
 
-        if(month.length !== 2) {
+        if (month.length !== 2) {
             month = '0' + month;
         }
         // console.log(`${day}.${month}.${this._date.getFullYear()}`)
         this._parrentTag.value = `${day}.${month}.${this._date.getFullYear()}`;
     }
 }
-Calendar.hideOpenCalendar()
+Calendar.hideOpenCalendar();
 window.Calendar = Calendar;

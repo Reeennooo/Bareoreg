@@ -16,9 +16,9 @@ mixin filters(data)
             +chip({txt: 'Текущий год', mod: 'filter'})
             +chip({txt: 'Текущий прошлый год', mod: 'filter'})
           .filters-tooltip__calendars
-            +input-custom({type: 'number', placeholder: 'Начало периода', name: 'filter-start-period', mods: ["ghost"], calendar: true})
+            +input-custom({type: 'text', placeholder: 'Начало периода', name: 'filter-start-period', mods: ["ghost"], calendar: true})
             .vertical-line
-            +input-custom({type: 'number', placeholder: 'Конец периода', name: 'filter-end-period', mods: ["ghost"], calendar: true})
+            +input-custom({type: 'text', placeholder: 'Конец периода', name: 'filter-end-period', mods: ["ghost"], calendar: true})
         .filters-tooltip__section
           .filters-tooltip__section-name Тип операции
           .filters-tooltip__wrapper

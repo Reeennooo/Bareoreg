@@ -4,7 +4,7 @@
   let addClass;
 
   if(pageName === 'new-patient') {
-    title="Создание<br class='adaptive'> карты <br>пациента";
+    title="Создание<br> карты пациента";
     img = 'img/hero/new-patient.png';
   }
   else if(pageName === 'creating-operation') {
@@ -38,4 +38,4 @@
         .hero__passed-time
           span 3 месяца после операции
       if(pageName === 'patient-list')
-        +btn({txt: 'Добавить пациента', icon: 'add-patient'}).hero__add-patient
+        +btn({txt: 'Добавить пациента', icon: 'add-patient', href: '/new-patient.html'}).hero__add-patient

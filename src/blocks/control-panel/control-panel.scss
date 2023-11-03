@@ -2,7 +2,6 @@
   &__tools {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 24px;
   }
 
   &__btns {
@@ -18,7 +17,7 @@
     gap: 8px;
 
     &:not(:empty) {
-      margin-bottom: 24px;
+      margin-top: 24px;
     }
   }
 }

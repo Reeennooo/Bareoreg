@@ -70,7 +70,15 @@
   }
 
   &.creating-operation {
-    padding-bottom: 92px;
+    main {
+      padding-bottom: 92px;
+    }
+  }
+
+  &.patient-list {
+    main {
+      padding-bottom: 40px;
+    }
   }
 
   &.sticky {

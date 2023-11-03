@@ -23,6 +23,11 @@
     }
   }
 
+  &.right-side {
+    left: auto;
+    right: 0;
+  }
+
   .btn {
     width: 24px;
     height: 24px;
@@ -55,12 +60,14 @@
   ul {
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 
     li {
       position: relative;
-      width: calc(100% / 7);
+      // width: calc(100% / 7);
       height: 48px;
       border-radius: 100%;
       display: flex;

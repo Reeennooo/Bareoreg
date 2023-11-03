@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded',function () {
 		"2.Создание операции": 'creating-operation.html',
 		"3.Создание наблюдения": 'creating-observation.html',
 		"4.Карта пациента": 'patient-card.html',
-		"5.Профиль": 'profile.html'
+		"5.Профиль": 'profile.html',
+		"6.Список пациентов": 'patient-list.html'
 	};
 
 	let link = ''+

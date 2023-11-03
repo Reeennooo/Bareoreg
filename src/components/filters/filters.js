@@ -3,6 +3,8 @@ import { createChip } from '../chip/chip';
 document.addEventListener('DOMContentLoaded', () => {
     const filters = document.querySelector('.filters');
     if (!filters) return;
+    new window.Calendar('#filter-start-period', { position: 'absolute' });
+    new window.Calendar('#filter-end-period', { position: 'absolute', side: 'right' });
     const selectedFilterWrapper = document.querySelector('.control-panel__active-filters');
     const btnFIlter = filters.querySelector('.filters__btn');
     btnFIlter.addEventListener('click', toggleFilters);
