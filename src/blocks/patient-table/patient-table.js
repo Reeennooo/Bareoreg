@@ -22,8 +22,30 @@ const tooltipActions = new TooltipActions({
 }).tooltip;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // table header
+    const patientTable = document.querySelector('.patient-table');
+    if (!patientTable) return;
+    const tableHeader = patientTable.querySelector('.patient-table__header');
+    window.addEventListener('scroll', tableScroll);
+
+    function tableScroll() {
+        const distanceFromTop = tableHeader.getBoundingClientRect().y;
+        const styleTopValue = +getComputedStyle(tableHeader).top.replace(/[^0-9]/g, '');
+        if (distanceFromTop === styleTopValue) {
+            tableHeader.classList.add('shadow');
+        } else {
+            tableHeader.classList.remove('shadow');
+        }
+    }
+
     const patientActions = document.querySelectorAll('.patient__actions');
     patientActions.forEach((el) => el.addEventListener('click', () => showEl(el)));
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.patient__actions')) {
+            tooltipActions.classList.remove('is-active');
+        }
+    });
 
     function showEl(el) {
         tooltipActions.classList.remove('is-active');
@@ -32,10 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltipActions.classList.add('is-active');
         }, 100);
     }
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.patient__actions')) {
-            tooltipActions.classList.remove('is-active');
-        }
-    });
 });

@@ -29,6 +29,12 @@
     top: 95px;
     background-color: $background;
 
+    &.shadow {
+      .patient-table__header-inner {
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+      }
+    }
+
     &-inner {
       background-color: $white;
       padding: 16px 32px;
@@ -36,7 +42,6 @@
       display: grid;
       grid-template-columns: minmax(auto, 231px) 72px 45px 83px minmax(auto, 231px) 92px 101px minmax(auto, 129px) 93px 40px;
       column-gap: 20px;
-      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
     }
   }
 
@@ -122,6 +127,16 @@
     font-weight: 500;
     line-height: 20px; /* 142.857% */
     letter-spacing: 0.1px;
+  }
+
+  .event {
+    display: block;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: $grey-light;
   }
 
   &__age,
