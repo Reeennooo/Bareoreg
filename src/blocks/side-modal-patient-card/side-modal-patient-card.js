@@ -2574,6 +2574,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (sideModalData[modalName]) {
             fillSideModal(modalName);
+            if (modalName === 'observation') {
+                main.prepend(obsLoader.fileLoader);
+            }
         } else if (fields[modalName]) {
             enableEditMode(modalName);
         }
@@ -2596,7 +2599,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 trashBtn.setAttribute('data-modal-name', 'remove-observation');
                 operationName.innerText = 'RYGB (Гастрошунтирование)';
                 sideModal.dataset.sideModalName = modalName;
-                main.append(obsLoader.fileLoader);
+
                 // paperclipBtn.addEventListener('click', obsLoaderTrigger);
                 const pillObservation = element.closest('.pill__observation');
                 trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
