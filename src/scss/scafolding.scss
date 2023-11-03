@@ -8,6 +8,15 @@
 //@media (hover: hover) and (pointer: fine) {}
 /* hide scrollbar */
 //html::-webkit-scrollbar { width: 0 !important }
+
+%scrollbar {
+  @include scrollbar(10px, transparent, $grey-light);
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+  }
+}
+
 @at-root {
   @-ms-viewport {
     // stylelint-disable-line
@@ -24,7 +33,7 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   //outline: none;
-  //	@extend %scrollbar;
+  @extend %scrollbar;
 }
 
 *::before,
