@@ -162,6 +162,8 @@ export class ItcCustomSelect {
         }
         // - - -
         if (el.classList.contains(this.constructor.EL_OPTION_SELECTED)) {
+            // закрываем список при нажатии на выбранный вариант
+            this.hide();
             return;
         }
         this._updateOption(el);
