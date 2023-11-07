@@ -28,6 +28,12 @@
   display: none;
 }
 
+.itc-select.have-message {
+  .itc-select__message {
+    display: block;
+  }
+}
+
 .itc-select__message {
   position: absolute;
   display: none;

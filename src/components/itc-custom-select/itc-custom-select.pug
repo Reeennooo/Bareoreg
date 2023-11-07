@@ -46,7 +46,7 @@ mixin itc-custom-select(data)
   .itc-select(
     id=data.id 
     data-multiple=data.multiple ? data.multiple : false
-    class=`${data.mod ? `itc-select--${data.mod}` : ''}`
+    class=`${data.mod ? `itc-select--${data.mod}` : ''} ${data.addClass ? data.addClass : ''}`
     )&attributes(attributes)
     input(type="text" name=data.name value=data.selectedValue ? data.selectedValue : '')
     button(
@@ -69,4 +69,4 @@ mixin itc-custom-select(data)
               data-index=option.index
               class=option.selected ? 'itc-select__option_selected' : ''
               ).itc-select__option=option.txt
-    .itc-select__message
+    .itc-select__message=data.message
