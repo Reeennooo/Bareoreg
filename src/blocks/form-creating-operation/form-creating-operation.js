@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // СВЯЗИ
     const hasConnections = document.querySelectorAll('[data-has-connection]');
     hasConnections.forEach((hasConnectEl) => {
-        setConnectionsForElements(hasConnectEl);
+        setConnectionsForElements(hasConnectEl, CONNECTED_RULES);
 
         // частный случай с disabled чекбоксов.
         if (hasConnectEl.dataset.hasConnection === 'no-complications') {
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //     return true;
 // }
 
-function setConnectionsForElements(element, rules) {
+export function setConnectionsForElements(element, connectedRules) {
     let connectedKey = '';
 
     if (element.dataset.hasConnection) {
@@ -488,7 +488,7 @@ function setConnectionsForElements(element, rules) {
             const elementObserver = new MutationObserver((mutations) => {
                 console.log(connectedKey);
                 let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                const rulesItem = CONNECTED_RULES[connectedKey].find((el) => el.value === mutations[0].target.dataset.value);
+                const rulesItem = connectedRules[connectedKey].find((el) => el.value === mutations[0].target.dataset.value);
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
@@ -523,7 +523,7 @@ function setConnectionsForElements(element, rules) {
             const monitoringElement = element.querySelector('button');
             const elementObserver = new MutationObserver((mutations) => {
                 let connectedElements = document.querySelectorAll(`[data-connected=${connectedKey}]`);
-                const rulesItem = CONNECTED_RULES[connectedKey].find((item) => {
+                const rulesItem = connectedRules[connectedKey].find((item) => {
                     if (item.value === mutations[0].target.value || item.value === Number(mutations[0].target.dataset.index)) {
                         return item;
                     }
@@ -927,7 +927,7 @@ function createRadioGroup(data) {
     }
     if (data.hasConnection) {
         radioGroup.setAttribute('data-has-connection', data.hasConnection);
-        setConnectionsForElements(radioGroup);
+        setConnectionsForElements(radioGroup, CONNECTED_RULES);
     }
 
     setRadioHandler(radioGroup);
@@ -958,7 +958,7 @@ export function createSelect(data) {
 
     if (data.hasConnection) {
         select.setAttribute('data-has-connection', data.hasConnection);
-        setConnectionsForElements(select);
+        setConnectionsForElements(select, CONNECTED_RULES);
     }
 
     if (data.connected) {
