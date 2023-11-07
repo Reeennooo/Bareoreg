@@ -62,7 +62,7 @@ export function checkValidate(element, rules) {
 export function assignInputRules(allRules, checkRightNow) {
     const AllElements = document.querySelectorAll('.input-custom input, .itc-select button');
     const rules = Object.keys(allRules);
-    console.log(allRules);
+    // console.log(allRules);
     AllElements.forEach((element) => {
         if (rules.indexOf(element.name) !== -1) {
             let currentElement;

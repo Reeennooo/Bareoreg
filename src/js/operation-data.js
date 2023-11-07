@@ -1969,7 +1969,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'сommentary-anastomosis',
-                            type: 'number',
+                            type: 'text',
                             placeholder: 'Комментарий к анастомозу',
                             required: false,
                         },

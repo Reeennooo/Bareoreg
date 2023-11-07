@@ -152,9 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let observer = new MutationObserver((mutationRecords) => {
                 for (const mutation of mutationRecords) {
                     if (mutation.target.value === 'out-observation') {
-                        connectedEl.style.display = 'block';
+                        connectedEl.classList.add('is-active');
                     } else {
-                        connectedEl.style.display = 'none';
+                        connectedEl.classList.remove('is-active');
                     }
                 }
             });
