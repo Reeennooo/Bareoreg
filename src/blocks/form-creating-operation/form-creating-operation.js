@@ -811,18 +811,18 @@ export function createInput(data) {
             <label for='${data.name}'>${data.placeholder}</label>
         </div>
         <div class='input-custom__message'>${data.message}</div>`;
+    const inputField = input.querySelector('input');
 
     if (data.required) {
         input?.querySelector('input')?.setAttribute('data-required', '');
     }
 
     if (data.value) {
-        input.querySelector('input').value = data.value;
+        inputField.value = data.value;
     }
 
     if (data.mod === 'calendar') {
         // new AirDatepicker(input.querySelector('input'), {});
-        const inputField = input.querySelector('input');
         let calendarToggler = `
         <div class='calendar-toggler'>
             <svg>
@@ -854,12 +854,12 @@ export function createInput(data) {
     }
 
     if (data.connected) {
-        input.setAttribute('data-connected', data.connected);
+        inputField.setAttribute('data-connected', data.connected);
         checkConnectionValue(input, CONNECTED_RULES);
     }
 
     if (data.connectedID) {
-        input.setAttribute('data-id', data.connectedID);
+        inputField.setAttribute('data-id', data.connectedID);
         // `[${data.connectedId.join(',')}]`
     }
 
