@@ -62,7 +62,7 @@ export function checkValidate(element, rules) {
 export function assignInputRules(allRules, checkRightNow) {
     const AllElements = document.querySelectorAll('.input-custom input, .itc-select button');
     const rules = Object.keys(allRules);
-    // console.log(allRules);
+    console.log(allRules);
     AllElements.forEach((element) => {
         if (rules.indexOf(element.name) !== -1) {
             let currentElement;
@@ -81,7 +81,16 @@ export function assignInputRules(allRules, checkRightNow) {
             }
 
             if (checkRightNow) {
-                checkValidate(currentElement, allRules[element.name]);
+                let inputInner;
+                if (currentElement.closest('.itc-select')) {
+                    inputInner = currentElement.querySelector('input');
+                } else {
+                    inputInner = currentElement;
+                }
+                // console.log(inputInner);
+                if (inputInner.value) {
+                    checkValidate(currentElement, allRules[element.name]);
+                }
             }
         }
     });

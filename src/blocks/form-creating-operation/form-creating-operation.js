@@ -345,35 +345,53 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kindOperationBtn) {
         let observer = new MutationObserver(() => {
             if (selectKindOperation.selectedIndex === '7') {
-                assignInputRules(
-                    {
-                        'duration-operation': {
-                            customRange: {
-                                min: 10,
-                                max: 30,
-                            },
-                            required: {
-                                message: 'Обязательное поле',
-                            },
-                        },
+                OPERATIONS_RULES['duration-operation'] = {
+                    customRange: {
+                        min: 10,
+                        max: 30,
                     },
-                    true
-                );
+                    required: {
+                        message: 'Обязательное поле',
+                    },
+                };
+                // assignInputRules(
+                //     {
+                //         'duration-operation': {
+                //             customRange: {
+                //                 min: 10,
+                //                 max: 30,
+                //             },
+                //             required: {
+                //                 message: 'Обязательное поле',
+                //             },
+                //         },
+                //     },
+                //     true
+                // );
             } else {
-                assignInputRules(
-                    {
-                        'duration-operation': {
-                            customRange: {
-                                min: 40,
-                                max: 120,
-                            },
-                            required: {
-                                message: 'Обязательное поле',
-                            },
-                        },
+                OPERATIONS_RULES['duration-operation'] = {
+                    customRange: {
+                        min: 40,
+                        max: 120,
                     },
-                    true
-                );
+                    required: {
+                        message: 'Обязательное поле',
+                    },
+                };
+                // assignInputRules(
+                //     {
+                //         'duration-operation': {
+                //             customRange: {
+                //                 min: 40,
+                //                 max: 120,
+                //             },
+                //             required: {
+                //                 message: 'Обязательное поле',
+                //             },
+                //         },
+                //     },
+                //     true
+                // );
             }
         });
         observer.observe(kindOperationBtn, { attributeFilter: ['data-index', 'value'] });
@@ -425,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         initGroupObserve(initObservers);
-        assignInputRules(OPERATIONS_RULES);
+        assignInputRules(OPERATIONS_RULES, true);
         initObservers = [];
     }
 
