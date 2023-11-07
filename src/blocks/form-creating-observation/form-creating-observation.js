@@ -5,7 +5,7 @@ import { setConnectionsForElements } from '../form-creating-operation/form-creat
 
 const selects = {
     'gastric-bandage': ['reason-adjusting-bandage'],
-    'general-information': ['arterial-hypertension', 'compensation-SD', 'GERD', 'bronchial-asthma', 'functional-status', 'back-and-limb-pain', 'hernia', 'sagging-skin', 'fat-apron'],
+    'general-information': ['arterial-hypertension', 'diabetes-mellitus-2-type', 'compensation-SD', 'GERD', 'bronchial-asthma', 'functional-status', 'back-and-limb-pain', 'hernia', 'sagging-skin', 'fat-apron'],
     woman: ['polycystic-ovary', 'menstrual-function', 'onset-of-pregnancy'],
 };
 
@@ -19,6 +19,11 @@ const rules = {
 
 const CONNECTED = {
     'adjusting-bandage': [],
+    'diabetes-сompensation': [
+        {
+            value: 'Нет признаков',
+        },
+    ],
 };
 
 function initSelects(selects) {

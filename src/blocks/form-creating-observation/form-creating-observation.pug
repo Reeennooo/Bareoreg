@@ -42,21 +42,21 @@
               },
             ]
           })(data-connected="adjusting-bandage")
-      +input-custom({type: 'text', placeholder: 'Изменение объема заполнения', name: 'changing-filling-volume', connected: "adjusting-bandage"})(data-required='')
+      +input-custom({type: 'text', placeholder: 'Изменение объема заполнения', name: 'changing-filling-volume', connected: "adjusting-bandage", message: "Пример: ± 200 мл", addClass: 'have-message'})(data-required='')
       +input-custom({type: 'text', placeholder: 'Планируемая дата регулировки', name: 'date-adjusting-bandage', calendar: true, connected: "adjusting-bandage"})(autocomplete='off' data-mask='date').only-number#calendar-adjusting-bandage
   +group({title: 'Общие сведения'}).form-creating-observation__general-information
     .group__form
       +group-radio-buttons({title: 'Приём витаминов и микроэлементов*'})(data-required='')
         +radio({name: 'intake-of-vitamins', value: 'Да', label: 'Да'})
         +radio({name: 'intake-of-vitamins', value: 'Нет', label: 'Нет'})
-      +group-radio-buttons({title: 'Признаки питательной недостаточности'})
-        +radio({name: 'signs-of-nutritional-deficiency', value: 'Есть', label: 'Есть'})
-        +radio({name: 'signs-of-nutritional-deficiency', value: 'Нет', label: 'Нет'})
       +group-radio-buttons({title: 'Чувство голода'})
         +radio({name: 'feeling-hungry', value: 'Нет', label: 'Нет'})
         +radio({name: 'feeling-hungry', value: 'Сниженое', label: 'Сниженое'})
         +radio({name: 'feeling-hungry', value: 'Обычное', label: 'Обычное'})
         +radio({name: 'feeling-hungry', value: 'Выраженное', label: 'Выраженное'})
+      +group-radio-buttons({title: 'Признаки питательной недостаточности'})
+        +radio({name: 'signs-of-nutritional-deficiency', value: 'Есть', label: 'Есть'})
+        +radio({name: 'signs-of-nutritional-deficiency', value: 'Нет', label: 'Нет'})
       +group-radio-buttons({title: 'Комфортность питания'})
         +radio({name: 'сomfort-of-nutrition', value: 'Нормальная', label: 'Нормальная'})
         +radio({name: 'сomfort-of-nutrition', value: 'Дискомфорт при приеме пищи', label: 'Дискомфорт при приеме пищи'})
@@ -97,9 +97,36 @@
             ]
           })
       +itc-custom-select({
+          id: 'diabetes-mellitus-2-type', 
+          name: 'diabetes-mellitus-2-type',
+          placeholder: 'Сахарный диабет 2-го типа',
+          options: [
+            {
+              index: 1,
+              value: 'Нет признаков',
+              txt: 'Нет признаков'
+            },
+            {
+              index: 2,
+              value: 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе',
+              txt: 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе'
+            },
+            {
+              index: 3,
+              value: 'Прием пероральных гипогликемических препаратов',
+              txt: 'Прием пероральных гипогликемических препаратов'
+            },
+            {
+              index: 4,
+              value: 'Инсулинотерапия',
+              txt: 'Инсулинотерапия'
+            },
+          ]
+        })(data-has-connection='diabetes-сompensation')
+      +itc-custom-select({
             id: 'compensation-SD', 
             name: 'compensation-SD',
-            placeholder: 'Срок наступления компенсации СД?',
+            placeholder: 'Срок наступления компенсации СД',
             options: [
               {
                 index: 0,
@@ -127,7 +154,7 @@
                 txt: 'Инсулинотерапия'
               },
             ]
-          })
+          })(data-connected='diabetes-сompensation')
       +itc-custom-select({
             id: 'GERD', 
             name: 'GERD',
