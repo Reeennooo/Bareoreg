@@ -38,7 +38,7 @@
 }
 
 .form-creating-operation__complications,
-.form-creating-operation__complication {
+.complication {
   .group__form,
   .group__additional-form {
     display: grid;
@@ -62,6 +62,7 @@
   }
 }
 
+.form-creating-operation__intraoperative,
 .form-creating-operation__emergency-situations {
   .group__form {
     grid-template-columns: repeat(3, 1fr);

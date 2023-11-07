@@ -260,7 +260,7 @@ export const CONNECTED_RULES = {
 
 const selects = {
     'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
-    hospital: ['vomiting', 'discharge-where'],
+    hospital: ['vomiting', 'discharge-where', 'сause-of-death'],
     complications: ['bleeding', 'positive-leak-test', 'injury-of-organs', 'electrotrauma-of-organs'],
 };
 
@@ -452,18 +452,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonsBlock = document.querySelector('.form__wrapper-btns');
 
     function setComplication() {
-        let count = 0;
-        return function () {
-            const complication = new Complication({ number: ++count, addClass: 'group--parent' });
-            // Добавляем правила к общим правилам.
-            complication.connectionRules.forEach((item) => {
-                CONNECTED_RULES[item.name] = item.rules;
-            });
-            buttonsBlock.before(complication.el);
-            assignInputRules(complication.fieldsRules);
-            initGroupObserve(initObservers);
-            initObservers = [];
-        };
+        const complication = new Complication({ addClass: ['group--parent'] });
+        // Добавляем правила к общим правилам.
+        complication.connectionRules.forEach((item) => {
+            CONNECTED_RULES[item.name] = item.rules;
+        });
+        buttonsBlock.before(complication.el);
+        assignInputRules(complication.fieldsRules);
+        initGroupObserve(initObservers);
+        initObservers = [];
     }
 
     function debounce(f, ms) {
@@ -480,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    let setComplicationDebounce = debounce(setComplication(), 1000);
+    let setComplicationDebounce = debounce(setComplication, 1000);
     addComplicationBtn.addEventListener('click', setComplicationDebounce);
 });
 
@@ -560,7 +557,7 @@ export function setConnectionsForElements(element, connectedRules) {
                                     selectOptions.innerHTML = '';
                                     const selectBtn = newSelect.querySelector('button');
                                     // console.log(selectBtn);
-                                    selectBtn.querySelector('.itc-select__text-selected span').innerHTML = '';
+                                    selectBtn.querySelector('.itc-select__text-selected').innerHTML = '';
                                     selectBtn.dataset.index = '-1';
                                     const newOptions = rulesItem.changeSelect.options.map((option, index) => {
                                         return `<li class="itc-select__option" data-select="option" data-value='${option[0]}' data-index='${index}'>
@@ -629,10 +626,12 @@ export function createGroup(data) {
                     <span class='group__add-info'></span>
                 </div>
             </div>
-            <div class='group__toggle'>
-                <svg class='svg'>
-                    <use href='img/sprite.svg#caret-up'></use>
-                </svg>
+            <div class='group__buttons'>
+                <div class='group__toggle'>
+                    <svg class='svg'>
+                        <use href='img/sprite.svg#caret-up'></use>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class='group__inner-wrapper'>
@@ -684,6 +683,18 @@ export function createGroup(data) {
 
     if (data.dataBlocks) {
         data.dataBlocks.forEach((item) => form.append(item));
+    }
+
+    if (data.deleteButton) {
+        group.querySelector('.group__buttons').insertAdjacentHTML(
+            'afterbegin',
+            `<button class='group__delete btn btn--text' type='button'>
+                <svg>
+                    <use href='img/sprite.svg#trash'></use>
+                </svg>
+            <span>Удалить</span>
+            </button>`
+        );
     }
 
     initGroup([group]);

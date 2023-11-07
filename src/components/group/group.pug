@@ -20,9 +20,10 @@ mixin group(data)
               span.group__add-info
           if(data.subtitle)
             .group__subtitle=data.subtitle
-        .group__toggle
-          svg.svg
-            use(xlink:href="img/sprite.svg#caret-up")
+        .group__buttons
+          .group__toggle
+            svg.svg
+              use(xlink:href="img/sprite.svg#caret-up")
       .group__inner-wrapper
         .group__inner
           if block
@@ -40,9 +41,10 @@ mixin group(data)
               span.group__add-info
           if(data.subtitle)
             .group__subtitle=data.subtitle
-        .group__toggle
-          svg.svg
-            use(xlink:href="img/sprite.svg#caret-up")
+        .group__buttons
+          .group__toggle
+            svg.svg
+              use(xlink:href="img/sprite.svg#caret-up")
       .group__inner-wrapper
         .group__inner
           if block

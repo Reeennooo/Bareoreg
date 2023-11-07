@@ -7,14 +7,16 @@ import { initGroupObserve } from '../../js/validate';
 
 export class Complication {
     title = 'Раннее осложнение №';
+    static complictionCount = 0;
 
     constructor(data) {
-        this.number = data.number;
+        Complication.complictionCount++;
+        this.number = Complication.complictionCount;
         this.fields = [
             {
                 type: 'INPUT',
                 data: {
-                    name: `date-of-detection-complication${data.number}`,
+                    name: `date-of-detection-complication${this.number}`,
                     type: 'text',
                     placeholder: 'Дата выявления осложнения*',
                     required: true,
@@ -25,7 +27,7 @@ export class Complication {
             {
                 type: 'SELECT',
                 data: {
-                    name: `main-complication${data.number}`,
+                    name: `main-complication${this.number}`,
                     placeholder: 'Основное осложнение*',
                     options: [
                         ['Кровотечение', 'Кровотечение'],
@@ -35,7 +37,8 @@ export class Complication {
                         ['Жидкостные скопления', 'Жидкостные скопления'],
                         ['Декомпенсация сопутствующих заболеваний', 'Декомпенсация сопутствующих заболеваний'],
                         ['Сердечно-сосудистые осложнения', 'Сердечно-сосудистые осложнения'],
-                        ['Осложнения БЖ', 'Осложнения ВЖБ'],
+                        ['Осложнение ВЖБ', 'Осложнение ВЖБ'],
+                        ['Осложнение БЖ', 'Осложнение БЖ'],
                         ['Другое', 'Другое'],
                     ],
                     hasConnection: `complication${this.number}`,
@@ -45,7 +48,7 @@ export class Complication {
             {
                 type: 'SELECT',
                 data: {
-                    name: `scale-complication${data.number}`,
+                    name: `scale-complication${this.number}`,
                     placeholder: 'Масштаб',
                     options: [
                         ['Внутрипросветное', 'Внутрипросветное'],
@@ -54,42 +57,42 @@ export class Complication {
                     ],
                     required: false,
                     connected: `complication${this.number}`,
-                    connectedID: `bleeding${data.number}`,
+                    connectedID: `bleeding${this.number}`,
                 },
             },
             {
                 type: 'SELECT',
                 data: {
-                    name: `localization-complication${data.number}`,
+                    name: `localization-complication${this.number}`,
                     placeholder: 'Локализация',
                     options: [
+                        ['Не определено', 'Не определено'],
                         ['Из степлерной линии', 'Из степлерной линии'],
                         ['Из гастроэнтероанастомоза', 'Из гастроэнтероанастомоза'],
                         ['Из еюноеюноанастомоза', 'Из еюноеюноанастомоза'],
                         ['Из троакарной раны', 'Из троакарной раны'],
-                        ['Не определено', 'Не определено'],
                         ['Другое', 'Другое'],
                     ],
                     required: false,
                     connected: `complication${this.number}`,
-                    connectedID: `bleeding${data.number}`,
+                    connectedID: `bleeding${this.number}`,
                 },
             },
             {
                 type: 'SELECT',
                 data: {
-                    name: `type-of-complication${data.number}`,
+                    name: `type-of-complication${this.number}`,
                     placeholder: 'Тип осложнения*',
                     options: [['У каждого свой вариант', 'У каждого свой вариант']],
                     required: false,
                     connected: `complication${this.number}`,
-                    connectedID: `other${data.number}`,
+                    connectedID: `other${this.number}`,
                 },
             },
             {
                 type: 'SELECT',
                 data: {
-                    name: `complications-by-Clavien-Dindo${data.number}`,
+                    name: `by-Clavien-Dindo-complication${this.number}`,
                     placeholder: 'Тяжесть осложнения по Clavien-Dindo*',
                     options: [
                         ['I степень - разрешилось без терапии', 'I степень - разрешилось без терапии'],
@@ -99,19 +102,19 @@ export class Complication {
                         ['IVa степень - интенсивная терапия (полиорганная недостаточность)', 'IVa степень - интенсивная терапия (полиорганная недостаточность)'],
                         ['V степень - летальный исход', 'V степень - летальный исход'],
                     ],
-                    hasConnection: `degree-complication${data.number}`,
+                    hasConnection: `degree-complication${this.number}`,
                     required: true,
                 },
             },
             {
                 type: 'TEXTAREA',
                 data: {
-                    name: `note_${data.number}`,
+                    name: `note-complication${this.number}`,
                     type: 'text',
                     placeholder: 'Примечание',
                     required: false,
                     addClass: 'textarea--small',
-                    connected: `degree-complication${data.number}`,
+                    connected: `degree-complication${this.number}`,
                     connectedID: 'note',
                 },
             },
@@ -121,7 +124,7 @@ export class Complication {
                     text: 'Добавить повторное вмешательство',
                     icon: 'plus-icon',
                     mod: 'btn--text',
-                    connected: `degree-complication${data.number}`,
+                    connected: `degree-complication${this.number}`,
                     connectedID: 'intervention',
                     addClass: 'add-intervention',
                 },
@@ -133,13 +136,13 @@ export class Complication {
                 rules: [
                     {
                         value: 'Кровотечение',
-                        connectedID: `bleeding${data.number}`,
+                        connectedID: `bleeding${this.number}`,
                     },
                     {
                         value: 'Несостоятельность',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Степлерной линии', 'Степлерной линии'],
                                 ['Гастроэнтероанастомоза', 'Гастроэнтероанастомоза'],
@@ -151,9 +154,9 @@ export class Complication {
                     },
                     {
                         value: 'Непроходимость, стеноз, стриктура',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Непроходимость кишечная', 'Непроходимость кишечная'],
                                 ['Непроходимость желудка', 'Непроходимость желудка'],
@@ -165,9 +168,9 @@ export class Complication {
                     },
                     {
                         value: 'Перфорация и ранение органов',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Тонкой кишки', 'Тонкой кишки'],
                                 ['12-перстной кишки', '12-перстной кишки'],
@@ -184,9 +187,9 @@ export class Complication {
                     },
                     {
                         value: 'Жидкостные скопления',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Серома', 'Серома'],
                                 ['Гемотома', 'Гемотома'],
@@ -195,9 +198,9 @@ export class Complication {
                     },
                     {
                         value: 'Декомпенсация сопутствующих заболеваний',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Острый холецистит', 'Острый холецистит'],
                                 ['Острый панкреатит', 'Острый панкреатит'],
@@ -208,9 +211,9 @@ export class Complication {
                     },
                     {
                         value: 'Сердечно-сосудистые осложнения',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Инсульт', 'Инсульт'],
                                 ['Аритмия', 'Аритмия'],
@@ -222,10 +225,10 @@ export class Complication {
                         },
                     },
                     {
-                        value: 'Осложнения БЖ',
-                        connectedID: `other${data.number}`,
+                        value: 'Осложнение БЖ',
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Cмещение бандажа', 'Cмещение бандажа'],
                                 ['Инфицирование системы/порта', 'Инфицирование системы/порта'],
@@ -238,9 +241,9 @@ export class Complication {
                     },
                     {
                         value: 'Инфекция',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Локальная инфекция (перитонит, абсцесс, нагноение раны и др.)', 'Локальная инфекция (перитонит, абсцесс, нагноение раны и др.)'],
                                 ['Иная инфекция  (пневмония, флебит, инфекция мочевыводящих путей и др.)', 'Иная инфекция  (пневмония, флебит, инфекция мочевыводящих путей и др.)'],
@@ -250,9 +253,9 @@ export class Complication {
                     },
                     {
                         value: 'Осложнение ВЖБ',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                         changeSelect: {
-                            id: `type-of-complication${data.number}`,
+                            id: `type-of-complication${this.number}`,
                             options: [
                                 ['Разгерметизация', 'Разгерметизация'],
                                 ['Непереносимость', 'Непереносимость'],
@@ -264,12 +267,12 @@ export class Complication {
                     },
                     {
                         value: 'Другое',
-                        connectedID: `other${data.number}`,
+                        connectedID: `other${this.number}`,
                     },
                 ],
             },
             {
-                name: `degree-complication${data.number}`,
+                name: `degree-complication${this.number}`,
                 rules: [
                     {
                         value: 0,
@@ -304,13 +307,15 @@ export class Complication {
         }
 
         this.interventionClass = data.interventionClass;
-        this.el = createGroup({ number: this.number, title: this.title, fields: this.fields, addClass: data.addClass });
+        this.el = createGroup({ number: this.number, title: this.title, fields: this.fields, deleteButton: true, addClass: ['complication', ...data.addClass] });
         this.complicationName = this.el.querySelector('.group__add-info');
         this._buttonIntervention = this.el.querySelector('.add-intervention');
         this._allInterventions = [];
+        this._deleteBtn = this.el.querySelector('.group__header .group__delete');
+        this._deleteBtn.addEventListener('click', this._deleteComplication.bind(this));
         this._buttonIntervention.addEventListener('click', this.addIntervention.bind(this));
         this.fieldsRules = {
-            [`date-of-detection-complication${data.number}`]: {
+            [`date-of-detection-complication${this.number}`]: {
                 required: {
                     message: 'Обязательное поле',
                 },
@@ -320,14 +325,14 @@ export class Complication {
                     message: 'Формат: 16.09.2023',
                 },
             },
-            [`complications-by-Clavien-Dindo${data.number}`]: {
+            [`complications-by-Clavien-Dindo${this.number}`]: {
                 required: {
                     message: 'Обязательное поле',
                 },
             },
         };
         // Установка имени выбранного осложнения
-        const mainComplication = this.el.querySelector(`.itc-select__toggle[name='main-complication${data.number}']`);
+        const mainComplication = this.el.querySelector(`.itc-select__toggle[name='main-complication${this.number}']`);
         const complicationObserver = new MutationObserver((mutations) => {
             const selectedTxt = mutations[0].target.querySelector('.itc-select__text-selected').innerText;
             this._setComplicationName(selectedTxt);
@@ -350,6 +355,52 @@ export class Complication {
             valueKeys.forEach((key) => {
                 if (element.data.name && element.data.name.includes(key)) {
                     element.data.value = this.fieldsValue[key];
+                }
+            });
+        });
+    }
+
+    _deleteComplication() {
+        console.log('delete');
+        console.log(Complication.complictionCount);
+        // console.log(this.el);
+        this.el.remove();
+        Complication.complictionCount = Complication.complictionCount - 1;
+        this._correctNumbers();
+    }
+
+    _correctNumbers() {
+        const allComplications = document.querySelectorAll('.complication');
+        allComplications.forEach((complication, i) => {
+            const newNumber = i + 1;
+            complication.querySelector('.group__title span').innerHTML = `Раннее осложнение №${newNumber}`;
+
+            const fields = [...complication.querySelectorAll('.input-custom__input, .itc-select, .textarea')];
+            fields.forEach((element) => {
+                if (element.classList.contains('input-custom__input')) {
+                    let oldValue = element.querySelector('input').getAttribute('name');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+
+                    const input = element.querySelector('input');
+                    const label = element.querySelector('label');
+                    input.setAttribute('name', newValue);
+                    input.setAttribute('id', newValue);
+                    label.setAttribute('for', newValue);
+                } else if (element.classList.contains('itc-select')) {
+                    let oldValue = element.getAttribute('id');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+                    const selectBtn = element.querySelector('button');
+                    selectBtn.setAttribute('name', newValue);
+                    element.setAttribute('id', newValue);
+                    element.querySelector('input').setAttribute('name', newValue);
+                } else if (element.classList.contains('textarea')) {
+                    const textarea = element.querySelector('textarea');
+                    let oldValue = textarea?.getAttribute('id');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+
+                    textarea.setAttribute('name', newValue);
+                    textarea.setAttribute('id', newValue);
+                    element.querySelector('label').setAttribute('for', newValue);
                 }
             });
         });
@@ -411,9 +462,10 @@ export class RepeatedIntervention {
                 type: 'INPUT',
                 data: {
                     name: `hours-from-main-operation_${this._id}`,
-                    type: 'text',
+                    type: 'number',
                     placeholder: 'Часов прошло от основной операции*',
                     required: true,
+                    addClass: 'only-number',
                 },
             },
             {
@@ -423,7 +475,8 @@ export class RepeatedIntervention {
                     placeholder: 'Метод повторной операции*',
                     options: [
                         ['Лапаротомия', 'Лапаротомия'],
-                        ['Конверсионная лапаротомия - Лапароскопия', 'Конверсионная лапаротомия - Лапароскопия'],
+                        ['Конверсионная лапаротомия', 'Конверсионная лапаротомия'],
+                        ['Лапароскопия', 'Лапароскопия'],
                         ['Эндоскопическая коррекция', 'Эндоскопическая коррекция'],
                     ],
                     required: true,

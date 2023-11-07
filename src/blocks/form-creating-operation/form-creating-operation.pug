@@ -227,28 +227,28 @@
           },
           {
             index: 2,
+            value: 'Эндоскопия',
+            txt: 'Эндоскопия'
+          },
+          {
+            index: 3,
             value: 'Конверсия из лапароскопии в лапаротомию',
             txt: 'Конверсия из лапароскопии в лапаротомию'
           },
           {
-            index: 3,
+            index: 4,
             value: 'value3',
             txt: 'Конверсия из лапароскопии в мануально ассистированную'
           },
           {
-            index: 4,
-            value: 'value4',
-            txt: 'SEALS'
-          },
-          {
             index: 5,
-            value: 'value5',
-            txt: 'Конверсия SILS в традиционную лапароскопию'
+            value: 'value4',
+            txt: 'SILS'
           },
           {
             index: 6,
-            value: 'value6',
-            txt: 'Эндоскопия'
+            value: 'value5',
+            txt: 'Конверсия SILS в традиционную лапароскопию'
           },
         ]
       })(data-required='' data-has-connection='access')
@@ -325,7 +325,7 @@
         +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
         +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')
         +checkbox({name: "No complications", value: 'yes', label: 'Нет осложнений'})(data-has-connection='no-complications')
-    +group({title: 'Интраоперационные осложнения', type: 'additional'})(data-connected='intraoperative-complications')
+    +group({title: 'Интраоперационные осложнения', type: 'additional'})(data-connected='intraoperative-complications').form-creating-operation__intraoperative
       .group__additional-form
         +itc-custom-select({
           id: 'bleeding', 
@@ -480,6 +480,7 @@
             },
           ]
         })
+        +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'intraoperative-complications-comment', addClass: 'long-input'})
     +group({title: 'Нештатные ситуации', type: 'additional'})(data-connected='emergency-situations').form-creating-operation__emergency-situations
       .group__additional-form
         +checkbox({name: "emergency-situation1", value: 'yes', label: 'Заклинивание степлера'})
@@ -491,7 +492,7 @@
         +checkbox({name: "emergency-situation7", value: 'yes', label: 'Анестезиологические осложнения'})
         +checkbox({name: "emergency-situation8", value: 'yes', label: 'Обнаружено новообразование'})
         +checkbox({name: "emergency-situation9", value: 'yes', label: 'Поломка элементов оборудования'})
-        +checkbox({name: "emergency-situation10", value: 'yes', label: 'Резкое ухудшение состояния хирурга/ассистента'})
+        +checkbox({name: "emergency-situation10", value: 'yes', label: 'Ухудшение состояния хирурга/ассистента'})
         +input-custom({type: 'text', placeholder: 'Другое/комментарии', name: 'emergency-situation-comment', addClass: 'long-input'})
   +group({title: 'Пребывание в стационаре и исход'}).form-creating-operation__hospital
     .group__form
@@ -545,7 +546,28 @@
             },
           ]
         })(data-has-connection='fatal-outcome')
-      +input-custom({type: 'text', placeholder: 'Причина летального исхода', name: 'сause-of-death',})(data-connected='fatal-outcome')
+      +itc-custom-select({
+          id: 'сause-of-death', 
+          name: 'сause-of-death',
+          placeholder: 'Причина летального исхода',
+          options: [
+            {
+              index: 0,
+              value: 'Причина 1',
+              txt: 'Причина 1'
+            },
+            {
+              index: 0,
+              value: 'Причина 2',
+              txt: 'Причина 2'
+            },
+            {
+              index: 0,
+              value: 'Причина 3',
+              txt: 'Причина 3'
+            },
+          ]
+        })(data-has-connection='fatal-outcome')
       +checkbox({name: "Electrolyte-disturbances", value: 'yes', label: 'Электролитные нарушения'})
       +checkbox({name: "Rhabdomyolysis", value: 'yes', label: 'Рабдомиолиз'})
   .form__wrapper-btns

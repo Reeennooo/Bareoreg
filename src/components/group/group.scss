@@ -105,6 +105,12 @@
     }
   }
 
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   &__toggle {
     cursor: pointer;
     flex-shrink: 0;
