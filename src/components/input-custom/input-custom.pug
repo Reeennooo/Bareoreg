@@ -10,7 +10,7 @@ mixin input-custom(data)
     }
     classesString = classes.join(' ')    
     
-  .input-custom(class=classes data-connected=data.connected)
+  .input-custom(class=classes)
     .input-custom__input
       input(
         type=data.type 
@@ -20,6 +20,7 @@ mixin input-custom(data)
         id=data.name || attributes.id
         autocomplete=attributes.autocomplete
         value=data.value
+        data-connected=data.connected
         )&attributes(attributes)
       label(for=attributes.id ? attributes.id : data.name)=data.placeholder
       if(data.info)
