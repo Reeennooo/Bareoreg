@@ -259,7 +259,7 @@ export const CONNECTED_RULES = {
 };
 
 const selects = {
-    'general-information': ['surgeon', 'assistants', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
+    'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
     hospital: ['vomiting', 'discharge-where'],
     complications: ['bleeding', 'positive-leak-test', 'injury-of-organs', 'electrotrauma-of-organs'],
 };
@@ -330,7 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectedOption = selectKindOperation._el.querySelector(`.itc-select__option[data-index='9']`);
     if (button) {
         let observer = new MutationObserver(() => {
-            if (selectTypeOperation.selectedIndex !== '0') {
+            console.log(selectTypeOperation.selectedIndex);
+            if (selectTypeOperation.selectedIndex === '0') {
                 connectedOption.classList.add('disabled');
             } else {
                 connectedOption.classList.remove('disabled');
