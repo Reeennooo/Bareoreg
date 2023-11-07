@@ -8,9 +8,12 @@ export function initGroup(groups) {
     initGroups.forEach((group) => {
         if (group.classList.contains('group--additional')) return;
 
-        const toggleBtn = group.querySelector('.group__toggle');
+        const toggler = group.querySelector('.group__header');
         let wrapper = group.querySelector('.group__inner-wrapper');
-        toggleBtn.addEventListener('click', () => toggleGroup(group));
+        toggler.addEventListener('click', (event) => {
+            if (event.target.closest('.btn')) return;
+            toggleGroup(group);
+        });
 
         if (group.classList.contains('is-active')) {
             let inner = group.querySelector('.group__inner');

@@ -41,6 +41,7 @@
   }
 
   &__header {
+    cursor: pointer;
     padding: 24px 32px;
     display: flex;
     align-items: center;
@@ -147,6 +148,7 @@
     opacity: 1;
     border-top: 2px solid $grey-super-light;
     .group__header {
+      cursor: auto;
       padding-top: 44px;
       padding-bottom: 0;
       border: none;

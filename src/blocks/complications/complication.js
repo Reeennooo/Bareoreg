@@ -361,9 +361,6 @@ export class Complication {
     }
 
     _deleteComplication() {
-        console.log('delete');
-        console.log(Complication.complictionCount);
-        // console.log(this.el);
         this.el.remove();
         Complication.complictionCount = Complication.complictionCount - 1;
         this._correctNumbers();
@@ -416,15 +413,12 @@ export class Complication {
 
             this._allInterventions.push(intervention);
             this.el.querySelector('.group__inner').append(intervention.el);
-            // console.log(interventionNumber++);
             initGroupObserve();
 
             function deleteIntervention() {
                 intervention.el.remove();
-                // console.log(this._allInterventions);
                 let deleteIndex = this._allInterventions.findIndex((el) => el === intervention);
                 this._allInterventions.splice(deleteIndex, 1);
-                console.log(this._allInterventions);
 
                 interventionNumber = this._allInterventions.length + 1;
 
