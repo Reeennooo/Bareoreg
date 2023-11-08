@@ -170,7 +170,7 @@ export class FileLoader {
           </div>
           <div class='loader'></div>
           <div class='file__uploaded'><svg><use href='img/sprite.svg#check-bold'></use></svg></div>
-          <div class='file__delete' data-delete-file><svg><use href='img/sprite.svg#close'></use></svg></div>`;
+          <div class='file__delete' data-delete-file><svg><use href='img/sprite.svg#close-X'></use></svg></div>`;
 
         const deleteFileFunc = deleteFile.bind(this);
         currentFile.querySelectorAll('[data-delete-file]').forEach((deleteBtn) => {
