@@ -1,10 +1,11 @@
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
+import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
     disease: ['arterial-hypertension', 'diabetes-mellitus-2-type', 'duration-diabetes-mellitus', 'GERD', 'bronchial-asthma', 'functional-status', 'back-and-limb-pain', 'liver-diseases', 'hernia', 'fat-apron'],
-    anamnesis: ['ASA-scale', 'smoking', 'PE-risk-factors', 'regular-medication-intake', 'weight-loss-attempts', 'previous-bariatric-surgery', 'history-of-operations'],
+    anamnesis: ['ASA-scale', 'smoking', 'PE-risk-factors', 'regular-medication-intake', 'weight-loss-attempts', 'previous-bariatric-surgery', 'history-of-operations', 'types-operations-in-anamnesis-select'],
     women: ['menstrual-function', 'polycystic-ovary'],
 };
 
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('new-patient')) return;
     initSelects(selects);
     setMasks();
+
     // устанавливаем правила
     assignInputRules(PATIENT_RULES);
 
@@ -119,6 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // искать по всему документу или только внутри конкретной группы?
     const hasConnections = document.querySelectorAll('[data-has-connection]');
     hasConnections.forEach((hasConnectEl) => {
+        setConnectionsForElements(hasConnectEl, {
+            'types-operations-anamnesis': [],
+        });
         if (hasConnectEl.dataset.hasConnection === 'diabetes') {
             let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
             let observer = new MutationObserver((mutationRecords) => {
