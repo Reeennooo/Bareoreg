@@ -101,15 +101,29 @@ export const CONNECTED_RULES = {
     'operation-type': [
         {
             value: 0,
-            connectedID: 'dissection',
+            connectedID: 'primary',
         },
         {
             value: 1,
             connectedID: 'revision',
         },
         {
+            value: 2,
+            connectedID: 'second-stage',
+        },
+        {
             value: 3,
             connectedID: 'revision',
+        },
+    ],
+    'bariatric-type': [
+        {
+            value: 1,
+        },
+    ],
+    'type-complication': [
+        {
+            value: 'Осложнение',
         },
     ],
     'fatal-outcome': [
@@ -259,7 +273,7 @@ export const CONNECTED_RULES = {
 };
 
 const selects = {
-    'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'reason-for-revision', 'kind-of-operation', 'access', 'simultaneous-operation', 'pain-relief'],
+    'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'type-of-revision-operation', 'reason-for-revision', 'type-of-complication', 'kind-of-operation', 'type-of-bariatric-operation', 'access', 'simultaneous-operation', 'pain-relief'],
     hospital: ['vomiting', 'discharge-where', 'сause-of-death'],
     complications: ['bleeding', 'positive-leak-test', 'injury-of-organs', 'electrotrauma-of-organs'],
 };
@@ -508,8 +522,6 @@ export function setConnectionsForElements(element, connectedRules) {
                 if (rulesItem) {
                     if (rulesItem.connectedID) {
                         connectedElements.forEach((connectedEL) => {
-                            // console.log(connectedEL.dataset.id);
-                            // console.log(rulesItem);
                             if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
                                 connectedEL.classList.add('is-active');
                             } else {
@@ -566,6 +578,7 @@ export function setConnectionsForElements(element, connectedRules) {
                                     selectOptions.insertAdjacentHTML('afterbegin', newOptions.join(''));
                                 }
                             }
+                            console.log(connectedEL);
                             if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
                                 connectedEL.classList.add('is-active');
                             } else {

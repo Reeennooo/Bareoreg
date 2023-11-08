@@ -712,14 +712,14 @@ export const OPERATIONS = {
                 type: 'RADIO-GROUP',
                 data: {
                     title: 'Диссекция',
-                    name: 'dissection',
+                    name: 'primary',
                     options: [
                         ['Pars flaccida', 'Pars flaccida'],
                         ['Перигастральная', 'Перигастральная'],
                     ],
                     required: false,
                     connected: 'operation-type',
-                    connectedID: 'dissection',
+                    connectedID: 'primary',
                     info: {
                         id: 'test-id',
                         content: 'Не игнорируйте это поле',
@@ -2901,6 +2901,11 @@ export const OPERATIONS_RULES = {
         },
     },
     'type-of-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'type-of-revision-operation': {
         required: {
             message: 'Обязательное поле',
         },

@@ -132,7 +132,7 @@
           },
           {
             index: 2,
-            value: 'value3',
+            value: 'Осложнение',
             txt: 'Осложнение'
           },
           {
@@ -146,7 +146,39 @@
             txt: 'Эстетическая, кометологическая, иная причина'
           },
         ]
-      })(data-required='' data-connected='operation-type' data-id='revision')
+      })(data-required='' data-connected='operation-type' data-has-connection='type-complication' data-id='revision')
+      +itc-custom-select({
+        id: 'type-of-complication', 
+        name: 'type-of-complication',
+        placeholder: 'Тип осложнения*',
+        options: [
+          {
+            index: 0,
+            value: 'Последствия несостоятельности',
+            txt: 'Последствия несостоятельности'
+          },
+          {
+            index: 1,
+            value: 'Непроходимость и стеноз',
+            txt: 'Непроходимость и стеноз'
+          },
+          {
+            index: 2,
+            value: 'Язва',
+            txt: 'Язва'
+          },
+          {
+            index: 3,
+            value: 'Нутриентная недостаточность',
+            txt: 'Нутриентная недостаточность'
+          },
+          {
+            index: 4,
+            value: 'ГПОД, ГЭРБ',
+            txt: 'ГПОД, ГЭРБ'
+          },
+        ]
+      })(data-required='' data-connected='type-complication')
       +itc-custom-select({
         id: 'kind-of-operation', 
         name: 'kind-of-operation',
@@ -208,7 +240,86 @@
             txt: 'Другая операция'
           },
         ]
-      })(data-required='')
+      })(data-required='' data-connected='operation-type' data-id='primary, second-stage').is-active
+      +itc-custom-select({
+        id: 'type-of-revision-operation', 
+        name: 'type-of-revision-operation',
+        placeholder: 'Вид ревизионной операции',
+        options: [
+          {
+            index: 0,
+            value: 'Иная ревизионная операция',
+            txt: 'Иная ревизионная операция'
+          },
+          {
+            index: 1,
+            value: 'Конверсия в др. бариатрическую операцию',
+            txt: 'Конверсия в др. бариатрическую операцию'
+          },
+        ]
+      })(data-required='' data-connected='operation-type' data-has-connection='bariatric-type' data-id='revision')
+      +itc-custom-select({
+        id: 'type-of-bariatric-operation', 
+        name: 'type-of-bariatric-operation',
+        placeholder: 'Вид бариатрической операции*',
+        options: [
+          {
+            index: 0,
+            value: 'Sleeve',
+            txt: 'Sleeve'
+          },
+          {
+            index: 1,
+            value: 'SLIM',
+            txt: 'SLIM'
+          },
+          {
+            index: 2,
+            value: 'MGB',
+            txt: 'MGB'
+          },
+          {
+            index: 3,
+            value: 'RYGB',
+            txt: 'RYGB'
+          },
+          {
+            index: 4,
+            value: 'BPD',
+            txt: 'BPD'
+          },
+          {
+            index: 5,
+            value: 'SADI',
+            txt: 'SADI'
+          },
+          {
+            index: 6,
+            value: 'Бандажирование желудка',
+            txt: 'Бандажирование желудка'
+          },
+          {
+            index: 7,
+            value: 'Внутрижелудочный баллон',
+            txt: 'Внутрижелудочный баллон'
+          },
+          {
+            index: 8,
+            value: 'Гастропликация',
+            txt: 'Гастропликация'
+          },
+          {
+            index: 9,
+            value: 'Удаление ВЖБ',
+            txt: 'Удаление ВЖБ'
+          },
+          {
+            index: 10,
+            value: 'Другая операция',
+            txt: 'Другая операция'
+          },
+        ]
+      })(data-required='' data-connected='bariatric-type')
       //- data-has-connection='operation'
       +itc-custom-select({
         id: 'access', 
@@ -553,18 +664,38 @@
           options: [
             {
               index: 0,
-              value: 'Причина 1',
-              txt: 'Причина 1'
+              value: 'ТЭЛА',
+              txt: 'ТЭЛА'
             },
             {
-              index: 0,
-              value: 'Причина 2',
-              txt: 'Причина 2'
+              index: 1,
+              value: 'Сердечно-сосудистая недостаточность',
+              txt: 'Сердечно-сосудистая недостаточность'
             },
             {
-              index: 0,
-              value: 'Причина 3',
-              txt: 'Причина 3'
+              index: 2,
+              value: 'Несостоятельность',
+              txt: 'Несостоятельность'
+            },
+            {
+              index: 3,
+              value: 'Кровотечение',
+              txt: 'Кровотечение'
+            },
+            {
+              index: 4,
+              value: 'Инфекционно-токсический шок',
+              txt: 'Инфекционно-токсический шок'
+            },
+            {
+              index: 5,
+              value: 'Пневмония',
+              txt: 'Пневмония'
+            },
+            {
+              index: 6,
+              value: 'Другая причина',
+              txt: 'Другая причина'
             },
           ]
         })(data-has-connection='fatal-outcome')
