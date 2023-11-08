@@ -62,7 +62,6 @@ approve.addTest(customRange, 'customRange');
 approve.addTest(dateRange, 'dateRange');
 
 export function checkValidate(element, rules) {
-    console.log(rules);
     let message;
     let result;
 

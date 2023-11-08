@@ -8,78 +8,6 @@ import { initGroup } from '../../components/group/group';
 import { createButton } from '../../components/btn/btn';
 import { Complication } from '../complications/complication';
 
-// export const VALIDATION_RULES = {
-//     // key - это name инпута
-//     // value - это правила проверки инпута
-//     surgeon: {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     access: {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'duration-operation': {
-//         customRange: {
-//             min: 40,
-//             max: 120,
-//         },
-//     },
-//     'weight-operation': {
-//         customRange: {
-//             min: 60,
-//             max: 300,
-//         },
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//         // сюда можно добавить еще тесты
-//     },
-//     'date-operation': {
-//         range: {
-//             min: 10,
-//             max: 10,
-//             message: 'Формат: 16.09.2023',
-//         },
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'type-of-operation': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'kind-of-operation': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'reason-for-revision': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     // Внутрижелудочный баллон
-//     'ballon-type': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'fullness-of-the-balloon': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-//     'date-ballon-delete': {
-//         required: {
-//             message: 'Обязательное поле',
-//         },
-//     },
-// };
-
 export const CONNECTED_RULES = {
     // key - имя связи
     // value - подходящие значений(для выпадающих списков можно использовать индексы(формат число)).
@@ -337,6 +265,39 @@ document.addEventListener('DOMContentLoaded', () => {
             hasConnectEl.addEventListener('change', checkState);
         }
     });
+
+    // Дата операции и Дата выписки
+    const dateOperationField = document.getElementById('calendar-operation');
+    if (dateOperationField.value) {
+        assignInputRules({
+            'discharge-from-hospital': {
+                range: {
+                    min: 10,
+                    max: 10,
+                    message: 'Формат xx.xx.xxxx',
+                },
+                dateRange: {
+                    minDate: dateOperationField.value,
+                    message: 'Не может быть раньше даты операции',
+                },
+            },
+        });
+    }
+    dateOperationField.addEventListener('blur', () =>
+        assignInputRules({
+            'discharge-from-hospital': {
+                range: {
+                    min: 10,
+                    max: 10,
+                    message: 'Формат xx.xx.xxxx',
+                },
+                dateRange: {
+                    minDate: dateOperationField.value,
+                    message: 'Не может быть раньше даты операции',
+                },
+            },
+        })
+    );
 
     // связи пунктов выпадающих списков
     // Операция ВЖБ
