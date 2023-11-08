@@ -25,9 +25,44 @@ let customRange = {
     },
 };
 
+let dateRange = {
+    expects: ['minDate'],
+    message: 'Неверная дата',
+    validate: function (value, params) {
+        let result = {
+            valid: true,
+            errors: [],
+        };
+
+        if (value.length < 10) return result;
+
+        const minYear = params.minDate.slice(6, 10);
+        const minMonth = params.minDate.slice(3, 5);
+        const minDay = params.minDate.slice(0, 2);
+        const minDate = new Date(`${minYear}-${minMonth}-${minDay}`);
+
+        const valueDateYear = value.slice(6, 10);
+        const valueDateMonth = value.slice(3, 5);
+        const valueDateDay = value.slice(0, 2);
+        const valueDate = new Date(`${valueDateYear}-${valueDateMonth}-${valueDateDay}`);
+
+        if (minDate <= valueDate) {
+            // console.log('Корректная дата');
+            result.valid = true;
+        } else {
+            // console.log('Слишком рано');
+            result.valid = false;
+        }
+
+        return result;
+    },
+};
+
 approve.addTest(customRange, 'customRange');
+approve.addTest(dateRange, 'dateRange');
 
 export function checkValidate(element, rules) {
+    console.log(rules);
     let message;
     let result;
 
@@ -76,8 +111,8 @@ export function assignInputRules(allRules, checkRightNow) {
             } else {
                 currentElement = element;
                 currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
-                currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
-                // element.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
+                // currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
+                currentElement.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
             }
 
             if (checkRightNow) {

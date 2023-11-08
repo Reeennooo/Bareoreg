@@ -15,6 +15,31 @@ const rules = {
             message: 'Обязательное поле',
         },
     },
+    'date-observation': {
+        required: {
+            message: 'Обязательное поле',
+        },
+        range: {
+            min: 10,
+            max: 10,
+            message: 'Формат xx.xx.xxxx',
+        },
+        dateRange: {
+            minDate: '01.01.2022',
+            message: 'Не может быть раньше даты операции',
+        },
+    },
+    'date-adjusting-bandage': {
+        range: {
+            min: 10,
+            max: 10,
+            message: 'Формат xx.xx.xxxx',
+        },
+        dateRange: {
+            minDate: '01.01.2022',
+            message: 'Не может быть раньше даты операции',
+        },
+    },
 };
 
 const CONNECTED = {
