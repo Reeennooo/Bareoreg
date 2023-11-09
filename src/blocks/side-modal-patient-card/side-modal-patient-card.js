@@ -2579,15 +2579,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         let modalName = element.dataset.modalName;
         setGeneralInfo(modalName, event.target);
+        disabledEditMode(modalName);
 
         if (sideModalData[modalName]) {
             fillSideModal(modalName);
             if (modalName === 'observation') {
                 main.prepend(obsLoader.fileLoader);
             }
-        } else if (fields[modalName]) {
+        }
+        if (modalName === 'patient') {
             enableEditMode(modalName);
         }
+        // else if (fields[modalName]) {
+        //     enableEditMode(modalName);
+        // }
     });
 
     function setGeneralInfo(modalName, element) {
