@@ -1,6 +1,7 @@
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
+import { data } from 'autoprefixer';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
@@ -121,49 +122,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // искать по всему документу или только внутри конкретной группы?
     const hasConnections = document.querySelectorAll('[data-has-connection]');
     hasConnections.forEach((hasConnectEl) => {
+        // Из-за этого ошибка в консоли
+
         setConnectionsForElements(hasConnectEl, {
             'types-operations-anamnesis': [],
+            gender: [
+                {
+                    value: 'Женский',
+                },
+            ],
+            status: [
+                {
+                    value: 2,
+                },
+            ],
+            diabetes: [
+                {
+                    value: 1,
+                },
+                {
+                    value: 2,
+                },
+                {
+                    value: 3,
+                },
+            ],
         });
-        if (hasConnectEl.dataset.hasConnection === 'diabetes') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            let observer = new MutationObserver((mutationRecords) => {
-                for (const mutation of mutationRecords) {
-                    // console.log(mutation.target)
-                    if (mutation.target.dataset.index > 1) {
-                        connectedEl.classList.add('is-active');
-                    } else {
-                        connectedEl.classList.remove('is-active');
-                    }
-                }
-            });
-            let button = hasConnectEl.querySelector('button');
-            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
-        } else if (hasConnectEl.dataset.hasConnection === 'gender') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            let observer = new MutationObserver((mutationRecords) => {
-                for (const mutation of mutationRecords) {
-                    // console.log(mutation)
-                    if (mutation.target.dataset.value === 'woman') {
-                        connectedEl.classList.add('is-active');
-                    } else {
-                        connectedEl.classList.remove('is-active');
-                    }
-                }
-            });
-            observer.observe(hasConnectEl, { attributes: true, attributeFilter: ['data-value'] });
-        } else if (hasConnectEl.dataset.hasConnection === 'status') {
-            let connectedEl = document.querySelector(`[data-connected=${hasConnectEl.dataset.hasConnection}]`);
-            let button = hasConnectEl.querySelector('button');
-            let observer = new MutationObserver((mutationRecords) => {
-                for (const mutation of mutationRecords) {
-                    if (mutation.target.value === 'out-observation') {
-                        connectedEl.classList.add('is-active');
-                    } else {
-                        connectedEl.classList.remove('is-active');
-                    }
-                }
-            });
-            observer.observe(button, { attributes: true, attributeFilter: ['value'] });
-        }
     });
 });
