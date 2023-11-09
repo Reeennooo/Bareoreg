@@ -5,7 +5,7 @@
     .patient-card__main
       +page-section({
         title: 'Операции и наблюдения',
-        buttons: [{txt: 'Добавить операцию', icon: 'mask', mode: 'text', href: '/creating-operation.html'}, {txt: 'Добавить наблюдение', icon: 'list', mode: 'text'}]
+        buttons: [{txt: 'Добавить операцию', icon: 'mask', mode: 'text', href: '/creating-operation.html'}, {txt: 'Добавить наблюдение', icon: 'list', mode: 'text', href: '/creating-observation.html'}]
       })
         .patient-card__operations
           +pill({type: 'operation', name: 'ВЖБ (22.02.2015)', content: []})(data-operation-id='1')
@@ -19,7 +19,7 @@
       })
         +pill({type: 'complication', name: 'ВЖБ (22.02.2015)', content: [{type: 'complication', name: 'Кровотечение', period: '3 мес.'}, {type: 'complication', name: 'Декомпенсация сопутст. заболеваний', period: '3 мес.'}, {type: 'complication', name: 'Перфорация и ранение органов', period: '3 мес.'}]})
       +page-section({
-        title: 'Потеря лишнего веса EWL график',
+        title: 'Потеря веса EWL график',
         buttons: [{txt: 'Настройка графика', icon: 'settings', mode: 'text'}]
       })
         //- #test-line-chart
