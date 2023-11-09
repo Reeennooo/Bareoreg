@@ -6,8 +6,8 @@
       +input-custom({type: 'text', placeholder: 'Отчество*', name: 'middle-name',})(class='only-txt' data-required='')
       +input-custom({type: 'text', placeholder: 'Дата рождения*', name: 'date-of-birth', calendar: true})(autocomplete='off' data-required='' data-mask='date')#calendar-date-birth
       +group-radio-buttons({title: 'Пол*'})(data-required='' data-has-connection="gender")
-        +radio({name: 'gender', value: 'man', label: 'Мужской'})
-        +radio({name: 'gender', value: 'woman', label: 'Женский'})
+        +radio({name: 'gender', value: 'Мужской', label: 'Мужской'})
+        +radio({name: 'gender', value: 'Женский', label: 'Женский'})
       +input-custom({type: 'number', placeholder: 'Вес кг*', name: 'weight'})(data-required='')
       +input-custom({type: 'number', placeholder: 'Рост (см)*', name: 'height'})(data-required='')
       +itc-custom-select({
@@ -20,23 +20,23 @@
         options: [
           {
             index: 0,
-            value: 'new-patient',
+            value: 'Новый пациент',
             txt: 'Новый пациент',
             selected: true,
           },
           {
             index: 1,
-            value: 'observed',
+            value: 'Наблюдается',
             txt: 'Наблюдается'
           },
           {
             index: 2,
-            value: 'out-observation',
+            value: 'Выбыл из наблюдения',
             txt: 'Выбыл из наблюдения'
           },
           {
             index: 3,
-            value: 'fatal-outcome',
+            value: 'Летальный исход',
             txt: 'Летальный исход'
           },
         ]
@@ -114,22 +114,22 @@
           placeholder: 'Сахарный диабет 2-го типа',
           options: [
             {
-              index: 1,
+              index: 0,
               value: 'no signs',
               txt: 'Нет признаков'
             },
             {
-              index: 2,
+              index: 1,
               value: 'insulin resistance',
               txt: 'Инсулинорезистентность, гипергликемия или нарушение толерантности к глюкозе'
             },
             {
-              index: 3,
+              index: 2,
               value: 'taking oral hypoglycemic drugs',
               txt: 'Прием пероральных гипогликемических препаратов'
             },
             {
-              index: 4,
+              index: 3,
               value: 'insulin therapy',
               txt: 'Инсулинотерапия'
             },
