@@ -12,7 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sideModalData = {
         operation: {
-            observations: ['45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.', '45 мес.'],
+            observations: [
+                { txt: '10 мес.', id: 1 },
+                { txt: '15 мес.', id: 2 },
+                { txt: '25 мес.', id: 3 },
+                { txt: '45 мес.', id: 4 },
+            ],
             groups: [
                 {
                     name: 'Общие сведения',
@@ -2108,11 +2113,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 addClass: ['group--simple'],
                 fields: [
                     {
-                        type: 'INPUT',
+                        type: 'SELECT',
                         data: {
                             name: 'who-directed',
-                            type: 'text',
                             placeholder: 'Кем направлен',
+                            options: [
+                                ['Самостоятельно', 'Самостоятельно'],
+                                ['По рекомендации прооперированных пациентов', 'По рекомендации прооперированных пациентов'],
+                                ['По рекомендации смежных специалистов (эндокринолог, терапевт, кардиолог, сомнолог и других)', 'По рекомендации смежных специалистов (эндокринолог, терапевт, кардиолог, сомнолог и других)'],
+                            ],
                             required: false,
                             value: 'Самостоятельно',
                         },
@@ -2651,8 +2660,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function createObservationPill(data) {
             const observationPill = document.createElement('div');
-            observationPill.classList.add('observations__observation');
-            observationPill.innerText = data;
+            observationPill.dataset.modalName = 'observation';
+            observationPill.dataset.observationId = data.id;
+            observationPill.classList.add('pill__observation', 'pill__observation--transparent');
+            observationPill.dataset.modalName;
+            observationPill.innerText = data.txt;
 
             return observationPill;
         }
