@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pageSection.classList.remove('not-empty');
             }
             changeItemNumbers('assistant');
-            window.closeModal();
+            window.closeModal(true);
         } else if (btnRemove.dataset.removeObservationId) {
             deletedEl = document.querySelector(`.pill__observation[data-observation-id='${btnRemove.dataset.removeObservationId}']`);
             deletedEl?.remove();
