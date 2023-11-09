@@ -1,7 +1,6 @@
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
-import { data } from 'autoprefixer';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
@@ -46,43 +45,43 @@ export const PATIENT_RULES = {
     },
 
     weight: {
+        required: {
+            message: 'Обязательное поле',
+        },
         customRange: {
             min: 60,
             max: 300,
-        },
-        required: {
-            message: 'Обязательное поле',
         },
         // сюда можно добавить еще тесты
     },
 
     height: {
+        required: {
+            message: 'Обязательное поле',
+        },
         customRange: {
             min: 140,
             max: 200,
         },
-        required: {
-            message: 'Обязательное поле',
-        },
     },
 
     email: {
-        email: {
-            message: 'Неверный адрес электронной почты',
-        },
         required: {
             message: 'Обязательное поле',
+        },
+        email: {
+            message: 'Неверный адрес электронной почты',
         },
     },
 
     phone: {
+        required: {
+            message: 'Обязательное поле',
+        },
         range: {
             min: 16,
             max: 16,
             message: 'Номер телефона слишком короткий',
-        },
-        required: {
-            message: 'Обязательное поле',
         },
     },
 
@@ -99,13 +98,13 @@ export const PATIENT_RULES = {
     },
 
     'date-of-birth': {
+        required: {
+            message: 'Обязательное поле',
+        },
         range: {
             min: 10,
             max: 10,
             message: 'Формат xx.xx.xxxx',
-        },
-        required: {
-            message: 'Обязательное поле',
         },
     },
 };
