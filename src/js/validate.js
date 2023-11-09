@@ -260,6 +260,7 @@ export function setValidCharacters(element) {
         const input = element.querySelector('input');
         if (input.classList.contains('only-txt')) {
             onlyTxt(input);
+            firstLetterCapital(input);
             return;
         }
         if (input.classList.contains('only-number')) {

@@ -2,6 +2,7 @@
 import { setMasks } from '../../js/input-validate';
 import { assignInputRules } from '../../js/input-validate';
 import { createInput, createSelect } from '../../blocks/form-creating-operation/form-creating-operation';
+import { setValidCharacters } from '../../js/validate';
 
 const avatarLoader = document.querySelector('.avatar-loader');
 
@@ -59,6 +60,7 @@ const sideModalData = {
                     name: 'surname',
                     type: 'text',
                     placeholder: 'Фамилия',
+                    addClass: 'only-txt',
                     required: true,
                 },
             },
@@ -68,6 +70,7 @@ const sideModalData = {
                     name: 'name',
                     type: 'text',
                     placeholder: 'Имя',
+                    addClass: 'only-txt',
                     required: true,
                 },
             },
@@ -77,6 +80,7 @@ const sideModalData = {
                     name: 'middle-name',
                     type: 'text',
                     placeholder: 'Отчество',
+                    addClass: 'only-txt',
                     required: true,
                 },
             },
@@ -234,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.entries(content).forEach((item) => {
         item[1].forEach((el) => {
             if (el.classList.contains('input-custom')) {
+                setValidCharacters(el);
                 el.querySelector('input').addEventListener('input', () => {
                     checkFilledInputs(sideModalForm);
                 });
@@ -279,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
 
+        editAssistant();
         window.closeModal();
     });
 
@@ -310,24 +316,28 @@ document.addEventListener('DOMContentLoaded', () => {
             setAssistantData(element);
         } else {
             content[modalName]?.map((item) => {
+                if (item.classList.contains('input-custom')) {
+                    item.querySelector('input').value = '';
+                }
                 grid.append(item);
             });
             mainBlock.append(grid);
         }
         submitBtn.querySelector('span').innerText = currentEl.btnText;
         submitBtn.setAttribute('disabled', 'disabled');
-        checkFilledInputs(form);
+        assignInputRules(RULES_FOR_FIELDS);
+        // checkFilledInputs(form);
     }
 
     function setAssistantData(element) {
-        sideModal.classList.add('editing-assistant');
         let assistant = element.closest('.assistant');
         let assistantNumber = assistant.dataset.number;
         let modalTitle = sideModal.querySelector('.side-modal__title');
         let trashBtn = sideModal.querySelector('.side-modal__remove');
 
         modalTitle.innerText = `Ассистент № ${assistantNumber}`;
-
+        // добавляем номер ассистента и на модальное окно
+        sideModal.dataset.assistantNumber = assistantNumber;
         trashBtn.dataset.number = assistantNumber;
         trashBtn.dataset.modalName = 'remove-assistant';
 
@@ -335,6 +345,14 @@ document.addEventListener('DOMContentLoaded', () => {
         sideModal.querySelector('input[name="surname"]').value = assistant.querySelector('.assistant__surname').innerText.trim();
         sideModal.querySelector('input[name="name"]').value = assistant.querySelector('.assistant__name').innerText.trim();
         sideModal.querySelector('input[name="middle-name"]').value = assistant.querySelector('.assistant__middle-name').innerText.trim();
+    }
+
+    function editAssistant() {
+        if (sideModal.dataset.sideModalName !== 'editing-assistant') return;
+        const assistantEditing = document.querySelector(`.assistant[data-number='${sideModal.dataset.assistantNumber}']`);
+        assistantEditing.querySelector('.assistant__surname').innerText = sideModal.querySelector('input[name="surname"]').value.trim();
+        assistantEditing.querySelector('.assistant__name').innerText = sideModal.querySelector('input[name="name"]').value.trim();
+        assistantEditing.querySelector('.assistant__middle-name').innerText = sideModal.querySelector('input[name="middle-name"]').value.trim();
     }
 
     // Смена пароля
