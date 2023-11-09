@@ -102,6 +102,28 @@
     white-space: nowrap;
   }
 
+  &__observation--transparent {
+    @include transition('border-color');
+    flex-shrink: 0;
+    max-width: 100px;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid $grey-light;
+    border-radius: 8px;
+    outline: none;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: $violet;
+      }
+    }
+  }
+
   &__complication {
     display: flex;
     column-gap: 8px;

@@ -39,7 +39,7 @@ mixin pill(data)
       svg.pill__arrow
         use(href='img/sprite.svg#caret-up')
       .pill-inner
-        .pill-inner__link
+        .pill-inner__link(data-modal='side-modal' data-modal-name='operation')
           span Перейти к операции
           svg
             use(href='img/sprite.svg#caret-up')
@@ -51,7 +51,7 @@ mixin pill(data)
                 if(item.type === 'observation')
                   .pill__observation(data-observation-id=item.id)=item.period
                 else
-                  .pill__complication
+                  a(href='/creating-operation.html').pill__complication
                     span.pill__complication-name=item.name
                     span=item.period
 

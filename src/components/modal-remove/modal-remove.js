@@ -113,9 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
             deletedEl?.remove();
             window.closeModal(true);
         } else if (btnRemove.dataset.removeOperationId) {
-            deletedEl = document.querySelector(`.pill[data-operation-id='${btnRemove.dataset.removeOperationId}']`);
-            console.log('УДАЛЯЮ');
-            deletedEl?.remove();
+            deletedEls = document.querySelectorAll(`.pill[data-operation-id='${btnRemove.dataset.removeOperationId}']`);
+            deletedEls.forEach((el) => el.remove());
+            // console.log('УДАЛЯЮ');
+            // deletedEl?.remove();
             window.closeModal(true);
         } else if (btnRemove.dataset.removeFileId) {
             deletedEl = document.querySelector(`.file[data-file-id='${btnRemove.dataset.removeFileId}']`);
