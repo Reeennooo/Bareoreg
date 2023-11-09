@@ -135,9 +135,19 @@ if (myChartCanvas) {
                 // legend: {
                 //     display: false,
                 // },
-                // tooltip: {
-                //     enabled: false,
-                // },
+                tooltip: {
+                    // enabled: false,
+                    backgroundColor: 'rgba(103, 80, 164, 1)',
+                    padding: 10,
+                    bodySpacing: 4,
+                    boxPadding: 4,
+                    titleFont: {
+                        family: 'Helvetica',
+                    },
+                    bodyFont: {
+                        family: 'Helvetica',
+                    },
+                },
             },
             maintainAspectRatio: false,
             responsive: true,
