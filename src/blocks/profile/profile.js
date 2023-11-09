@@ -1,4 +1,5 @@
 // Требуется разделить код. И подключить нужный код к нужным страницам.
+import { setMasks } from '../../js/input-validate';
 import { assignInputRules } from '../../js/input-validate';
 import { createInput, createSelect } from '../../blocks/form-creating-operation/form-creating-operation';
 
@@ -89,9 +90,39 @@ const sideModalData = {
 };
 
 const RULES_FOR_FIELDS = {
+    name: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    surname: {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    'middle-name': {
+        required: {
+            message: 'Обязательное поле',
+        },
+    },
+    phone: {
+        required: {
+            message: 'Обязательное поле',
+        },
+        range: {
+            min: 16,
+            max: 16,
+            message: 'Номер телефона слишком короткий',
+        },
+    },
     password: {
         required: {
             message: 'Обязательное поле',
+        },
+    },
+    email: {
+        email: {
+            message: 'Неверный адрес электронной почты',
         },
     },
     'new-password': {
@@ -111,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!profile) return;
     // Установим правила для полей
     assignInputRules(RULES_FOR_FIELDS);
+    setMasks();
 
     // Редактирование прфоиля
     const editBtn = document.querySelector('.profile__edit-btn');
@@ -177,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sideModalForm = sideModal.querySelector('form');
     const mainBlock = sideModal.querySelector('.side-modal__main');
     const submitBtn = sideModal.querySelector('.submit-button');
+    sideModal.querySelector('.cancel-button').setAttribute('data-modal-close', '');
 
     const content = {
         'new-work-place': undefined,
@@ -254,29 +287,33 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentEl = sideModalData[modalName];
         const form = sideModal.querySelector('form');
         sideModal.querySelector('.side-modal__title').innerText = currentEl.title;
+        sideModal.dataset.sideModalName = modalName;
         form.dataset.name = modalName;
+
+        const grid = document.createElement('div');
+        grid.classList.add('side-modal__grid');
 
         // columns-style
         if (modalName === 'new-assistant' || modalName === 'editing-assistant') {
-            mainBlock.classList.add('three-columns');
+            grid.classList.add('three-columns');
         } else if (mainBlock.classList.contains('three-columns')) {
-            mainBlock.classList.remove('three-columns');
+            grid.classList.remove('three-columns');
         }
 
         mainBlock.innerHTML = '';
 
         if (modalName === 'editing-assistant') {
             content['new-assistant']?.map((item) => {
-                mainBlock.append(item);
+                grid.append(item);
             });
+            mainBlock.append(grid);
             setAssistantData(element);
         } else {
-            sideModal.classList.remove('editing-assistant');
             content[modalName]?.map((item) => {
-                mainBlock.append(item);
+                grid.append(item);
             });
+            mainBlock.append(grid);
         }
-
         submitBtn.querySelector('span').innerText = currentEl.btnText;
         submitBtn.setAttribute('disabled', 'disabled');
         checkFilledInputs(form);
