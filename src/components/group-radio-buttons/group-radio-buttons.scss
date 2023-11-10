@@ -3,7 +3,7 @@
     display: none;
   }
 
-  &[data-required] {
+  &[data-required].hightlight {
     .group-radio-buttons__title {
       animation: titleLight 3s ease 0s infinite;
     }

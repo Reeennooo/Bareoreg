@@ -7,6 +7,7 @@ import { OPERATIONS_RULES } from '../../js/operation-data';
 import { initGroup } from '../../components/group/group';
 import { createButton } from '../../components/btn/btn';
 import { Complication } from '../complications/complication';
+import { hightlightRequiredFields } from '../../js/utils/create-group';
 
 export const CONNECTED_RULES = {
     // key - имя связи
@@ -76,7 +77,7 @@ export const CONNECTED_RULES = {
             },
         },
         {
-            value: 'Отступ от связки трейца',
+            value: 'Отступ от связки Трейтца',
             connectedID: 'indent',
             rules: {
                 'gut-indent': {
@@ -234,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setMasks();
     assignInputRules(OPERATIONS_RULES);
     initSelects(selects);
+    hightlightRequiredFields();
 
     // calendars
     // Написать функцию которая делает календарь 100% ширины, под инпут.
@@ -419,6 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         initGroupObserve(initObservers);
         assignInputRules(OPERATIONS_RULES, true);
+        hightlightRequiredFields();
         initObservers = [];
     }
 

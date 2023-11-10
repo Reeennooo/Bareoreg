@@ -20,7 +20,7 @@
     display: block;
   }
 
-  &:has(input[data-required]) {
+  &:has(input[data-required].hightlight) {
     input {
       @include violetLight;
       border-color: $violet;
@@ -118,7 +118,7 @@
   input:not(:placeholder-shown) {
     color: $grey-dark;
 
-    &:not(.is-invalid) {
+    &:not(.is-invalid).hightlight {
       border-color: $grey;
       animation: none;
     }
@@ -142,7 +142,7 @@
     }
   }
 
-  &:has(input[data-required].is-invalid) {
+  &:has(input[data-required].is-invalid.hightlight) {
     input {
       @include redLight;
     }

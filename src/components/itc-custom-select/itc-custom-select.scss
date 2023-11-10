@@ -21,11 +21,10 @@
   opacity: 0;
 }
 
-.itc-select[data-required] {
+.itc-select[data-required].hightlight {
   .itc-select__toggle {
     border-color: $violet;
     @include violetLight;
-    // animation: shadowLight 3s linear 0s infinite;
   }
 }
 
@@ -56,7 +55,6 @@
 .itc-select.is-invalid {
   .itc-select__toggle {
     border-color: $input-error;
-    @include redLight;
   }
 
   .itc-select__message {
@@ -66,6 +64,13 @@
 
   .itc-select__placeholder {
     color: $input-error;
+  }
+}
+
+.itc-select.is-invalid.hightlight {
+  .itc-select__toggle {
+    border-color: $input-error;
+    @include redLight;
   }
 }
 
