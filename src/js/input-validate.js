@@ -25,6 +25,23 @@ let customRange = {
     },
 };
 
+let minValue = {
+    expects: ['min'],
+    message: 'Не может быть меньше {min}',
+    validate: function (value, params) {
+        let result = {
+            valid: true,
+            errors: [],
+        };
+
+        if (value < params.min) {
+            result.valid = false;
+        }
+
+        return result;
+    },
+};
+
 let dateRange = {
     expects: ['minDate'],
     message: 'Неверная дата',
@@ -60,6 +77,7 @@ let dateRange = {
 
 approve.addTest(customRange, 'customRange');
 approve.addTest(dateRange, 'dateRange');
+approve.addTest(minValue, 'minValue');
 
 export function checkValidate(element, rules) {
     let message;

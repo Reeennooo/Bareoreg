@@ -597,7 +597,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
                                 ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
@@ -798,8 +798,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -957,8 +958,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -1440,8 +1442,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -1486,6 +1489,26 @@ export const OPERATIONS = {
                         },
                     },
                     {
+                        type: 'SELECT',
+                        data: {
+                            name: 'number-cassettes-for-stomach-separation',
+                            placeholder: 'Количество кассет для разделения желудка',
+                            options: [
+                                ['1', '1'],
+                                ['2', '2'],
+                                ['3', '3'],
+                                ['4', '4'],
+                                ['5', '5'],
+                                ['6', '6'],
+                                ['7', '7'],
+                                ['8', '8'],
+                                ['9', '9'],
+                                ['10', '10'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
                         type: 'INPUT',
                         data: {
                             name: 'probe-diameter',
@@ -1494,50 +1517,6 @@ export const OPERATIONS = {
                             value: 36,
                             addClass: 'only-number',
                             required: false,
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'distance-from-gatekeeper-to-first cassette',
-                            placeholder: 'Расстояние от привратника до первой кассеты',
-                            options: [
-                                ['Не оценивали', 'Не оценивали'],
-                                ['2 см', '2 см'],
-                                ['3 см', '3 см'],
-                                ['4 см', '4 см'],
-                                ['5 см', '5 см'],
-                                ['более 5 см', 'более 5 см'],
-                            ],
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            required: false,
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
-                            name: 'number-cassettes-for-stomach-separation',
-                            placeholder: 'Количество кассет для разделения желудка',
-                            type: 'number',
-                            required: false,
-                            addClass: 'only-number-strict',
                         },
                     },
                     {
@@ -1560,6 +1539,21 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'distance-from-gatekeeper-to-first cassette',
+                            placeholder: 'Расстояние от привратника до первой кассеты',
+                            options: [
+                                ['Не оценивали', 'Не оценивали'],
+                                ['2 см', '2 см'],
+                                ['3 см', '3 см'],
+                                ['4 см', '4 см'],
+                                ['5 см', '5 см'],
+                                ['более 5 см', 'более 5 см'],
+                            ],
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'strengthening-stapler-line',
                             placeholder: 'Укрепление степлерной линии',
                             options: [
@@ -1569,6 +1563,25 @@ export const OPERATIONS = {
                                 ['Peristrips', 'Peristrips'],
                                 ['Biodesign SLR', 'Biodesign SLR'],
                                 ['Duet TRS', 'Duet TRS'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
                             ],
                             required: false,
                         },
@@ -1611,6 +1624,20 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'hemostasis-from-staplers',
+                            placeholder: 'Гемостаз из степлерных линий',
+                            options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
+                                ['Частичное ушивание', 'Частичное ушивание'],
+                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
+                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
+                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
+                            ],
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -1634,19 +1661,6 @@ export const OPERATIONS = {
                                 ['28 Fr', '28 Fr'],
                             ],
                             connected: 'drainage-tube',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
-                            options: [
-                                ['Частичное ушивание', 'Частичное ушивание'],
-                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
-                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
-                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
-                            ],
                         },
                     },
                     {
@@ -2031,8 +2045,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -2437,8 +2452,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -2843,8 +2859,9 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз от степлерных линий',
+                            placeholder: 'Гемостаз из степлерных линий',
                             options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                 ['Частичное ушивание', 'Частичное ушивание'],
                                 ['Гемостаз клипсами', 'Гемостаз клипсами'],
                                 ['Гемостаз биполяром', 'Гемостаз биполяром'],
@@ -3039,10 +3056,13 @@ export const OPERATIONS_RULES = {
         // required: {
         //     message: 'Обязательное поле',
         // },
-        customRange: {
+        minValue: {
             min: 0,
-            max: 99999,
         },
+        // customRange: {
+        //     min: 0,
+        //     max: 99999,
+        // },
     },
     'spur-height': {
         customRange: {
