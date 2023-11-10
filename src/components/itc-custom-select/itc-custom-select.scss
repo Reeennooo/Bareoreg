@@ -21,6 +21,14 @@
   opacity: 0;
 }
 
+.itc-select[data-required] {
+  .itc-select__toggle {
+    border-color: $violet;
+    @include violetLight;
+    // animation: shadowLight 3s linear 0s infinite;
+  }
+}
+
 .itc-select[data-connected] {
   &.is-active {
     display: block;
@@ -48,6 +56,7 @@
 .itc-select.is-invalid {
   .itc-select__toggle {
     border-color: $input-error;
+    @include redLight;
   }
 
   .itc-select__message {
@@ -63,6 +72,23 @@
 .itc-select.disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+// .itc-select__text-selected:not(:empty) {
+//   width: 10px;
+//   height: 10px;
+//   background-color: red;
+// }
+
+.itc-select:has(.itc-select__text-selected:not(:empty)) {
+  .itc-select__toggle {
+    border-color: $grey-light;
+    animation: none;
+
+    &:hover {
+      border-color: $violet;
+    }
+  }
 }
 
 .itc-select__toggle {

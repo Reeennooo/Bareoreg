@@ -20,6 +20,13 @@
     display: block;
   }
 
+  &:has(input[data-required]) {
+    input {
+      @include violetLight;
+      border-color: $violet;
+    }
+  }
+
   // &.is-invalid {
   //   input {
   //     border-color: $input-error;
@@ -80,13 +87,15 @@
   }
 
   // стили при hover на input
-  input:hover {
+  input:hover,
+  input:not(:placeholder-shown):not(.is-invalid):hover {
     border-color: $violet;
   }
 
   // стили при focuse на input
   input:focus {
-    border-color: $violet;
+    border-color: $violet !important;
+    animation: none !important;
     box-shadow: 0px 0px 0px 1px $violet;
     & ~ label {
       color: $violet;
@@ -108,6 +117,12 @@
 
   input:not(:placeholder-shown) {
     color: $grey-dark;
+
+    &:not(.is-invalid) {
+      border-color: $grey;
+      animation: none;
+    }
+
     & ~ label {
       color: $grey;
     }
@@ -121,9 +136,15 @@
 
   // не валидные значения
   input.is-invalid {
-    border-color: $input-error;
+    border-color: $input-error !important;
     & ~ label {
       color: $input-error;
+    }
+  }
+
+  &:has(input[data-required].is-invalid) {
+    input {
+      @include redLight;
     }
   }
 

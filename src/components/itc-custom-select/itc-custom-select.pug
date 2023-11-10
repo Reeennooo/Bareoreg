@@ -55,9 +55,7 @@ mixin itc-custom-select(data)
       value=data.selectedValue ? data.selectedValue : ''  
       data-index=data.selectedIndex ? data.selectedIndex : "-1"
       data-select="toggle").itc-select__toggle
-      .itc-select__text-selected=data.selectedTxt
-        if(data.mod === 'simple')
-          .itc-select__additional 6
+      .itc-select__text-selected=data.selectedTxt ? data.selectedTxt : ''
     .itc-select__placeholder=data.placeholder
     if(data.options)
       .itc-select__dropdown

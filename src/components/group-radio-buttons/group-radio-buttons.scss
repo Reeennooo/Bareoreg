@@ -3,6 +3,18 @@
     display: none;
   }
 
+  &[data-required] {
+    .group-radio-buttons__title {
+      animation: titleLight 3s ease 0s infinite;
+    }
+  }
+
+  &.is-filled {
+    .group-radio-buttons__title {
+      animation: none;
+    }
+  }
+
   &.is-active {
     display: block;
   }
@@ -26,5 +38,17 @@
     label {
       white-space: nowrap;
     }
+  }
+}
+
+@keyframes titleLight {
+  0% {
+    color: $grey;
+  }
+  50% {
+    color: $violet;
+  }
+  100% {
+    color: $grey;
   }
 }
