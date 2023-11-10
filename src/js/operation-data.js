@@ -189,6 +189,7 @@ export const OPERATIONS = {
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
+                            addClass: 'only-number',
                             required: false,
                             connectedID: 'percent-gut',
                             connected: 'method-determination-small-gut',
@@ -1168,6 +1169,7 @@ export const OPERATIONS = {
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
+                            addClass: 'only-number',
                             required: false,
                             connectedID: 'percent-gut',
                             connected: 'method-determination-small-gut',
@@ -1196,6 +1198,7 @@ export const OPERATIONS = {
                         data: {
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
+                            addClass: 'only-number',
                             placeholder: 'Длина билиопанкреатической петли (см)',
                             required: true,
                         },
@@ -1911,6 +1914,7 @@ export const OPERATIONS = {
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
+                            addClass: 'only-number',
                             required: true,
                             connected: 'method-determination-duodenoenteroanastomosis',
                             connectedID: 'percent-gut',
@@ -1921,7 +1925,8 @@ export const OPERATIONS = {
                         data: {
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
-                            placeholder: 'Длина билиопанкреатической петли (см',
+                            addClass: 'only-number',
+                            placeholder: 'Длина билиопанкреатической петли (см)',
                             required: false,
                         },
                     },
@@ -2222,6 +2227,7 @@ export const OPERATIONS = {
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
+                            addClass: 'only-number',
                             required: false,
                         },
                     },
@@ -2230,6 +2236,7 @@ export const OPERATIONS = {
                         data: {
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
+                            addClass: 'only-number',
                             placeholder: 'Длина билиопанкреатической петли (см)',
                             required: true,
                         },
@@ -2626,6 +2633,7 @@ export const OPERATIONS = {
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
+                            addClass: 'only-number',
                             required: false,
                         },
                     },
@@ -2634,6 +2642,7 @@ export const OPERATIONS = {
                         data: {
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
+                            addClass: 'only-number',
                             placeholder: 'Длина билиопанкреатической петли (см)',
                             required: true,
                         },
@@ -2890,6 +2899,18 @@ export const OPERATIONS_RULES = {
         },
         // сюда можно добавить еще тесты
     },
+    'total-loop-length': {
+        customRange: {
+            min: 0,
+            max: 99999,
+        },
+    },
+    'length-alimentary-loop': {
+        customRange: {
+            min: 0,
+            max: 99999,
+        },
+    },
     'date-operation': {
         range: {
             min: 10,
@@ -3015,8 +3036,12 @@ export const OPERATIONS_RULES = {
         },
     },
     'length-biliopancreatic-loop': {
-        required: {
-            message: 'Обязательное поле',
+        // required: {
+        //     message: 'Обязательное поле',
+        // },
+        customRange: {
+            min: 0,
+            max: 99999,
         },
     },
     'spur-height': {

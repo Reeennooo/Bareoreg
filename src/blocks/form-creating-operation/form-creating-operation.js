@@ -803,6 +803,11 @@ export function createInput(data) {
 
     if (data.required) {
         input?.querySelector('input')?.setAttribute('data-required', '');
+        OPERATIONS_RULES[data.name] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.name] };
+    } else if (OPERATIONS_RULES[data.name]) {
+        if (OPERATIONS_RULES[data.name].required) {
+            delete OPERATIONS_RULES[data.name].required;
+        }
     }
 
     if (data.value) {
@@ -945,8 +950,18 @@ function createRadioGroup(data) {
 export function createSelect(data) {
     const select = document.createElement('div');
     select.setAttribute('id', data.name);
+    // if (data.required) {
+    //     select.setAttribute('data-required', '');
+
+    // }
+
     if (data.required) {
         select.setAttribute('data-required', '');
+        OPERATIONS_RULES[data.name] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.name] };
+    } else if (OPERATIONS_RULES[data.name]) {
+        if (OPERATIONS_RULES[data.name].required) {
+            delete OPERATIONS_RULES[data.name].required;
+        }
     }
 
     const itcSelect = initSelect(select, data);

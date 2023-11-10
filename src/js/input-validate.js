@@ -78,12 +78,13 @@ export function checkValidate(element, rules) {
         result = approve.value(button.value, rules);
     }
 
-    // console.log(result);
-    if (result?.required?.approved && !result.required.approved) {
-        message.innerText = result.required.errors[0];
-        message.classList.add('error-message');
-        element.classList.add('is-invalid');
-    } else if (!result.approved) {
+    console.log(result);
+    // if (result.required && !result?.required?.approved) {
+    //     message.innerText = result.required.errors[0];
+    //     message.classList.add('error-message');
+    //     element.classList.add('is-invalid');
+    // } else
+    if (!result.approved) {
         message.innerText = result.errors[0];
         message.classList.add('error-message');
         element.classList.add('is-invalid');
