@@ -29,6 +29,10 @@
       // overflow: initial;
     }
 
+    .group__subtitle {
+      display: block;
+    }
+
     .group__inner {
       opacity: 1;
     }
@@ -47,7 +51,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid transparent;
-    @include transition('border');
+    @include transition('border, height');
   }
 
   &__title {
@@ -61,6 +65,8 @@
   }
 
   &__subtitle {
+    display: none;
+    // position: absolute;
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
