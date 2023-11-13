@@ -2573,27 +2573,6 @@ export const OPERATIONS = {
                         },
                     },
                     {
-                        type: 'SELECT',
-                        data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            // targetValue: 'device2',
-                            required: false,
-                            multiple: true,
-                        },
-                    },
-                    {
                         type: 'INPUT',
                         data: {
                             name: 'number-of-cassettes',
@@ -2601,22 +2580,6 @@ export const OPERATIONS = {
                             placeholder: 'Количество кассет',
                             required: true,
                             addClass: 'only-number-strict',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'strengthening-the-seam',
-                            placeholder: 'Укрепление линии шва',
-                            options: [
-                                ['Нет', 'Нет'],
-                                ['Ушивание', 'Ушивание'],
-                                ['Seamguard', 'Seamguard'],
-                                ['Peristrips', 'Peristrips'],
-                                ['Biodesign SLR', 'Biodesign SLR'],
-                                ['Duet TRS', 'Duet TRS'],
-                            ],
-                            required: false,
                         },
                     },
                     {
@@ -2657,6 +2620,43 @@ export const OPERATIONS = {
                                 ['Ниже гусиной лапки', 'Ниже гусиной лапки'],
                             ],
                             required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'strengthening-the-seam',
+                            placeholder: 'Укрепление линии шва',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ушивание', 'Ушивание'],
+                                ['Seamguard', 'Seamguard'],
+                                ['Peristrips', 'Peristrips'],
+                                ['Biodesign SLR', 'Biodesign SLR'],
+                                ['Duet TRS', 'Duet TRS'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
+                            ],
+                            // targetValue: 'device2',
+                            required: false,
+                            multiple: true,
                         },
                     },
                     {
@@ -2772,8 +2772,8 @@ export const OPERATIONS = {
                             title: 'Формирование ГЭА',
                             name: 'formation-GEA',
                             options: [
-                                ['Аппаратный циркулярный', 'Аппаратный циркулярный'],
-                                ['Аппаратный линейный', 'Аппаратный линейный'],
+                                ['Линейным степлером 60 мм', 'Линейным степлером 60 мм'],
+                                ['Линейным степлером 45 мм', 'Линейным степлером 45 мм'],
                                 ['Ручной', 'Ручной'],
                             ],
                             hasConnection: 'formation-gea',
