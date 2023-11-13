@@ -875,16 +875,6 @@ export const OPERATIONS = {
                         },
                     },
                     {
-                        type: 'INPUT',
-                        data: {
-                            name: 'probe-diameter',
-                            type: 'number',
-                            placeholder: 'Диаметр зонда (Fr)',
-                            value: 36,
-                            required: false,
-                        },
-                    },
-                    {
                         type: 'SELECT',
                         data: {
                             name: 'seam-row',
@@ -895,6 +885,16 @@ export const OPERATIONS = {
                                 ['Трехрядный', 'Трехрядный'],
                             ],
                             hasConnection: 'seam-row',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'probe-diameter',
+                            type: 'number',
+                            placeholder: 'Диаметр зонда (Fr)',
+                            value: 36,
+                            required: false,
                         },
                     },
                     {
@@ -959,6 +959,20 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'hemostasis',
+                            placeholder: 'Гемостаз',
+                            options: [
+                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
+                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
+                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
+                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
+                            ],
+                            multiple: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -982,21 +996,6 @@ export const OPERATIONS = {
                                 ['28 Fr', '28 Fr'],
                             ],
                             connected: 'drainage-tube',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'hemostasis-from-staplers',
-                            placeholder: 'Гемостаз из степлерных линий',
-                            options: [
-                                ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
-                                ['Частичное ушивание', 'Частичное ушивание'],
-                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
-                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
-                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
-                            ],
-                            multiple: true,
                         },
                     },
                     {
