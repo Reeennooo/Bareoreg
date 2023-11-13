@@ -135,10 +135,16 @@
   }
 
   // не валидные значения
-  input.is-invalid {
-    border-color: $input-error !important;
-    & ~ label {
-      color: $input-error;
+  &:has(input.is-invalid) {
+    input {
+      border-color: $input-error !important;
+      & ~ label {
+        color: $input-error;
+      }
+    }
+
+    .input-custom__message {
+      display: block;
     }
   }
 
@@ -193,7 +199,7 @@
     letter-spacing: 0.4px;
 
     &.error-message {
-      display: block;
+      // display: block;
       color: $input-error;
     }
   }

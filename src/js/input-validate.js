@@ -130,7 +130,11 @@ export function assignInputRules(allRules, checkRightNow) {
                 currentElement = element;
                 currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
                 // currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
-                currentElement.addEventListener('blur', () => checkValidate(element, allRules[element.name]));
+                currentElement.addEventListener('blur', () => {
+                    if (!currentElement.value && !currentElement.hasAttribute('data-required')) {
+                        currentElement.classList.remove('is-invalid');
+                    }
+                });
             }
 
             if (checkRightNow) {
