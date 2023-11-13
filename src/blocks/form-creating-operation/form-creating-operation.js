@@ -65,7 +65,7 @@ export const CONNECTED_RULES = {
     'method-determination-small-gut': [
         {
             value: 'Отступ от илеоцекального угла',
-            connectedID: 'indent',
+            connectedID: 'ileocecal',
             rules: {
                 'gut-indent': {
                     customRange: {
@@ -78,7 +78,7 @@ export const CONNECTED_RULES = {
         },
         {
             value: 'Отступ от связки Трейтца',
-            connectedID: 'indent',
+            connectedID: 'treitz',
             rules: {
                 'gut-indent': {
                     customRange: {

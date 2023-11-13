@@ -36,26 +36,6 @@ export const OPERATIONS = {
                         },
                     },
                     {
-                        type: 'SELECT',
-                        data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            // targetValue: 'device2',
-                            required: false,
-                        },
-                    },
-                    {
                         type: 'INPUT',
                         data: {
                             name: 'number-of-cassettes',
@@ -63,23 +43,6 @@ export const OPERATIONS = {
                             placeholder: 'Количество кассет',
                             required: false,
                             addClass: 'only-number-strict',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'strengthening-the-seam',
-                            placeholder: 'Укрепление линии шва',
-                            options: [
-                                ['Нет', 'Нет'],
-                                ['Ушивание', 'Ушивание'],
-                                ['Seamguard', 'Seamguard'],
-                                ['Peristrips', 'Peristrips'],
-                                ['Biodesign SLR', 'Biodesign SLR'],
-                                ['Duet TRS', 'Duet TRS'],
-                            ],
-                            value: 36,
-                            required: false,
                         },
                     },
                     {
@@ -128,6 +91,44 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'strengthening-the-seam',
+                            placeholder: 'Укрепление линии шва',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ушивание', 'Ушивание'],
+                                ['Seamguard', 'Seamguard'],
+                                ['Peristrips', 'Peristrips'],
+                                ['Biodesign SLR', 'Biodesign SLR'],
+                                ['Duet TRS', 'Duet TRS'],
+                            ],
+                            value: 36,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
+                            ],
+                            multiple: true,
+                            // targetValue: 'device2',
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -143,7 +144,7 @@ export const OPERATIONS = {
                 ],
             },
             {
-                name: 'Формирование анастамозов',
+                name: 'Формирование анастомозов',
                 active: false,
                 number: 2,
                 observe: true,
@@ -168,7 +169,7 @@ export const OPERATIONS = {
                             type: 'number',
                             placeholder: 'Расстояние (см)',
                             required: false,
-                            connectedID: 'indent',
+                            connectedID: 'ileocecal, treitz',
                             connected: 'method-determination-small-gut',
                         },
                     },
@@ -191,7 +192,7 @@ export const OPERATIONS = {
                             placeholder: 'Длина общей петли (см)',
                             addClass: 'only-number',
                             required: false,
-                            connectedID: 'percent-gut',
+                            connectedID: 'ileocecal, percent-gut',
                             connected: 'method-determination-small-gut',
                         },
                     },
@@ -202,6 +203,8 @@ export const OPERATIONS = {
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
                             required: false,
+                            connected: 'method-determination-small-gut',
+                            connectedID: 'treitz',
                         },
                     },
                     {
@@ -210,7 +213,17 @@ export const OPERATIONS = {
                             name: 'length-alimentary-loop',
                             type: 'number',
                             placeholder: 'Длина алиментарной петли (см)',
-                            required: false,
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'length-biliopancreatic-loop',
+                            type: 'number',
+                            addClass: 'only-number',
+                            required: true,
+                            placeholder: 'Длина билиопанкреатической петли (см)',
                         },
                     },
                     {
@@ -222,35 +235,23 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
-                            title: 'Расположение гастроэнтероанастомоза',
-                            name: 'location-gastroenteroanastomosis',
-                            options: [
-                                ['Впередиободочное', 'Впередиободочное'],
-                                ['Позадиободочное', 'Позадиободочное'],
-                            ],
-                            required: false,
-                        },
-                    },
-                    {
-                        type: 'RADIO-GROUP',
-                        data: {
-                            title: 'Расположение алиментарной петли',
-                            name: 'location-alimentary-loop',
-                            options: [
-                                ['Впередиободочное', 'Впередиободочное'],
-                                ['Позадиободочное', 'Позадиободочное'],
-                            ],
-                            required: false,
-                        },
-                    },
-                    {
-                        type: 'RADIO-GROUP',
-                        data: {
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
                                 ['Просвет вскрыт другим способом', 'Просвет вскрыт другим способом'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Расположение гастроэнтероанастомоза',
+                            name: 'location-gastroenteroanastomosis',
+                            options: [
+                                ['Впередиободочное', 'Впередиободочное'],
+                                ['Позадиободочное', 'Позадиободочное'],
                             ],
                             required: false,
                         },
@@ -270,6 +271,18 @@ export const OPERATIONS = {
                         },
                     },
                     {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Расположение алиментарной петли',
+                            name: 'location-alimentary-loop',
+                            options: [
+                                ['Впередиободочное', 'Впередиободочное'],
+                                ['Позадиободочное', 'Позадиободочное'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
                         type: 'SELECT',
                         data: {
                             name: 'gastroenteroanastomosis-stitching-machine-circle',
@@ -281,7 +294,6 @@ export const OPERATIONS = {
                             ],
                             connectedID: 'circle',
                             connected: 'gastroenteroanastomosis',
-                            multiple: true,
                             required: false,
                         },
                     },
@@ -373,7 +385,7 @@ export const OPERATIONS = {
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1, 5 см ', 'До 1, 5 см '],
+                                ['До 1,5 см ', 'До 1,5 см '],
                                 ['1,5 - 3 см ', '1,5 - 3 см '],
                                 ['4 см ', '4 см '],
                                 ['5 см', '5 см'],
@@ -400,6 +412,7 @@ export const OPERATIONS = {
                                 ['Да', 'Да'],
                                 ['Нет', 'Нет'],
                             ],
+                            hasConnection: 'spur',
                         },
                     },
                     {
@@ -408,6 +421,7 @@ export const OPERATIONS = {
                             name: 'spur-height',
                             type: 'number',
                             placeholder: 'Высота шпоры (см)',
+                            connected: 'spur',
                         },
                     },
                     {
@@ -420,7 +434,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'formation-of-EEA',
-                            placeholder: 'Формирование EEA',
+                            placeholder: 'Формирование еюноеюноанстомоза',
                             options: [
                                 ['Аппаратный с ручным закрытием', 'Аппаратный с ручным закрытием'],
                                 ['Аппаратный полностью', 'Аппаратный полностью'],
@@ -492,14 +506,29 @@ export const OPERATIONS = {
                             ],
                         },
                     },
+                    // {
+                    //     type: 'RADIO-GROUP',
+                    //     data: {
+                    //         title: 'Закрытие технологического отверстия',
+                    //         name: 'herjunojunoanastomosis-сlosing-process-hole',
+                    //         options: [
+                    //             ['Ручное', 'Ручное'],
+                    //             ['Аппаратное', 'Аппаратное'],
+                    //         ],
+                    //         connectedID: 'hardware-with-manual',
+                    //         connected: 'herjunojunoanastomosis',
+                    //     },
+                    // },
                     {
-                        type: 'RADIO-GROUP',
+                        type: 'SELECT',
                         data: {
-                            title: 'Закрытие технологического отверстия',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
+                            placeholder: 'Закрытие технологического отверстия',
                             options: [
-                                ['Ручное', 'Ручное'],
-                                ['Аппаратное', 'Аппаратное'],
+                                ['Однорядный, монофиламентной нитью', 'Однорядный, монофиламентной нитью'],
+                                ['Однорядный, нитью Stratafix', 'Однорядный, нитью Stratafix'],
+                                ['Однорядный, нитью V-loc', 'Однорядный, нитью V-loc'],
+                                ['Другой', 'Другой'],
                             ],
                             connectedID: 'hardware-with-manual',
                             connected: 'herjunojunoanastomosis',
@@ -525,7 +554,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'herjunojunoanastomosis-сommentary-heandly-anastomosis',
-                            type: 'number',
+                            type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
                             addClass: 'long',
                             connectedID: 'fully-manual',
