@@ -162,11 +162,11 @@ export const CONNECTED_RULES = {
     ],
     'formation-gea': [
         {
-            value: 'Аппаратный циркулярный',
+            value: 'Линейным степлером 60 мм',
             connectedID: 'hardware',
         },
         {
-            value: 'Аппаратный линейный',
+            value: 'Линейным степлером 45 мм',
             connectedID: 'hardware',
         },
         {
@@ -273,11 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dateOperationField.value) {
         assignInputRules({
             'discharge-from-hospital': {
-                range: {
-                    min: 10,
-                    max: 10,
-                    message: 'Формат xx.xx.xxxx',
-                },
                 dateRange: {
                     minDate: dateOperationField.value,
                     message: 'Не может быть раньше даты операции',
@@ -288,11 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dateOperationField.addEventListener('blur', () =>
         assignInputRules({
             'discharge-from-hospital': {
-                range: {
-                    min: 10,
-                    max: 10,
-                    message: 'Формат xx.xx.xxxx',
-                },
                 dateRange: {
                     minDate: dateOperationField.value,
                     message: 'Не может быть раньше даты операции',

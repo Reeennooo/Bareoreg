@@ -348,6 +348,7 @@
 
 // classic mode
 .itc-select {
+  height: auto;
   &--classic {
     min-width: 70px;
     .itc-select__toggle {

@@ -258,7 +258,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
-                            title: 'Формирование ГЭА',
+                            title: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
                                 ['Аппаратный циркулярный', 'Аппаратный циркулярный'],
@@ -2094,49 +2094,21 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            // targetValue: 'device2',
-                            required: false,
-                            multiple: true,
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
                             name: 'number-of-cassettes',
-                            type: 'number',
                             placeholder: 'Количество кассет',
-                            required: true,
-                            addClass: 'only-number-strict',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'strengthening-the-seam',
-                            placeholder: 'Укрепление линии шва',
                             options: [
-                                ['Нет', 'Нет'],
-                                ['Ушивание', 'Ушивание'],
-                                ['Seamguard', 'Seamguard'],
-                                ['Peristrips', 'Peristrips'],
-                                ['Biodesign SLR', 'Biodesign SLR'],
-                                ['Duet TRS', 'Duet TRS'],
+                                ['1', '1'],
+                                ['2', '2'],
+                                ['3', '3'],
+                                ['4', '4'],
+                                ['5', '5'],
+                                ['6', '6'],
+                                ['7', '7'],
+                                ['8', '8'],
+                                ['9', '9'],
+                                ['10', '10'],
                             ],
-                            value: 36,
-                            required: false,
+                            required: true,
                         },
                     },
                     {
@@ -2146,7 +2118,7 @@ export const OPERATIONS = {
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
                             value: 36,
-                            required: false,
+                            required: true,
                         },
                     },
                     {
@@ -2177,6 +2149,44 @@ export const OPERATIONS = {
                                 ['Ниже гусиной лапки', 'Ниже гусиной лапки'],
                             ],
                             required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'strengthening-the-seam',
+                            placeholder: 'Укрепление линии шва',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ушивание', 'Ушивание'],
+                                ['Seamguard', 'Seamguard'],
+                                ['Peristrips', 'Peristrips'],
+                                ['Biodesign SLR', 'Biodesign SLR'],
+                                ['Duet TRS', 'Duet TRS'],
+                            ],
+                            value: 36,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
+                            ],
+                            // targetValue: 'device2',
+                            required: false,
+                            multiple: true,
                         },
                     },
                     {
@@ -2289,11 +2299,11 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
-                            title: 'Формирование ГЭА',
+                            title: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
-                                ['Аппаратный циркулярный', 'Аппаратный циркулярный'],
-                                ['Аппаратный линейный', 'Аппаратный линейный'],
+                                ['Линейным степлером 60 мм', 'Линейным степлером 60 мм'],
+                                ['Линейным степлером 45 мм', 'Линейным степлером 45 мм'],
                                 ['Ручной', 'Ручной'],
                             ],
                             hasConnection: 'formation-gea',
@@ -2906,36 +2916,41 @@ export const OPERATIONS_RULES = {
             max: 120,
         },
     },
+    'discharge-from-hospital': {
+        range: {
+            min: 10,
+            max: 10,
+            message: 'Формат xx.xx.xxxx',
+        },
+    },
     'weight-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
         customRange: {
             min: 60,
             max: 300,
         },
-        required: {
-            message: 'Обязательное поле',
-        },
         // сюда можно добавить еще тесты
     },
     'total-loop-length': {
-        customRange: {
+        minValue: {
             min: 0,
-            max: 99999,
         },
     },
     'length-alimentary-loop': {
-        customRange: {
+        minValue: {
             min: 0,
-            max: 99999,
         },
     },
     'date-operation': {
+        required: {
+            message: 'Обязательное поле',
+        },
         range: {
             min: 10,
             max: 10,
             message: 'Формат: 16.09.2023',
-        },
-        required: {
-            message: 'Обязательное поле',
         },
     },
     'type-of-operation': {
@@ -3059,15 +3074,11 @@ export const OPERATIONS_RULES = {
         minValue: {
             min: 0,
         },
-        // customRange: {
-        //     min: 0,
-        //     max: 99999,
-        // },
     },
     'spur-height': {
         customRange: {
             min: 1,
-            max: 10,
+            max: 20,
             // message: 'Минимальное значение: 2500, максимальное значение 6000',
         },
     },
