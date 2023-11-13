@@ -1,6 +1,7 @@
 // СТИЛИ КАСТОМНОГО ЧЕКБОКСА
 .checkbox {
-  display: flex;
+  display: inline-flex;
+  justify-self: self-start;
   column-gap: 8px;
   align-items: flex-start;
   // align-items: center;
