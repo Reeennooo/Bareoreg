@@ -110,7 +110,7 @@ export const CONNECTED_RULES = {
         },
         {
             value: 'Отступ от связки Трейтца',
-            connectedID: 'indent',
+            connectedID: 'treitz',
             rules: {
                 'gut-indent': {
                     customRange: {

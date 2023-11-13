@@ -1801,26 +1801,6 @@ export const OPERATIONS = {
                         },
                     },
                     {
-                        type: 'SELECT',
-                        data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            // targetValue: 'device2',
-                            required: false,
-                        },
-                    },
-                    {
                         type: 'INPUT',
                         data: {
                             name: 'number-of-cassettes',
@@ -1828,23 +1808,6 @@ export const OPERATIONS = {
                             placeholder: 'Количество кассет',
                             required: true,
                             addClass: 'only-number-strict',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'strengthening-the-seam',
-                            placeholder: 'Укрепление линии шва',
-                            options: [
-                                ['Нет', 'Нет'],
-                                ['Ушивание', 'Ушивание'],
-                                ['Seamguard', 'Seamguard'],
-                                ['Peristrips', 'Peristrips'],
-                                ['Biodesign SLR', 'Biodesign SLR'],
-                                ['Duet TRS', 'Duet TRS'],
-                            ],
-                            value: 36,
-                            required: false,
                         },
                     },
                     {
@@ -1893,6 +1856,44 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'strengthening-the-seam',
+                            placeholder: 'Укрепление линии шва',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ушивание', 'Ушивание'],
+                                ['Seamguard', 'Seamguard'],
+                                ['Peristrips', 'Peristrips'],
+                                ['Biodesign SLR', 'Biodesign SLR'],
+                                ['Duet TRS', 'Duet TRS'],
+                            ],
+                            value: 36,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
+                            ],
+                            // targetValue: 'device2',
+                            multiple: true,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -1931,12 +1932,10 @@ export const OPERATIONS = {
                             name: 'level-mobilization-bulb',
                             placeholder: 'Уровень мобилизации луковицы (отступ от привратника)',
                             options: [
-                                ['Не оценивали', 'Не оценивали'],
+                                ['1 см', '1 см'],
                                 ['2 см', '2 см'],
                                 ['3 см', '3 см'],
-                                ['4 см', '4 см'],
-                                ['5 см', '5 см'],
-                                ['более 5 см', 'более 5 см'],
+                                ['Более 3 см', '3 см'],
                             ],
                         },
                     },
@@ -1951,6 +1950,17 @@ export const OPERATIONS = {
                                 ['Процент от общей длины тонкой кишки', 'Процент от общей длины тонкой кишки'],
                             ],
                             hasConnection: 'method-determination-duodenoenteroanastomosis',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'ident-treitz',
+                            type: 'number',
+                            placeholder: 'Отступ от связки Трейтца (см)',
+                            required: false,
+                            connected: 'method-determination-duodenoenteroanastomosis',
+                            connectedID: 'treitz',
                         },
                     },
                     {
