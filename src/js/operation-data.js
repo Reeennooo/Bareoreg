@@ -385,7 +385,7 @@ export const OPERATIONS = {
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1,5 см ', 'До 1,5 см '],
+                                ['До 1,5 см', 'До 1,5 см'],
                                 ['1,5 - 3 см ', '1,5 - 3 см '],
                                 ['4 см ', '4 см '],
                                 ['5 см', '5 см'],
@@ -1034,26 +1034,6 @@ export const OPERATIONS = {
                         },
                     },
                     {
-                        type: 'SELECT',
-                        data: {
-                            name: 'stitching-machine',
-                            placeholder: 'Сшивающий аппарат',
-                            options: [
-                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
-                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
-                                ['Endo GIA', 'Endo GIA'],
-                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
-                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
-                                ['Powered Echelon', 'Powered Echelon'],
-                                ['Covidien GIA 80', 'Covidien GIA 80'],
-                                ['NTLC 75', 'NTLC 75'],
-                                ['Китайский производитель', 'Китайский производитель'],
-                            ],
-                            // targetValue: 'device2',
-                            required: false,
-                        },
-                    },
-                    {
                         type: 'INPUT',
                         data: {
                             name: 'number-of-cassettes',
@@ -1061,23 +1041,6 @@ export const OPERATIONS = {
                             placeholder: 'Количество кассет',
                             required: true,
                             addClass: 'only-number-strict',
-                        },
-                    },
-                    {
-                        type: 'SELECT',
-                        data: {
-                            name: 'strengthening-the-seam',
-                            placeholder: 'Укрепление линии шва',
-                            options: [
-                                ['Нет', 'Нет'],
-                                ['Ушивание', 'Ушивание'],
-                                ['Seamguard', 'Seamguard'],
-                                ['Peristrips', 'Peristrips'],
-                                ['Biodesign SLR', 'Biodesign SLR'],
-                                ['Duet TRS', 'Duet TRS'],
-                            ],
-                            value: 36,
-                            required: false,
                         },
                     },
                     {
@@ -1126,6 +1089,44 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            name: 'strengthening-the-seam',
+                            placeholder: 'Укрепление линии шва',
+                            options: [
+                                ['Нет', 'Нет'],
+                                ['Ушивание', 'Ушивание'],
+                                ['Seamguard', 'Seamguard'],
+                                ['Peristrips', 'Peristrips'],
+                                ['Biodesign SLR', 'Biodesign SLR'],
+                                ['Duet TRS', 'Duet TRS'],
+                            ],
+                            value: 36,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'stitching-machine',
+                            placeholder: 'Сшивающий аппарат',
+                            options: [
+                                ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
+                                ['Endopath Echelon 60', 'Endopath Echelon 60'],
+                                ['Endo GIA', 'Endo GIA'],
+                                ['Endopath Echelon Flex 45', 'Endopath Echelon Flex 45'],
+                                ['Endopath Echelon 45', 'Endopath Echelon 45'],
+                                ['Powered Echelon', 'Powered Echelon'],
+                                ['Covidien GIA 80', 'Covidien GIA 80'],
+                                ['NTLC 75', 'NTLC 75'],
+                                ['Китайский производитель', 'Китайский производитель'],
+                            ],
+                            // targetValue: 'device2',
+                            multiple: true,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -1159,6 +1160,20 @@ export const OPERATIONS = {
                         },
                     },
                     {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Уровень мобилизации луковицы(отступ от привратника)',
+                            name: 'level-mobilization-bulb',
+                            options: [
+                                ['1 см', '1 см'],
+                                ['2 см', '2 см'],
+                                ['3 см', '3 см'],
+                                ['Более 3 см', 'Более 3 см'],
+                            ],
+                            required: false,
+                        },
+                    },
+                    {
                         type: 'SELECT',
                         data: {
                             name: 'gut-place',
@@ -1179,7 +1194,7 @@ export const OPERATIONS = {
                             type: 'number',
                             placeholder: 'Расстояние (см)',
                             required: false,
-                            connectedID: 'indent',
+                            connectedID: 'ileocecal, treitz',
                             connected: 'method-determination-small-gut',
                         },
                     },
@@ -1201,9 +1216,9 @@ export const OPERATIONS = {
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
                             addClass: 'only-number',
-                            required: false,
-                            connectedID: 'percent-gut',
-                            connected: 'method-determination-small-gut',
+                            required: true,
+                            // connectedID: 'percent-gut',
+                            // connected: 'method-determination-small-gut',
                         },
                     },
                     {
@@ -1212,6 +1227,8 @@ export const OPERATIONS = {
                             name: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
+                            connected: 'method-determination-small-gut',
+                            connectedID: 'treitz',
                             required: false,
                         },
                     },
@@ -1221,7 +1238,7 @@ export const OPERATIONS = {
                             name: 'length-alimentary-loop',
                             type: 'number',
                             placeholder: 'Длина алиментарной петли (см)',
-                            required: false,
+                            required: true,
                         },
                     },
                     {
@@ -1231,7 +1248,7 @@ export const OPERATIONS = {
                             type: 'number',
                             addClass: 'only-number',
                             placeholder: 'Длина билиопанкреатической петли (см)',
-                            required: true,
+                            required: false,
                         },
                     },
                     {
@@ -1258,28 +1275,33 @@ export const OPERATIONS = {
                             name: 'formation-of-DEA',
                             placeholder: 'Формирование ДЭА',
                             options: [
-                                ['value1', 'List item1'],
-                                ['value2', 'List item2'],
-                                ['value3', 'List item3'],
-                                ['value4', 'List item4'],
+                                ['Однорядный, монофиламентной нитью', 'Однорядный, монофиламентной нитью'],
+                                ['Однорядный, нитью Stratafix', 'Однорядный, нитью Stratafix'],
+                                ['Однорядный, нитью V-loc', 'Однорядный, нитью V-loc'],
+                                ['Двухрядный, монофиламентной нитью', 'Двухрядный, монофиламентной нитью'],
+                                ['Другой', 'Другой'],
                             ],
                             required: false,
                         },
                     },
                     {
-                        type: 'INPUT',
+                        type: 'SELECT',
                         data: {
-                            name: 'diameter-anastomosis',
-                            type: 'number',
+                            name: 'duodenoenteroanastomosis-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
-                            required: false,
+                            options: [
+                                ['До 1,5 см', 'До 1,5 см'],
+                                ['1,5 - 3 см ', '1,5 - 3 см '],
+                                ['4 см ', '4 см '],
+                                ['5 см', '5 см'],
+                            ],
                         },
                     },
                     {
                         type: 'INPUT',
                         data: {
                             name: 'сommentary-anastomosis',
-                            type: 'number',
+                            type: 'text',
                             placeholder: 'Комментарий к анастомозу',
                             required: false,
                         },
@@ -1360,21 +1382,24 @@ export const OPERATIONS = {
                             name: 'herjunojunoanastomosis-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1, 5 см ', 'До 1, 5 см '],
-                                ['1,5 - 3 см ', '1,5 - 3 см '],
-                                ['4 см ', '4 см '],
+                                ['Менее 3 см', 'Менее 3 см'],
+                                ['3 см', '3 см'],
+                                ['4 см', '4 см'],
                                 ['5 см', '5 см'],
+                                ['Более 5 см', 'Более 5 см'],
                             ],
                         },
                     },
                     {
-                        type: 'RADIO-GROUP',
+                        type: 'SELECT',
                         data: {
-                            title: 'Закрытие технологического отверстия',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
+                            placeholder: 'Закрытие технологического отверстия',
                             options: [
-                                ['Ручное', 'Ручное'],
-                                ['Аппаратное', 'Аппаратное'],
+                                ['Однорядный, монофиламентной нитью', 'Однорядный, монофиламентной нитью'],
+                                ['Однорядный, нитью Stratafix', 'Однорядный, нитью Stratafix'],
+                                ['Однорядный, нитью V-loc', 'Однорядный, нитью V-loc'],
+                                ['Другой', 'Другой'],
                             ],
                             connectedID: 'hardware-with-manual',
                             connected: 'herjunojunoanastomosis',
@@ -1433,7 +1458,6 @@ export const OPERATIONS = {
                             name: 'closure-hernia-defects',
                             placeholder: 'Закрытие внутренних грыжевых дефетков',
                             options: [
-                                ['Пространство Петерсена', 'Пространство Петерсена'],
                                 ['Дефект в зоне тонкокишечного анастамоза', 'Дефект в зоне тонкокишечного анастамоза'],
                                 ['Мезоколон', 'Мезоколон'],
                             ],
@@ -2006,7 +2030,7 @@ export const OPERATIONS = {
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1, 5 см ', 'До 1, 5 см '],
+                                ['До 1,5 см', 'До 1,5 см'],
                                 ['1,5 - 3 см ', '1,5 - 3 см '],
                                 ['4 см ', '4 см '],
                                 ['5 см', '5 см'],
@@ -2399,7 +2423,7 @@ export const OPERATIONS = {
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1, 5 см ', 'До 1, 5 см '],
+                                ['До 1,5 см', 'До 1,5 см'],
                                 ['1,5 - 3 см ', '1,5 - 3 см '],
                                 ['4 см ', '4 см '],
                                 ['5 см', '5 см'],
@@ -2806,7 +2830,7 @@ export const OPERATIONS = {
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
-                                ['До 1, 5 см ', 'До 1, 5 см '],
+                                ['До 1,5 см', 'До 1,5 см'],
                                 ['1,5 - 3 см ', '1,5 - 3 см '],
                                 ['4 см ', '4 см '],
                                 ['5 см', '5 см'],
