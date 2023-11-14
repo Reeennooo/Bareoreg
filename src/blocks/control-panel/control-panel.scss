@@ -21,3 +21,12 @@
     }
   }
 }
+
+@media (max-width: $mobile-big) {
+  .control-panel {
+    &__tools {
+      flex-direction: column;
+      row-gap: 24px;
+    }
+  }
+}

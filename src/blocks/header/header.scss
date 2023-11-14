@@ -59,7 +59,7 @@
 
 @media (max-width: $mobile-big) {
   .header {
-    width: 100vw;
+    // width: 100vw;
     &__inner {
       flex-direction: column;
       row-gap: 20px;

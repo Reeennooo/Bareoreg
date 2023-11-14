@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function tableScroll() {
         const distanceFromTop = tableHeader.getBoundingClientRect().y;
-        const styleTopValue = +getComputedStyle(tableHeader).top.replace(/[^0-9]/g, '');
-        if (distanceFromTop === styleTopValue) {
+        const styleTopValue = +getComputedStyle(tableHeader).top.replace(/[^0-9]/g, '') - 5;
+        if (distanceFromTop >= styleTopValue) {
             tableHeader.classList.add('shadow');
         } else {
             tableHeader.classList.remove('shadow');

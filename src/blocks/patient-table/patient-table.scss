@@ -168,3 +168,11 @@
     }
   }
 }
+
+@media (max-width: $mobile-big) {
+  .patient-table {
+    &__header {
+      top: 67px;
+    }
+  }
+}
