@@ -2597,6 +2597,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setGeneralInfo(modalName, element) {
         if (!modalName) return;
+        console.log('SET GENERAL INFO');
         const title = sideModal.querySelector('.side-modal__title');
         const operationName = sideModal.querySelector('.side-modal__add-txt span');
         rerenderPaperclip(modalName);
@@ -2682,6 +2683,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillSideModal(modalName) {
+        if (!sideModalData[modalName]) return;
+
         main.innerHTML = '';
         sideModal.classList.add('view-mode');
 
@@ -2735,7 +2738,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function disabledEditMode(modalName) {
         if (modalName === 'patient') return;
-        main.innerHTML = '';
+        // main.innerHTML = '';
         sideModal.classList.add('view-mode');
         sideModal.classList.remove('is-editable');
         fillSideModal(modalName);
