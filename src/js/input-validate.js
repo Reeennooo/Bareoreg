@@ -96,7 +96,7 @@ export function checkValidate(element, rules) {
         result = approve.value(button.value, rules);
     }
 
-    console.log(result);
+    // console.log(result);
     // if (result.required && !result?.required?.approved) {
     //     message.innerText = result.required.errors[0];
     //     message.classList.add('error-message');
@@ -131,6 +131,7 @@ export function assignInputRules(allRules, checkRightNow) {
                 currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
                 // currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
                 currentElement.addEventListener('blur', () => {
+                    checkValidate(currentElement, allRules[element.name]);
                     if (!currentElement.value && !currentElement.hasAttribute('data-required')) {
                         currentElement.classList.remove('is-invalid');
                     }

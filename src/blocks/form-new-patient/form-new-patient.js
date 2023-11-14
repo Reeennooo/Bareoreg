@@ -1,6 +1,7 @@
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
+import { hightlightRequiredFields } from '../../js/utils/create-group';
 
 const selects = {
     'main-data': ['patient-status', 'who-directed'],
@@ -112,6 +113,7 @@ export const PATIENT_RULES = {
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('new-patient')) return;
     initSelects(selects);
+    hightlightRequiredFields();
     setMasks();
 
     // устанавливаем правила

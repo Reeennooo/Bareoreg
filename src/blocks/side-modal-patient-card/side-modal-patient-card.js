@@ -1237,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 type: 'SELECT',
                                 data: {
                                     name: 'hemostasis-from-staplers',
-                                    placeholder: 'Гемостаз от степлерных линий',
+                                    placeholder: 'Гемостаз из степлерных линий',
                                     options: [
                                         ['Ушивание вдоль всей длины', 'Ушивание вдоль всей длины'],
                                         ['Частичное ушивание', 'Частичное ушивание'],

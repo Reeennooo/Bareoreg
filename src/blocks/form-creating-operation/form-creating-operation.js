@@ -532,7 +532,7 @@ export function setConnectionsForElements(element, connectedRules) {
                                     selectOptions.insertAdjacentHTML('afterbegin', newOptions.join(''));
                                 }
                             }
-                            console.log(connectedEL);
+                            // console.log(connectedEL);
                             if (connectedEL.dataset.id.includes(rulesItem.connectedID)) {
                                 connectedEL.classList.add('is-active');
                             } else {

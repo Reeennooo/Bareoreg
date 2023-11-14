@@ -2,6 +2,7 @@ import { setMasks } from '../../js/input-validate';
 import { assignInputRules } from '../../js/input-validate';
 import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
 import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
+import { hightlightRequiredFields } from '../../js/utils/create-group';
 
 const selects = {
     'gastric-bandage': ['reason-adjusting-bandage'],
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     setMasks();
     initSelects(selects);
+    hightlightRequiredFields();
     assignInputRules(rules);
     new window.Calendar('#calendar-observation');
     new window.Calendar('#calendar-adjusting-bandage');

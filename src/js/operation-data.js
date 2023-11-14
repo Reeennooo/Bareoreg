@@ -3128,6 +3128,9 @@ export const OPERATIONS_RULES = {
     },
     // Формирование анастомоза
     'small-intestine-length': {
+        minValue: {
+            min: 0,
+        },
         customRange: {
             min: 2500,
             max: 6000,

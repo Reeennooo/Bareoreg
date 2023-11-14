@@ -61,7 +61,7 @@ export function initGroupObserve() {
                     }
                     observers.push(observer);
                 } else {
-                    requiredEl.addEventListener('blur', () => checkFilledInput(group));
+                    requiredEl.addEventListener('blur', () => setTimeout(() => checkFilledInput(group)));
                     // requiredEl.addEventListener('change', () => checkFilledInput(group));
                     requiredEl.addEventListener('input', () => checkFilledInput(group));
                 }
@@ -178,6 +178,7 @@ function checkFilledInput(group) {
             }
         } else {
             if (element.value && !element.classList.contains('is-invalid')) {
+                // console.log(element);
                 return true;
             } else {
                 return false;
