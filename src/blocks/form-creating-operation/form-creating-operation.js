@@ -66,12 +66,25 @@ export const CONNECTED_RULES = {
         {
             value: 'Отступ от илеоцекального угла',
             connectedID: 'ileocecal',
+        },
+        {
+            value: 'Отступ от связки Трейтца',
+            connectedID: 'treitz',
+        },
+        {
+            value: 'Процент от общей длины тонкой кишки',
+            connectedID: 'percent-gut',
+        },
+    ],
+    'method-determining-place-gastroenteroanastomosis': [
+        {
+            value: 'Отступ от илеоцекального угла',
+            connectedID: 'ileocecal',
             rules: {
                 'gut-indent': {
                     customRange: {
                         min: 250,
                         max: 350,
-                        // message: 'Диапазон значений: 250-350',
                     },
                 },
             },
@@ -79,13 +92,10 @@ export const CONNECTED_RULES = {
         {
             value: 'Отступ от связки Трейтца',
             connectedID: 'treitz',
-            rules: {
-                'gut-indent': {
-                    customRange: {
-                        min: 20,
-                        max: 350,
-                        // message: 'Диапазон значений: 20-350',
-                    },
+            'gut-indent': {
+                customRange: {
+                    min: 20,
+                    max: 350,
                 },
             },
         },
@@ -103,7 +113,6 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 250,
                         max: 350,
-                        // message: 'Диапазон значений: 250-350',
                     },
                 },
             },
@@ -116,7 +125,6 @@ export const CONNECTED_RULES = {
                     customRange: {
                         min: 20,
                         max: 350,
-                        // message: 'Диапазон значений: 20-350',
                     },
                 },
             },
@@ -321,20 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         message: 'Обязательное поле',
                     },
                 };
-                // assignInputRules(
-                //     {
-                //         'duration-operation': {
-                //             customRange: {
-                //                 min: 10,
-                //                 max: 30,
-                //             },
-                //             required: {
-                //                 message: 'Обязательное поле',
-                //             },
-                //         },
-                //     },
-                //     true
-                // );
             } else {
                 OPERATIONS_RULES['duration-operation'] = {
                     customRange: {
@@ -345,20 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         message: 'Обязательное поле',
                     },
                 };
-                // assignInputRules(
-                //     {
-                //         'duration-operation': {
-                //             customRange: {
-                //                 min: 40,
-                //                 max: 120,
-                //             },
-                //             required: {
-                //                 message: 'Обязательное поле',
-                //             },
-                //         },
-                //     },
-                //     true
-                // );
             }
         });
         observer.observe(kindOperationBtn, { attributeFilter: ['data-index', 'value'] });
@@ -398,15 +378,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     fieldWrapper.append(node);
                 });
                 optionFormInner.append(fieldWrapper);
-                // initSelects(operation.mainFields);
             }
             if (operation.additionalGroups) {
                 operation.additionalGroups.forEach((item) => {
                     const group = createAditionalGroup(item);
                     optionFormInner.append(group);
                 });
-                // const group = createAditionalGroup();
-                // optionFormInner.innerHTML(group);
             }
         }
         initGroupObserve(initObservers);
