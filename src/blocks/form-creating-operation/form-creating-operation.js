@@ -389,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initGroupObserve(initObservers);
         assignInputRules(OPERATIONS_RULES, true);
         hightlightRequiredFields();
+        initCalculateLengthLoops();
         initObservers = [];
     }
 
@@ -1067,4 +1068,96 @@ export function checkConnectionValue(element, connectedRules) {
         activeToggler(element, monitoringElement.checked);
         return;
     }
+}
+
+// Вычисление длин петель
+function initCalculateLengthLoops() {
+    const connectedFields = [
+        {
+            name: 'total-loop-length',
+            field: null,
+        },
+        {
+            name: 'small-intestine-length',
+            field: null,
+        },
+        {
+            name: 'length-alimentary-loop',
+            field: null,
+        },
+        {
+            name: 'length-biliopancreatic-loop',
+            field: null,
+        },
+    ];
+
+    connectedFields.forEach((item) => {
+        item.field = document.querySelector(`input[name="${item.name}"]`);
+        // if (item.name !== 'total-loop-length') {
+        //     item.field.addEventListener('change', calculateLengthLoops);
+        // }
+        if (item.field) {
+            item.field.addEventListener('change', (event) => calculateLengthLoops(event.target));
+        }
+    });
+
+    const smallIntestine = connectedFields.find((el) => el.name === 'small-intestine-length').field;
+    const totalLoop = connectedFields.find((el) => el.name === 'total-loop-length').field;
+    const alimentaryLoop = connectedFields.find((el) => el.name === 'length-alimentary-loop').field;
+    const biliopancreaticLoop = connectedFields.find((el) => el.name === 'length-biliopancreatic-loop').field;
+
+    function calculateLengthLoops(changedInput) {
+        if (changedInput.name === 'small-intestine-length' && connectedFields.filter((item) => item.field?.value).length === connectedFields.length) {
+            totalLoop.value = '';
+            biliopancreaticLoop.value = '';
+            if (alimentaryLoop) alimentaryLoop.value = '';
+        }
+
+        const smallIntestineValue = Number(smallIntestine.value); // 0
+        const totalLoopValue = Number(totalLoop.value); // 1
+        const alimentaryLoopValue = Number(alimentaryLoop?.value) || null; // 2
+        const biliopancreaticValue = Number(biliopancreaticLoop.value); // 3
+
+        const indices = [];
+        const arrValues = [smallIntestineValue, totalLoopValue, alimentaryLoopValue, biliopancreaticValue];
+
+        // Находим в массиве нули (0)
+        let index = arrValues.indexOf(0);
+
+        // Записываем индексы нулевых значений в новый массив
+        while (index != -1) {
+            indices.push(index);
+            index = arrValues.indexOf(0, index + 1);
+        }
+
+        if (indices.length <= 1) {
+            const index = indices[0] || 0;
+            switch (index) {
+                case 0:
+                    // console.log('Длина тонкой кишки');
+                    smallIntestine.value = totalLoopValue + alimentaryLoopValue + biliopancreaticValue;
+                    inputTrigger(smallIntestine);
+                    break;
+                case 1:
+                    // console.log('Длина общей петли');
+                    totalLoop.value = smallIntestineValue - alimentaryLoopValue - biliopancreaticValue;
+                    break;
+                case 2:
+                    // console.log('Длина алиментарной петли');
+                    if (alimentaryLoop) {
+                        alimentaryLoop.value = smallIntestineValue - totalLoopValue - biliopancreaticValue;
+                    }
+                    break;
+                case 3:
+                    // console.log('Длина билеопанкреатической петли');
+                    biliopancreaticLoop.value = smallIntestineValue - totalLoopValue - alimentaryLoopValue;
+                    break;
+            }
+        }
+    }
+}
+
+function inputTrigger(input) {
+    input.focus();
+    input.blur();
 }
