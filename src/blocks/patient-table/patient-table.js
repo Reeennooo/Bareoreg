@@ -1,18 +1,5 @@
 import { setMasks } from '../../js/input-validate';
-class TooltipActions {
-    static _createTooltip(options) {
-        const tooltip = document.createElement('ul');
-        tooltip.classList.add('tooltip-menu');
-        options.forEach((opt) => {
-            tooltip.insertAdjacentHTML('beforeend', `<a href='${opt.href}'><li class='tooltip-menu__option'><svg><use href='img/sprite.svg#${opt.icon}'></use></svg><span>${opt.txt}</span></li></a>`);
-        });
-        return tooltip;
-    }
-
-    constructor(data) {
-        this.tooltip = TooltipActions._createTooltip(data.options);
-    }
-}
+import { TooltipActions } from '../../components/tooltipActions/tooltipActions';
 
 const tooltipActions = new TooltipActions({
     options: [

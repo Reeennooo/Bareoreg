@@ -82,7 +82,20 @@
   align-items: center;
   column-gap: 4px;
 
+  &.is-up {
+    path.up {
+      stroke: $violet;
+    }
+  }
+
+  &.is-down {
+    path.down {
+      stroke: $violet;
+    }
+  }
+
   &__name {
+    cursor: pointer;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

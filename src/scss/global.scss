@@ -171,11 +171,15 @@
 
   @media (hover: hover) {
     &:hover {
-      svg {
-        stroke: $violet;
-      }
-      // color: $violet-light;
+      background-color: rgba($violet, $alpha: 0.1);
     }
+  }
+
+  &.logout {
+    svg {
+      stroke: $red-btn;
+    }
+    color: $red-btn;
   }
 
   // txt

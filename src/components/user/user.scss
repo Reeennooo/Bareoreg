@@ -1,0 +1,56 @@
+.user {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  &.is-open {
+    .user__carret {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__avatar-template {
+    width: 40px;
+    height: 40px;
+    border: 1px solid $grey;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: $grey;
+    }
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+  }
+
+  &__username {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px;
+    color: $grey-dark;
+  }
+
+  &__carret {
+    @include transition('transform');
+    width: 18px;
+    height: 18px;
+    stroke: $grey;
+    fill: none;
+
+    transform: rotate(180deg);
+  }
+}

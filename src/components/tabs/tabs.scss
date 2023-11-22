@@ -20,6 +20,12 @@
   position: relative;
   cursor: pointer;
 
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
   &.is-active {
     &:before {
       background-color: $violet;
