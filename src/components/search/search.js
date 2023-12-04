@@ -10,22 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchBtn.addEventListener('click', openSearch);
     document.addEventListener('click', (event) => {
-        if (!event.target.closest('.search')) {
+        if (!event.target.closest('.search') && search.classList.contains('is-active')) {
             closeSearch();
+            createSearchChip();
         } else if (event.target.closest('.search__clear')) {
             clearSeacrh();
+            closeSearch();
+        }
+    });
+
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter' && search.classList.contains('is-active')) {
+            createSearchChip();
+            closeSearch();
         }
     });
 
     function openSearch() {
         search.classList.add('is-active');
         searchInput.focus();
-        console.log(searchInput);
     }
 
     function closeSearch() {
         search.classList.remove('is-active');
+    }
 
+    function createSearchChip() {
         if (!searchChip && searchInput.value) {
             searchChip = createChip({ txt: searchInput.value, mod: 'search' });
             searchChip.querySelector('.chip__remove').addEventListener('click', clearSeacrh);
@@ -37,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function clearSeacrh() {
         searchInput.value = '';
-        console.log(searchChip);
         if (searchChip) {
             searchChip.remove();
             searchChip = null;

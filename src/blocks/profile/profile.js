@@ -361,22 +361,22 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach((input) => {
         input.addEventListener('input', () => checkFilledInputs(chnagePassForm));
     });
+
+    const changePassBtn = document.querySelector('.change-password .submit-button');
+    const passwordMessage = document.querySelector('.password-message');
+
+    changePassBtn?.addEventListener('click', (event) => {
+        event.preventDefault();
+        changePassword();
+    });
+
+    function changePassword() {
+        passwordMessage.classList.add('is-active');
+        setTimeout(() => {
+            passwordMessage.classList.remove('is-active');
+        }, 3000);
+    }
 });
-
-const changePassBtn = document.querySelector('.change-password .submit-button');
-const passwordMessage = document.querySelector('.password-message');
-
-changePassBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    changePassword();
-});
-
-function changePassword() {
-    passwordMessage.classList.add('is-active');
-    setTimeout(() => {
-        passwordMessage.classList.remove('is-active');
-    }, 3000);
-}
 
 function createWorkPlace(data) {
     const element = document.createElement('div');
