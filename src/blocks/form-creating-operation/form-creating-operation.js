@@ -8,6 +8,7 @@ import { initGroup } from '../../components/group/group';
 import { createButton } from '../../components/btn/btn';
 import { Complication } from '../complications/complication';
 import { hightlightRequiredFields } from '../../js/utils/create-group';
+import { inputTrigger } from '../../js/input-validate';
 
 export const CONNECTED_RULES = {
     // key - имя связи
@@ -1155,9 +1156,4 @@ function initCalculateLengthLoops() {
             }
         }
     }
-}
-
-function inputTrigger(input) {
-    input.focus();
-    input.blur();
 }

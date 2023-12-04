@@ -183,3 +183,8 @@ export function setMasks(input) {
         });
     }
 }
+
+export function inputTrigger(input) {
+    input.focus();
+    input.blur();
+}

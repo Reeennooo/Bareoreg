@@ -1,5 +1,5 @@
 import { ItcCustomSelect } from '../itc-custom-select/itc-custom-select';
-
+import { inputTrigger } from '../../js/input-validate';
 // params
 // {
 //     static: true/false
@@ -133,7 +133,7 @@ class Calendar {
         document.addEventListener('click', (event) => {
             if (event.target.closest('.inactive.calendar__day')) return;
 
-            if (!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler')) {
+            if (!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler') || event.target.closest('.calendar__day')) {
                 const activeCalendars = document.querySelectorAll(`.${this.EL}`);
                 activeCalendars.forEach((el) => {
                     el.classList.remove('is-active');
@@ -382,6 +382,7 @@ class Calendar {
         }
         // console.log(`${day}.${month}.${this._date.getFullYear()}`)
         this._parrentTag.value = `${day}.${month}.${this._date.getFullYear()}`;
+        inputTrigger(this._parrentTag);
     }
 }
 Calendar.hideOpenCalendar();

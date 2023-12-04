@@ -194,7 +194,7 @@ export class FileLoader {
             const modalRemove = document.querySelector('.modal-remove');
             const removeBtn = modalRemove.querySelector('.modal-remove__remove-btn');
             modalRemove.querySelector('.modal-remove__title').innerText = 'Удаление файла';
-            modalRemove.querySelector('.modal-remove__subtitle').innerText = 'Это действие безвозвратно, вы уверены?';
+            modalRemove.querySelector('.modal-remove__subtitle').innerText = 'Это действие необратимо, вы уверены?';
             let openModals = document.querySelectorAll('.i-modal.is-active');
             if (openModals.length) {
                 window.openModal('modal-remove', true);
