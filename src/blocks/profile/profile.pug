@@ -75,6 +75,7 @@
       +input-custom({type: 'text', placeholder: 'Новый пароль', name: 'new-password',})(data-required='')
       +input-custom({type: 'text', placeholder: 'Повторите новый пароль', name: 'repeat-new-password',})(data-required='')
       +btn({txt: 'Сменить пароль'}).submit-button(disabled)
+    .page-section__message.password-message Пароль успешно изменён
   .profile__footer
     .container.profile__footer-inner
       +btn({txt: 'Отменить', mode: 'ghost'}).profile__cancel-changes

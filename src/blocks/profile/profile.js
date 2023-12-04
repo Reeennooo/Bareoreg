@@ -363,6 +363,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const changePassBtn = document.querySelector('.change-password .submit-button');
+const passwordMessage = document.querySelector('.password-message');
+
+changePassBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    changePassword();
+});
+
+function changePassword() {
+    passwordMessage.classList.add('is-active');
+    setTimeout(() => {
+        passwordMessage.classList.remove('is-active');
+    }, 3000);
+}
+
 function createWorkPlace(data) {
     const element = document.createElement('div');
     element.classList.add('place-of-work');

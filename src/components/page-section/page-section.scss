@@ -35,6 +35,21 @@
     display: flex;
     column-gap: 16px;
   }
+
+  &__message {
+    display: none;
+    margin-top: 24px;
+    font-weight: 500;
+    color: $green;
+
+    &.is-active {
+      display: block;
+    }
+
+    &.error {
+      color: $input-error;
+    }
+  }
 }
 
 @media (max-width: $mobile-big) {
