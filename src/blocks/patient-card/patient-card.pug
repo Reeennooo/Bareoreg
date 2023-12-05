@@ -30,9 +30,9 @@
       include ../anamnesis/anamnesis
       +page-section({
         title: 'Файлы',
-        buttons: [{txt: 'Прикрепить файл', icon: 'paperclip', mode: 'text'}]
+        buttons: [{txt: 'Прикрепить файл', icon: 'paperclip', mode: 'text', addClass: 'patient-card__add-file'}]
       })
-        .patient-card__files-wrapper
+        +file-loader({name: 'main-card-files', id: 'main-card-files'}).patient-card__loader
           +file({addClass: 'file--advanced'})
           +file({addClass: 'file--advanced', img: 'img/logo.svg', menu: [{txt: 'Посмотреть', icon: 'eye', modalAttribute: 'viewing-modal'}, {txt: 'Скачать', icon: 'download'}]})(data-file-id='file5312')
       .patient-card__bottom

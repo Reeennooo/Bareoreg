@@ -1,7 +1,7 @@
 import { createAditionalGroup, createGroup, checkConnectionValue, CONNECTED_RULES } from '../form-creating-operation/form-creating-operation';
 import { PATIENT_RULES } from '../form-new-patient/form-new-patient';
 import { OPERATIONS_RULES } from '../../js/operation-data';
-import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
+import { FileLoader } from '../../components/file-loader/file-loader';
 import { Complication } from '../complications/complication';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';

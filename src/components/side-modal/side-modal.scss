@@ -195,6 +195,10 @@
 .side-modal[data-side-modal-name='operation'],
 .side-modal[data-side-modal-name='observation'],
 .side-modal[data-side-modal-name='patient'] {
+  .file-loader {
+    padding: 0 40px;
+  }
+
   .side-modal__main {
     height: 100%;
   }

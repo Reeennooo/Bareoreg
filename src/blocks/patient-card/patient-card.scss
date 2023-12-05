@@ -30,6 +30,12 @@
       width: 100%;
     }
   }
+
+  &__loader {
+    .file-loader__add-file {
+      display: none;
+    }
+  }
 }
 
 .patient-card__operations {

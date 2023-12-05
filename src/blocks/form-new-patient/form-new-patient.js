@@ -1,5 +1,5 @@
 import { assignInputRules, setMasks } from '../../js/input-validate';
-import { FileLoader } from '../../components/observation-file-loader/observation-file-loader';
+import { FileLoader } from '../../components/file-loader/file-loader';
 import { setConnectionsForElements } from '../form-creating-operation/form-creating-operation';
 import { hightlightRequiredFields } from '../../js/utils/create-group';
 

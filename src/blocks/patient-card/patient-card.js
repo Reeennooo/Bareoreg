@@ -1,9 +1,14 @@
 import { Chart, registerables } from 'chart.js';
+import { FileLoader } from '../../components/file-loader/file-loader';
 Chart.register(...registerables);
 
 document.addEventListener('DOMContentLoaded', () => {
     new window.ItcCustomSelect(`#test-select2`);
     new window.ItcCustomSelect(`#test-select3`);
+    const patientCardLoader = new FileLoader({ name: 'main-card-files', type: 'loader' });
+    const addFileBtn = document.querySelector('.patient-card__add-file');
+    const triggerLoader = patientCardLoader.triggerLoader.bind(patientCardLoader);
+    addFileBtn.addEventListener('click', triggerLoader);
 });
 
 Chart.defaults.font.family = 'TT Norms Pro';

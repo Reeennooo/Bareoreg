@@ -1,0 +1,10 @@
+mixin file-loader(data)
+  .file-loader&attributes(attributes)
+    .file-loader__content
+      if block
+        block
+    label(for=data.id).file-loader__add-file
+      input(type="file" name=data.name id=data.id)
+      svg
+        use(href='img/sprite.svg#plus-icon')
+      

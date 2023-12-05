@@ -39,11 +39,17 @@ export class FileLoader {
     }
 
     createFileloader(args) {
-        const fileLoader = document.createElement('div');
-        fileLoader.classList.add('observation-file-loader');
+        let fileLoader = document.querySelector(`#${args.name}`)?.closest('.file-loader');
+
+        if (document.querySelector(`#${args.name}`)) {
+            return fileLoader;
+        }
+
+        fileLoader = document.createElement('div');
+        fileLoader.classList.add('file-loader');
         fileLoader.innerHTML = `
-        <div class='observation-file-loader__content'></div>
-        <label for='${args.name}' class='observation-file-loader__add-file'>
+        <div class='file-loader__content'></div>
+        <label for='${args.name}' class='file-loader__add-file'>
         <input type="file" name='${args.name}' id='${args.name}' >
         <svg><use href='img/sprite.svg#plus-icon'></use></svg>
         </label>`;
@@ -254,7 +260,7 @@ export class FileLoader {
     }
 
     addFile(file) {
-        const filesWrapper = this.fileLoader?.querySelector('.observation-file-loader__content');
+        const filesWrapper = this.fileLoader?.querySelector('.file-loader__content');
         // if (file) {
         //     filesWrapper.append(this.createFileElement(file));
         //     return;
@@ -286,6 +292,7 @@ export class FileLoader {
     }
 
     uploadFile(file) {
+        console.log('upload file');
         this.currentFile = file;
         this.fileEl = this.createFileElement(file);
         this.modalUpload.querySelector('.modal-upload__files').innerHTML = '';

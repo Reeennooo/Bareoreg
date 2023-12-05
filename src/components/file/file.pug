@@ -26,7 +26,7 @@ mixin file(data = {})
             svg
               use(href='img/sprite.svg#download')
             span Скачать
-          li.file__menu-item
+          li.file__menu-item(data-delete-file)
             svg
               use(href='img/sprite.svg#trash')
             span Удалить
