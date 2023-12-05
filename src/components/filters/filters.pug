@@ -12,9 +12,9 @@ mixin filters(data)
         .filters-tooltip__section(data-section-name='date-operation')
           .filters-tooltip__section-name Дата операции
           .filters-tooltip__wrapper
-            +chip({txt: 'Текущий месяц', mod: 'filter'})
-            +chip({txt: 'Текущий год', mod: 'filter'})
-            +chip({txt: 'Текущий прошлый год', mod: 'filter'})
+            +chip({txt: 'Текущий месяц', mod: 'filter'})(data-date='current-month')
+            +chip({txt: 'Текущий год', mod: 'filter'})(data-date='current-year')
+            +chip({txt: 'Прошлый год', mod: 'filter'})(data-date='last-year')
           .filters-tooltip__calendars
             +input-custom({type: 'text', placeholder: 'Начало периода', name: 'filter-start-period', mods: ["ghost"], calendar: true})(data-mask='date')
             .vertical-line

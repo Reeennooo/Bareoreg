@@ -133,7 +133,7 @@ class Calendar {
         document.addEventListener('click', (event) => {
             if (event.target.closest('.inactive.calendar__day')) return;
 
-            if (!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler') || event.target.closest('.calendar__day')) {
+            if ((!event.target.closest(`.${this.EL}`) && !event.target.closest('.calendar-toggler')) || event.target.closest('.calendar__day')) {
                 const activeCalendars = document.querySelectorAll(`.${this.EL}`);
                 activeCalendars.forEach((el) => {
                     el.classList.remove('is-active');
@@ -383,6 +383,16 @@ class Calendar {
         // console.log(`${day}.${month}.${this._date.getFullYear()}`)
         this._parrentTag.value = `${day}.${month}.${this._date.getFullYear()}`;
         inputTrigger(this._parrentTag);
+    }
+
+    setDate(date) {
+        this._date = date;
+        this._month = date.getMonth();
+        this._year = date.getFullYear();
+        this._renderCalendar();
+        this._setInputValue();
+        this._monthsSelect.selectedIndex = this._month;
+        this._yearsSelect.value = String(this._year);
     }
 }
 Calendar.hideOpenCalendar();

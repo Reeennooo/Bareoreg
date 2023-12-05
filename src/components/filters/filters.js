@@ -3,8 +3,8 @@ import { createChip } from '../chip/chip';
 document.addEventListener('DOMContentLoaded', () => {
     const filters = document.querySelector('.filters');
     if (!filters) return;
-    new window.Calendar('#filter-start-period', { position: 'absolute' });
-    new window.Calendar('#filter-end-period', { position: 'absolute', side: 'right' });
+    const startPeriod = new window.Calendar('#filter-start-period', { position: 'absolute' });
+    const endPeriod = new window.Calendar('#filter-end-period', { position: 'absolute', side: 'right' });
     const selectedFilterWrapper = document.querySelector('.control-panel__active-filters');
     const btnFIlter = filters.querySelector('.filters__btn');
     btnFIlter.addEventListener('click', toggleFilters);
@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filter.classList.contains('is-active')) {
             filter.classList.remove('is-active');
             removeFilter(filter.dataset.filterId);
+        } else if (filter.dataset.date) {
+            const dateFilters = filterTooltip.querySelectorAll('.chip--filter[data-date]');
+            for (let dateFilter of dateFilters) {
+                dateFilter.classList.remove('is-active');
+            }
+            setPeriod(filter.dataset.date);
+            filter.classList.add('is-active');
         } else {
             filter.classList.add('is-active');
             if (filter.dataset.filterId) {
@@ -39,6 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 selectedFilterWrapper?.append(selectedFilterChip);
             }
+        }
+    }
+
+    function setPeriod(period) {
+        const currentDate = new Date();
+        switch (period) {
+            case 'current-month':
+                startPeriod.setDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1));
+                endPeriod.setDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0));
+                break;
+            case 'current-year':
+                startPeriod.setDate(new Date(currentDate.getFullYear(), 0, 1));
+                endPeriod.setDate(new Date(currentDate.getFullYear() + 1, 0, 0));
+                break;
+            case 'last-year':
+                startPeriod.setDate(new Date(currentDate.getFullYear() - 1, 0, 1));
+                endPeriod.setDate(new Date(currentDate.getFullYear(), 0, 0));
+                break;
         }
     }
 
@@ -55,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.remove('is-active');
             document.querySelector(`.chip--selected-filter[data-filter-id=${el.dataset.filterId}]`)?.remove();
         });
+        document.getElementById('filter-start-period').value = '';
+        document.getElementById('filter-end-period').value = '';
     }
 
     function toggleFilters() {
