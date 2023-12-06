@@ -287,6 +287,9 @@
 }
 
 .side-modal[data-side-modal-name='observation'] {
+  .side-modal__add-txt {
+    display: flex;
+  }
   .side-modal__header-buttons {
     .side-modal__add-file {
       display: inline-flex;

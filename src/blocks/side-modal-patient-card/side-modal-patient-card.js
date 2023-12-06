@@ -2599,7 +2599,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modalName) return;
         console.log('SET GENERAL INFO');
         const title = sideModal.querySelector('.side-modal__title');
-        const operationName = sideModal.querySelector('.side-modal__add-txt span');
+        const operationName = sideModal.querySelector('.side-modal__add-txt');
         rerenderPaperclip(modalName);
         switch (modalName) {
             case 'operation':
@@ -2611,7 +2611,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'observation':
                 trashBtn.setAttribute('data-modal-name', 'remove-observation');
-                operationName.innerText = 'RYGB (Гастрошунтирование)';
+                operationName.querySelector('span').innerText = 'RYGB (Гастрошунтирование)';
+                operationName.dataset.modal = 'side-modal';
+                operationName.dataset.modalName = 'operation';
                 sideModal.dataset.sideModalName = modalName;
 
                 // paperclipBtn.addEventListener('click', obsLoaderTrigger);
@@ -2794,22 +2796,6 @@ document.addEventListener('DOMContentLoaded', () => {
             assignInputRules(PATIENT_RULES);
         }
     }
-
-    // function createComplicationFn() {
-    //     let count = 0;
-    //     return function (data) {
-    //         const complication = new Complication({ number: ++count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data });
-    //         // Добавляем правила к общим правилам.
-    //         complication.connectionRules.forEach((item) => {
-    //             CONNECTED_RULES[item.name] = item.rules;
-    //         });
-    //         assignInputRules(complication.fieldsRules);
-    //         initGroupObserve(initObservers);
-    //         initObservers = [];
-
-    //         return complication;
-    //     };
-    // }
 
     function makeCreateComplication() {
         function createComplication(data) {
