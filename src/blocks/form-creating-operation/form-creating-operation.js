@@ -22,7 +22,7 @@ export const CONNECTED_RULES = {
 
     access: [
         {
-            value: 'Лапаратомия',
+            value: 'Лапаротомия',
         },
         {
             value: 'Конверсия из лапароскопии в лапаротомию',
