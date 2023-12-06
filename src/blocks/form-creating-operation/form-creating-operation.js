@@ -46,11 +46,11 @@ export const CONNECTED_RULES = {
             connectedID: 'revision',
         },
     ],
-    'bariatric-type': [
-        {
-            value: 1,
-        },
-    ],
+    // 'bariatric-type': [
+    //     {
+    //         value: 1,
+    //     },
+    // ],
     'type-complication': [
         {
             value: 'Осложнение',
@@ -306,10 +306,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectedOption = selectKindOperation._el.querySelector(`.itc-select__option[data-index='9']`);
     if (button) {
         let observer = new MutationObserver(() => {
-            console.log(selectTypeOperation.selectedIndex);
+            // console.log(selectTypeOperation.selectedIndex);
             if (selectTypeOperation.selectedIndex === '0') {
                 connectedOption.classList.add('disabled');
+                selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид операции';
+            } else if (selectTypeOperation.selectedIndex === '1') {
+                selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид бариатрической операции*';
+                connectedOption.classList.remove('disabled');
             } else {
+                selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид операции*';
                 connectedOption.classList.remove('disabled');
             }
         });
@@ -815,14 +820,13 @@ export function createInput(data) {
         }
     }
 
-    if (data.connected) {
-        inputField.setAttribute('data-connected', data.connected);
-        checkConnectionValue(input, CONNECTED_RULES);
-    }
-
     if (data.connectedID) {
         inputField.setAttribute('data-id', data.connectedID);
         // `[${data.connectedId.join(',')}]`
+    }
+    if (data.connected) {
+        inputField.setAttribute('data-connected', data.connected);
+        checkConnectionValue(input, CONNECTED_RULES);
     }
 
     if (data.info) {
@@ -899,16 +903,16 @@ function createRadioGroup(data) {
         }
     }
 
-    if (data.connected) {
-        radioGroup.setAttribute('data-connected', data.connected);
-        checkConnectionValue(radioGroup, CONNECTED_RULES);
-    }
     if (data.connectedID) {
         radioGroup.setAttribute('data-id', data.connectedID);
     }
     if (data.hasConnection) {
         radioGroup.setAttribute('data-has-connection', data.hasConnection);
         setConnectionsForElements(radioGroup, CONNECTED_RULES);
+    }
+    if (data.connected) {
+        radioGroup.setAttribute('data-connected', data.connected);
+        checkConnectionValue(radioGroup, CONNECTED_RULES);
     }
 
     setRadioHandler(radioGroup);
@@ -952,13 +956,14 @@ export function createSelect(data) {
         setConnectionsForElements(select, CONNECTED_RULES);
     }
 
+    if (data.connectedID) {
+        select.setAttribute('data-id', data.connectedID);
+    }
     if (data.connected) {
         select.setAttribute('data-connected', data.connected);
         checkConnectionValue(select, CONNECTED_RULES);
     }
-    if (data.connectedID) {
-        select.setAttribute('data-id', data.connectedID);
-    }
+
     return select;
 }
 
@@ -1024,6 +1029,8 @@ function initSelect(select, data, variable) {
 
 // проверка связи для созданных с помощью JS элементов.
 export function checkConnectionValue(element, connectedRules) {
+    // console.log(element);
+    // console.log(connectedRules);
     const connectedKey = element.dataset.connected;
     const connectionParent = document.querySelector(`[data-has-connection=${connectedKey}]`);
     let monitoringElement;

@@ -742,7 +742,7 @@ export const OPERATIONS = {
                 type: 'RADIO-GROUP',
                 data: {
                     title: 'Диссекция',
-                    name: 'primary',
+                    name: 'dissection',
                     options: [
                         ['Pars flaccida', 'Pars flaccida'],
                         ['Перигастральная', 'Перигастральная'],
