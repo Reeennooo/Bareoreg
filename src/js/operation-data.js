@@ -3009,8 +3009,8 @@ export const OPERATIONS_RULES = {
     },
     'duration-operation': {
         customRange: {
-            min: 40,
-            max: 120,
+            min: 5,
+            max: 600,
         },
     },
     'discharge-from-hospital': {
