@@ -165,17 +165,6 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
-                            name: 'gut-indent',
-                            type: 'number',
-                            placeholder: 'Расстояние (см)',
-                            required: false,
-                            connectedID: 'ileocecal',
-                            connected: 'method-determination-small-gut',
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -1191,17 +1180,6 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
-                            name: 'gut-indent',
-                            type: 'number',
-                            placeholder: 'Расстояние (см)',
-                            required: false,
-                            connectedID: 'ileocecal',
-                            connected: 'method-determination-small-gut',
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -1965,17 +1943,6 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
-                            name: 'gut-indent',
-                            type: 'number',
-                            placeholder: 'Расстояние (см)',
-                            required: false,
-                            connected: 'method-determination-duodenoenteroanastomosis',
-                            connectedID: 'indent',
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -2287,17 +2254,6 @@ export const OPERATIONS = {
                             ],
                             required: false,
                             hasConnection: 'method-determining-place-gastroenteroanastomosis',
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
-                            name: 'gut-indent',
-                            type: 'number',
-                            placeholder: 'Расстояние (см)',
-                            required: false,
-                            connected: 'method-determining-place-gastroenteroanastomosis',
-                            connectedID: 'ileocecal',
                         },
                     },
                     {
@@ -2709,17 +2665,6 @@ export const OPERATIONS = {
                             ],
                             required: false,
                             hasConnection: 'method-determining-place-gastroenteroanastomosis',
-                        },
-                    },
-                    {
-                        type: 'INPUT',
-                        data: {
-                            name: 'gut-indent',
-                            type: 'number',
-                            placeholder: 'Расстояние (см)',
-                            required: false,
-                            connected: 'method-determining-place-gastroenteroanastomosis',
-                            connectedID: 'ileocecal',
                         },
                     },
                     {
@@ -3179,12 +3124,6 @@ export const OPERATIONS_RULES = {
     'ident-treitz': {
         customRange: {
             min: 20,
-            max: 350,
-        },
-    },
-    'gut-indent': {
-        customRange: {
-            min: 250,
             max: 350,
         },
     },
