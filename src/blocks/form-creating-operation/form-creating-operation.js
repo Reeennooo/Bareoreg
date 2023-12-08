@@ -217,6 +217,11 @@ export const CONNECTED_RULES = {
         },
     ],
     // Осложнения
+    // 'view-complication': [
+    //     {
+    //         value: 'Да',
+    //     },
+    // ],
 };
 
 const selects = {

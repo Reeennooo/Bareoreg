@@ -157,7 +157,7 @@ function checkFilledInput(group) {
         const groupAdditionalForm = group.querySelector('.group__additional-form');
         requiredElements = groupAdditionalForm.querySelectorAll('[data-required]');
     }
-
+    // К вложенным группам is-filled добавляется уже после проверки заполненности родительской группы
     // console.log(requiredElements);
     // console.log(additionalGroupsFilled);
     let inputsField = false;

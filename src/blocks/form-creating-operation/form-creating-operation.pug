@@ -501,8 +501,12 @@
       })(data-multiple=true)
   +group({title: 'Операция', operation: true})(data-group-name='operation').group--parent.form-creating-operation__operation
     .group__info Выберите «Вид операции»
-  +group({title: 'Осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications.group--parent
-    +group({title: 'Вид осложнения', type: 'additional'}).is-active
+  +group({title: 'Интраоперационные осложнения', subtitle: 'Трудности и отклонения от стандартного хода операции, которые возникли в операционной и привели к изменению тактики, увеличению длительности или прекращению вмешательства.'}).form-creating-operation__complications.group--parent
+    //- .group__form
+    //-   +group-radio-buttons({title: 'Наличие осложнений'})(data-required='' data-has-connection='view-complication')
+    //-       +radio({name: 'has-complication', value: 'Да', label: 'Да'})
+    //-       +radio({name: 'has-complication', value: 'Нет', label: 'Нет'})
+    +group({title: 'Вид осложнения', type: 'additional'})
       .group__additional-form
         +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
         +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')
@@ -764,7 +768,7 @@
               txt: 'Другая причина'
             },
           ]
-        })(data-has-connection='fatal-outcome')
+        })(data-connected='fatal-outcome')
       +checkbox({name: "Electrolyte-disturbances", value: 'yes', label: 'Электролитные нарушения'})
       +checkbox({name: "Rhabdomyolysis", value: 'yes', label: 'Рабдомиолиз'})
   .form__wrapper-btns
