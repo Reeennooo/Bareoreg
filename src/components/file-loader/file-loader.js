@@ -29,10 +29,10 @@ export class FileLoader {
                 this.uploadFile(event.target.files[0]);
                 event.target.value = '';
             });
-            this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+            this.modalUpload?.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
             return;
         } else if (this.dropZone) {
-            this.modalUpload.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
+            this.modalUpload?.querySelector('.modal-upload__save').addEventListener('click', () => this.addFile());
         } else {
             return;
         }

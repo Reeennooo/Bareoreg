@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const patientCardLoader = new FileLoader({ name: 'main-card-files', type: 'loader' });
     const addFileBtn = document.querySelector('.patient-card__add-file');
     const triggerLoader = patientCardLoader.triggerLoader.bind(patientCardLoader);
-    addFileBtn.addEventListener('click', triggerLoader);
+    addFileBtn?.addEventListener('click', triggerLoader);
 });
 
 Chart.defaults.font.family = 'TT Norms Pro';
