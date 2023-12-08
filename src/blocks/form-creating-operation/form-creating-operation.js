@@ -2,8 +2,7 @@ import tippy from 'tippy.js';
 import { assignInputRules, setMasks } from '../../js/input-validate';
 import { initGroupObserve, setValidCharacters } from '../../js/validate';
 import { setRadioHandler } from '../../components/group-radio-buttons/group-radio-buttons';
-import { OPERATIONS } from '../../js/operation-data';
-import { OPERATIONS_RULES } from '../../js/operation-data';
+import { OPERATIONS, REVISION_OPERATIONS, OPERATIONS_RULES } from '../../js/operation-data';
 import { initGroup } from '../../components/group/group';
 import { createButton } from '../../components/btn/btn';
 import { Complication } from '../complications/complication';
@@ -46,14 +45,24 @@ export const CONNECTED_RULES = {
             connectedID: 'revision',
         },
     ],
-    // 'bariatric-type': [
-    //     {
-    //         value: 1,
-    //     },
-    // ],
-    'type-complication': [
+    'type-revision-operation': [
         {
-            value: 'Осложнение',
+            value: 0,
+            connectedID: 'other',
+        },
+        {
+            value: 1,
+            connectedID: 'conversion',
+        },
+    ],
+    'reason-revision': [
+        {
+            value: 2,
+            connectedID: 'complication',
+        },
+        {
+            value: 3,
+            connectedID: 'remove',
         },
     ],
     'fatal-outcome': [
@@ -211,8 +220,8 @@ export const CONNECTED_RULES = {
 };
 
 const selects = {
-    'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'type-of-revision-operation', 'reason-for-revision', 'type-of-complication', 'kind-of-operation', 'type-of-bariatric-operation', 'access', 'simultaneous-operation', 'pain-relief'],
-    hospital: ['vomiting', 'discharge-where', 'сause-of-death'],
+    'general-information': ['surgeon', 'assistants', 'сhoosing-clinic', 'type-of-operation', 'type-of-revision-operation', 'reason-for-revision', 'type-of-complication', 'reason-deletion-ballon', 'kind-of-operation', 'type-of-bariatric-operation', 'access', 'simultaneous-operation', 'pain-relief'],
+    hospital: ['vomiting', 'discharge-where', 'сause-of-death', 'other-revision-operation'],
     complications: ['bleeding', 'positive-leak-test', 'injury-of-organs', 'electrotrauma-of-organs'],
 };
 
@@ -227,6 +236,12 @@ function initSelects(selects) {
             selectTypeOperation = new window.ItcCustomSelect(`#${selectId}`);
         } else if (selectId === 'kind-of-operation') {
             selectKindOperation = new window.ItcCustomSelect(`#${selectId}`);
+        } else if (selectId === 'type-of-revision-operation') {
+            selectTypeRevisionOperation = new window.ItcCustomSelect(`#${selectId}`);
+        } else if (selectId === 'other-revision-operation') {
+            otherRevisionOperation = new window.ItcCustomSelect(`#${selectId}`);
+        } else if (selectId === 'reason-for-revision') {
+            selectReasonRevision = new window.ItcCustomSelect(`#${selectId}`);
         } else {
             let select = new window.ItcCustomSelect(`#${selectId}`);
             // console.log(select);
@@ -236,6 +251,9 @@ function initSelects(selects) {
 
 let selectTypeOperation;
 let selectKindOperation;
+let selectTypeRevisionOperation;
+let otherRevisionOperation;
+let selectReasonRevision;
 
 document.addEventListener('DOMContentLoaded', () => {
     // отключаю выполнение скрипта
@@ -245,6 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
     assignInputRules(OPERATIONS_RULES);
     initSelects(selects);
     hightlightRequiredFields();
+
+    const operationForm = document.querySelector(`[data-group-name="operation"]`);
+    const operationFormInner = operationForm.querySelector('.group__inner');
+    const operationNameElement = operationForm?.querySelector('.group__add-info');
 
     // calendars
     // Написать функцию которая делает календарь 100% ширины, под инпут.
@@ -300,23 +322,55 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     );
 
-    // связи пунктов выпадающих списков
-    // Операция ВЖБ
+    // СВЯЗИ МЕЖДУ ТИПАМИ И ВИДАМИ ОПЕРАЦИЙ
     const button = selectTypeOperation._elToggle;
     const connectedOption = selectKindOperation._el.querySelector(`.itc-select__option[data-index='9']`);
+    const removeBallonItem = selectKindOperation._el.querySelector(`.itc-select__option[data-value='removal-of-vzhb']`);
     if (button) {
+        // НАБЛЮДЕНИЕ ЗА ПОЛЕМ ТИП ОПЕРАЦИИ
         let observer = new MutationObserver(() => {
-            // console.log(selectTypeOperation.selectedIndex);
+            // СБРОС поля Вид операции/Вид бариатрической операции* при смене типа операции.
+            if (selectKindOperation.selectedIndex !== '-1') {
+                selectKindOperation.selectedIndex = '-1';
+            }
+            if (selectReasonRevision.selectedIndex !== '-1') {
+                selectReasonRevision.selectedIndex = '-1';
+            }
+            selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид операции';
+            operationFormInner.innerHTML = '<div class="group__info">Выберите «Вид операции»</div>';
+            operationNameElement.innerHTML = '';
+
+            // Тип операции - Первичная
             if (selectTypeOperation.selectedIndex === '0') {
                 connectedOption.classList.add('disabled');
-                selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид операции';
-            } else if (selectTypeOperation.selectedIndex === '1') {
+                // СБРОС поля вид ревизионной операции
+                if (selectTypeRevisionOperation.selectedIndex !== '-1') {
+                    selectTypeRevisionOperation.selectedIndex = '-1';
+                }
+                setTimeout(() => {
+                    selectKindOperation._el.classList.add('is-active');
+                }, 0);
+            }
+            // Тип операции - Ревизионная(по поводу)
+            else if (selectTypeOperation.selectedIndex === '1' || selectTypeOperation.selectedIndex === '3') {
                 selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид бариатрической операции*';
-                connectedOption.classList.remove('disabled');
-            } else {
-                selectKindOperation._el.querySelector('.itc-select__placeholder').innerHTML = 'Вид операции*';
+                // СБРОС поля вид ревизионной операции
+                if (selectTypeRevisionOperation.selectedIndex !== '-1') {
+                    selectTypeRevisionOperation.selectedIndex = '-1';
+                }
+                selectKindOperation._el.classList.remove('is-active');
+
+                connectedOption.classList.add('disabled');
+            }
+            // Тип операции - Плановый второй этап
+            else if (selectTypeOperation.selectedIndex === '2') {
+                selectKindOperation._el.querySelector('.itc-select__options').prepend(removeBallonItem);
                 connectedOption.classList.remove('disabled');
             }
+            // Тип операции - Любой другой
+            // else {
+            //     connectedOption.classList.remove('disabled');
+            // }
         });
         observer.observe(button, { attributeFilter: ['data-index'] });
     }
@@ -353,26 +407,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // УСТАНАВЛИВАЕМ НАБЛЮДЕНИЕ ЗА СПИСКОМ ОПЕРАЦИЙ
     const selectOperationObserver = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
-            setOperation(mutation.target.value);
+            setOperation(mutation.target.value, 'operation');
         }
     });
     selectOperationObserver.observe(selectKindOperation._elToggle, { attributeFilter: ['value'] });
 
-    const operationForm = document.querySelector(`[data-group-name="operation"]`);
-    const optionFormInner = operationForm.querySelector('.group__inner');
-    const operationNameElement = operationForm?.querySelector('.group__add-info');
+    const revisionOperationObserver = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            setOperation(mutation.target.value, 'revision-operation');
+        }
+    });
+    revisionOperationObserver.observe(otherRevisionOperation._elToggle, { attributeFilter: ['value'] });
+
     let initObservers = [];
 
     // МЕТОД ДОБАВЛЕНИЯ ОПЕРАЦИИ
-    function setOperation(value) {
-        if (!OPERATIONS[value]) return;
+    function setOperation(value, type = 'operation') {
+        const operationData = type === 'operation' ? OPERATIONS : REVISION_OPERATIONS;
+        if (!operationData[value]) return;
 
         // устанавливаем имя в блок.
-        let operationName = selectKindOperation._textSelectedEl.innerText;
+        let operationName = type === 'operation' ? selectKindOperation._textSelectedEl.innerText : otherRevisionOperation._textSelectedEl.innerText;
         operationNameElement.innerText = operationName;
-        optionFormInner.innerHTML = '';
+        operationFormInner.innerHTML = '';
 
-        const operation = OPERATIONS[value];
+        const operation = operationData[value];
 
         if (operation) {
             if (operation.mainFields) {
@@ -383,12 +442,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const node = createSingleField(item);
                     fieldWrapper.append(node);
                 });
-                optionFormInner.append(fieldWrapper);
+                operationFormInner.append(fieldWrapper);
             }
             if (operation.additionalGroups) {
                 operation.additionalGroups.forEach((item) => {
                     const group = createAditionalGroup(item);
-                    optionFormInner.append(group);
+                    operationFormInner.append(group);
                 });
             }
         }

@@ -1744,16 +1744,12 @@ export const OPERATIONS = {
                     placeholder: 'Причина удаления баллона',
                     options: [
                         ['Подошел срок удаления', 'Подошел срок удаления'],
-                        ['Рецидив или недостаточное снижение веса', 'Рецидив или недостаточное снижение веса'],
-                        ['Инфицирование системы/порта', 'Инфицирование системы/порта'],
-                        ['Эрозия бандажа', 'Эрозия бандажа'],
-                        ['Поломка, протечка', 'Поломка, протечка'],
-                        ['Непроходимость', 'Непроходимость'],
+                        ['Разгерметизация', 'Разгерметизация'],
                         ['Непереносимость', 'Непереносимость'],
-                        ['Дисфагия', 'Дисфагия'],
-                        ['Слиппейдж', 'Слиппейдж'],
-                        ['Растяжение пищевода', 'Растяжение пищевода'],
-                        ['Дискомфорт пациента', 'Дискомфорт пациента'],
+                        ['Обтурация желудка баллоном', 'Обтурация желудка баллоном'],
+                        ['Пролежень стенки желудка', 'Пролежень стенки желудка'],
+                        ['Эрозия', 'Эрозия'],
+                        ['Язва желудка', 'Язва желудка'],
                         ['Другое', 'Другое'],
                     ],
                 },
@@ -3191,5 +3187,433 @@ export const OPERATIONS_RULES = {
             min: 250,
             max: 350,
         },
+    },
+};
+
+export const REVISION_OPERATIONS = {
+    'сhanging-loops': {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    'readjustment-anastomosis': {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    'return-old-anatomy': {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    gastrostomy: {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    'removal-hernia-or-infringement': {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    'elimination-of-obstruction': {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    krurorafia: {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    fistuloenterostomy: {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
+    },
+    'additional-banding-ventricle': {
+        mainFields: [
+            {
+                type: 'SELECT',
+                data: {
+                    name: 'type-of-bandage',
+                    placeholder: 'Тип бандажа',
+                    options: [
+                        ['Allergan AP large', 'Allergan AP large'],
+                        ['Allergan AP small', 'Allergan AP small'],
+                        ['BioEnterics LAP-BAND', 'BioEnterics LAP-BAND'],
+                        ['Bioring (Cousin)', 'Bioring (Cousin)'],
+                        ['Heliogast', 'Heliogast'],
+                        ['MID', 'MID'],
+                        ['Minimizer Extra', 'Minimizer Extra'],
+                        ['SAGB (Quickclose)', 'SAGB (Quickclose)'],
+                        ['SAGB (Velocity)', 'SAGB (Velocity)'],
+                        ['Медсил', 'Медсил'],
+                        ['Другой', 'Другой'],
+                    ],
+                    required: true,
+                },
+            },
+            {
+                type: 'RADIO-GROUP',
+                data: {
+                    title: 'Диссекция',
+                    name: 'dissection',
+                    options: [
+                        ['Pars flaccida', 'Pars flaccida'],
+                        ['Перигастральная', 'Перигастральная'],
+                    ],
+                    required: false,
+                    connected: 'operation-type',
+                    connectedID: 'primary',
+                    info: {
+                        id: 'test-id',
+                        content: 'Не игнорируйте это поле',
+                        theme: 'violet',
+                    },
+                },
+            },
+            {
+                type: 'INPUT',
+                data: {
+                    name: 'date-adjustment-bandage',
+                    type: 'text',
+                    placeholder: 'Планируемая дата регулировки бандажа',
+                    required: true,
+                    addClass: 'only-number',
+                    mod: 'calendar',
+                },
+            },
+            {
+                type: 'CHECKBOX',
+                data: {
+                    name: 'hemming-stomach-wall',
+                    value: 'Подшивание стенки желудка - да',
+                    label: 'Подшивание стенки желудка',
+                },
+            },
+        ],
+        additionalGroups: [
+            {
+                name: 'Завершающий этап',
+                active: true,
+                // observe: true,
+                content: [
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            name: 'drainage-of-the-abdominal-cavity',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            hasConnection: 'drainage-tube',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'hemostasis-from-staplers',
+                            placeholder: 'Гемостаз из степлерных линий',
+                            options: [
+                                ['Ушивание вдоль всей длины линии', 'Ушивание вдоль всей длины линии'],
+                                ['Частичное ушивание', 'Частичное ушивание'],
+                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
+                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
+                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
+                            ],
+                            multiple: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'thickness-drainage-tube',
+                            placeholder: 'Толщина дренажной трубки',
+                            options: [
+                                ['Не учитываю', 'Не учитываю'],
+                                ['12 Fr', '12 Fr'],
+                                ['13 Fr', '13 Fr'],
+                                ['14 Fr', '14 Fr'],
+                                ['15 Fr', '15 Fr'],
+                                ['16 Fr', '16 Fr'],
+                                ['17 Fr', '17 Fr'],
+                                ['18 Fr', '18 Fr'],
+                                ['19 Fr', '19 Fr'],
+                                ['20 Fr', '20 Fr'],
+                                ['21 Fr', '21 Fr'],
+                                ['22 Fr', '22 Fr'],
+                                ['23 Fr', '23 Fr'],
+                                ['24 Fr', '24 Fr'],
+                                ['25 Fr', '25 Fr'],
+                                ['26 Fr', '26 Fr'],
+                                ['27 Fr', '27 Fr'],
+                                ['28 Fr', '28 Fr'],
+                            ],
+                            connected: 'drainage-tube',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Ушивание лапаротомной раны',
+                            name: 'suturing-laparotomy-wound',
+                            options: [
+                                ['Узловым способом', 'Узловым способом'],
+                                ['Непрерывной нитью', 'Непрерывной нитью'],
+                            ],
+                            connected: 'access',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+    'additional-gastroplication-ventricle': {
+        additionalGroups: [
+            {
+                name: 'Формирование желудочной трубки',
+                number: 1,
+                active: true,
+                observe: true,
+                content: [
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Желудочная трубка сформирована по зонду?',
+                            name: 'gastric-tube-by-probe',
+                            options: [
+                                ['Да', 'Да'],
+                                ['С отступом от зонда', 'С отступом от зонда'],
+                            ],
+                            required: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'seam-row',
+                            placeholder: 'Рядность шва',
+                            options: [
+                                ['Однорядный', 'Однорядный'],
+                                ['Двухрядный', 'Двухрядный'],
+                                ['Трехрядный', 'Трехрядный'],
+                            ],
+                            hasConnection: 'seam-row',
+                        },
+                    },
+                    {
+                        type: 'INPUT',
+                        data: {
+                            name: 'probe-diameter',
+                            type: 'number',
+                            placeholder: 'Диаметр зонда (Fr)',
+                            value: 36,
+                            required: false,
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Первый ряд',
+                            name: 'first-row',
+                            options: [
+                                ['Узловой', 'Узловой'],
+                                ['Непрерывный', 'Непрерывный'],
+                            ],
+                            connected: 'seam-row',
+                            connectedID: '1,2,3',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Второй ряд',
+                            name: 'second-row',
+                            options: [
+                                ['Узловой', 'Узловой'],
+                                ['Непрерывный', 'Непрерывный'],
+                            ],
+                            connected: 'seam-row',
+                            connectedID: '2,3',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Третий ряд',
+                            name: 'third-row',
+                            options: [
+                                ['Узловой', 'Узловой'],
+                                ['Непрерывный', 'Непрерывный'],
+                            ],
+                            connected: 'seam-row',
+                            connectedID: '3',
+                        },
+                    },
+                ],
+            },
+            {
+                name: 'Завершающий этап',
+                number: 2,
+                active: false,
+                // observe: true,
+                content: [
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            name: 'drainage-of-the-abdominal-cavity',
+                            options: [
+                                ['Да', 'Да'],
+                                ['Нет', 'Нет'],
+                            ],
+                            hasConnection: 'drainage-tube',
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'hemostasis',
+                            placeholder: 'Гемостаз',
+                            options: [
+                                ['Ушивание вдоль всей длины линии', 'Ушивание вдоль всей длины линии'],
+                                ['Гемостаз клипсами', 'Гемостаз клипсами'],
+                                ['Гемостаз биполяром', 'Гемостаз биполяром'],
+                                ['Гемостаз монополяром', 'Гемостаз монополяром'],
+                            ],
+                            multiple: true,
+                        },
+                    },
+                    {
+                        type: 'SELECT',
+                        data: {
+                            name: 'thickness-drainage-tube',
+                            placeholder: 'Толщина дренажной трубки',
+                            options: [
+                                ['Не учитываю', 'Не учитываю'],
+                                ['12 Fr', '12 Fr'],
+                                ['13 Fr', '13 Fr'],
+                                ['14 Fr', '14 Fr'],
+                                ['15 Fr', '15 Fr'],
+                                ['16 Fr', '16 Fr'],
+                                ['17 Fr', '17 Fr'],
+                                ['18 Fr', '18 Fr'],
+                                ['19 Fr', '19 Fr'],
+                                ['20 Fr', '20 Fr'],
+                                ['21 Fr', '21 Fr'],
+                                ['22 Fr', '22 Fr'],
+                                ['23 Fr', '23 Fr'],
+                                ['24 Fr', '24 Fr'],
+                                ['25 Fr', '25 Fr'],
+                                ['26 Fr', '26 Fr'],
+                                ['27 Fr', '27 Fr'],
+                                ['28 Fr', '28 Fr'],
+                            ],
+                            connected: 'drainage-tube',
+                        },
+                    },
+                    {
+                        type: 'RADIO-GROUP',
+                        data: {
+                            title: 'Ушивание лапаротомной раны',
+                            name: 'suturing-laparotomy-wound',
+                            options: [
+                                ['Узловым способом', 'Узловым способом'],
+                                ['Непрерывной нитью', 'Непрерывной нитью'],
+                            ],
+                            connected: 'access',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+    other: {
+        mainFields: [
+            {
+                type: 'TEXTAREA',
+                data: {
+                    name: 'operation-details',
+                    type: 'text',
+                    placeholder: 'Подробности операции',
+                    required: true,
+                    addClass: 'long',
+                },
+            },
+        ],
     },
 };

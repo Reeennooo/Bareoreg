@@ -179,6 +179,7 @@
   }
 
   .itc-select__placeholder {
+    width: auto;
     color: $violet;
     top: 0;
     font-size: 12px;
@@ -191,12 +192,13 @@
   top: 50%;
   left: 16px;
   transform: translateY(-50%);
-  display: flex;
+  // display: flex;
   pointer-events: none;
   border: none;
   background-color: $white;
   color: $grey;
   padding: 0 4px;
+
   // txt
   font-size: 16px;
   letter-spacing: 0.4px;
@@ -204,6 +206,11 @@
   font-weight: 400;
   line-height: 1.5;
   @include transition('top, font-size, color', 0.2s);
+
+  width: calc(100% - 66px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .itc-select__dropdown {
@@ -268,6 +275,7 @@
 }
 
 .itc-select:has(.itc-select__option_selected) .itc-select__placeholder {
+  width: auto;
   top: 0;
   font-size: 12px;
   line-height: 16px;
