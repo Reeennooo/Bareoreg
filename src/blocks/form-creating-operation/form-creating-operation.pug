@@ -506,7 +506,7 @@
     //-   +group-radio-buttons({title: 'Наличие осложнений'})(data-required='' data-has-connection='view-complication')
     //-       +radio({name: 'has-complication', value: 'Да', label: 'Да'})
     //-       +radio({name: 'has-complication', value: 'Нет', label: 'Нет'})
-    +group({title: 'Вид осложнения', type: 'additional'})
+    +group({title: 'Вид осложнения', type: 'additional'}).is-active
       .group__additional-form
         +checkbox({name: "Intraoperative complications", value: 'yes', label: 'Интраоперационные осложнения'})(data-has-connection="intraoperative-complications")(data-connected='no-complications')
         +checkbox({name: "Emergency situations", value: 'yes', label: 'Нештатные ситуации'})(data-has-connection="emergency-situations")(data-connected='no-complications')
