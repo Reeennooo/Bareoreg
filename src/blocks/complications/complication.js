@@ -1,6 +1,8 @@
 import { createGroup } from '../form-creating-operation/form-creating-operation';
 import { createAditionalGroup } from '../form-creating-operation/form-creating-operation';
 import { initGroupObserve } from '../../js/validate';
+import { assignInputRules } from '../../js/input-validate';
+import { hightlightRequiredFields } from '../../js/utils/create-group';
 // const COMPLCIATIONS_RULES = {
 
 // }
@@ -314,6 +316,8 @@ export class Complication {
         this._deleteBtn = this.el.querySelector('.group__header .group__delete');
         this._deleteBtn.addEventListener('click', this._deleteComplication.bind(this));
         this._buttonIntervention.addEventListener('click', this.addIntervention.bind(this));
+        this._operationDate = data.operationDate || null;
+
         this.fieldsRules = {
             [`date-of-detection-complication${this.number}`]: {
                 required: {
@@ -323,6 +327,10 @@ export class Complication {
                     min: 10,
                     max: 10,
                     message: 'Формат: 16.09.2023',
+                },
+                dateRange: {
+                    minDate: this._operationDate,
+                    message: 'Не может быть раньше даты операции',
                 },
             },
             [`complications-by-Clavien-Dindo${this.number}`]: {
@@ -409,11 +417,37 @@ export class Complication {
         return function (repeatedIntData) {
             let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass, interventionData: repeatedIntData });
 
-            interventionNumber++;
-
             this._allInterventions.push(intervention);
             this.el.querySelector('.group__inner').append(intervention.el);
+            // console.log(this._operationDate);
             initGroupObserve();
+            assignInputRules({
+                [`date-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                    required: {
+                        message: 'Обязательное поле',
+                    },
+                    range: {
+                        min: 10,
+                        max: 10,
+                        message: 'Формат: xx.xx.xxxx',
+                    },
+                    dateRange: {
+                        minDate: this._operationDate,
+                        message: 'Не может быть раньше даты операции',
+                    },
+                },
+                [`method-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                    required: {
+                        message: 'Обязательное поле',
+                    },
+                },
+                [`type-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                    required: {
+                        message: 'Обязательное поле',
+                    },
+                },
+            });
+            hightlightRequiredFields();
 
             function deleteIntervention() {
                 intervention.el.remove();
@@ -428,6 +462,8 @@ export class Complication {
             }
             // удаление вмешательства
             intervention.el.querySelector('.group__delete').addEventListener('click', deleteIntervention.bind(this));
+
+            interventionNumber++;
         };
     }
 
@@ -458,7 +494,7 @@ export class RepeatedIntervention {
                     name: `hours-from-main-operation_${this._id}`,
                     type: 'number',
                     placeholder: 'Часов прошло от основной операции*',
-                    required: true,
+                    required: false,
                     addClass: 'only-number',
                 },
             },

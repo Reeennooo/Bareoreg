@@ -468,13 +468,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonsBlock = document.querySelector('.form__wrapper-btns');
 
     function setComplication() {
-        const complication = new Complication({ addClass: ['group--parent'] });
+        const complication = new Complication({ addClass: ['group--parent'], operationDate: dateOperationField.value });
         // Добавляем правила к общим правилам.
         complication.connectionRules.forEach((item) => {
             CONNECTED_RULES[item.name] = item.rules;
         });
         buttonsBlock.before(complication.el);
         assignInputRules(complication.fieldsRules);
+        hightlightRequiredFields();
         initGroupObserve(initObservers);
         initObservers = [];
     }

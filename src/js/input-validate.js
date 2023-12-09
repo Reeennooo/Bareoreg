@@ -51,7 +51,7 @@ let dateRange = {
             errors: [],
         };
 
-        if (value.length < 10) return result;
+        if (value.length < 10 || !minDate) return result;
 
         const minYear = params.minDate.slice(6, 10);
         const minMonth = params.minDate.slice(3, 5);
