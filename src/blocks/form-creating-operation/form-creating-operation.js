@@ -469,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setComplication() {
         const complication = new Complication({ addClass: ['group--parent'], operationDate: dateOperationField.value });
+        console.log(complication);
         // Добавляем правила к общим правилам.
         complication.connectionRules.forEach((item) => {
             CONNECTED_RULES[item.name] = item.rules;
@@ -794,7 +795,7 @@ export function createAditionalGroup(groupData) {
 
     if (groupData.addClass) {
         if (typeof groupData.addClass === 'object') {
-            groupData.addClass.forEach((el) => {
+            groupData.addClass.filter(Boolean).forEach((el) => {
                 group.classList.add(el);
             });
         } else {

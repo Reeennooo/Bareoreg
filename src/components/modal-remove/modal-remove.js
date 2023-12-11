@@ -1,3 +1,5 @@
+import { Complication, RepeatedIntervention } from '../../blocks/complications/complication';
+
 const removeData = {
     'remove-work': {
         title: 'Удаление места работы',
@@ -17,6 +19,14 @@ const removeData = {
     },
     'remove-file': {
         title: 'Удаление файла',
+        subtitle: 'Это действие необратимо, вы уверены?',
+    },
+    'remove-complication': {
+        title: 'Удаление осложнения',
+        subtitle: 'Это действие необратимо, вы уверены?',
+    },
+    'remove-intervention': {
+        title: 'Удаление вмешательства',
         subtitle: 'Это действие необратимо, вы уверены?',
     },
 };
@@ -71,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnRemove.dataset.removeOperationId = trashBtn.dataset.operationId;
             case 'remove-file':
                 btnRemove.dataset.removeFileId = trashBtn.dataset.fileId;
+            case 'remove-complication':
+                btnRemove.dataset.removeComplication = trashBtn.dataset.complicationId;
+            case 'remove-intervention':
+                btnRemove.dataset.removeIntervention = trashBtn.dataset.interventionId;
         }
 
         if (removeData[trashBtn.dataset.modalName]) {
@@ -121,6 +135,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (btnRemove.dataset.removeFileId) {
             deletedEl = document.querySelector(`.file[data-file-id='${btnRemove.dataset.removeFileId}']`);
             deletedEl?.remove();
+            window.closeModal(true);
+        } else if (btnRemove.hasAttribute('data-remove-complication')) {
+            const complication = document.querySelector(`.complication[data-complication-id="${btnRemove.dataset.removeComplication}"]`);
+            Complication.deleteComplication(complication);
+            window.closeModal(true);
+        } else if (btnRemove.hasAttribute('data-remove-intervention')) {
+            const intervention = document.querySelector(`.intervention[data-intervention-id="${btnRemove.dataset.removeIntervention}"]`);
+            console.log(intervention);
+            RepeatedIntervention.deleteIntervention(intervention);
             window.closeModal(true);
         }
 

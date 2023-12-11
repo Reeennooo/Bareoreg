@@ -11,6 +11,51 @@ export class Complication {
     title = 'Раннее осложнение №';
     static complictionCount = 0;
 
+    static deleteComplication(element) {
+        element.remove();
+        Complication.complictionCount = Complication.complictionCount - 1;
+        Complication.correctNumbers();
+    }
+
+    static correctNumbers() {
+        const allComplications = document.querySelectorAll('.complication');
+        allComplications.forEach((complication, i) => {
+            const newNumber = i + 1;
+            complication.querySelector('.group__title span').innerHTML = `Раннее осложнение №${newNumber}`;
+            complication.querySelector('.group__delete').dataset.complicationId = newNumber;
+            complication.dataset.complicationId = newNumber;
+
+            const fields = [...complication.querySelectorAll('.input-custom__input, .itc-select, .textarea')];
+            fields.forEach((element) => {
+                if (element.classList.contains('input-custom__input')) {
+                    let oldValue = element.querySelector('input').getAttribute('name');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+
+                    const input = element.querySelector('input');
+                    const label = element.querySelector('label');
+                    input.setAttribute('name', newValue);
+                    input.setAttribute('id', newValue);
+                    label.setAttribute('for', newValue);
+                } else if (element.classList.contains('itc-select')) {
+                    let oldValue = element.getAttribute('id');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+                    const selectBtn = element.querySelector('button');
+                    selectBtn.setAttribute('name', newValue);
+                    element.setAttribute('id', newValue);
+                    element.querySelector('input').setAttribute('name', newValue);
+                } else if (element.classList.contains('textarea')) {
+                    const textarea = element.querySelector('textarea');
+                    let oldValue = textarea?.getAttribute('id');
+                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+
+                    textarea.setAttribute('name', newValue);
+                    textarea.setAttribute('id', newValue);
+                    element.querySelector('label').setAttribute('for', newValue);
+                }
+            });
+        });
+    }
+
     constructor(data) {
         Complication.complictionCount++;
         this.number = Complication.complictionCount;
@@ -308,14 +353,18 @@ export class Complication {
             this._setComplicationValue();
         }
 
-        this.interventionClass = data.interventionClass;
+        this.interventionClass = data.interventionClass || '';
         this.el = createGroup({ number: this.number, title: this.title, fields: this.fields, deleteButton: true, addClass: ['complication', ...data.addClass] });
+        this.el.dataset.complicationId = this.number;
         this.complicationName = this.el.querySelector('.group__add-info');
         this._buttonIntervention = this.el.querySelector('.add-intervention');
         this._allInterventions = [];
         this._deleteBtn = this.el.querySelector('.group__header .group__delete');
-        this._deleteBtn.addEventListener('click', this._deleteComplication.bind(this));
-        this._buttonIntervention.addEventListener('click', this.addIntervention.bind(this));
+        this._deleteBtn.dataset.modal = 'modal-remove';
+        this._deleteBtn.dataset.modalName = 'remove-complication';
+        this._deleteBtn.dataset.complicationId = this.number;
+        // this._deleteBtn.addEventListener('click', () => Complication.deleteComplication(this.el));
+        this._buttonIntervention.addEventListener('click', this._createInterventionFn.bind(this));
         this._operationDate = data.operationDate || null;
 
         this.fieldsRules = {
@@ -368,110 +417,103 @@ export class Complication {
         });
     }
 
-    _deleteComplication() {
-        this.el.remove();
-        Complication.complictionCount = Complication.complictionCount - 1;
-        this._correctNumbers();
-    }
+    // _deleteComplication() {
+    //     // document.querySelector('modal-remove').remove
+    //     Complication.deleteComplication(this.el);
+    // }
 
-    _correctNumbers() {
-        const allComplications = document.querySelectorAll('.complication');
-        allComplications.forEach((complication, i) => {
-            const newNumber = i + 1;
-            complication.querySelector('.group__title span').innerHTML = `Раннее осложнение №${newNumber}`;
+    _createInterventionFn(repeatedIntData) {
+        let interventionNumber = this.el.querySelectorAll('.intervention').length + 1;
 
-            const fields = [...complication.querySelectorAll('.input-custom__input, .itc-select, .textarea')];
-            fields.forEach((element) => {
-                if (element.classList.contains('input-custom__input')) {
-                    let oldValue = element.querySelector('input').getAttribute('name');
-                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
+        let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass, interventionData: repeatedIntData });
 
-                    const input = element.querySelector('input');
-                    const label = element.querySelector('label');
-                    input.setAttribute('name', newValue);
-                    input.setAttribute('id', newValue);
-                    label.setAttribute('for', newValue);
-                } else if (element.classList.contains('itc-select')) {
-                    let oldValue = element.getAttribute('id');
-                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
-                    const selectBtn = element.querySelector('button');
-                    selectBtn.setAttribute('name', newValue);
-                    element.setAttribute('id', newValue);
-                    element.querySelector('input').setAttribute('name', newValue);
-                } else if (element.classList.contains('textarea')) {
-                    const textarea = element.querySelector('textarea');
-                    let oldValue = textarea?.getAttribute('id');
-                    let newValue = oldValue.replace(/complication\d*/, `complication${newNumber}`);
-
-                    textarea.setAttribute('name', newValue);
-                    textarea.setAttribute('id', newValue);
-                    element.querySelector('label').setAttribute('for', newValue);
-                }
-            });
+        // this._allInterventions.push(intervention);
+        this.el.querySelector('.group__inner').append(intervention.el);
+        // console.log(this._operationDate);
+        initGroupObserve();
+        assignInputRules({
+            [`date-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                required: {
+                    message: 'Обязательное поле',
+                },
+                range: {
+                    min: 10,
+                    max: 10,
+                    message: 'Формат: xx.xx.xxxx',
+                },
+                dateRange: {
+                    minDate: this._operationDate,
+                    message: 'Не может быть раньше даты операции',
+                },
+            },
+            [`method-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                required: {
+                    message: 'Обязательное поле',
+                },
+            },
+            [`type-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
+                required: {
+                    message: 'Обязательное поле',
+                },
+            },
         });
+        hightlightRequiredFields();
+
+        // удаление вмешательства
+        intervention.el.querySelector('.group__delete').dataset.modal = 'modal-remove';
+        intervention.el.querySelector('.group__delete').dataset.modalName = 'remove-intervention';
+        const removeBtnInModal = document.querySelector('.modal-remove .modal-remove__remove-btn');
     }
-
-    _createInterventionFn() {
-        let interventionNumber = 1;
-
-        return function (repeatedIntData) {
-            let intervention = new RepeatedIntervention({ number: interventionNumber, id: `complication-${this.number}_intervention-${interventionNumber}`, addClass: this.interventionClass, interventionData: repeatedIntData });
-
-            this._allInterventions.push(intervention);
-            this.el.querySelector('.group__inner').append(intervention.el);
-            // console.log(this._operationDate);
-            initGroupObserve();
-            assignInputRules({
-                [`date-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
-                    required: {
-                        message: 'Обязательное поле',
-                    },
-                    range: {
-                        min: 10,
-                        max: 10,
-                        message: 'Формат: xx.xx.xxxx',
-                    },
-                    dateRange: {
-                        minDate: this._operationDate,
-                        message: 'Не может быть раньше даты операции',
-                    },
-                },
-                [`method-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
-                    required: {
-                        message: 'Обязательное поле',
-                    },
-                },
-                [`type-repeated-operation_complication-${this.number}_intervention-${interventionNumber}`]: {
-                    required: {
-                        message: 'Обязательное поле',
-                    },
-                },
-            });
-            hightlightRequiredFields();
-
-            function deleteIntervention() {
-                intervention.el.remove();
-                let deleteIndex = this._allInterventions.findIndex((el) => el === intervention);
-                this._allInterventions.splice(deleteIndex, 1);
-
-                interventionNumber = this._allInterventions.length + 1;
-
-                this._allInterventions.forEach((element, index) => {
-                    element.changeFieldsData(index + 1);
-                });
-            }
-            // удаление вмешательства
-            intervention.el.querySelector('.group__delete').addEventListener('click', deleteIntervention.bind(this));
-
-            interventionNumber++;
-        };
-    }
-
-    addIntervention = this._createInterventionFn();
 }
 
 export class RepeatedIntervention {
-    title = 'Повторное вмешательство №';
+    static title = 'Повторное вмешательство №';
+
+    static deleteIntervention(element) {
+        const parrentComplication = element.closest('.complication');
+        element.remove();
+        const allInterventions = parrentComplication.querySelectorAll('.intervention');
+        allInterventions.forEach((int, index) => RepeatedIntervention.changeFieldsData(int, index + 1));
+    }
+
+    static changeFieldsData(intervention, newNumber) {
+        // delete btn
+        const deleteBtn = intervention.querySelector('.btn.group__delete');
+        deleteBtn.dataset.interventionId = newNumber;
+        intervention.dataset.interventionId = newNumber;
+        // title
+        const title = intervention.querySelector('.group__title span');
+        title.innerHTML = RepeatedIntervention.title + newNumber;
+        // fields
+        const fields = [...intervention.querySelectorAll('.input-custom__input, .itc-select, .textarea')];
+        fields.forEach((element) => {
+            if (element.classList.contains('input-custom__input')) {
+                let oldValue = element.querySelector('input').getAttribute('name');
+                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
+
+                const input = element.querySelector('input');
+                const label = element.querySelector('label');
+                input.setAttribute('name', newValue);
+                input.setAttribute('id', newValue);
+                label.setAttribute('for', newValue);
+            } else if (element.classList.contains('itc-select')) {
+                let oldValue = element.getAttribute('id');
+                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
+                const selectBtn = element.querySelector('button');
+                selectBtn.setAttribute('name', newValue);
+                element.setAttribute('id', newValue);
+                element.querySelector('input').setAttribute('name', newValue);
+            } else if (element.classList.contains('textarea')) {
+                const textarea = element.querySelector('textarea');
+                let oldValue = textarea?.getAttribute('id');
+                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
+
+                textarea.setAttribute('name', newValue);
+                textarea.setAttribute('id', newValue);
+                element.querySelector('label').setAttribute('for', newValue);
+            }
+        });
+    }
 
     constructor(data) {
         this.number = data.number;
@@ -561,48 +603,15 @@ export class RepeatedIntervention {
             });
         }
         this.el = createAditionalGroup({
-            name: this.title + this.number,
+            name: RepeatedIntervention.title + this.number,
             content: this.fields,
             deleteButton: true,
             active: true,
-            addClass: data.addClass,
+            addClass: typeof data.addClass === 'object' ? ['intervention', ...data.addClass] : ['intervention', data.addClass],
         });
+        this._deleteBtn = this.el.querySelector('.group__header .group__delete');
+
+        this._deleteBtn.dataset.interventionId = this._id;
+        this.el.dataset.interventionId = this._id;
     }
-
-    changeFieldsData(newNumber) {
-        // title
-        this.el.querySelector('.group__title span').innerHTML = this.title + newNumber;
-        // fields
-        const fields = [...this.el.querySelectorAll('.input-custom__input, .itc-select, .textarea')];
-        fields.forEach((element) => {
-            if (element.classList.contains('input-custom__input')) {
-                let oldValue = element.querySelector('input').getAttribute('name');
-                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
-
-                const input = element.querySelector('input');
-                const label = element.querySelector('label');
-                input.setAttribute('name', newValue);
-                input.setAttribute('id', newValue);
-                label.setAttribute('for', newValue);
-            } else if (element.classList.contains('itc-select')) {
-                let oldValue = element.getAttribute('id');
-                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
-                const selectBtn = element.querySelector('button');
-                selectBtn.setAttribute('name', newValue);
-                element.setAttribute('id', newValue);
-                element.querySelector('input').setAttribute('name', newValue);
-            } else if (element.classList.contains('textarea')) {
-                const textarea = element.querySelector('textarea');
-                let oldValue = textarea?.getAttribute('id');
-                let newValue = oldValue.replace(/intervention-\d*/, `intervention-${newNumber}`);
-
-                textarea.setAttribute('name', newValue);
-                textarea.setAttribute('id', newValue);
-                element.querySelector('label').setAttribute('for', newValue);
-                // ${oldValue}${newNumber}
-            }
-        });
-    }
-
-    // снова ставить наблюдение за элементом?
 }

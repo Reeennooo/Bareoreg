@@ -44,6 +44,7 @@
 html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-text-size-adjust: 100%; // stylelint-disable-line
+  // height: auto !important;
   // 	touch-action: manipulation;
 }
 body {
@@ -53,7 +54,10 @@ body {
   line-height: $line-height;
   color: $black;
   background-color: $background;
-  overflow-x: hidden;
+
+  // overflow-x: hidden;
+  // overflow-y: unset;
+  overflow-y: visible;
   text-align: left;
   cursor: default;
   word-break: break-word;
