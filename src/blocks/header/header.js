@@ -1,42 +1,9 @@
-function makeGetScroll() {
-    // let lastScrollValue = 0;
-    const header = document.querySelector('.header');
+const header = document.querySelector('.header');
+const menuBtn = header.querySelector('.burger');
 
-    function openHeader() {
-        header.classList.remove('is-close');
-    }
-    header.addEventListener('click', openHeader);
+menuBtn.addEventListener('click', toggleMenu);
 
-    function checkHeaderScroll() {
-        if (window.scrollY > header.clientHeight && !header.classList.contains('is-close')) {
-            header.classList.add('is-close');
-        }
-
-        if (window.scrollY < header.clientHeight) {
-            openHeader();
-        }
-
-        if (document.documentElement.classList.contains('noScroll')) {
-            header.classList.add('is-close');
-            header.classList.add('is-blocked');
-        } else if (header.classList.contains('is-blocked')) {
-            header.classList.remove('is-blocked');
-        }
-
-        // if (window.scrollY > lastScrollValue) {
-        //     // console.log('ВНИЗ');
-        // }
-
-        // if (window.scrollY < lastScrollValue) {
-        //     header.classList.remove('is-close');
-        // }
-
-        // lastScrollValue = window.scrollY;
-    }
-
-    return checkHeaderScroll;
+function toggleMenu() {
+    header.classList.toggle('menu-is-open');
+    menuBtn.classList.toggle('is-active');
 }
-
-const checkHeaderScroll = makeGetScroll();
-
-document.addEventListener('scroll', checkHeaderScroll);

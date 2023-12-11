@@ -226,6 +226,7 @@
   .profile {
     &__personal-data {
       flex-direction: column;
+      align-items: center;
       row-gap: 24px;
     }
 

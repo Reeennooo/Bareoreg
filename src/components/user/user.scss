@@ -53,4 +53,25 @@
 
     transform: rotate(180deg);
   }
+
+  .tooltip-menu {
+    z-index: 100;
+  }
+}
+
+@media (max-width: $tablet) {
+  .user {
+    &__username {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .user {
+    &__carret,
+    &__username {
+      display: none;
+    }
+  }
 }

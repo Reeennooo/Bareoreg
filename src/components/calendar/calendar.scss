@@ -147,6 +147,10 @@
 }
 
 @container (max-width: 360px) {
+  .calendar {
+    min-width: none;
+  }
+
   .calendar__header {
     column-gap: 12px;
   }
@@ -157,8 +161,8 @@
   }
 }
 
-// @media (max-width: $mobile-big) {
-//   .calendar__header {
-//     flex-direction: column;
-//   }
-// }
+@media (max-width: $mobile) {
+  .calendar {
+    min-width: 250px;
+  }
+}
