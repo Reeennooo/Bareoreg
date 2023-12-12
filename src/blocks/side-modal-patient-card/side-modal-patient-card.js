@@ -2597,7 +2597,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setGeneralInfo(modalName, element) {
         if (!modalName) return;
-        console.log('SET GENERAL INFO');
         const title = sideModal.querySelector('.side-modal__title');
         const operationName = sideModal.querySelector('.side-modal__add-txt');
         rerenderPaperclip(modalName);

@@ -3,7 +3,7 @@ import { Complication, RepeatedIntervention } from '../../blocks/complications/c
 const removeData = {
     'remove-work': {
         title: 'Удаление места работы',
-        subtitle: 'Это действие необратимо,<br> вы уверены?',
+        subtitle: 'Вы больше не сможете добавлять операции с этой клиникой,<br> вы уверены?',
     },
     'remove-assistant': {
         title: 'Удаление ассистента',

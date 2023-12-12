@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addFileBtn?.addEventListener('click', triggerLoader);
 });
 
-Chart.defaults.font.family = 'TT Norms Pro';
+Chart.defaults.font.family = 'TTNormsPro';
 Chart.defaults.color = '#49454f';
 
 let operations = {
@@ -135,7 +135,7 @@ if (myChartCanvas) {
                     beginAtZero: true,
                 },
             },
-            animation: false,
+            // animation: false,
             plugins: {
                 // legend: {
                 //     display: false,
@@ -147,10 +147,10 @@ if (myChartCanvas) {
                     bodySpacing: 4,
                     boxPadding: 4,
                     titleFont: {
-                        family: 'Helvetica',
+                        family: 'TTNormsPro',
                     },
                     bodyFont: {
-                        family: 'Helvetica',
+                        family: 'TTNormsPro',
                     },
                 },
             },

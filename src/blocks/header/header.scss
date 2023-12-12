@@ -160,13 +160,9 @@
       display: inline-flex;
     }
 
-    &.is-close {
-      padding: 10px 0;
-
-      .header__buttons,
-      .header__nav {
-        display: none;
-      }
+    .header__buttons {
+      justify-content: flex-end;
+      column-gap: 15px;
     }
 
     &.is-blocked {
