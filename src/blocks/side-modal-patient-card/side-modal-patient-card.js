@@ -2764,6 +2764,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (el.interventions && el.interventions.length) {
                     el.interventions.forEach((repeatedInt) => {
+                        console.log(complicationInstance);
                         complicationInstance.addIntervention(repeatedInt);
                     });
                 }

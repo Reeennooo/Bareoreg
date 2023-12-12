@@ -50,3 +50,9 @@
     border-color: $grey-light;
   }
 }
+
+@media (max-width: $mobile-big) {
+  .observations {
+    padding: 0 20px;
+  }
+}

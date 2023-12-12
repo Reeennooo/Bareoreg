@@ -92,3 +92,12 @@
     margin-bottom: 24px;
   }
 }
+
+@media (max-width: $mobile-big) {
+  .i-modal {
+    padding: 20px;
+    &__content {
+      padding: 30px 20px;
+    }
+  }
+}

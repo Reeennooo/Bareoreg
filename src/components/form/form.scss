@@ -14,3 +14,12 @@
     }
   }
 }
+
+@media (max-width: $mobile) {
+  .form {
+    &__wrapper-btns {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+}

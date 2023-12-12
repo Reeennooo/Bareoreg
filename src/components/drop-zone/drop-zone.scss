@@ -87,3 +87,17 @@
     }
   }
 }
+
+@media (max-width: $mobile-big) {
+  .drop-zone {
+    label {
+      padding: 20px;
+      justify-content: center;
+      row-gap: 8px;
+    }
+
+    &__subtitle {
+      text-align: center;
+    }
+  }
+}

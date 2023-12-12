@@ -862,7 +862,7 @@ export function createInput(data) {
                 <use href='img/sprite.svg#calendar'></use>
             </svg>
         </div>`;
-        input.querySelector('.input-custom__input').insertAdjacentHTML('afterend', calendarToggler);
+        input.querySelector('.input-custom__input').insertAdjacentHTML('beforeend', calendarToggler);
         inputField.dataset.mask = 'date';
         new window.Calendar(inputField);
         setMasks(inputField);

@@ -3,23 +3,23 @@ import { Complication, RepeatedIntervention } from '../../blocks/complications/c
 const removeData = {
     'remove-work': {
         title: 'Удаление места работы',
-        subtitle: 'Это действие необратимо, вы уверены?',
+        subtitle: 'Это действие необратимо,<br> вы уверены?',
     },
     'remove-assistant': {
         title: 'Удаление ассистента',
-        subtitle: 'Это действие необратимо, вы уверены?',
+        subtitle: 'Это действие необратимо,<br> вы уверены?',
     },
     'remove-operation': {
         title: 'Удаление операции',
-        subtitle: 'Это действие необратимо, вы уверены?',
+        subtitle: 'Это действие необратимо,<br> вы уверены?',
     },
     'remove-observation': {
         title: 'Удаление наблюдения',
-        subtitle: 'Это действие необратимо, вы уверены?',
+        subtitle: 'Это действие необратимо,<br> вы уверены?',
     },
     'remove-file': {
         title: 'Удаление файла',
-        subtitle: 'Это действие необратимо, вы уверены?',
+        subtitle: 'Это действие необратимо,<br> вы уверены?',
     },
     'remove-complication': {
         title: 'Удаление осложнения',
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (removeData[trashBtn.dataset.modalName]) {
             removeModal.querySelector('.modal-remove__title').innerText = removeData[trashBtn.dataset.modalName].title;
-            removeModal.querySelector('.modal-remove__subtitle').innerText = removeData[trashBtn.dataset.modalName]?.subtitle;
+            removeModal.querySelector('.modal-remove__subtitle').innerHTML = removeData[trashBtn.dataset.modalName]?.subtitle;
         }
     });
 

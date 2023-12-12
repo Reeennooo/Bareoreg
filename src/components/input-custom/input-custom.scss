@@ -3,6 +3,21 @@
   &__input {
     width: 100%;
     position: relative;
+
+    // Стили если есть икона календаря
+    &:has(.calendar-toggler) {
+      input {
+        padding-right: 50px;
+      }
+
+      label {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 60px);
+      }
+    }
   }
 
   &[data-connected] {

@@ -374,7 +374,7 @@ export class Complication {
         this._deleteBtn.dataset.modalName = 'remove-complication';
         this._deleteBtn.dataset.complicationId = this.number;
         // this._deleteBtn.addEventListener('click', () => Complication.deleteComplication(this.el));
-        this._buttonIntervention.addEventListener('click', this._createInterventionFn.bind(this));
+        this._buttonIntervention.addEventListener('click', this.addIntervention.bind(this));
         this._operationDate = data.operationDate || null;
 
         this.fieldsRules = {
@@ -474,6 +474,8 @@ export class Complication {
         intervention.el.querySelector('.group__delete').dataset.modalName = 'remove-intervention';
         const removeBtnInModal = document.querySelector('.modal-remove .modal-remove__remove-btn');
     }
+
+    addIntervention = this._createInterventionFn;
 }
 
 export class RepeatedIntervention {

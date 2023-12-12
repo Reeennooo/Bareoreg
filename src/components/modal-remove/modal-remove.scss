@@ -20,6 +20,10 @@
     letter-spacing: 0.15px;
     color: $grey-light;
     margin-bottom: 24px;
+
+    br {
+      display: none;
+    }
   }
 
   &__buttons {
@@ -30,6 +34,16 @@
     .btn {
       width: auto;
       flex-grow: 1;
+    }
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .modal-remove {
+    &__subtitle {
+      br {
+        display: block;
+      }
     }
   }
 }

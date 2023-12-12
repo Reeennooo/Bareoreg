@@ -242,3 +242,11 @@
     }
   }
 }
+
+@media (max-width: $mobile-big) {
+  .profile {
+    &__hint {
+      font-weight: 400;
+    }
+  }
+}

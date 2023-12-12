@@ -160,3 +160,9 @@
     column-gap: 6px;
   }
 }
+
+@media (max-width: $mobile-big) {
+  .calendar {
+    min-width: 250px;
+  }
+}

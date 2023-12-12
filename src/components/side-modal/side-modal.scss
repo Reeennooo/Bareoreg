@@ -321,7 +321,7 @@
 @media (max-width: $mobile-big) {
   .side-modal.i-modal {
     .i-modal__content {
-      padding-top: 68px;
+      padding-top: 60px;
     }
 
     .side-modal__main {
@@ -342,8 +342,51 @@
       grid-column-end: span 1;
     }
 
+    .side-modal__grid {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+    }
+
     .side-modal__title {
-      font-size: 20px;
+      font-size: 22px;
+    }
+  }
+
+  .side-modal[data-side-modal-name='operation'],
+  .side-modal[data-side-modal-name='observation'],
+  .side-modal[data-side-modal-name='patient'] {
+    .group.three-columns {
+      .group__form,
+      .group__additional-form {
+        grid-template-columns: 1fr;
+      }
+
+      .long {
+        grid-column-end: span 1;
+      }
+    }
+
+    .file-loader {
+      padding: 0 20px;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .side-modal.i-modal {
+    .side-modal__header {
+      padding: 20px;
+
+      &::before {
+        width: calc(100% - 40px);
+        left: 20px;
+      }
+    }
+
+    .side-modal__header-main {
+      flex-direction: column;
+      align-items: start;
+      row-gap: 10px;
     }
   }
 }
