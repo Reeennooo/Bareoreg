@@ -68,3 +68,12 @@
     }
   }
 }
+
+@media (max-width: $mobile) {
+  .search {
+    &__input {
+      left: 0;
+      width: 350px;
+    }
+  }
+}

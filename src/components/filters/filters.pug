@@ -7,7 +7,11 @@ mixin filters(data)
     .filters-tooltip
       .filters-tooltip__header
         span Фильтры
-        +btn({txt: 'Сбросить фильтры', mode: 'text'})(data-reset-filters)
+        .filters-tooltip__btns
+          +btn({txt: 'Сбросить фильтры', mode: 'text'})(data-reset-filters)
+          button.filters-tooltip__close
+            svg
+              use(href='img/sprite.svg#close-X')
       .filters-tooltip__body
         .filters-tooltip__section(data-section-name='date-operation')
           .filters-tooltip__section-name Дата операции

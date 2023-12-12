@@ -142,11 +142,48 @@
       background-color: $grey-super-light;
     }
   }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  &__close {
+    // display: none;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+
+    svg {
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      stroke: $grey-light;
+    }
+  }
 }
 
 @media (max-width: $mobile-big) {
+  .filters {
+    position: static;
+  }
   .filters-tooltip {
+    border-radius: 0;
     right: auto;
+    width: 100%;
+    height: calc(100vh - 60px);
+    top: 60px;
     left: 0;
+
+    &__section {
+      row-gap: 16px;
+    }
+
+    &__close {
+      display: block;
+    }
   }
 }

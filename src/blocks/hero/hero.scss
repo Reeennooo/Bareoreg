@@ -101,6 +101,7 @@
     padding-bottom: 32px !important;
 
     &__title {
+      font-weight: 500;
       line-height: 1.2;
     }
 
@@ -109,8 +110,33 @@
     }
 
     &__add-patient {
-      margin-top: 32px;
       position: relative;
+    }
+  }
+
+  .patient-list {
+    .hero {
+      &__inner {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+      }
+
+      &__add-patient {
+        flex-shrink: 0;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        span {
+          display: none;
+        }
+
+        svg {
+          flex-shrink: 0;
+          width: 24px;
+          height: 24px;
+        }
+      }
     }
   }
 }

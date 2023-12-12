@@ -79,7 +79,7 @@
 
   &.is-active {
     .burger-line {
-      background-color: $red-btn;
+      background-color: $grey-light;
     }
     .burger-line:nth-child(1) {
       transform: rotate(-45deg) translateY(5px) translateX(0);

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnFIlter.addEventListener('click', toggleFilters);
 
     document.addEventListener('click', (event) => {
-        if (!event.target.closest('.filters')) {
+        if (!event.target.closest('.filters') || event.target.closest('.filters-tooltip__close')) {
             filters.classList.remove('is-active');
         }
         const filter = event.target.closest('.chip--filter');

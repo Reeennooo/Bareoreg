@@ -159,6 +159,7 @@
 
 @media (max-width: $desktop) {
   .general-info {
+    position: initial;
     width: 100%;
     display: grid;
     // align-items: center;
