@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showEl(el) {
         tooltipActions.classList.remove('is-active');
+
+        // Установка href
+        const linksObj = JSON.parse(el.dataset.links);
+        tooltipActions.firstElementChild.href = linksObj.operation;
+        tooltipActions.firstElementChild.nextElementSibling.href = linksObj.observation;
+        tooltipActions.lastElementChild.href = linksObj.patient;
+
         el.append(tooltipActions);
         setTimeout(() => {
             tooltipActions.classList.add('is-active');

@@ -387,7 +387,7 @@
           if(patient.nextObserv.event)
             span.event=patient.nextObserv.event
         .patient__param.patient__EWL=patient.ewl
-        .patient__actions
+        .patient__actions(data-links={"operation": "/new-operation/323", "observation":"/new-observation/323", "patient":"/personal/patient/3223"})
           svg.dots-icon
             use(href='img/sprite.svg#dots-three-vertical')
     .patient-table__empty
