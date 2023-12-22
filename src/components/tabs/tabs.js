@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelector('.tabs-wrapper');
     if (!tabs) return;
 
-    tabs.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
         const tab = event.target.closest('.tab');
         if (tab) tabClick(tab);
     });

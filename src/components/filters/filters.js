@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const startPeriod = new window.Calendar('#filter-start-period', { position: 'absolute' });
     const endPeriod = new window.Calendar('#filter-end-period', { position: 'absolute', side: 'right' });
     const selectedFilterWrapper = document.querySelector('.control-panel__active-filters');
-    const btnFIlter = filters.querySelector('.filters__btn');
-    btnFIlter.addEventListener('click', toggleFilters);
 
     document.addEventListener('click', (event) => {
-        if (!event.target.closest('.filters') || event.target.closest('.filters-tooltip__close')) {
-            filters.classList.remove('is-active');
+        const filters = event.target.closest('.filters');
+        if(event.target.closest('.filters__btn')) {
+            toggleFilters()
+        }
+        if (!filters) {
+            document.querySelector('.filters').classList.remove('is-active');
         }
         const filter = event.target.closest('.chip--filter');
         if (filter) {
@@ -21,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             resetFilters();
         }
     });
-
-    const filterTooltip = document.querySelector('.filters-tooltip');
 
     function selectFilter(filter) {
         if (filter.classList.contains('is-active')) {
@@ -69,12 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function removeFilter(filterId) {
         if (!filterId) return;
+        const filterTooltip = document.querySelector('.filters-tooltip');
         const filterSelectedChip = document.querySelector(`.chip--selected-filter[data-filter-id=${filterId}]`);
         filterSelectedChip?.remove();
         filterTooltip.querySelector(`[data-filter-id='${filterId}']`).classList.remove('is-active');
     }
 
     function resetFilters() {
+        const filterTooltip = document.querySelector('.filters-tooltip');
         const elsActive = filterTooltip.querySelectorAll('.chip--filter.is-active');
         elsActive.forEach((el) => {
             el.classList.remove('is-active');
@@ -85,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleFilters() {
+        const filters = document.querySelector('.filters');
         if (filters.classList.contains('is-active')) {
             filters.classList.remove('is-active');
         } else {

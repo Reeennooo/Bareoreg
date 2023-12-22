@@ -392,7 +392,7 @@ export class Complication {
                     message: 'Не может быть раньше даты операции',
                 },
             },
-            [`complications-by-Clavien-Dindo${this.number}`]: {
+            [`by-Clavien-Dindo-complication${this.number}`]: {
                 required: {
                     message: 'Обязательное поле',
                 },

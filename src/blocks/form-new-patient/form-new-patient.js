@@ -91,13 +91,11 @@ export const PATIENT_RULES = {
             message: 'Обязательное поле',
         },
     },
-
     'middle-name': {
         required: {
             message: 'Обязательное поле',
         },
     },
-
     'date-of-birth': {
         required: {
             message: 'Обязательное поле',
@@ -108,6 +106,11 @@ export const PATIENT_RULES = {
             message: 'Формат xx.xx.xxxx',
         },
     },
+   "ASA-scale": {
+        required: {
+            message: 'Обязательное поле',
+        },
+   }
 };
 
 document.addEventListener('DOMContentLoaded', () => {

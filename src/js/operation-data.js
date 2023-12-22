@@ -3023,7 +3023,7 @@ export const OPERATIONS_RULES = {
             max: 600,
         },
     },
-    'discharge-from-hospital': {
+    'calendar-discharge': {
         range: {
             min: 10,
             max: 10,
@@ -3050,7 +3050,7 @@ export const OPERATIONS_RULES = {
             min: 0,
         },
     },
-    'date-operation': {
+    'calendar-operation': {
         required: {
             message: 'Обязательное поле',
         },

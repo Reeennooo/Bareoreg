@@ -9,7 +9,13 @@ const tooltipActions = new TooltipActions({
     ],
 }).tooltip;
 
-document.addEventListener('DOMContentLoaded', () => {
+// const tableContainer = document.querySelector('.table-container');
+// const observer = new MutationObserver(() => setEventListeners())
+// observer.observe(tableContainer, {childList: true, subtree: true})
+
+document.addEventListener("DOMContentLoaded", setEventListeners)
+
+function setEventListeners() {
     // table header
     const patientTable = document.querySelector('.patient-table');
     if (!patientTable) return;
@@ -27,12 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const patientActions = document.querySelectorAll('.patient__actions');
-    patientActions.forEach((el) => el.addEventListener('click', () => showEl(el)));
-
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.patient__actions')) {
+        const patientActionBtn = e.target.closest('.patient__actions')
+        if (!patientActionBtn) {
             tooltipActions.classList.remove('is-active');
+        }
+        else if(patientActionBtn) {
+            showEl(patientActionBtn)
         }
     });
 
@@ -50,4 +57,4 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltipActions.classList.add('is-active');
         }, 100);
     }
-});
+}

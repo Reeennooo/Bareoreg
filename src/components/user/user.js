@@ -5,8 +5,8 @@ const userElement = document.querySelector('.user');
 if (userElement) {
     const tooltipUserMenu = new TooltipActions({
         options: [
-            { txt: 'Профиль', icon: 'user', href: '/profile.html' },
-            { txt: 'Выйти', icon: 'SignOut', addClass: 'logout' },
+            { txt: 'Профиль', icon: 'user', href: '/personal/profile' },
+            { txt: 'Выйти', icon: 'SignOut', addClass: '/logout' },
         ],
     }).tooltip;
 

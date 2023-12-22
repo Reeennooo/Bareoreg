@@ -4,18 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const search = document.querySelector('.search');
     if (!search) return;
     const selectedFilterWrapper = document.querySelector('.control-panel__active-filters');
-    const searchBtn = search.querySelector('.search__btn');
     const searchInput = search.querySelector('.search__input input');
     let searchChip;
 
-    searchBtn.addEventListener('click', openSearch);
     document.addEventListener('click', (event) => {
+        const search = document.querySelector('.search');
         if (!event.target.closest('.search') && search.classList.contains('is-active')) {
             closeSearch();
             createSearchChip();
         } else if (event.target.closest('.search__clear')) {
             clearSeacrh();
             closeSearch();
+        }
+        // searchBtn
+        if(event.target.closest('.search__btn')) {
+            openSearch()
         }
     });
 
