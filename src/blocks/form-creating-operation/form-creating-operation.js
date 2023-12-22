@@ -306,19 +306,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Дата операции и Дата выписки
     const dateOperationField = document.getElementById('calendar-operation');
-    if (dateOperationField.value) {
-        assignInputRules({
-            'discharge-from-hospital': {
-                dateRange: {
-                    minDate: dateOperationField.value,
-                    message: 'Не может быть раньше даты операции',
-                },
-            },
-        });
-    }
+    // if (dateOperationField.value) {
+    //     assignInputRules({
+    //         'calendar-discharge': {
+    //             dateRange: {
+    //                 minDate: dateOperationField.value,
+    //                 message: 'Не может быть раньше даты операции',
+    //             },
+    //         },
+    //     });
+    // }
     dateOperationField.addEventListener('blur', () =>
         assignInputRules({
-            'discharge-from-hospital': {
+            'calendar-discharge': {
+                required: {
+                    message: 'Обязательное поле',
+                },
+                range: {
+                    min: 10,
+                    max: 10,
+                    message: 'Формат xx.xx.xxxx',
+                },
                 dateRange: {
                     minDate: dateOperationField.value,
                     message: 'Не может быть раньше даты операции',
@@ -830,6 +838,9 @@ export function createAditionalGroup(groupData) {
     return group;
 }
 
+// !!! СЕЙЧАС ID УСТАНАВЛИВАЕТСЯ В СООТВЕТСТВИИ С NAME
+// ПРИ СМЕНЕ NAME НУЖНО ОСТАВИТЬ ПРЕЖНИЙ ID, Т.К У МЕНЯ ВСЕ ПРАВИЛА
+// ДЛЯ ПОЛЕЙ ОРИЕНТИРУЮТСЯ НА ID
 export function createInput(data) {
     const input = document.createElement('div');
     input.classList.add('input-custom');
@@ -912,6 +923,9 @@ export function createInput(data) {
     return input;
 }
 
+// !!! СЕЙЧАС ID УСТАНАВЛИВАЕТСЯ В СООТВЕТСТВИИ С NAME
+// ПРИ СМЕНЕ NAME НУЖНО ОСТАВИТЬ ПРЕЖНИЙ ID, Т.К У МЕНЯ ВСЕ ПРАВИЛА
+// ДЛЯ ПОЛЕЙ ОРИЕНТИРУЮТСЯ НА ID
 function createRadioGroup(data) {
     const radioGroup = document.createElement('div');
     radioGroup.classList.add('group-radio-buttons');
@@ -923,6 +937,7 @@ function createRadioGroup(data) {
     const options = [];
     data.options.forEach((el) => {
         const option = document.createElement('label');
+        // option.id = data.name;
         option.classList.add('radio');
         option.innerHTML = `
             <input type='radio' name='${data.name}' value='${el[0] || ''}'>
@@ -986,6 +1001,9 @@ function createRadioGroup(data) {
     return radioGroup;
 }
 
+// !!! СЕЙЧАС ID УСТАНАВЛИВАЕТСЯ В СООТВЕТСТВИИ С NAME
+// ПРИ СМЕНЕ NAME НУЖНО ОСТАВИТЬ ПРЕЖНИЙ ID, Т.К У МЕНЯ ВСЕ ПРАВИЛА
+// ДЛЯ ПОЛЕЙ ОРИЕНТИРУЮТСЯ НА ID
 export function createSelect(data) {
     const select = document.createElement('div');
     select.setAttribute('id', data.name);

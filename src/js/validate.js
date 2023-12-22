@@ -277,7 +277,7 @@ export function setValidCharacters(element) {
 
     let onlyTxtInputs = document.querySelectorAll('.only-txt');
     onlyTxtInputs.forEach((input) => {
-        if (input.name === 'name' || input.name === 'middle-name' || input.name === 'surname') {
+        if (input.id === 'name' || input.id === 'middle-name' || input.id === 'surname') {
             firstLetterCapital(input);
         }
         onlyTxt(input);

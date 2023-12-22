@@ -51,7 +51,7 @@ let dateRange = {
             errors: [],
         };
 
-        if (value.length < 10 || !minDate) return result;
+        if (value.length < 10 || !params.minDate) return result;
 
         const minYear = params.minDate.slice(6, 10);
         const minMonth = params.minDate.slice(3, 5);
@@ -113,25 +113,26 @@ export function checkValidate(element, rules) {
 }
 
 export function assignInputRules(allRules, checkRightNow) {
-    const AllElements = document.querySelectorAll('.input-custom input, .itc-select button');
+    const AllElements = document.querySelectorAll('.input-custom input, .itc-select');
     const rules = Object.keys(allRules);
     // console.log(allRules);
     AllElements.forEach((element) => {
-        if (rules.indexOf(element.name) !== -1) {
+        if (rules.indexOf(element.id) !== -1) {
+            // console.log(element.id)
             let currentElement;
-            if (element.dataset.select === 'toggle') {
-                currentElement = element.closest('.itc-select');
+            if (element.closest('.itc-select')) {
+                currentElement = element;
                 // const selectItems = select.querySelectorAll('.itc-select__option');
-                currentElement.addEventListener('click', () => checkValidate(currentElement, allRules[element.name]));
-                // selectItems.forEach((item) => item.addEventListener('click', () => checkValidate(select, allRules[element.name])));
-                const observer = new MutationObserver(() => checkValidate(currentElement, allRules[element.name]));
+                currentElement.addEventListener('click', () => checkValidate(currentElement, allRules[element.id]));
+                // selectItems.forEach((item) => item.addEventListener('click', () => checkValidate(select, allRules[element.id])));
+                const observer = new MutationObserver(() => checkValidate(currentElement, allRules[element.id]));
                 observer.observe(element, { attributes: true, attributeFilter: ['value'] });
             } else {
                 currentElement = element;
-                currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.name]));
-                // currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.name]));
+                currentElement.addEventListener('input', () => checkValidate(currentElement, allRules[element.id]));
+                // currentElement.addEventListener('change', () => checkValidate(currentElement, allRules[element.id]));
                 currentElement.addEventListener('blur', () => {
-                    checkValidate(currentElement, allRules[element.name]);
+                    checkValidate(currentElement, allRules[element.id]);
                     if (!currentElement.value && !currentElement.hasAttribute('data-required')) {
                         currentElement.classList.remove('is-invalid');
                     }
@@ -145,9 +146,8 @@ export function assignInputRules(allRules, checkRightNow) {
                 } else {
                     inputInner = currentElement;
                 }
-                // console.log(inputInner);
                 if (inputInner.value) {
-                    checkValidate(currentElement, allRules[element.name]);
+                    checkValidate(currentElement, allRules[element.id]);
                 }
             }
         }
