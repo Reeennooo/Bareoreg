@@ -1,3 +1,5 @@
+// ЭТО НУЖНО БУДЕТ УДАЛИТЬ
+
 export const sideModalData = {
     operation: {
         observations: [

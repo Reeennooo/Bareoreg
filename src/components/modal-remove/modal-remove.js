@@ -139,12 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (btnRemove.hasAttribute('data-remove-complication')) {
             const complication = document.querySelector(`.complication[data-complication-id="${btnRemove.dataset.removeComplication}"]`);
             Complication.deleteComplication(complication);
-            window.closeModal(true);
+            window.closeModal();
         } else if (btnRemove.hasAttribute('data-remove-intervention')) {
             const intervention = document.querySelector(`.intervention[data-intervention-id="${btnRemove.dataset.removeIntervention}"]`);
             console.log(intervention);
             RepeatedIntervention.deleteIntervention(intervention);
-            window.closeModal(true);
+            window.closeModal();
         }
 
         clearBtnRemove();

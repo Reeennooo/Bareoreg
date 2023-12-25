@@ -5,7 +5,7 @@ import { FileLoader } from '../../components/file-loader/file-loader';
 import { Complication } from '../complications/complication';
 import { assignInputRules } from '../../js/input-validate';
 import { initGroupObserve } from '../../js/validate';
-import { sideModalData, fields } from './data';
+import { OPERATIONS, PATIENT } from './modal-template-data';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!location.pathname.includes('patient-card')) return;
@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const obsLoaderTrigger = obsLoader.triggerLoader.bind(obsLoader);
     const patientLoaderTrigger = patientLoader.triggerLoader.bind(patientLoader);
 
-    function rerenderPaperclip(modaName) {
+    function rerenderPaperclip(modalName) {
         const paperClone = paperclipBtn.cloneNode(true);
-        switch (modaName) {
+        switch (modalName) {
             case 'observation':
                 paperClone.addEventListener('click', obsLoaderTrigger);
                 break;
@@ -40,65 +40,73 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (event) => {
         const element = event.target.closest('[data-modal-name]');
         if (!element) return;
-        let modalName = element.dataset.modalName;
-        setGeneralInfo(modalName, event.target);
-        disabledEditMode(modalName);
+        const modalName = element.dataset.modalName;
 
-        if (sideModalData[modalName]) {
-            fillSideModal(modalName);
-            if (modalName === 'observation') {
-                main.prepend(obsLoader.fileLoader);
-            }
-        }
-        if (modalName === 'patient') {
-            enableEditMode(modalName);
-        }
-        // else if (fields[modalName]) {
-        //     enableEditMode(modalName);
-        // }
+        if (modalName !== 'observation' && modalName !== 'operation' && modalName !== 'patient') return;
+
+        resetModalStyles();
+        setGeneralInfo(element, modalName);
     });
 
-    function setGeneralInfo(modalName, element) {
+    function setGeneralInfo(element, modalName) {
         if (!modalName) return;
-        const title = sideModal.querySelector('.side-modal__title');
-        const operationName = sideModal.querySelector('.side-modal__add-txt');
-        rerenderPaperclip(modalName);
-        switch (modalName) {
-            case 'operation':
-                title.innerText = 'RYGB (Гастрошунтирование)';
-                trashBtn.setAttribute('data-modal-name', 'remove-operation');
-                sideModal.dataset.sideModalName = modalName;
-                const pill = element.closest('.pill');
-                trashBtn.setAttribute('data-operation-id', pill.dataset.operationId);
-                break;
-            case 'observation':
-                trashBtn.setAttribute('data-modal-name', 'remove-observation');
-                operationName.querySelector('span').innerText = 'RYGB (Гастрошунтирование)';
-                operationName.dataset.modal = 'side-modal';
-                operationName.dataset.modalName = 'operation';
-                sideModal.dataset.sideModalName = modalName;
+        sideModal.removeAttribute('data-observation-id');
+        sideModal.dataset.sideModalName = modalName;
+        const modalTitle = sideModal.querySelector('.side-modal__title');
 
-                // paperclipBtn.addEventListener('click', obsLoaderTrigger);
-                const pillObservation = element.closest('.pill__observation');
-                trashBtn.setAttribute('data-observation-id', pillObservation.dataset.observationId);
-                title.innerText = `Наблюдение: ${pillObservation.innerText} после операции`;
-                break;
-            case 'patient':
-                title.innerText = 'Редактирование карты пациента';
-                sideModal.dataset.sideModalName = modalName;
-                // patientLoader = new FileLoader({ type: 'loader', name: 'patient-files' });
-                // main.append(patientLoader.fileLoader);
+        if (modalName === 'operation' || modalName === 'observation') {
+            sideModal.classList.add('view-mode');
 
-                break;
-            // default:
-            //     title.innerText = 'Просмотр данных';
+            const operationId = Number(element.closest('[data-operation-id]').dataset.operationId);
+            const operation = OPERATIONS.find((item) => item.id === operationId);
+            const blockOperationName = sideModal.querySelector('.side-modal__add-txt');
+
+            // Добавляем id операции на модальное окно
+            sideModal.dataset.operationId = operationId;
+
+            rerenderPaperclip(modalName);
+
+            switch (modalName) {
+                case 'operation':
+                    // Настройки модального окна
+                    modalTitle.innerText = operation.name;
+                    trashBtn.setAttribute('data-modal-name', 'remove-operation');
+                    trashBtn.setAttribute('data-operation-id', operationId);
+
+                    fillSideModal(modalName, operation);
+                    break;
+                case 'observation':
+                    const observationId = Number(element.closest('.pill__observation').dataset.observationId);
+                    const observation = operation.observations.find((item) => item.id === observationId);
+
+                    // Настройки модального окна
+                    trashBtn.setAttribute('data-modal-name', 'remove-observation');
+                    blockOperationName.querySelector('span').innerText = operation.name;
+                    blockOperationName.dataset.modal = 'side-modal';
+                    blockOperationName.dataset.modalName = 'operation';
+                    blockOperationName.dataset.operationId = operationId;
+                    trashBtn.setAttribute('data-observation-id', observationId);
+                    modalTitle.innerText = `Наблюдение: ${observation.txt} после операции`;
+                    sideModal.dataset.observationId = observationId;
+
+                    fillSideModal(modalName, observation);
+                    break;
+            }
+        } else if (modalName === 'patient') {
+            // patient
+            sideModal.removeAttribute('data-operation-id');
+            modalTitle.innerText = 'Редактирование карты пациента';
+            enableEditMode(modalName);
+
+            // renderFields(modalName);
+            // console.log('patient');
         }
     }
 
     const editBtn = sideModal.querySelector('.side-modal__edit');
     const cancelBtn = sideModal.querySelector('.cancel-button');
     editBtn.addEventListener('click', () => enableEditMode(sideModal.dataset.sideModalName));
-    cancelBtn.addEventListener('click', () => disabledEditMode(sideModal.dataset.sideModalName));
+    cancelBtn.addEventListener('click', disabledEditMode);
 
     function createDataBlock(data) {
         const element = document.createElement('div');
@@ -132,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const observationPill = document.createElement('div');
             observationPill.dataset.modalName = 'observation';
             observationPill.dataset.observationId = data.id;
+            // observationPill.dataset.operationId = data.id;
             observationPill.classList.add('pill__observation', 'pill__observation--transparent');
             observationPill.dataset.modalName;
             observationPill.innerText = data.txt;
@@ -146,17 +155,21 @@ document.addEventListener('DOMContentLoaded', () => {
         sideModal.querySelector('.side-modal__main').prepend(observationsBlock);
     }
 
-    function fillSideModal(modalName) {
-        if (!sideModalData[modalName]) return;
+    function fillSideModal(modalName, data) {
+        // if (!sideModalData[modalName]) return;
 
         main.innerHTML = '';
-        sideModal.classList.add('view-mode');
+        // sideModal.classList.add('view-mode');
+        let content;
 
-        if (sideModalData[modalName].observations) {
-            renderObservations(sideModalData[modalName].observations);
+        if (modalName === 'operation') {
+            data.observations && renderObservations(data.observations);
+            content = data.operation.info;
+        } else if (modalName === 'observation') {
+            content = data.info;
         }
 
-        sideModalData[modalName].groups.forEach((item) => {
+        content.forEach((item) => {
             let dataBlocks;
             let group;
 
@@ -200,21 +213,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function disabledEditMode(modalName) {
+    function disabledEditMode() {
+        const modalName = sideModal.dataset.sideModalName;
         if (modalName === 'patient') return;
+        const operationId = Number(sideModal.dataset.operationId);
+        const observationId = Number(sideModal.dataset.observationId);
+        const operation = OPERATIONS.find((item) => item.id === operationId);
+
         // main.innerHTML = '';
         sideModal.classList.add('view-mode');
         sideModal.classList.remove('is-editable');
-        fillSideModal(modalName);
-        if (modalName === 'obsrevation') {
+
+        if (modalName === 'observation') {
             main.append(obsLoader.fileLoader);
+            const observation = operation.observations.find((item) => item.id === observationId);
+            fillSideModal(sideModal.dataset.sideModalName, observation);
             paperclipBtn.addEventListener('click', obsLoader.triggerLoader);
+        } else {
+            fillSideModal(sideModal.dataset.sideModalName, operation);
         }
     }
 
     function renderFields(modalName) {
         createComplication.count = 0;
-        fields[modalName].forEach((el) => {
+
+        const operation = OPERATIONS.find((item) => item.id === Number(sideModal.dataset.operationId));
+        let content;
+
+        if (modalName === 'operation') {
+            content = operation.operation.fields;
+        } else if (modalName === 'observation') {
+            const observationId = sideModal.dataset.observationId;
+            content = operation.observations.find((item) => item.id === Number(observationId)).fields;
+        } else if (modalName === 'patient') {
+            content = PATIENT;
+        }
+
+        content.forEach((el) => {
             if (el.complication) {
                 const complicationInstance = createComplication(el.data);
                 const complicationBlock = complicationInstance.el;
@@ -226,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (el.interventions && el.interventions.length) {
                     el.interventions.forEach((repeatedInt) => {
-                        console.log(complicationInstance);
+                        // console.log(complicationInstance);
                         complicationInstance.addIntervention(repeatedInt);
                     });
                 }
@@ -262,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function makeCreateComplication() {
         function createComplication(data) {
-            const complication = new Complication({ number: ++createComplication.count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data });
+            const complication = new Complication({ number: ++createComplication.count, addClass: ['group--parent', 'group--simple'], interventionClass: 'group--simple', fieldsValue: data, type: 'inside-the-modal' });
             // Добавляем правила к общим правилам.
             complication.connectionRules.forEach((item) => {
                 CONNECTED_RULES[item.name] = item.rules;
@@ -275,6 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         createComplication.count = 0;
         return createComplication;
+    }
+
+    function resetModalStyles() {
+        sideModal.classList.remove('view-mode', 'is-editable');
     }
 
     const createComplication = makeCreateComplication();

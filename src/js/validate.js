@@ -36,16 +36,12 @@ export function initGroupObserve() {
                     requiredElements = groupForm.querySelectorAll('[data-required]');
                 }
             }
-            checkFilledInput(group);
 
             requiredElements.forEach((requiredEl) => {
                 // дополнительно наблюдаем за элементами имеющими связь
                 if (requiredEl.hasAttribute('data-connected')) {
                     let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
-                    if (!observer) {
-                        console.log(observer);
-                    }
                     observers.push(observer);
                 }
                 if (requiredEl.classList.contains('itc-select')) {
@@ -56,9 +52,6 @@ export function initGroupObserve() {
                 } else if (requiredEl.classList.contains('group-radio-buttons')) {
                     let observer = new MutationObserver(() => checkFilledInput(group));
                     observer.observe(requiredEl, { attributes: true, attributeFilter: ['class'] });
-                    if (!observer) {
-                        console.log(observer);
-                    }
                     observers.push(observer);
                 } else {
                     requiredEl.addEventListener('blur', () => setTimeout(() => checkFilledInput(group)));
@@ -69,7 +62,7 @@ export function initGroupObserve() {
 
             // Отслеживаем поялвение класса 'is-filled' у группы.
             let observer = new MutationObserver((mutationRecords) => {
-                // Отслеживаем поялвение дополнительной группы и запускаем проверку
+                // Отслеживаем поялвение is-filled у вложенной группы и запускаем проверку родительской на заполненость.
                 if (mutationRecords[0].target.classList.contains('group--additional')) {
                     const parrentGroup = mutationRecords[0].target.closest('.group--parent');
                     // console.log('ПОЯВИЛАСЬ ДОДОПЛНИТЕЛЬНАЯ ГРУППА');
@@ -81,9 +74,9 @@ export function initGroupObserve() {
                 }
             });
             observer.observe(group, { attributeFilter: ['class'], attributeOldValue: true });
-            if (!observer) {
-                console.log(observer);
-            }
+            // if (!observer) {
+            //     console.log(observer);
+            // }
             observers.push(observer);
 
             // несколько group__form
@@ -95,12 +88,14 @@ export function initGroupObserve() {
                         checkFilledInput(group);
                     });
                     groupFormObserver.observe(groupForm, { attributeFilter: ['class'] });
-                    if (!groupFormObserver) {
-                        console.log(observer);
-                    }
+                    // if (!groupFormObserver) {
+                    //     console.log(observer);
+                    // }
                     observers.push(groupFormObserver);
                 });
             }
+
+            checkFilledInput(group);
         });
     }
 }

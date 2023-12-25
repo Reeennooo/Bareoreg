@@ -370,7 +370,12 @@ export class Complication {
         this._buttonIntervention = this.el.querySelector('.add-intervention');
         this._allInterventions = [];
         this._deleteBtn = this.el.querySelector('.group__header .group__delete');
-        this._deleteBtn.dataset.modal = 'modal-remove';
+
+        if (data.type === 'inside-the-modal') {
+            this._deleteBtn.dataset.modalNext = 'modal-remove';
+        } else {
+            this._deleteBtn.dataset.modal = 'modal-remove';
+        }
         this._deleteBtn.dataset.modalName = 'remove-complication';
         this._deleteBtn.dataset.complicationId = this.number;
         // this._deleteBtn.addEventListener('click', () => Complication.deleteComplication(this.el));
