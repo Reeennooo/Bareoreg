@@ -953,7 +953,7 @@ function createRadioGroup(data) {
 
     radioGroup.innerHTML = `
         <div class='group-radio-buttons__title'>
-            <span>${data.title}</span>
+            <span>${data.placeholder}</span>
         </div>
         <div class='group-radio-buttons__options'>
         </div>
@@ -1087,7 +1087,7 @@ function createCheckbox(data) {
     checkbox.classList.add('checkbox');
     checkbox.innerHTML = `<input type='checkbox' name='${data.name}' id='${data.id}' value='${data.value}'>
         <span class='checkbox__fake'></span>
-        <span class='checkbox__label'>${data.label}</span>`;
+        <span class='checkbox__label'>${data.placeholder}</span>`;
     return checkbox;
 }
 

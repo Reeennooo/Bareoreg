@@ -22,7 +22,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             id: 'ventricle-formed-probe',
                             // info: {
@@ -249,7 +249,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'cutting-stapler-line',
-                            title: 'Отсечение торцевой степлерной линии',
+                            placeholder: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
@@ -262,7 +262,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'location-gastroenteroanastomosis',
-                            title: 'Расположение гастроэнтероанастомоза',
+                            placeholder: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
                                 ['Впередиободочное', 'Впередиободочное'],
@@ -275,7 +275,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'formation-GEA',
-                            title: 'Формирование гастроэнтероанастомоза',
+                            placeholder: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
                                 ['Аппаратный циркулярный', 'Аппаратный циркулярный'],
@@ -290,7 +290,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'location-alimentary-loop',
-                            title: 'Расположение алиментарной петли',
+                            placeholder: 'Расположение алиментарной петли',
                             name: 'location-alimentary-loop',
                             options: [
                                 ['Впередиободочное', 'Впередиободочное'],
@@ -385,7 +385,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'herjunojunoanastomosis-сlosing-process-hole',
-                            title: 'Закрытие технологического отверстия',
+                            placeholder: 'Закрытие технологического отверстия',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
                             connectedID: 'linear, circle',
                             connected: 'gastroenteroanastomosis',
@@ -442,7 +442,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'spur-been-formed',
-                            title: 'Была ли сформирована шпора?',
+                            placeholder: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
                                 ['Да', 'Да'],
@@ -559,19 +559,6 @@ export const OPERATIONS = {
                             ],
                         },
                     },
-                    // {
-                    //     type: 'RADIO-GROUP',
-                    //     data: {
-                    //         title: 'Закрытие технологического отверстия',
-                    //         name: 'herjunojunoanastomosis-сlosing-process-hole',
-                    //         options: [
-                    //             ['Ручное', 'Ручное'],
-                    //             ['Аппаратное', 'Аппаратное'],
-                    //         ],
-                    //         connectedID: 'hardware-with-manual',
-                    //         connected: 'herjunojunoanastomosis',
-                    //     },
-                    // },
                     {
                         type: 'SELECT',
                         data: {
@@ -630,7 +617,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -701,7 +688,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -737,7 +724,7 @@ export const OPERATIONS = {
                 type: 'RADIO-GROUP',
                 data: {
                     id: 'fullness-of-the-balloon',
-                    title: 'Чем заполнен балон',
+                    placeholder: 'Чем заполнен балон',
                     name: 'fullness-of-the-balloon',
                     options: [
                         ['Воздух', 'Воздух'],
@@ -808,7 +795,7 @@ export const OPERATIONS = {
                 type: 'RADIO-GROUP',
                 data: {
                     id: 'dissection',
-                    title: 'Диссекция',
+                    placeholder: 'Диссекция',
                     name: 'dissection',
                     options: [
                         ['Pars flaccida', 'Pars flaccida'],
@@ -842,7 +829,7 @@ export const OPERATIONS = {
                     id: 'hemming-stomach-wall',
                     name: 'hemming-stomach-wall',
                     value: 'Подшивание стенки желудка - да',
-                    label: 'Подшивание стенки желудка',
+                    placeholder: 'Подшивание стенки желудка',
                 },
             },
         ],
@@ -856,7 +843,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -912,7 +899,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -937,7 +924,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'gastric-tube-by-probe',
-                            title: 'Желудочная трубка сформирована по зонду?',
+                            placeholder: 'Желудочная трубка сформирована по зонду?',
                             name: 'gastric-tube-by-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -975,7 +962,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'first-row',
-                            title: 'Первый ряд',
+                            placeholder: 'Первый ряд',
                             name: 'first-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -989,7 +976,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'second-row',
-                            title: 'Второй ряд',
+                            placeholder: 'Второй ряд',
                             name: 'second-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -1003,7 +990,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'third-row',
-                            title: 'Третий ряд',
+                            placeholder: 'Третий ряд',
                             name: 'third-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -1025,7 +1012,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -1081,7 +1068,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -1106,7 +1093,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'ventricle-formed-probe',
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -1250,7 +1237,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'preservation-right-artery',
-                            title: 'Сохранение правой гастродуоденальной артерии',
+                            placeholder: 'Сохранение правой гастродуоденальной артерии',
                             name: 'preservation-right-artery',
                             options: [
                                 ['Да', 'Да'],
@@ -1263,7 +1250,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'level-mobilization-bulb',
-                            title: 'Уровень мобилизации луковицы (отступ от привратника)',
+                            placeholder: 'Уровень мобилизации луковицы (отступ от привратника)',
                             name: 'level-mobilization-bulb',
                             options: [
                                 ['1 см', '1 см'],
@@ -1357,7 +1344,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'cutting-stapler-line',
-                            title: 'Отсечение торцевой степлерной линии',
+                            placeholder: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
@@ -1563,7 +1550,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -1633,7 +1620,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -1658,7 +1645,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'ventricle-formed-probe',
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -1721,8 +1708,8 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
-                            id: 'distance-from-gatekeeper-to-first cassette',
-                            name: 'distance-from-gatekeeper-to-first cassette',
+                            id: 'distance-from-gatekeeper-to-first-cassette',
+                            name: 'distance-from-gatekeeper-to-first-cassette',
                             placeholder: 'Расстояние от привратника до первой кассеты',
                             options: [
                                 ['Не оценивали', 'Не оценивали'],
@@ -1799,7 +1786,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -1857,7 +1844,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -1929,7 +1916,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'ventricle-formed-probe',
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -2073,7 +2060,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'preservation-right-artery',
-                            title: 'Сохранение правой гастродуоденальной артерии',
+                            placeholder: 'Сохранение правой гастродуоденальной артерии',
                             name: 'preservation-right-artery',
                             options: [
                                 ['Да', 'Да'],
@@ -2162,7 +2149,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'cutting-stapler-line',
-                            title: 'Отсечение торцевой степлерной линии',
+                            placeholder: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
@@ -2223,7 +2210,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -2281,7 +2268,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -2306,7 +2293,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'ventricle-formed-probe',
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -2516,7 +2503,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'location-gastroenteroanastomosis',
-                            title: 'Расположение гастроэнтероанастомоза',
+                            placeholder: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
                                 ['Впередиободочное', 'Впередиободочное'],
@@ -2529,7 +2516,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'cutting-stapler-line',
-                            title: 'Отсечение торцевой степлерной линии',
+                            placeholder: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
@@ -2542,7 +2529,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'formation-GEA',
-                            title: 'Формирование гастроэнтероанастомоза',
+                            placeholder: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
                                 ['Линейным степлером 60 мм', 'Линейным степлером 60 мм'],
@@ -2557,7 +2544,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'selection-tube-wall-hardware-gastroenteroanastomosis',
-                            title: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
+                            placeholder: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
                             name: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             options: [
                                 ['По передней стенке трубки', 'По передней стенке трубки'],
@@ -2572,7 +2559,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'сlosing-process-hole',
-                            title: 'Закрытие технологического отверстия',
+                            placeholder: 'Закрытие технологического отверстия',
                             name: 'сlosing-process-hole',
                             options: [
                                 ['Ручное', 'Ручное'],
@@ -2629,7 +2616,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'spur-been-formed',
-                            title: 'Была ли сформирована шпора?',
+                            placeholder: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
                                 ['Да', 'Да'],
@@ -2660,7 +2647,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -2731,7 +2718,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -2756,7 +2743,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'ventricle-formed-probe',
-                            title: 'Желудочек сформирован по зонду',
+                            placeholder: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -2965,7 +2952,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'location-gastroenteroanastomosis',
-                            title: 'Расположение гастроэнтероанастомоза',
+                            placeholder: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
                                 ['Впередиободочное', 'Впередиободочное'],
@@ -2978,7 +2965,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'cutting-stapler-line',
-                            title: 'Отсечение торцевой степлерной линии',
+                            placeholder: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
                                 ['Да', 'Да'],
@@ -2991,7 +2978,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'formation-GEA',
-                            title: 'Формирование ГЭА',
+                            placeholder: 'Формирование ГЭА',
                             name: 'formation-GEA',
                             options: [
                                 ['Линейным степлером 60 мм', 'Линейным степлером 60 мм'],
@@ -3006,7 +2993,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'selection-tube-wall-hardware-gastroenteroanastomosis',
-                            title: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
+                            placeholder: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
                             name: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             options: [
                                 ['По передней стенке трубки', 'По передней стенке трубки'],
@@ -3021,7 +3008,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'сlosing-process-hole',
-                            title: 'Закрытие технологического отверстия',
+                            placeholder: 'Закрытие технологического отверстия',
                             name: 'сlosing-process-hole',
                             options: [
                                 ['Ручное', 'Ручное'],
@@ -3078,7 +3065,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'spur-been-formed',
-                            title: 'Была ли сформирована шпора?',
+                            placeholder: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
                                 ['Да', 'Да'],
@@ -3109,7 +3096,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -3180,7 +3167,7 @@ export const OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -3516,7 +3503,7 @@ export const REVISION_OPERATIONS = {
                 type: 'RADIO-GROUP',
                 data: {
                     id: 'dissection',
-                    title: 'Диссекция',
+                    placeholder: 'Диссекция',
                     name: 'dissection',
                     options: [
                         ['Pars flaccida', 'Pars flaccida'],
@@ -3550,7 +3537,7 @@ export const REVISION_OPERATIONS = {
                     id: 'hemming-stomach-wall',
                     name: 'hemming-stomach-wall',
                     value: 'Подшивание стенки желудка - да',
-                    label: 'Подшивание стенки желудка',
+                    placeholder: 'Подшивание стенки желудка',
                 },
             },
         ],
@@ -3564,7 +3551,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -3622,7 +3609,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
@@ -3647,7 +3634,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'gastric-tube-by-probe',
-                            title: 'Желудочная трубка сформирована по зонду?',
+                            placeholder: 'Желудочная трубка сформирована по зонду?',
                             name: 'gastric-tube-by-probe',
                             options: [
                                 ['Да', 'Да'],
@@ -3685,7 +3672,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'first-row',
-                            title: 'Первый ряд',
+                            placeholder: 'Первый ряд',
                             name: 'first-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -3699,7 +3686,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'second-row',
-                            title: 'Второй ряд',
+                            placeholder: 'Второй ряд',
                             name: 'second-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -3713,7 +3700,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'third-row',
-                            title: 'Третий ряд',
+                            placeholder: 'Третий ряд',
                             name: 'third-row',
                             options: [
                                 ['Узловой', 'Узловой'],
@@ -3735,7 +3722,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'drainage-of-the-abdominal-cavity',
-                            title: 'Дренирование брюшной полости и зон анастомоза',
+                            placeholder: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
                                 ['Да', 'Да'],
@@ -3792,7 +3779,7 @@ export const REVISION_OPERATIONS = {
                         type: 'RADIO-GROUP',
                         data: {
                             id: 'suturing-laparotomy-wound',
-                            title: 'Ушивание лапаротомной раны',
+                            placeholder: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
                                 ['Узловым способом', 'Узловым способом'],
