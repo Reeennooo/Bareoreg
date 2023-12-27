@@ -64,7 +64,7 @@ function initSelects(selects) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!location.pathname.includes('creating-observation')) return;
+    if (!document.querySelector('.wrapper').classList.contains('creating-observation')) return;
 
     const hasConnections = document.querySelectorAll('[data-has-connection]');
     hasConnections.forEach((hasConnectEl) => {

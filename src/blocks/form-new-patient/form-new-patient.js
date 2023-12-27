@@ -106,15 +106,16 @@ export const PATIENT_RULES = {
             message: 'Формат xx.xx.xxxx',
         },
     },
-   "ASA-scale": {
+    'ASA-scale': {
         required: {
             message: 'Обязательное поле',
         },
-   }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!location.pathname.includes('new-patient')) return;
+    if (!document.querySelector('.wrapper').classList.contains('new-patient')) return;
+
     initSelects(selects);
     hightlightRequiredFields();
     setMasks();
