@@ -24,6 +24,7 @@ export const OPERATIONS = {
                         data: {
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
+                            id: 'ventricle-formed-probe',
                             // info: {
                             //     content: 'Не игнорируйте это поле',
                             //     theme: 'violet',
@@ -39,6 +40,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'number-of-cassettes',
+                            id: 'number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
                                 ['1', '1'],
@@ -59,6 +61,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'probe-diameter',
+                            id: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
                             value: 36,
@@ -69,6 +72,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'used-cassettes',
+                            id: 'used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
                                 ['Черные (4-4.5-5 мм)', 'Черные (4-4.5-5 мм)'],
@@ -86,6 +90,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'indent-gatekeeper',
+                            id: 'indent-gatekeeper',
                             placeholder: 'Отступ от привратника (см)',
                             options: [
                                 ['Не оценивали', 'Не оценивали'],
@@ -102,6 +107,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'strengthening-the-seam',
+                            id: 'strengthening-the-seam',
                             placeholder: 'Укрепление линии шва',
                             options: [
                                 ['Нет', 'Нет'],
@@ -119,6 +125,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'stitching-machine',
+                            id: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
                                 ['Endopath Echelon Flex 60', 'Endopath Echelon Flex 60'],
@@ -140,6 +147,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'hiatus-treatment',
+                            id: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
                                 ['Нет', 'Нет'],
@@ -163,6 +171,7 @@ export const OPERATIONS = {
                         type: 'SELECT',
                         data: {
                             name: 'gut-place',
+                            id: 'gut-place',
                             placeholder: 'Метод определения места пересечения тонкой кишки',
                             options: [
                                 ['Отступ от илеоцекального угла', 'Отступ от илеоцекального угла'],
@@ -176,6 +185,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'small-intestine-length',
+                            id: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
                             required: false,
@@ -187,6 +197,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'total-loop-length',
+                            id: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
                             addClass: 'only-number',
@@ -199,6 +210,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'ident-treitz',
+                            id: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
                             required: false,
@@ -210,6 +222,7 @@ export const OPERATIONS = {
                         type: 'INPUT',
                         data: {
                             name: 'length-alimentary-loop',
+                            id: 'length-alimentary-loop',
                             type: 'number',
                             placeholder: 'Длина алиментарной петли (см)',
                             required: true,
@@ -218,6 +231,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-biliopancreatic-loop',
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
                             addClass: 'only-number',
@@ -234,6 +248,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'cutting-stapler-line',
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
@@ -246,6 +261,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'location-gastroenteroanastomosis',
                             title: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
@@ -258,6 +274,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'formation-GEA',
                             title: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
@@ -272,6 +289,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'location-alimentary-loop',
                             title: 'Расположение алиментарной петли',
                             name: 'location-alimentary-loop',
                             options: [
@@ -284,6 +302,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'gastroenteroanastomosis-stitching-machine-circle',
                             name: 'gastroenteroanastomosis-stitching-machine-circle',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -299,6 +318,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'gastroenteroanastomosis-stitching-machine-linear',
                             name: 'gastroenteroanastomosis-stitching-machine-linear',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -321,6 +341,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'gastroenteroanastomosis-number-of-cassettes',
                             name: 'gastroenteroanastomosis-number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -343,6 +364,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'gastroenteroanastomosis-used-cassettes',
                             name: 'gastroenteroanastomosis-used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -362,6 +384,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'herjunojunoanastomosis-сlosing-process-hole',
                             title: 'Закрытие технологического отверстия',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
                             connectedID: 'linear, circle',
@@ -375,6 +398,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'manual-anastomosis',
                             name: 'manual-anastomosis',
                             placeholder: 'Ручной анастомоз',
                             options: [
@@ -391,6 +415,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'select-diameter-anastomosis',
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -404,6 +429,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'сommentary-heandly-anastomosis',
                             name: 'сommentary-heandly-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
@@ -415,6 +441,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'spur-been-formed',
                             title: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
@@ -427,6 +454,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'spur-height',
                             name: 'spur-height',
                             type: 'number',
                             placeholder: 'Высота шпоры (см)',
@@ -442,6 +470,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'formation-of-EEA',
                             name: 'formation-of-EEA',
                             placeholder: 'Формирование еюноеюноанстомоза',
                             options: [
@@ -455,6 +484,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-stitching-machine',
                             name: 'herjunojunoanastomosis-stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -475,6 +505,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-number-of-cassettes',
                             name: 'herjunojunoanastomosis-number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -497,6 +528,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-used-cassettes',
                             name: 'herjunojunoanastomosis-used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -515,6 +547,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-diameter-anastomosis',
                             name: 'herjunojunoanastomosis-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -542,6 +575,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-сlosing-process-hole',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
                             placeholder: 'Закрытие технологического отверстия',
                             options: [
@@ -557,6 +591,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-manual-anastomosis',
                             name: 'herjunojunoanastomosis-manual-anastomosis',
                             placeholder: 'Ручной анастомоз',
                             options: [
@@ -573,6 +608,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'herjunojunoanastomosis-сommentary-heandly-anastomosis',
                             name: 'herjunojunoanastomosis-сommentary-heandly-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
@@ -593,6 +629,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -605,6 +642,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'closure-hernia-defects',
                             name: 'closure-hernia-defects',
                             placeholder: 'Закрытие внутренних грыжевых дефетков',
                             options: [
@@ -617,6 +655,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -645,6 +684,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -660,6 +700,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -678,6 +719,7 @@ export const OPERATIONS = {
             {
                 type: 'SELECT',
                 data: {
+                    id: 'ballon-type',
                     name: 'ballon-type',
                     placeholder: 'Тип баллона',
                     options: [
@@ -694,6 +736,7 @@ export const OPERATIONS = {
             {
                 type: 'RADIO-GROUP',
                 data: {
+                    id: 'fullness-of-the-balloon',
                     title: 'Чем заполнен балон',
                     name: 'fullness-of-the-balloon',
                     options: [
@@ -711,6 +754,7 @@ export const OPERATIONS = {
             {
                 type: 'INPUT',
                 data: {
+                    id: 'ballon-filling-volume',
                     name: 'ballon-filling-volume',
                     type: 'number',
                     placeholder: 'Объем заполнения (мл)',
@@ -725,6 +769,7 @@ export const OPERATIONS = {
             {
                 type: 'INPUT',
                 data: {
+                    id: 'date-ballon-delete',
                     name: 'date-ballon-delete',
                     type: 'text',
                     placeholder: 'Планируемая дата удаления баллона',
@@ -740,6 +785,7 @@ export const OPERATIONS = {
             {
                 type: 'SELECT',
                 data: {
+                    id: 'type-of-bandage',
                     name: 'type-of-bandage',
                     placeholder: 'Тип бандажа',
                     options: [
@@ -761,6 +807,7 @@ export const OPERATIONS = {
             {
                 type: 'RADIO-GROUP',
                 data: {
+                    id: 'dissection',
                     title: 'Диссекция',
                     name: 'dissection',
                     options: [
@@ -780,6 +827,7 @@ export const OPERATIONS = {
             {
                 type: 'INPUT',
                 data: {
+                    id: 'date-adjustment-bandage',
                     name: 'date-adjustment-bandage',
                     type: 'text',
                     placeholder: 'Планируемая дата регулировки бандажа',
@@ -791,6 +839,7 @@ export const OPERATIONS = {
             {
                 type: 'CHECKBOX',
                 data: {
+                    id: 'hemming-stomach-wall',
                     name: 'hemming-stomach-wall',
                     value: 'Подшивание стенки желудка - да',
                     label: 'Подшивание стенки желудка',
@@ -806,6 +855,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -818,6 +868,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -831,6 +882,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -859,6 +911,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -883,6 +936,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'gastric-tube-by-probe',
                             title: 'Желудочная трубка сформирована по зонду?',
                             name: 'gastric-tube-by-probe',
                             options: [
@@ -895,6 +949,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'seam-row',
                             name: 'seam-row',
                             placeholder: 'Рядность шва',
                             options: [
@@ -908,6 +963,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -918,6 +974,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'first-row',
                             title: 'Первый ряд',
                             name: 'first-row',
                             options: [
@@ -931,6 +988,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'second-row',
                             title: 'Второй ряд',
                             name: 'second-row',
                             options: [
@@ -944,6 +1002,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'third-row',
                             title: 'Третий ряд',
                             name: 'third-row',
                             options: [
@@ -965,6 +1024,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -977,6 +1037,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis',
                             name: 'hemostasis',
                             placeholder: 'Гемостаз',
                             options: [
@@ -990,6 +1051,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -1018,6 +1080,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -1042,6 +1105,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'ventricle-formed-probe',
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
@@ -1054,6 +1118,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'number-of-cassettes',
                             name: 'number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -1074,6 +1139,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -1084,6 +1150,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'used-cassettes',
                             name: 'used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -1101,6 +1168,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'indent-gatekeeper',
                             name: 'indent-gatekeeper',
                             placeholder: 'Отступ от привратника (см)',
                             options: [
@@ -1117,6 +1185,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'strengthening-the-seam',
                             name: 'strengthening-the-seam',
                             placeholder: 'Укрепление линии шва',
                             options: [
@@ -1134,6 +1203,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'stitching-machine',
                             name: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -1155,6 +1225,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hiatus-treatment',
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -1178,6 +1249,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'preservation-right-artery',
                             title: 'Сохранение правой гастродуоденальной артерии',
                             name: 'preservation-right-artery',
                             options: [
@@ -1190,6 +1262,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'level-mobilization-bulb',
                             title: 'Уровень мобилизации луковицы (отступ от привратника)',
                             name: 'level-mobilization-bulb',
                             options: [
@@ -1204,6 +1277,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'gut-place',
                             name: 'gut-place',
                             placeholder: 'Метод определения места пересечения тонкой кишки',
                             options: [
@@ -1218,6 +1292,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'small-intestine-length',
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -1229,6 +1304,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'total-loop-length',
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
@@ -1239,6 +1315,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'ident-treitz',
                             name: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
@@ -1250,6 +1327,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-alimentary-loop',
                             name: 'length-alimentary-loop',
                             type: 'number',
                             placeholder: 'Длина алиментарной петли (см)',
@@ -1259,6 +1337,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-biliopancreatic-loop',
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
                             addClass: 'only-number',
@@ -1277,6 +1356,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'cutting-stapler-line',
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
@@ -1289,6 +1369,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'formation-of-DEA',
                             name: 'formation-of-DEA',
                             placeholder: 'Формирование ДЭА',
                             options: [
@@ -1304,6 +1385,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'duodenoenteroanastomosis-diameter-anastomosis',
                             name: 'duodenoenteroanastomosis-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -1317,6 +1399,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'сommentary-anastomosis',
                             name: 'сommentary-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к анастомозу',
@@ -1332,6 +1415,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'formation-of-EEA',
                             name: 'formation-of-EEA',
                             placeholder: 'Формирование EEA',
                             options: [
@@ -1346,6 +1430,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-stitching-machine',
                             name: 'herjunojunoanastomosis-stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -1367,6 +1452,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-number-of-cassettes',
                             name: 'herjunojunoanastomosis-number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -1389,6 +1475,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-used-cassettes',
                             name: 'herjunojunoanastomosis-used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -1407,6 +1494,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-diameter-anastomosis',
                             name: 'herjunojunoanastomosis-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -1421,6 +1509,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-сlosing-process-hole',
                             name: 'herjunojunoanastomosis-сlosing-process-hole',
                             placeholder: 'Закрытие технологического отверстия',
                             options: [
@@ -1436,6 +1525,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'herjunojunoanastomosis-manual-anastomosis',
                             name: 'herjunojunoanastomosis-manual-anastomosis',
                             placeholder: 'Ручной анастомоз',
                             options: [
@@ -1452,6 +1542,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'herjunojunoanastomosis-сommentary-heandly-anastomosis',
                             name: 'herjunojunoanastomosis-сommentary-heandly-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
@@ -1471,6 +1562,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -1483,6 +1575,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'closure-hernia-defects',
                             name: 'closure-hernia-defects',
                             placeholder: 'Закрытие внутренних грыжевых дефетков',
                             options: [
@@ -1494,6 +1587,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -1522,6 +1616,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -1537,6 +1632,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -1561,6 +1657,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'ventricle-formed-probe',
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
@@ -1573,6 +1670,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'number-cassettes-for-stomach-separation',
                             name: 'number-cassettes-for-stomach-separation',
                             placeholder: 'Количество кассет для разделения желудка',
                             options: [
@@ -1593,6 +1691,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -1604,6 +1703,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'cassettes-for-stomach-separation',
                             name: 'cassettes-for-stomach-separation',
                             placeholder: 'Кассеты для разделения желудка',
                             options: [
@@ -1621,6 +1721,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'distance-from-gatekeeper-to-first cassette',
                             name: 'distance-from-gatekeeper-to-first cassette',
                             placeholder: 'Расстояние от привратника до первой кассеты',
                             options: [
@@ -1636,6 +1737,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'strengthening-stapler-line',
                             name: 'strengthening-stapler-line',
                             placeholder: 'Укрепление степлерной линии',
                             options: [
@@ -1652,6 +1754,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'stitching-machine',
                             name: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -1671,6 +1774,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'additional-processing-hiatus',
                             name: 'additional-processing-hiatus',
                             placeholder: 'Дополнительная обработка хиатуса',
                             options: [
@@ -1694,6 +1798,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -1706,6 +1811,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -1721,6 +1827,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -1749,6 +1856,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -1767,6 +1875,7 @@ export const OPERATIONS = {
             {
                 type: 'SELECT',
                 data: {
+                    id: 'reason-removing-balloon',
                     name: 'reason-removing-balloon',
                     placeholder: 'Причина удаления баллона',
                     options: [
@@ -1788,6 +1897,7 @@ export const OPERATIONS = {
             {
                 type: 'INPUT',
                 data: {
+                    id: 'another-operation-name',
                     name: 'another-operation-name',
                     type: 'text',
                     placeholder: 'Название операции',
@@ -1797,6 +1907,7 @@ export const OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'additional-operation-information',
                     name: 'additional-operation-information',
                     type: 'text',
                     placeholder: 'Дополнительная информация об операции',
@@ -1817,6 +1928,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'ventricle-formed-probe',
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
@@ -1829,6 +1941,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'number-of-cassettes',
                             name: 'number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -1849,6 +1962,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -1859,6 +1973,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'used-cassettes',
                             name: 'used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -1876,6 +1991,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'indent-gatekeeper',
                             name: 'indent-gatekeeper',
                             placeholder: 'Отступ от привратника (см)',
                             options: [
@@ -1892,6 +2008,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'strengthening-the-seam',
                             name: 'strengthening-the-seam',
                             placeholder: 'Укрепление линии шва',
                             options: [
@@ -1909,6 +2026,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'stitching-machine',
                             name: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -1930,6 +2048,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hiatus-treatment',
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -1953,6 +2072,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'preservation-right-artery',
                             title: 'Сохранение правой гастродуоденальной артерии',
                             name: 'preservation-right-artery',
                             options: [
@@ -1965,6 +2085,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'level-mobilization-bulb',
                             name: 'level-mobilization-bulb',
                             placeholder: 'Уровень мобилизации луковицы (отступ от привратника)',
                             options: [
@@ -1978,6 +2099,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'Method-determining location of duodenoenteroanastomosis',
                             name: 'Method-determining location of duodenoenteroanastomosis',
                             placeholder: 'Метод определения места дуоденоэнтероанастомоза',
                             options: [
@@ -1991,6 +2113,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'ident-treitz',
                             name: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
@@ -2002,6 +2125,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'small-intestine-length',
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -2013,6 +2137,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'total-loop-length',
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
@@ -2023,6 +2148,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-biliopancreatic-loop',
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
                             addClass: 'only-number',
@@ -2035,6 +2161,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'cutting-stapler-line',
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
@@ -2047,6 +2174,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'formation-of-DEA',
                             name: 'formation-of-DEA',
                             placeholder: 'Формирование ДЭА',
                             options: [
@@ -2062,6 +2190,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'select-diameter-anastomosis',
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -2075,6 +2204,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'сommentary-anastomosis',
                             name: 'сommentary-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к анастомозу',
@@ -2092,6 +2222,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -2104,6 +2235,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -2132,6 +2264,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -2147,6 +2280,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -2171,6 +2305,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'ventricle-formed-probe',
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
@@ -2183,6 +2318,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'number-of-cassettes',
                             name: 'number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -2203,6 +2339,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -2213,6 +2350,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'used-cassettes',
                             name: 'used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -2230,6 +2368,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'first-flashing',
                             name: 'first-flashing',
                             placeholder: 'Первое прошивание',
                             options: [
@@ -2243,6 +2382,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'strengthening-the-seam',
                             name: 'strengthening-the-seam',
                             placeholder: 'Укрепление линии шва',
                             options: [
@@ -2260,6 +2400,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'stitching-machine',
                             name: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -2281,6 +2422,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hiatus-treatment',
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -2304,6 +2446,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'method-determining-place-gastroenteroanastomosis',
                             name: 'method-determining-place-gastroenteroanastomosis',
                             placeholder: 'Метод определения места гастроэнтероанастомоза',
                             options: [
@@ -2318,6 +2461,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'ident-treitz',
                             name: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
@@ -2329,6 +2473,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'small-intestine-length',
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -2340,6 +2485,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'total-loop-length',
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
@@ -2352,6 +2498,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-biliopancreatic-loop',
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
                             addClass: 'only-number',
@@ -2368,6 +2515,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'location-gastroenteroanastomosis',
                             title: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
@@ -2380,6 +2528,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'cutting-stapler-line',
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
@@ -2392,6 +2541,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'formation-GEA',
                             title: 'Формирование гастроэнтероанастомоза',
                             name: 'formation-GEA',
                             options: [
@@ -2406,6 +2556,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             title: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
                             name: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             options: [
@@ -2420,6 +2571,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'сlosing-process-hole',
                             title: 'Закрытие технологического отверстия',
                             name: 'сlosing-process-hole',
                             options: [
@@ -2433,6 +2585,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'manual-anastomosis',
                             name: 'manual-anastomosis',
                             placeholder: 'Ручной анастомоз',
                             options: [
@@ -2449,6 +2602,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'сommentary-heandly-anastomosis',
                             name: 'сommentary-heandly-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
@@ -2460,6 +2614,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'select-diameter-anastomosis',
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -2473,6 +2628,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'spur-been-formed',
                             title: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
@@ -2485,6 +2641,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'spur-height',
                             name: 'spur-height',
                             type: 'number',
                             placeholder: 'Высота шпоры (см)',
@@ -2502,6 +2659,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -2514,6 +2672,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'closure-hernia-defects',
                             name: 'closure-hernia-defects',
                             placeholder: 'Ушивание пространства Петерсона',
                             options: [
@@ -2526,6 +2685,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -2554,6 +2714,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -2569,6 +2730,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -2593,6 +2755,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'ventricle-formed-probe',
                             title: 'Желудочек сформирован по зонду',
                             name: 'ventricle-formed-probe',
                             options: [
@@ -2605,6 +2768,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'number-of-cassettes',
                             name: 'number-of-cassettes',
                             placeholder: 'Количество кассет',
                             options: [
@@ -2625,6 +2789,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -2635,6 +2800,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'used-cassettes',
                             name: 'used-cassettes',
                             placeholder: 'Использованные кассеты',
                             options: [
@@ -2652,6 +2818,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'first-flashing',
                             name: 'first-flashing',
                             placeholder: 'Первое прошивание',
                             options: [
@@ -2665,6 +2832,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'strengthening-the-seam',
                             name: 'strengthening-the-seam',
                             placeholder: 'Укрепление линии шва',
                             options: [
@@ -2681,6 +2849,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'stitching-machine',
                             name: 'stitching-machine',
                             placeholder: 'Сшивающий аппарат',
                             options: [
@@ -2702,6 +2871,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hiatus-treatment',
                             name: 'hiatus-treatment',
                             placeholder: 'Обработка хиатуса',
                             options: [
@@ -2725,6 +2895,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'method-determining-place-gastroenteroanastomosis',
                             name: 'method-determining-place-gastroenteroanastomosis',
                             placeholder: 'Метод определения места гастроэнтероанастомоза',
                             options: [
@@ -2739,6 +2910,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'ident-treitz',
                             name: 'ident-treitz',
                             type: 'number',
                             placeholder: 'Отступ от связки Трейтца (см)',
@@ -2750,6 +2922,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'small-intestine-length',
                             name: 'small-intestine-length',
                             type: 'number',
                             placeholder: 'Длина тонкой кишки (см)',
@@ -2761,6 +2934,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'total-loop-length',
                             name: 'total-loop-length',
                             type: 'number',
                             placeholder: 'Длина общей петли (см)',
@@ -2773,6 +2947,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'length-biliopancreatic-loop',
                             name: 'length-biliopancreatic-loop',
                             type: 'number',
                             addClass: 'only-number',
@@ -2789,6 +2964,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'location-gastroenteroanastomosis',
                             title: 'Расположение гастроэнтероанастомоза',
                             name: 'location-gastroenteroanastomosis',
                             options: [
@@ -2801,6 +2977,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'cutting-stapler-line',
                             title: 'Отсечение торцевой степлерной линии',
                             name: 'cutting-stapler-line',
                             options: [
@@ -2813,6 +2990,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'formation-GEA',
                             title: 'Формирование ГЭА',
                             name: 'formation-GEA',
                             options: [
@@ -2827,6 +3005,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             title: 'Выбор стенки трубки при формировании аппаратного гастроэнтероанастомоза',
                             name: 'selection-tube-wall-hardware-gastroenteroanastomosis',
                             options: [
@@ -2841,6 +3020,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'сlosing-process-hole',
                             title: 'Закрытие технологического отверстия',
                             name: 'сlosing-process-hole',
                             options: [
@@ -2854,6 +3034,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'manual-anastomosis',
                             name: 'manual-anastomosis',
                             placeholder: 'Ручной анастомоз',
                             options: [
@@ -2870,6 +3051,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'сommentary-heandly-anastomosis',
                             name: 'сommentary-heandly-anastomosis',
                             type: 'text',
                             placeholder: 'Комментарий к ручному анастомозу',
@@ -2881,6 +3063,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'select-diameter-anastomosis',
                             name: 'select-diameter-anastomosis',
                             placeholder: 'Диаметр анастомоза (см)',
                             options: [
@@ -2894,6 +3077,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'spur-been-formed',
                             title: 'Была ли сформирована шпора?',
                             name: 'spur-been-formed',
                             options: [
@@ -2906,6 +3090,7 @@ export const OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'spur-height',
                             name: 'spur-height',
                             type: 'number',
                             placeholder: 'Высота шпоры (см)',
@@ -2923,6 +3108,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -2935,6 +3121,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'closure-hernia-defects',
                             name: 'closure-hernia-defects',
                             placeholder: 'Ушивание пространства Петерсона',
                             options: [
@@ -2947,6 +3134,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -2975,6 +3163,7 @@ export const OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -2990,6 +3179,7 @@ export const OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -3183,6 +3373,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3197,6 +3388,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3211,6 +3403,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3225,6 +3418,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3239,6 +3433,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3253,6 +3448,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3267,6 +3463,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3281,6 +3478,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
@@ -3295,6 +3493,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'SELECT',
                 data: {
+                    id: 'type-of-bandage',
                     name: 'type-of-bandage',
                     placeholder: 'Тип бандажа',
                     options: [
@@ -3316,6 +3515,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'RADIO-GROUP',
                 data: {
+                    id: 'dissection',
                     title: 'Диссекция',
                     name: 'dissection',
                     options: [
@@ -3335,6 +3535,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'INPUT',
                 data: {
+                    id: 'date-adjustment-bandage',
                     name: 'date-adjustment-bandage',
                     type: 'text',
                     placeholder: 'Планируемая дата регулировки бандажа',
@@ -3346,6 +3547,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'CHECKBOX',
                 data: {
+                    id: 'hemming-stomach-wall',
                     name: 'hemming-stomach-wall',
                     value: 'Подшивание стенки желудка - да',
                     label: 'Подшивание стенки желудка',
@@ -3361,6 +3563,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -3373,6 +3576,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis-from-staplers',
                             name: 'hemostasis-from-staplers',
                             placeholder: 'Гемостаз из степлерных линий',
                             options: [
@@ -3388,6 +3592,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -3416,6 +3621,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -3440,6 +3646,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'gastric-tube-by-probe',
                             title: 'Желудочная трубка сформирована по зонду?',
                             name: 'gastric-tube-by-probe',
                             options: [
@@ -3452,6 +3659,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'seam-row',
                             name: 'seam-row',
                             placeholder: 'Рядность шва',
                             options: [
@@ -3465,6 +3673,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'INPUT',
                         data: {
+                            id: 'probe-diameter',
                             name: 'probe-diameter',
                             type: 'number',
                             placeholder: 'Диаметр зонда (Fr)',
@@ -3475,6 +3684,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'first-row',
                             title: 'Первый ряд',
                             name: 'first-row',
                             options: [
@@ -3488,6 +3698,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'second-row',
                             title: 'Второй ряд',
                             name: 'second-row',
                             options: [
@@ -3501,6 +3712,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'third-row',
                             title: 'Третий ряд',
                             name: 'third-row',
                             options: [
@@ -3522,6 +3734,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'drainage-of-the-abdominal-cavity',
                             title: 'Дренирование брюшной полости и зон анастомоза',
                             name: 'drainage-of-the-abdominal-cavity',
                             options: [
@@ -3534,6 +3747,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'hemostasis',
                             name: 'hemostasis',
                             placeholder: 'Гемостаз',
                             options: [
@@ -3548,6 +3762,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'SELECT',
                         data: {
+                            id: 'thickness-drainage-tube',
                             name: 'thickness-drainage-tube',
                             placeholder: 'Толщина дренажной трубки',
                             options: [
@@ -3576,6 +3791,7 @@ export const REVISION_OPERATIONS = {
                     {
                         type: 'RADIO-GROUP',
                         data: {
+                            id: 'suturing-laparotomy-wound',
                             title: 'Ушивание лапаротомной раны',
                             name: 'suturing-laparotomy-wound',
                             options: [
@@ -3594,6 +3810,7 @@ export const REVISION_OPERATIONS = {
             {
                 type: 'TEXTAREA',
                 data: {
+                    id: 'operation-details',
                     name: 'operation-details',
                     type: 'text',
                     placeholder: 'Подробности операции',
