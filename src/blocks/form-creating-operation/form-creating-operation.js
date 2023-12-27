@@ -263,7 +263,7 @@ let selectReasonRevision;
 document.addEventListener('DOMContentLoaded', () => {
     // отключаю выполнение скрипта
     // console.log(window.location);
-    if (!window.location.pathname.includes('creating-operation')) return;
+    if (!window.location.pathname.includes('operation')) return;
     setMasks();
     assignInputRules(OPERATIONS_RULES);
     initSelects(selects);
@@ -846,18 +846,18 @@ export function createInput(data) {
     input.classList.add('input-custom');
     input.innerHTML = `
         <div class='input-custom__input'>
-            <input type='${data.type}' name='${data.name}' placeholder='' id='${data.name}' value='${data.value ? data.value : ''}'>
-            <label for='${data.name}'>${data.placeholder}</label>
+            <input type='${data.type}' name='${data.name}' placeholder='' id='${data.id}' value='${data.value ? data.value : ''}'>
+            <label for='${data.id}'>${data.placeholder}</label>
         </div>
         <div class='input-custom__message'>${data.message}</div>`;
     const inputField = input.querySelector('input');
 
     if (data.required) {
         input?.querySelector('input')?.setAttribute('data-required', '');
-        OPERATIONS_RULES[data.name] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.name] };
-    } else if (OPERATIONS_RULES[data.name]) {
-        if (OPERATIONS_RULES[data.name].required) {
-            delete OPERATIONS_RULES[data.name].required;
+        OPERATIONS_RULES[data.id] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.id] };
+    } else if (OPERATIONS_RULES[data.id]) {
+        if (OPERATIONS_RULES[data.id].required) {
+            delete OPERATIONS_RULES[data.id].required;
         }
     }
 
@@ -1006,7 +1006,7 @@ function createRadioGroup(data) {
 // ДЛЯ ПОЛЕЙ ОРИЕНТИРУЮТСЯ НА ID
 export function createSelect(data) {
     const select = document.createElement('div');
-    select.setAttribute('id', data.name);
+    select.setAttribute('id', data.id);
     // if (data.required) {
     //     select.setAttribute('data-required', '');
 
@@ -1014,10 +1014,10 @@ export function createSelect(data) {
 
     if (data.required) {
         select.setAttribute('data-required', '');
-        OPERATIONS_RULES[data.name] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.name] };
-    } else if (OPERATIONS_RULES[data.name]) {
-        if (OPERATIONS_RULES[data.name].required) {
-            delete OPERATIONS_RULES[data.name].required;
+        OPERATIONS_RULES[data.id] = { required: { message: 'Обязательное поле' }, ...OPERATIONS_RULES[data.id] };
+    } else if (OPERATIONS_RULES[data.id]) {
+        if (OPERATIONS_RULES[data.id].required) {
+            delete OPERATIONS_RULES[data.id].required;
         }
     }
 
@@ -1054,7 +1054,7 @@ export function createSelect(data) {
 function createTextarea(data) {
     const textarea = document.createElement('div');
     textarea.classList.add('textarea');
-    textarea.innerHTML = `<textarea name='${data.name}' id='${data.name}' placeholder=''></textarea><label for='${data.name}'>${data.placeholder}</label>`;
+    textarea.innerHTML = `<textarea name='${data.name}' id='${data.id}' placeholder=''></textarea><label for='${data.name}'>${data.placeholder}</label>`;
 
     if (data.addClass) {
         textarea.classList.add(data.addClass);
@@ -1085,7 +1085,7 @@ function createSubtitle(data) {
 function createCheckbox(data) {
     const checkbox = document.createElement('label');
     checkbox.classList.add('checkbox');
-    checkbox.innerHTML = `<input type='checkbox' name='${data.name}' value='${data.value}'>
+    checkbox.innerHTML = `<input type='checkbox' name='${data.name}' id='${data.id}' value='${data.value}'>
         <span class='checkbox__fake'></span>
         <span class='checkbox__label'>${data.label}</span>`;
     return checkbox;
